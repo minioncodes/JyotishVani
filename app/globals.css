@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+body{
+  @apply bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
