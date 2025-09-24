@@ -1,31 +1,46 @@
+"use client";
+
+
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Services from "@/components/Services";
 import About from "@/components/About";
-import Horoscope from "@/components/Horoscope";
+import Services from "@/components/Services";
 import Reviews from "@/components/Reviews";
-// import CTA from "@/components/CTA";
-import Footer from "@/components/Footer";
+import CTA from "@/components/CTA";
 import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import StarsBg from "@/components/StarBg";
+import Blogs from "@/components/Blogs";
+
 
 export default function Page() {
-  return (
-    <>
-      <header className="bg-gradient-to-r from-purple-900 via-indigo-800 to-blue-700 shadow-2xl">
-      <Navbar />
-      </header>
-      <main className="bg-gradient-to-b from-pink-50 via-yellow-100 to-teal-100 min-h-screen">
-      <Hero />
-      <About />
-      <Contact />
-      <Services />
-      <Horoscope />
-      <Reviews />
-      {/* <CTA /> */}
-      </main>
-      <footer className="bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900 text-pink-100">
-      <Footer />
-      </footer>
-    </>
-  );
+useEffect(() => {
+// Prevent flashing scrollbar shift on mount
+document.documentElement.style.scrollBehavior = "smooth";
+}, []);
+
+
+return (
+<main className="relative min-h-screen bg-black text-white overflow-x-hidden">
+{/* Subtle animated starfield */}
+<StarsBg />
+{/* Glow gradients */}
+<div className="pointer-events-none fixed inset-0">
+<div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-fuchsia-500/10 blur-3xl" />
+<div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-indigo-500/10 blur-3xl" />
+</div>
+
+
+<Navbar />
+<Hero />
+<Contact />
+<About />
+<Services />
+<Reviews />
+<Blogs />
+<CTA />
+<Footer />
+</main>
+);
 }

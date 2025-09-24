@@ -1,107 +1,86 @@
 "use client";
 
+
 import { motion } from "framer-motion";
-import { FiSun, FiMoon, FiFeather, FiGlobe } from "react-icons/fi";
+import { FiStar, FiHeart, FiBriefcase, FiClock } from "react-icons/fi";
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-  },
-};
 
-const itemUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
+const services = [
+{
+icon: <FiHeart />, // Love & Relationships
+title: "Love & Relationships",
+desc: "Clarity on compatibility, timing, and healing patterns. Synastry + transit-based guidance.",
+price: "₹1,999 / 30 min",
+},
+{
+icon: <FiBriefcase />, // Career & Finance
+title: "Career & Finance",
+desc: "Find the right moves and timings for growth, switches, or launches. Practical and time-bound.",
+price: "₹2,499 / 45 min",
+},
+{
+icon: <FiClock />, // Muhurat
+title: "Shubh Muhurat",
+desc: "Pick auspicious dates for marriage, moves, openings, investments—aligned with your chart.",
+price: "₹1,499 / slot",
+},
+{
+icon: <FiStar />, // Birth Chart
+title: "Birth Chart Reading",
+desc: "Complete Kundli reading with remedies, strengths, challenges, and yearly transit roadmap.",
+price: "₹3,999 / 60 min",
+},
+];
+
 
 export default function Services() {
-  return (
-    <section id="services" className="relative overflow-hidden py-20 md:py-28">
-   
-      <div className="pointer-events-none absolute inset-0" />
+return (
+<section id="services" className="relative px-6 py-20 md:py-28">
+<div className="mx-auto max-w-6xl">
+<div className="mb-8 md:mb-12 flex items-end justify-between">
+<h2 className="text-3xl md:text-4xl font-bold">Services</h2>
+<span className="text-sm text-gray-400">Transparent pricing • Secure online sessions</span>
+</div>
 
-      {/* Decorative blur blobs */}
-      <div className="pointer-events-none absolute -top-20 left-0 h-64 w-64 rounded-full blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 rounded-full blur-3xl" />
 
-      <div className="relative mx-auto max-w-7xl px-6">
-        {/* Section Header */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="text-center space-y-4"
-        >
-          <motion.h2
-            variants={itemUp}
-            className="text-3xl font-bold text-gray-900 md:text-5xl"
-          >
-            My{" "}
-            <span className="bg-gradient-to-r from-indigo-500 to-rose-400 bg-clip-text text-transparent">
-              Services
-            </span>
-          </motion.h2>
-
-          <motion.p
-            variants={itemUp}
-            className="max-w-2xl mx-auto text-base text-gray-600 md:text-lg"
-          >
-            Offering thoughtful, personalized readings designed to bring you
-            clarity and confidence at every stage of life.
-          </motion.p>
-        </motion.div>
-
-        {/* Services Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
-        >
-          {[
-            {
-              icon: <FiSun className="text-indigo-500 text-3xl" />,
-              title: "Daily Guidance",
-              desc: "Short and insightful readings to align your day with purpose.",
-            },
-            {
-              icon: <FiMoon className="text-rose-500 text-3xl" />,
-              title: "Love & Relationships",
-              desc: "Heart-centered clarity for your relationships, past or future.",
-            },
-            {
-              icon: <FiFeather className="text-teal-500 text-3xl" />,
-              title: "Career & Growth",
-              desc: "Practical guidance to navigate work, business, and life goals.",
-            },
-            {
-              icon: <FiGlobe className="text-yellow-500 text-3xl" />,
-              title: "Birth Chart Reading",
-              desc: "Deep dive into your cosmic blueprint for self-discovery.",
-            },
-          ].map((service, i) => (
-            <motion.div
-              key={i}
-              variants={itemUp}
-              whileHover={{ scale: 1.04, y: -4 }}
-              transition={{ type: "spring", stiffness: 250, damping: 20 }}
-              className="group rounded-3xl border border-gray-200 bg-white/70 p-6 text-center shadow-lg backdrop-blur-md hover:shadow-xl transition"
-            >
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-indigo-100 to-rose-100 group-hover:from-indigo-200 group-hover:to-rose-200">
-                {service.icon}
-              </div>
-              <h3 className="mb-2 text-lg font-semibold text-gray-900">
-                {service.title}
-              </h3>
-              <p className="text-sm text-gray-600">{service.desc}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
+<motion.div
+initial="hidden"
+whileInView="show"
+viewport={{ once: true, amount: 0.2 }}
+variants={{
+hidden: { opacity: 0 },
+show: {
+opacity: 1,
+transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+},
+}}
+className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+>
+{services.map((s) => (
+<motion.div
+key={s.title}
+variants={{ hidden: { y: 18, opacity: 0 }, show: { y: 0, opacity: 1 } }}
+whileHover={{ y: -4 }}
+className="group rounded-3xl border border-white/10 bg-black/50 p-5 shadow-xl backdrop-blur-xl"
+>
+<div className="flex items-center justify-between">
+<div className="text-xl opacity-80">{s.icon}</div>
+<span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-300">
+{s.price}
+</span>
+</div>
+<h3 className="mt-4 text-lg font-semibold">{s.title}</h3>
+<p className="mt-2 text-gray-300 text-sm leading-relaxed">{s.desc}</p>
+<a
+href="#contact"
+className="mt-5 inline-block rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm hover:bg-white/10"
+>
+Book this
+</a>
+</motion.div>
+))}
+</motion.div>
+</div>
+</section>
+);
 }

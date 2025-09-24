@@ -1,101 +1,49 @@
 "use client";
 
+
 import { motion } from "framer-motion";
-import { FiStar, FiHeart, FiCompass } from "react-icons/fi";
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
-  },
-};
-
-const itemUp = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
 
 export default function About() {
-  return (
-    <section id="about" className="py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid gap-12 lg:grid-cols-2 lg:items-center"
-        >
-          {/* Left: Text content */}
-          <div className="space-y-6">
-            <motion.h2
-              variants={itemUp}
-              className="text-3xl font-bold text-gray-900 md:text-5xl"
-            >
-              About{" "}
-              <span className="text-indigo-600">
-                Me
-              </span>
-            </motion.h2>
-
-            <motion.p
-              variants={itemUp}
-              className="max-w-xl text-base text-gray-600 md:text-lg"
-            >
-              With years of experience in astrology and guiding people through
-              life’s crossroads, my work blends ancient wisdom with modern
-              clarity. Every session is designed to help you rediscover balance,
-              confidence, and direction.
-            </motion.p>
-
-            <motion.div
-              variants={itemUp}
-              className="grid gap-6 pt-4 sm:grid-cols-2"
-            >
-              {[
-                {
-                  icon: <FiStar className="text-indigo-500 text-xl" />,
-                  title: "Accurate Readings",
-                  desc: "Personalized insights aligned with your unique journey.",
-                },
-                {
-                  icon: <FiHeart className="text-rose-500 text-xl" />,
-                  title: "Compassionate Approach",
-                  desc: "Guidance rooted in empathy and kindness.",
-                },
-                {
-                  icon: <FiCompass className="text-teal-500 text-xl" />,
-                  title: "Life Navigation",
-                  desc: "Clarity for relationships, career, and inner peace.",
-                },
-              ].map((f, i) => (
-                <motion.div
-                  key={i}
-                  variants={itemUp}
-                  className="flex items-start gap-4 rounded-lg border border-gray-200 p-4 shadow-sm"
-                >
-                  {f.icon}
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{f.title}</h4>
-                    <p className="text-sm text-gray-600">{f.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Right: Image placeholder */}
-          <motion.div variants={itemUp}>
-            <div className="mx-auto max-w-md rounded-2xl border border-gray-200 p-3 shadow-md">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-gray-100 flex items-center justify-center text-gray-400">
-                {/* Replace with <Image ... /> */}
-                Image Placeholder
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
+return (
+<section id="about" className="relative px-6 py-20 md:py-28">
+<div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 gap-8">
+<motion.div
+initial={{ x: -30, opacity: 0 }}
+whileInView={{ x: 0, opacity: 1 }}
+viewport={{ once: true, amount: 0.3 }}
+transition={{ duration: 0.6 }}
+className="rounded-3xl border border-white/10 bg-black/50 p-6 md:p-8 shadow-2xl backdrop-blur-xl"
+>
+<h2 className="text-3xl md:text-4xl font-bold">About Me</h2>
+<p className="mt-3 text-gray-300">
+I'm Parul, a practicing astrologer with 8+ years helping clients align actions with cosmic cycles. I combine
+Vedic, transit analysis, and tarot for grounded guidance.
+</p>
+<ul className="mt-5 space-y-3 text-gray-300">
+<li>• Birth Chart (Kundli) decoding with remedies</li>
+<li>• Career & Business timing (Dasha/Transit)</li>
+<li>• Relationships & Synastry insights</li>
+<li>• Muhurat selection for important events</li>
+</ul>
+</motion.div>
+<motion.div
+initial={{ x: 30, opacity: 0 }}
+whileInView={{ x: 0, opacity: 1 }}
+viewport={{ once: true, amount: 0.3 }}
+transition={{ duration: 0.6 }}
+className="rounded-3xl border border-white/10 bg-black/50 p-0 shadow-2xl backdrop-blur-xl overflow-hidden"
+>
+<div className="aspect-[4/3] w-full bg-[linear-gradient(135deg,rgba(255,255,255,.08),transparent)]" />
+<div className="p-6 md:p-8">
+<h3 className="text-xl font-semibold">Why clients trust me</h3>
+<p className="mt-2 text-gray-300">
+Sessions are empathetic yet practical. You leave with clarity, timelines, and doable next steps—not
+superstition.
+</p>
+</div>
+</motion.div>
+</div>
+</section>
+);
 }

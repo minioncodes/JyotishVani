@@ -2,130 +2,82 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
-  },
-};
-
-const itemUp = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
+import Planetarium from "./Planetarium";
+import Celestial from "./Planetarium";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 md:pt-36">
-     
+    <section
+      id="home"
+      className="relative flex min-h-[92vh] items-center justify-center px-6"
+    >
+      {/* Cosmic gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black" />
+      <div className="absolute -top-40 -left-40 h-[30rem] w-[30rem] rounded-full bg-fuchsia-600/20 blur-3xl" />
+      <div className="absolute -bottom-40 -right-40 h-[30rem] w-[30rem] rounded-full bg-indigo-600/20 blur-3xl" />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      {/* Content Grid */}
+      <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        {/* LEFT: Text Content */}
         <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="grid items-center gap-10 lg:grid-cols-2"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="rounded-3xl  bg-black/40 p-8 sm:p-12 shadow-2xl backdrop-blur-xl"
         >
-          {/* Left: Text */}
-          <div className="space-y-6">
-            <motion.div
-              variants={itemUp}
-              className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm backdrop-blur-md shadow-sm"
+          <motion.h1
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold"
+          >
+            Unlock Your{" "}
+            <span className=" bg-clip-text text-transparent">
+              Cosmic Destiny
+            </span>
+          </motion.h1>
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.7 }}
+            className="mt-4 text-base md:text-lg text-gray-300 leading-relaxed"
+          >
+            Personalized astrology readings for love, career, and life path.  
+            Get clarity, confidence, and cosmic alignment with every session.
+          </motion.p>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.7 }}
+            className="mt-6 flex flex-col sm:flex-row gap-3"
+          >
+            <a
+              href="#contact"
+              className="rounded-xl bg-gradient-to-r from-fuchsia-500 to-indigo-500 px-6 py-3 font-semibold shadow-lg hover:opacity-95"
             >
-              <span className="h-2 w-2 rounded-full" />
-              Now booking 1:1 sessions
-            </motion.div>
-
-            <motion.h1
-              variants={itemUp}
-              className="text-4xl font-bold leading-tight md:text-6xl"
+              Book a Reading
+            </a>
+            <a
+              href="#services"
+              className="rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-semibold hover:bg-white/10"
             >
-              Guidance for your{" "}
-              <span className="bg-clip-text text-black text-transparent">
-                next chapter
-              </span>
-            </motion.h1>
-
-            <motion.p
-              variants={itemUp}
-              className="max-w-xl text-base md:text-lg"
-            >
-              Clarity, confidence, and calm—with readings tailored to your story.
-              Gentle insights, practical steps, and a little stardust. ✨
-            </motion.p>
-
-            <motion.div
-              variants={itemUp}
-              className="flex flex-wrap gap-3 pt-2"
-            >
-              <a
-                href="#book"
-                className="group relative inline-flex items-center justify-center rounded-xl border px-5 py-3 text-sm font-semibold backdrop-blur-md transition"
-              >
-                Book a Session
-              </a>
-              <a
-                href="#services"
-                className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold shadow-md transition"
-              >
-                Explore Services
-              </a>
-            </motion.div>
-
-            {/* Social proof / stats */}
-            <motion.div
-              variants={itemUp}
-              className="flex flex-wrap gap-6 pt-4 text-sm"
-            >
-              <div className="flex items-center gap-2">
-                <span className="font-semibold">2k+</span> readings
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-semibold">4.9/5</span> avg. rating
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-semibold">7+ yrs</span> experience
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right: Visual card */}
-          <motion.div variants={itemUp} className="relative">
-            <div className="mx-auto w-full max-w-lg rounded-3xl border p-3  backdrop-blur-xl">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
-                {/* Replace with your image */}
-                {/* <Image
-                  src="/your-image.jpg"
-                  alt="Astrology session"
-                  fill
-                  className="object-cover"
-                  priority
-                /> */}
-                {/* Floating tag */}
-                <motion.div
-                  initial={{ opacity: 0, y: 12, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ delay: 0.35, duration: 0.5 }}
-                  className="absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-medium backdrop-blur"
-                >
-                  Gentle Guidance
-                </motion.div>
-                {/* Floating badge */}
-                <motion.div
-                  initial={{ opacity: 0, x: 16, y: 16, rotate: -4 }}
-                  animate={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
-                  transition={{ delay: 0.45, duration: 0.5 }}
-                  className="absolute -bottom-4 -right-4 rounded-2xl border px-4 py-3 text-sm shadow-lg backdrop-blur"
-                >
-                  Next available:{" "}
-                  <span className="font-semibold">Today 7 PM</span>
-                </motion.div>
-              </div>
-            </div>
+              Explore Services
+            </a>
           </motion.div>
+          <div className="mt-6 text-xs text-gray-400">
+            ✦ Trusted by 1000+ clients • Available worldwide
+          </div>
         </motion.div>
+
+        {/* RIGHT: Animated Astrology Wheel */}
+ <motion.div
+  initial={{ scale: 0.9, opacity: 0 }}
+  animate={{ scale: 1, opacity: 1 }}
+  transition={{ duration: 1, ease: "easeOut" }}
+  className="relative flex items-center justify-center"
+>
+  <Planetarium />
+</motion.div>
       </div>
     </section>
   );
