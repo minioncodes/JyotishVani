@@ -43,7 +43,7 @@ className="hover:text-white/90 transition-colors"
 </motion.a>
 ))}
 <a
-href="#contact"
+href="/booking"
 className="rounded-xl bg-white/10 px-4 py-2 text-sm border border-white/10 hover:bg-white/15"
 >
 Book Now
