@@ -11,7 +11,7 @@ const links = [
 { href: "/", label: "Home" },
 { href: "#about", label: "About" },
 { href: "#services", label: "Services" },
-{ href: "#testimonials", label: "Testimonials" },
+{ href: "/all-blogs", label: "Blogs" },
 { href: "/contact", label: "Contact" },
 ];
 
@@ -28,7 +28,7 @@ transition={{ duration: 0.6, ease: "easeOut" }}
 className="fixed top-4 left-1/2 z-50 w-[92%] max-w-6xl -translate-x-1/2"
 >
 <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/50 backdrop-blur-xl px-5 py-3 shadow-2xl">
-<Link href="#home" className="text-lg md:text-xl font-bold tracking-wide">
+<Link href="#home" className="text-lg md:text-xl  text-shadow-white font-bold tracking-wide">
 ✨ JyotishVani
 </Link>
 <div className="hidden md:flex items-center gap-7 text-gray-200">
@@ -76,7 +76,7 @@ onClick={() => setOpen(false)}
 {l.label}
 </a>
 ))}
-<a href="#contact" className="mt-3 rounded-xl bg-white/10 px-4 py-2 text-center border border-white/10">
+<a href="/booking" className="mt-3 rounded-xl bg-white/10 px-4 py-2 text-center border border-white/10">
 Book Now
 </a>
 </div>

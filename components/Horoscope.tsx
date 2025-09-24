@@ -16,99 +16,123 @@ import {
   FiTarget,
 } from "react-icons/fi";
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
+type Sign = { name: string; icon: JSX.Element; msg: string };
 
-const itemUp = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
-const zodiac = [
-  { name: "Aries", icon: <FiZap />, msg: "Take bold steps today." },
-  { name: "Taurus", icon: <FiAnchor />, msg: "Stay grounded and steady." },
-  { name: "Gemini", icon: <FiWind />, msg: "Conversations bring clarity." },
-  { name: "Cancer", icon: <FiHeart />, msg: "Nurture emotional bonds." },
-  { name: "Leo", icon: <FiSun />, msg: "Your charisma shines bright." },
-  { name: "Virgo", icon: <FiFeather />, msg: "Focus on small details." },
-  { name: "Libra", icon: <FiCompass />, msg: "Balance is your strength." },
-  { name: "Scorpio", icon: <FiMoon />, msg: "Trust your deep intuition." },
-  { name: "Sagittarius", icon: <FiTarget />, msg: "Adventure calls you." },
-  { name: "Capricorn", icon: <FiGlobe />, msg: "Stay ambitious & practical." },
-  { name: "Aquarius", icon: <FiAperture />, msg: "Innovate and inspire." },
-  { name: "Pisces", icon: <FiStar />, msg: "Let your dreams guide you." },
+const ZODIAC: Sign[] = [
+  { name: "Aries",        icon: <FiZap />,      msg: "Take bold steps today." },
+  { name: "Taurus",       icon: <FiAnchor />,   msg: "Stay grounded and steady." },
+  { name: "Gemini",       icon: <FiWind />,     msg: "Conversations bring clarity." },
+  { name: "Cancer",       icon: <FiHeart />,    msg: "Nurture emotional bonds." },
+  { name: "Leo",          icon: <FiSun />,      msg: "Your charisma shines bright." },
+  { name: "Virgo",        icon: <FiFeather />,  msg: "Focus on small details." },
+  { name: "Libra",        icon: <FiCompass />,  msg: "Balance is your strength." },
+  { name: "Scorpio",      icon: <FiMoon />,     msg: "Trust your deep intuition." },
+  { name: "Sagittarius",  icon: <FiTarget />,   msg: "Adventure calls you." },
+  { name: "Capricorn",    icon: <FiGlobe />,    msg: "Stay ambitious & practical." },
+  { name: "Aquarius",     icon: <FiAperture />, msg: "Innovate and inspire." },
+  { name: "Pisces",       icon: <FiStar />,     msg: "Let your dreams guide you." },
 ];
 
-export default function Horoscope() {
+// Single glass card
+function Card({ s }: { s: Sign }) {
   return (
-    <section
-      id="horoscope"
-      className="relative overflow-hidden py-20 md:py-28"
-    >
-      {/* Gradient bg */}
-      <div className="pointer-events-none absolute inset-0" />
+    <div className="group mx-2 w-[240px] shrink-0 rounded-2xl border border-white/10 bg-black/50 p-5 shadow-xl backdrop-blur-xl">
+      <div className="flex items-center justify-center">
+        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-2xl text-white/90">
+          {s.icon}
+        </div>
+      </div>
+      <h3 className="text-center text-lg font-semibold text-white">{s.name}</h3>
+      <p className="mt-1 text-center text-sm text-gray-300">{s.msg}</p>
+    </div>
+  );
+}
 
-      {/* Blurred orbs */}
-      {/* <div className="pointer-events-none absolute -top-20 left-10 h-64 w-64 rounded-full bg-indigo-300/20 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-10 h-72 w-72 rounded-full bg-rose-300/20 blur-3xl" /> */}
+// One marquee row (right → left). Duplicate content for seamless loop.
+function MarqueeRow({
+  items,
+  speed = 30, // seconds for a full loop
+  offset = 0, // delay start
+}: {
+  items: Sign[];
+  speed?: number;
+  offset?: number;
+}) {
+  // Duplicate the array so when first batch scrolls out, the next batch continues
+  const track = [...items, ...items];
 
-      <div className="relative mx-auto max-w-7xl px-6">
+  return (
+    <div className="relative w-full overflow-hidden">
+      <motion.div
+        className="flex"
+        initial={{ x: 0 }}
+        animate={{ x: "-50%" }} // since we doubled, -50% equals one full batch width
+        transition={{
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: speed,
+          ease: "linear",
+          delay: offset,
+        }}
+      >
+        {/* Each half = 50% width of total content because of duplication */}
+        <div className="flex">
+          {track.map((s, i) => (
+            <Card key={`${s.name}-${i}`} s={s} />
+          ))}
+        </div>
+      </motion.div>
+      {/* Soft gradient edges (mask) */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-black to-transparent" />
+    </div>
+  );
+}
+
+export default function Horoscope() {
+  // split into two rows for a richer feel
+  const row1 = ZODIAC.slice(0, 12);
+  const row2 = [...ZODIAC.slice(6), ...ZODIAC.slice(0, 6)]; // staggered order
+
+  return (
+    <section id="horoscope" className="relative overflow-hidden px-6 py-20 md:py-28">
+      {/* subtle cosmic bg */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 -left-40 h-[30rem] w-[30rem] rounded-full bg-fuchsia-600/10 blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 h-[30rem] w-[30rem] rounded-full bg-indigo-600/10 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl">
         {/* Header */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="text-center space-y-4"
-        >
-          <motion.h2
-            variants={itemUp}
-            className="text-3xl font-bold text-gray-900 md:text-5xl"
-          >
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl md:text-5xl font-bold">
             Today’s{" "}
-            <span className="bg-gradient-to-r from-indigo-500 to-rose-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-fuchsia-400 to-indigo-400 bg-clip-text text-transparent">
               Horoscope
             </span>
-          </motion.h2>
-          <motion.p
-            variants={itemUp}
-            className="max-w-2xl mx-auto text-base text-gray-600 md:text-lg"
-          >
+          </h2>
+          <p className="mt-3 text-sm md:text-base text-gray-300">
             Your daily dose of cosmic guidance, aligned with the stars ✨
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        {/* Zodiac Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="mt-14 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        >
-          {zodiac.map((sign, i) => (
-            <motion.div
-              key={sign.name}
-              variants={itemUp}
-              whileHover={{ scale: 1.05, y: -4 }}
-              transition={{ type: "spring", stiffness: 200, damping: 18 }}
-              className="group rounded-2xl border border-gray-200 bg-white/70 p-6 shadow-md backdrop-blur hover:shadow-xl transition text-center"
-            >
-              <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full  text-indigo-600 text-2xl group-hover:from-indigo-200 group-hover:to-pink-200">
-                {sign.icon}
-              </div>
-              <h3 className="mb-1 text-lg font-semibold text-gray-900">
-                {sign.name}
-              </h3>
-              <p className="text-sm text-gray-600">{sign.msg}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Marquee rows */}
+        <div className="mt-10 space-y-6">
+          {/* Row A */}
+          <MarqueeRow items={row1} speed={30} />
+          {/* Row B (slightly faster + delayed for parallax feel) */}
+          <MarqueeRow items={row2} speed={24} offset={0.5} />
+        </div>
+
+        {/* CTA under marquee */}
+        <div className="mt-10 flex justify-center">
+          <a
+            href="#contact"
+            className="rounded-xl bg-gradient-to-r from-fuchsia-500 to-indigo-500 px-6 py-3 text-sm font-semibold shadow-lg hover:opacity-95"
+          >
+            Get your personalized reading
+          </a>
+        </div>
       </div>
     </section>
   );

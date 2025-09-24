@@ -12,6 +12,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import StarsBg from "@/components/StarBg";
 import Blogs from "@/components/Blogs";
+import Horoscope from "@/components/Horoscope";
 
 
 export default function Page() {
@@ -35,8 +36,10 @@ return (
 <Navbar />
 <Hero />
 <Contact />
+
 <About />
 <Services />
+<Horoscope />
 <Reviews />
 <Blogs />
 <CTA />
