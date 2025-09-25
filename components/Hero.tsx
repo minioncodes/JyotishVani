@@ -15,9 +15,9 @@ export default function Hero() {
       <div className="absolute -top-40 -left-40 h-[30rem] w-[30rem] rounded-full bg-fuchsia-600/20 blur-3xl" /> */}
       <div className="absolute -bottom-40 -right-40 h-[30rem] w-[30rem] rounded-full bg-indigo-600/20 blur-3xl" />
 
-      {/* Content Grid */}
+   
       <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* LEFT: Text Content */}
+      
         <motion.div
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -68,14 +68,14 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* RIGHT: Animated Astrology Wheel */}
+     
  <motion.div
   initial={{ scale: 0.9, opacity: 0 }}
   animate={{ scale: 1, opacity: 1 }}
   transition={{ duration: 1, ease: "easeOut" }}
   className="relative flex items-center justify-center"
 >
-  {/* <Planetarium /> */}
+
   <AstroGlobe />
 </motion.div>
       </div>
