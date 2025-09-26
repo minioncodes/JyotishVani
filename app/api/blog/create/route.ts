@@ -19,12 +19,14 @@ export async function POST(req: NextRequest) {
         const title = formData.get("title") as string;
         const description = formData.get("description") as string;
         const imageFile = formData.get("image") as File | null;
-        if (!title || !description) {
-            return NextResponse.json({ msg: "missing fileds" }, { status: 400 });
-        }
+        console.log("formdata = ",formData);
+        // if (!title || !description) {
+        //     return NextResponse.json({ msg: "missing fileds" }, { status: 400 });
+        // }
         let imageUrl = "";
         if (imageFile) {
             const uploaded = await uploadBlogImageToCloudinary(imageFile, "blogs");
+            console.log("uploaded = ",uploaded);
             imageUrl = uploaded.secure_url;
         }
         const newBlog = await BlogModel.create({

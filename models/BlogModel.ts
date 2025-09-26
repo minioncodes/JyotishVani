@@ -12,8 +12,8 @@ export interface IPost extends Document {
 const BlogSchema = new Schema<IPost>(
     {
         adminId: { type: Schema.Types.ObjectId, ref: "Admin", required: true },
-        title: { type: String, required: true },
-        description: { type: String, required: true },
+        title: { type: String },
+        description: { type: String},
         likes: [{ type: String }],
         comments: [
             {
