@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
         if (!token) {
             return NextResponse.json({ msg: "unauthorized" }, { status: 401 });
         }
+        console.log("token = ",token);
         console.log("secret from the route = ", process.env.SECRET_KEY);
         const decoded = jwt.verify(token, process.env.SECRET_KEY as string) as { id: string };
         const formData = await req.formData();

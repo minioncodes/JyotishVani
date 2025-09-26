@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Planetarium from "./Planetarium";
-import Celestial from "./Planetarium";
+import AstroGlobe from "./Astroglobe";
 
 export default function Hero() {
   return (
@@ -11,19 +10,19 @@ export default function Hero() {
       id="home"
       className="relative flex min-h-[92vh] items-center justify-center px-6"
     >
-      {/* Cosmic gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black" />
-      <div className="absolute -top-40 -left-40 h-[30rem] w-[30rem] rounded-full bg-fuchsia-600/20 blur-3xl" />
+    
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black" />
+      <div className="absolute -top-40 -left-40 h-[30rem] w-[30rem] rounded-full bg-fuchsia-600/20 blur-3xl" /> */}
       <div className="absolute -bottom-40 -right-40 h-[30rem] w-[30rem] rounded-full bg-indigo-600/20 blur-3xl" />
 
-      {/* Content Grid */}
+   
       <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* LEFT: Text Content */}
+      
         <motion.div
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="rounded-3xl  bg-black/40 p-8 sm:p-12 shadow-2xl backdrop-blur-xl"
+          className="rounded-3xl   p-8 sm:p-12 shadow-sm backdrop-blur-xl"
         >
           <motion.h1
             initial={{ y: 20, opacity: 0 }}
@@ -32,7 +31,7 @@ export default function Hero() {
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold"
           >
             Unlock Your{" "}
-            <span className=" bg-clip-text text-transparent">
+            <span className=" bg-clip-text">
               Cosmic Destiny
             </span>
           </motion.h1>
@@ -69,14 +68,15 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* RIGHT: Animated Astrology Wheel */}
+     
  <motion.div
   initial={{ scale: 0.9, opacity: 0 }}
   animate={{ scale: 1, opacity: 1 }}
   transition={{ duration: 1, ease: "easeOut" }}
   className="relative flex items-center justify-center"
 >
-  <Planetarium />
+
+  <AstroGlobe />
 </motion.div>
       </div>
     </section>

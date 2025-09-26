@@ -9,51 +9,56 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    // TODO: hook this to your API/Email service (e.g., /api/contact or Resend)
     setTimeout(() => setSubmitting(false), 1200);
   };
 
   return (
     <section id="contact" className="relative px-6 py-20 md:py-28">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Info Card */}
+      <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-5 gap-8">
+        {/* Info Card (Left - more descriptive, centered) */}
         <motion.div
           initial={{ x: -30, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="rounded-3xl border border-white/10 bg-black/50 p-6 md:p-8 shadow-2xl backdrop-blur-xl"
+          className="md:col-span-2 self-center rounded-3xl border border-white/10 bg-black/50 p-6 md:p-8 shadow-2xl backdrop-blur-xl"
         >
           <h2 className="text-3xl md:text-4xl font-bold">Contact</h2>
-          <p className="mt-2 text-gray-300">
-            Fill the form and I’ll get back within 24 hours. Sessions are
-            available via Google Meet or in-person (Delhi).
-          </p>
+          {/* <p className="mt-3 text-gray-300 leading-relaxed">
+            Astrology is not about predicting fate—it’s about <span className="text-fuchsia-400 font-medium">guiding you with cosmic wisdom</span>.  
+            Every planet, every star tells a story, and your birth chart is the map that reveals it.  
+            Whether it’s love, career, or clarity in life’s crossroads, astrology brings direction and peace.
+          </p> */}
 
-          <div className="mt-6 space-y-3 text-gray-300">
+          {/* <p className="mt-4 text-gray-300 leading-relaxed">
+            Fill the form and you’ll receive a personalized consultation within 24 hours.  
+            Sessions are available <span className="text-indigo-400">online via Google Meet</span>, on call, or <span className="text-indigo-400">in-person (Delhi)</span>.
+          </p> */}
+
+          <div className="mt-6 space-y-3 text-gray-300 text-sm">
             <div>📧 hello@jyotishvani.example</div>
             <div>📞 +91 90000 00000</div>
             <div>🕒 Mon–Sat • 10am–7pm IST</div>
           </div>
 
           <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-gray-300">
-            <p className="font-medium">Tip for accurate reading:</p>
+            <p className="font-medium">For the most accurate reading:</p>
             <ul className="mt-2 list-disc pl-5 space-y-1">
-              <li>Enter exact birth date and time (from birth certificate if possible).</li>
-              <li>Specify birth city (and state/country) for precise coordinates.</li>
-              <li>Mention your primary concern in the “Concern/Problem” field.</li>
+              <li>Provide your exact birth date, time, and city.</li>
+              <li>Share your primary concern clearly (career, love, finance, etc.).</li>
+              <li>Be open—astrology works best when approached with trust.</li>
             </ul>
           </div>
         </motion.div>
 
-        {/* Form */}
+        {/* Form (Right - larger) */}
         <motion.form
           initial={{ x: 30, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           onSubmit={handleSubmit}
-          className="rounded-3xl border border-white/10 bg-black/50 p-6 md:p-8 shadow-2xl backdrop-blur-xl"
+          className="md:col-span-3 rounded-3xl border border-white/10 bg-black/50 p-6 md:p-10 shadow-2xl backdrop-blur-xl flex flex-col justify-center"
         >
           {/* Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -66,19 +71,6 @@ export default function Contact() {
                 required
               />
             </label>
-            {/* <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">Email</span>
-              <input
-                type="email"
-                name="email"
-                className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none"
-                placeholder="you@example.com"
-                required
-              />
-            </label> */}
-          </div>
-
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             <label className="flex flex-col gap-2">
               <span className="text-sm text-gray-300">WhatsApp / Phone</span>
               <input
@@ -89,24 +81,12 @@ export default function Contact() {
                 required
               />
             </label>
-            <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">Preferred Mode</span>
-              <select
-                name="mode"
-                className="rounded-xl text-black border border-white/10 bg-white/5 px-4 py-3 outline-none"
-                defaultValue="Online (Google Meet)"
-              >
-                <option>Online (Google Meet)</option>
-                <option>Phone Call</option>
-                <option>In-person (Delhi)</option>
-              </select>
-            </label>
           </div>
 
           {/* Birth Details */}
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
             <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">Date of Birth (DOB)</span>
+              <span className="text-sm text-gray-300">DOB</span>
               <input
                 type="date"
                 name="dob"
@@ -115,7 +95,7 @@ export default function Contact() {
               />
             </label>
             <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">Time of Birth</span>
+              <span className="text-sm text-gray-300">Time</span>
               <input
                 type="time"
                 name="tob"
@@ -124,77 +104,21 @@ export default function Contact() {
                 required
               />
             </label>
-            {/* <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">AM/PM (optional)</span>
-              <select
-                name="meridiem"
-                className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none"
-                defaultValue=""
-              >
-                <option value="">24-hour time</option>
-                <option>AM</option>
-                <option>PM</option>
-              </select>
-            </label> */}
-          </div>
-
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">Place of Birth</span>
+              <span className="text-sm text-gray-300">Birth Place</span>
               <input
                 name="pob"
                 className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none"
-                placeholder="City, State, Country"
+                placeholder="City, Country"
                 required
               />
-            </label>
-            {/* <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">Current City</span>
-              <input
-                name="currentCity"
-                className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none"
-                placeholder="Where you live now"
-              />
-            </label> */}
-          </div>
-
-          {/* Optional Demographics */}
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">Gender (optional)</span>
-              <select
-                name="gender"
-                className="text-black rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none"
-                defaultValue=""
-              >
-                <option value="">Prefer not to say</option>
-                <option>Female</option>
-                <option>Male</option>
-                <option>Non-binary</option>
-                <option>Other</option>
-              </select>
-            </label>
-            <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">Marital Status (optional)</span>
-              <select
-                name="marital"
-                className="rounded-xl text-black border border-white/10 bg-white/5 px-4 py-3 outline-none"
-                defaultValue=""
-              >
-                <option value="">—</option>
-                <option>Single</option>
-                <option>In a relationship</option>
-                <option>Engaged</option>
-                <option>Married</option>
-                <option>Divorced</option>
-              </select>
             </label>
           </div>
 
           {/* Service & Concern */}
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">Service Type</span>
+              <span className="text-sm text-gray-300">Service</span>
               <select
                 name="service"
                 className="rounded-xl text-black border border-white/10 bg-white/5 px-4 py-3 outline-none"
@@ -203,45 +127,32 @@ export default function Contact() {
                 <option>Birth Chart Reading</option>
                 <option>Love & Relationships</option>
                 <option>Career & Finance</option>
-                <option>Shubh Muhurat</option>
-                <option>Yearly Transit Forecast</option>
-                <option>Remedy Consultation</option>
+                <option>Yearly Forecast</option>
               </select>
             </label>
-
             <label className="flex flex-col gap-2">
-              <span className="text-sm text-gray-300">Concern / Problem</span>
+              <span className="text-sm text-gray-300">Concern</span>
               <select
                 name="concern"
-                className="rounded-xl border text-black border-white/10 bg-white/5 px-4 py-3 outline-none"
+                className="rounded-xl text-black border border-white/10 bg-white/5 px-4 py-3 outline-none"
                 required
               >
-                {/* 12+ common astrology concerns */}
-                <option>Career growth / job change</option>
-                <option>Love life / marriage timing</option>
-                <option>Compatibility / synastry</option>
-                <option>Business / startup launch timing</option>
-                <option>Finance / investments</option>
-                <option>Health & wellness outlook</option>
-                <option>Education / higher studies</option>
-                <option>Property / vehicle purchase muhurat</option>
-                <option>Foreign travel / PR / immigration</option>
-                <option>Legal disputes outlook</option>
-                <option>Childbirth / family planning</option>
-                <option>Spiritual growth / remedies</option>
-                <option>Yearly roadmap (12-month)</option>
+                <option>Career growth</option>
+                <option>Marriage timing</option>
+                <option>Business outlook</option>
+                <option>Foreign travel</option>
               </select>
             </label>
           </div>
 
           {/* Question */}
           <label className="mt-4 flex flex-col gap-2">
-            <span className="text-sm text-gray-300">Your specific question / focus</span>
+            <span className="text-sm text-gray-300">Your specific question</span>
             <textarea
               name="question"
-              rows={4}
+              rows={3}
               className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none"
-              placeholder="Tell me what’s happening and what clarity you want…"
+              placeholder="Tell me what clarity you want…"
             />
           </label>
 
@@ -249,7 +160,7 @@ export default function Contact() {
           <label className="mt-4 flex items-start gap-3 text-sm text-gray-300">
             <input type="checkbox" required className="mt-1 accent-fuchsia-500" />
             <span>
-              I consent to sharing my birth details for astrological analysis and agree to the{" "}
+              I consent to sharing my details for astrological analysis and agree to the{" "}
               <a href="#" className="underline hover:text-white/90">terms</a> &{" "}
               <a href="#" className="underline hover:text-white/90">privacy policy</a>.
             </span>
@@ -262,10 +173,6 @@ export default function Contact() {
           >
             {submitting ? "Submitting…" : "Submit"}
           </button>
-
-          <p className="mt-3 text-xs text-gray-400">
-            By submitting, you agree to our terms & privacy policy.
-          </p>
         </motion.form>
       </div>
     </section>
