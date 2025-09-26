@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import Image from "next/image";
 
 
 const links = [
@@ -28,8 +29,16 @@ transition={{ duration: 0.6, ease: "easeOut" }}
 className="fixed top-4 left-1/2 z-50 w-[92%] max-w-6xl -translate-x-1/2"
 >
 <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/50 backdrop-blur-xl px-5 py-3 shadow-2xl">
-<Link href="#home" className="text-lg md:text-xl  text-shadow-white font-bold tracking-wide">
-✨ JyotishVani
+<Link href="/" className="text-lg md:text-xl  text-shadow-white font-bold tracking-wide">
+<Image
+  src="/logo.jpg"
+  alt="Logo"
+  width={200}
+  height={60}
+  className="inline-block mr-2"
+  />
+  
+
 </Link>
 <div className="hidden md:flex items-center gap-7 text-gray-200">
 {links.map((l) => (
@@ -76,7 +85,7 @@ onClick={() => setOpen(false)}
 {l.label}
 </a>
 ))}
-<a href="/booking" className="mt-3 rounded-xl bg-white/10 px-4 py-2 text-center border border-white/10">
+<a href="/booking" className="mt-3 rounded-xl  bg-gradient-to-r from-fuchsia-500 to-indigo-500 px-4 py-2 text-center border border-white/10">
 Book Now
 </a>
 </div>

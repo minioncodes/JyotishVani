@@ -18,7 +18,7 @@ const SIGNS = [
 
 // In-memory cache
 let cache: { datetime: string; data: any[]; timestamp: number } | null = null;
-const CACHE_TTL = 1000 * 60 * 60 * 6; // 6h
+const CACHE_TTL = 1000 * 60 * 60 * 6;
 
 export async function GET(request: Request) {
   try {
