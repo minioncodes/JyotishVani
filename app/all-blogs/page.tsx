@@ -44,21 +44,20 @@ export default function BlogsPage() {
     <>
       <Navbar />
 
-      {/* Starry Background */}
-      <div className="fixed inset-0 -z-10 bg-black">
+      {/* Background */}
+      <div className="fixed inset-0 -z-10 bg-[#FAF8F3]">
         <StarsBg />
-        {/* Glow gradients layered on top */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-fuchsia-500/10 blur-3xl" />
-          <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-indigo-500/10 blur-3xl" />
+          <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
+          <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
         </div>
       </div>
 
       {/* Blogs Content */}
-      <div className="max-w-6xl mx-auto px-6 py-10 relative z-10">
+      <div className="max-w-6xl mx-auto px-6 py-14 relative z-10">
         {/* Page Heading */}
-        <h1 className="text-4xl font-bold text-center font-[Cinzel] mb-10 text-white">
-          Whispers from the Stars ✨
+        <h1 className="text-4xl md:text-5xl font-bold text-center font-[Cinzel] mb-12 text-black">
+          Whispers from the <span className="text-[#C5A46D]">Stars ✨</span>
         </h1>
 
         {/* Blog Grid */}
@@ -66,7 +65,7 @@ export default function BlogsPage() {
           {blogs.map((blog) => (
             <div
               key={blog._id}
-              className="border border-white/10 rounded-lg shadow-lg hover:shadow-xl transition bg-black/60 backdrop-blur-xl overflow-hidden"
+              className="rounded-2xl border border-[#C5A46D]/30 bg-white/90 shadow-md hover:shadow-lg transition overflow-hidden"
             >
               {blog.image && (
                 <img
@@ -75,16 +74,16 @@ export default function BlogsPage() {
                   className="w-full h-48 object-cover"
                 />
               )}
-              <div className="p-5">
-                <h2 className="text-lg font-semibold mb-2 line-clamp-2 text-white">
+              <div className="p-5 flex flex-col">
+                <h2 className="text-lg font-semibold mb-2 line-clamp-2 text-black">
                   {blog.title}
                 </h2>
-                <p className="text-sm text-gray-300 line-clamp-3 mb-4">
+                <p className="text-sm text-gray-700 line-clamp-3 mb-4">
                   {blog.description}
                 </p>
                 <Link
                   href={`/single-blog/${blog._id}`}
-                  className="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md text-sm hover:bg-indigo-700 transition"
+                  className="inline-block rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-sm font-medium shadow hover:bg-black hover:text-white transition"
                 >
                   Read More
                 </Link>

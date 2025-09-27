@@ -5,7 +5,13 @@ import Contact from "@/components/Contact";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useState } from "react";
-import { FiCheckCircle, FiClock, FiMapPin, FiPhone, FiMail, FiHelpCircle, FiExternalLink } from "react-icons/fi";
+import {
+  FiCheckCircle,
+  FiClock,
+  FiMapPin,
+  FiHelpCircle,
+  FiExternalLink,
+} from "react-icons/fi";
 import CTA from "@/components/CTA";
 import StarsBg from "@/components/StarBg";
 
@@ -13,42 +19,32 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-<main className="relative min-h-screen bg-black text-white overflow-x-hidden">
-{/* Subtle animated starfield */}
-<StarsBg />
-{/* Glow gradients */}
-<div className="pointer-events-none fixed inset-0">
-<div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-fuchsia-500/10 blur-3xl" />
-<div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-indigo-500/10 blur-3xl" />
-</div>
+      <main className="relative min-h-screen bg-[#FAF8F3] text-black overflow-x-hidden">
+        {/* Subtle animated starfield */}
+        <StarsBg />
+        {/* Glow gradients */}
+        <div className="pointer-events-none fixed inset-0">
+          <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
+          <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
+        </div>
 
-       
         <HeaderHero />
-
-        
         <TrustStrip />
+        <Contact />
 
-              <Contact />
         <section className="relative px-6 py-10 md:py-14">
           <div className="mx-auto grid max-w-6xl grid-cols-1 lg:grid-cols-3 gap-6">
-         
-          
-        
-
+            {/* Left empty for balance if needed */}
           </div>
-            <div className="space-y-6">
-           
-              <HoursLocationCard />
-              <QuickLinksCard />
-            </div>
+          <div className="space-y-6">
+            <HoursLocationCard />
+            <QuickLinksCard />
+          </div>
         </section>
 
         <FAQSection />
-
-   
         <CTA />
       </main>
-
       <Footer />
     </>
   );
@@ -64,23 +60,30 @@ function HeaderHero() {
         transition={{ duration: 0.6 }}
         className="mx-auto max-w-6xl"
       >
-      
-        <nav className="text-sm text-gray-400 mb-3">
-          <a href="/" className="hover:text-gray-200">Home</a>
+        <nav className="text-sm text-gray-500 mb-3">
+          <a href="/" className="hover:text-[#C5A46D]">Home</a>
           <span className="mx-2">/</span>
-          <span className="text-gray-300">Contact</span>
+          <span className="text-gray-700">Contact</span>
         </nav>
 
-        <div className="rounded-3xl border border-white/10 bg-black/50 p-6 md:p-10 backdrop-blur-xl shadow-2xl">
-          <h1 className="text-3xl md:text-5xl font-extrabold">Let’s connect.</h1>
-          <p className="mt-3 text-gray-300 max-w-2xl">
-            Share your birth details and your main concern—love, career, finance, or timing—and I’ll reply within
-            24 hours with next steps and available slots.
+        <div className="rounded-3xl bg-white/90 border border-[#C5A46D]/30 p-6 md:p-10 shadow-xl">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-black">
+            Let’s <span className="text-[#C5A46D]">connect.</span>
+          </h1>
+          <p className="mt-3 text-gray-700 max-w-2xl">
+            Share your birth details and your main concern—love, career, finance, or timing—
+            and I’ll reply within 24 hours with next steps and available slots.
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm">
-            <span className="rounded-xl border border-white/10 bg-white/5 px-3 py-1">Vedic • Transit • Tarot</span>
-            <span className="rounded-xl border border-white/10 bg-white/5 px-3 py-1">Online / In-person (Delhi)</span>
-            <span className="rounded-xl border border-white/10 bg-white/5 px-3 py-1">Secure & private</span>
+            <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
+              Vedic • Transit • Tarot
+            </span>
+            <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
+              Online / In-person (Delhi)
+            </span>
+            <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
+              Secure & private
+            </span>
           </div>
         </div>
       </motion.div>
@@ -105,13 +108,13 @@ function TrustStrip() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.45 }}
-            className="rounded-2xl border border-white/10 bg-black/50 p-4 backdrop-blur-xl shadow-xl"
+            className="rounded-2xl bg-white/90 border border-[#C5A46D]/30 p-4 shadow-md"
           >
             <div className="flex items-center gap-3">
-              <div className="text-lg opacity-90">{it.icon}</div>
+              <div className="text-lg text-[#C5A46D]">{it.icon}</div>
               <div>
-                <div className="font-semibold">{it.label}</div>
-                <div className="text-xs text-gray-400">{it.sub}</div>
+                <div className="font-semibold text-black">{it.label}</div>
+                <div className="text-xs text-gray-600">{it.sub}</div>
               </div>
             </div>
           </motion.div>
@@ -129,7 +132,7 @@ function CardWrapper({ children }: { children: React.ReactNode }) {
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.45 }}
-      className="rounded-2xl border border-white/10 bg-black/50 p-5 backdrop-blur-xl shadow-xl"
+      className="rounded-2xl bg-white/90 border border-[#C5A46D]/30 p-5 shadow-md"
     >
       {children}
     </motion.div>
@@ -139,13 +142,12 @@ function CardWrapper({ children }: { children: React.ReactNode }) {
 function HoursLocationCard() {
   return (
     <CardWrapper>
-      <h3 className="text-lg font-semibold">Hours & Location</h3>
-      <div className="mt-3 text-sm text-gray-300">
+      <h3 className="text-lg font-semibold text-black">Hours & Location</h3>
+      <div className="mt-3 text-sm text-gray-700">
         <div className="flex items-center gap-2"><FiClock /> Mon–Sat • 10am–7pm IST</div>
         <div className="mt-2 flex items-center gap-2"><FiMapPin /> Delhi (in-person) • Google Meet (online)</div>
       </div>
-      {/* Map placeholder box; replace with iframe if you have a location */}
-      <div className="mt-4 h-40 w-full rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-xs text-gray-400">
+      <div className="mt-4 h-40 w-full rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 flex items-center justify-center text-xs text-gray-500">
         Add Google Maps iframe here
       </div>
     </CardWrapper>
@@ -161,11 +163,11 @@ function QuickLinksCard() {
   ];
   return (
     <CardWrapper>
-      <h3 className="text-lg font-semibold">Quick Links</h3>
-      <ul className="mt-3 space-y-2 text-sm">
+      <h3 className="text-lg font-semibold text-black">Quick Links</h3>
+      <ul className="mt-3 space-y-2 text-sm text-gray-700">
         {links.map((l) => (
           <li key={l.href}>
-            <a href={l.href} className="flex items-center gap-2 hover:text-gray-100">
+            <a href={l.href} className="flex items-center gap-2 hover:text-[#C5A46D]">
               <FiExternalLink /> {l.label}
             </a>
           </li>
@@ -206,8 +208,10 @@ function FAQSection() {
           transition={{ duration: 0.5 }}
           className="mb-6"
         >
-          <h2 className="text-2xl md:text-3xl font-bold">Frequently Asked Questions</h2>
-          <p className="mt-2 text-sm text-gray-300">
+          <h2 className="text-2xl md:text-3xl font-bold text-black">
+            Frequently Asked <span className="text-[#C5A46D]">Questions</span>
+          </h2>
+          <p className="mt-2 text-sm text-gray-700">
             Quick answers to common queries. Still unsure? Reach out and I’ll help you decide.
           </p>
         </motion.div>
@@ -230,21 +234,21 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.4 }}
-      className="rounded-2xl border border-white/10 bg-black/50 p-5 backdrop-blur-xl shadow-xl"
+      className="rounded-2xl bg-white/90 border border-[#C5A46D]/30 p-5 shadow-md"
     >
       <button
         onClick={() => setOpen((s) => !s)}
-        className="flex w-full items-center justify-between text-left"
+        className="flex w-full items-center justify-between text-left text-black"
       >
         <span className="font-medium">{question}</span>
-        <FiHelpCircle className={`transition-transform ${open ? "rotate-45" : ""}`} />
+        <FiHelpCircle className={`transition-transform ${open ? "rotate-45 text-[#C5A46D]" : ""}`} />
       </button>
       <motion.div
         initial={false}
         animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
         className="overflow-hidden"
       >
-        <p className="mt-3 text-sm text-gray-300">{answer}</p>
+        <p className="mt-3 text-sm text-gray-700">{answer}</p>
       </motion.div>
     </motion.div>
   );

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Blog {
   _id: string;
@@ -28,10 +28,10 @@ export default function BlogsPage() {
         if (res.ok) {
           setBlogs(data.blogs);
         } else {
-          setError(data.msg || "failed to fetch blogs");
+          setError(data.msg || "Failed to fetch blogs");
         }
       } catch (err) {
-        setError("something went wrong");
+        setError("Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -62,11 +62,10 @@ export default function BlogsPage() {
   const maxIndex = Math.max(0, blogs.length - cardsPerView);
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center font-[Cinzel] bg-clip-text ">
-  Whispers from the Stars 
-</h1>
-
+    <div className="p-6 mx-auto">
+      <h1 className="text-3xl font-bold mb-6 text-center font-[Cinzel] text-black">
+        Whispers from the <span className="text-[#C5A46D]">Stars</span>
+      </h1>
 
       {/* Carousel */}
       <div className="overflow-hidden">
@@ -78,7 +77,7 @@ export default function BlogsPage() {
           {blogs.map((blog) => (
             <motion.div
               key={blog._id}
-              className="flex-shrink-0 w-[calc(100%/2-0.5rem)] lg:w-[calc(100%/4-0.75rem)] border rounded-lg shadow bg-white overflow-hidden"
+              className="flex-shrink-0 w-[calc(100%/2-0.5rem)] lg:w-[calc(100%/4-0.75rem)] rounded-sm bg-white/90 shadow-md hover:shadow-xl overflow-hidden"
               whileHover={{ scale: 1.02 }}
             >
               {blog.image && (
@@ -89,7 +88,7 @@ export default function BlogsPage() {
                 />
               )}
               <div className="p-4 flex flex-col h-[220px]">
-                <h2 className="text-md font-semibold mb-1 line-clamp-2">
+                <h2 className="text-md font-semibold mb-1 line-clamp-2 text-black">
                   {blog.title}
                 </h2>
                 <p className="text-sm text-gray-700 flex-1 line-clamp-3">
@@ -97,7 +96,7 @@ export default function BlogsPage() {
                 </p>
                 <Link
                   href={`/single-blog/${blog._id}`}
-                  className="mt-2 inline-block text-center bg-indigo-600 text-white px-3 py-1.5 rounded-md text-sm hover:bg-indigo-700 transition"
+                  className="mt-2 inline-block text-center bg-[#C5A46D] text-black px-3 py-1.5 rounded-md text-sm font-medium hover:bg-black hover:text-white transition"
                 >
                   View Details
                 </Link>
@@ -114,7 +113,7 @@ export default function BlogsPage() {
             key={i}
             onClick={() => setIndex(i)}
             className={`w-3 h-3 rounded-full ${
-              i === index ? "bg-indigo-600" : "bg-gray-300"
+              i === index ? "bg-[#C5A46D]" : "bg-gray-400/50"
             }`}
           />
         ))}

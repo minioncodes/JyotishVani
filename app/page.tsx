@@ -23,27 +23,27 @@ document.documentElement.style.scrollBehavior = "smooth";
 
 
 return (
-<main className="relative min-h-screen bg-black text-white overflow-x-hidden">
-{/* Subtle animated starfield */}
-<StarsBg />
-{/* Glow gradients */}
-<div className="pointer-events-none fixed inset-0">
-<div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-fuchsia-500/10 blur-3xl" />
-<div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-indigo-500/10 blur-3xl" />
-</div>
+<main className="relative min-h-screen bg-[#FAF9F6] text-black overflow-x-hidden">
+  {/* Subtle animated starfield (make stars golden glow instead of white) */}
+  <StarsBg />
 
+  {/* Glow gradients (swap neon with soft golden haze) */}
+  <div className="pointer-events-none fixed inset-0">
+    <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
+    <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#E6D5B8]/20 blur-3xl" />
+  </div>
 
-<Navbar />
-<Hero />
-{/* <Contact /> */}
-
-<About />
-<Services />
-<Horoscope />
-<Reviews />
-<Blogs />
-<CTA />
-<Footer />
+  <Navbar />
+  <Hero />
+  {/* <Contact /> */}
+  <About />
+  <Services />
+  <Horoscope />
+  <Reviews />
+  <Blogs />
+  <CTA />
+  <Footer />
 </main>
+
 );
 }

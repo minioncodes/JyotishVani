@@ -1,95 +1,96 @@
 "use client";
 
-
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
 
-
 const links = [
-{ href: "/", label: "Home" },
-{ href: "#about", label: "About" },
-{ href: "#services", label: "Services" },
-{ href: "/all-blogs", label: "Blogs" },
-{ href: "/contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
+  { href: "/all-blogs", label: "Blogs" },
+  { href: "/contact", label: "Contact" },
 ];
 
-
 export default function Navbar() {
-const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
+  return (
+    <motion.nav
+      initial={{ y: -30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="fixed top-4 left-1/2 z-50 w-[92%] max-w-6xl -translate-x-1/2"
+    >
+      <div className="flex items-center justify-between rounded-2xl bg-white/90 backdrop-blur-md px-5 py-3 shadow-md">
+        {/* Logo */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.jpg"
+            alt="Logo"
+            width={160}
+            height={50}
+            className="mr-2"
+          />
+        </Link>
 
-return (
-<motion.nav
-initial={{ y: -30, opacity: 0 }}
-animate={{ y: 0, opacity: 1 }}
-transition={{ duration: 0.6, ease: "easeOut" }}
-className="fixed top-4 left-1/2 z-50 w-[92%] max-w-6xl -translate-x-1/2"
->
-<div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/50 backdrop-blur-xl px-5 py-3 shadow-2xl">
-<Link href="/" className="text-lg md:text-xl  text-shadow-white font-bold tracking-wide">
-<Image
-  src="/logo.jpg"
-  alt="Logo"
-  width={200}
-  height={60}
-  className="inline-block mr-2"
-  />
-  
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-7 text-gray-800 font-medium">
+          {links.map((l) => (
+            <motion.a
+              key={l.href}
+              href={l.href}
+              whileHover={{ y: -2 }}
+              className="hover:text-[#C5A46D] transition-colors"
+            >
+              {l.label}
+            </motion.a>
+          ))}
+          <a
+            href="/booking"
+            className="rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-sm font-semibold shadow hover:bg-black hover:text-white transition"
+          >
+            Book Now
+          </a>
+        </div>
 
-</Link>
-<div className="hidden md:flex items-center gap-7 text-gray-200">
-{links.map((l) => (
-<motion.a
-key={l.href}
-href={l.href}
-whileHover={{ y: -2 }}
-className="hover:text-white/90 transition-colors"
->
-{l.label}
-</motion.a>
-))}
-<a
-href="/booking"
-className="rounded-xl bg-white/10 px-4 py-2 text-sm border border-white/10 hover:bg-white/15"
->
-Book Now
-</a>
-</div>
-<button
-className="md:hidden rounded-xl border border-white/10 bg-white/5 p-2"
-onClick={() => setOpen((s) => !s)}
-aria-label="Menu"
->
-{open ? <FiX /> : <FiMenu />}
-</button>
-</div>
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden rounded-xl bg-[#C5A46D]/20 p-2 text-black hover:bg-[#C5A46D]/30"
+          onClick={() => setOpen((s) => !s)}
+          aria-label="Menu"
+        >
+          {open ? <FiX /> : <FiMenu />}
+        </button>
+      </div>
 
-
-{/* Mobile drawer */}
-<motion.div
-initial={false}
-animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
-className="md:hidden overflow-hidden mt-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-xl"
->
-<div className="flex flex-col p-4">
-{links.map((l) => (
-<a
-key={l.href}
-href={l.href}
-className="py-3 text-gray-200 border-b border-white/10 last:border-none"
-onClick={() => setOpen(false)}
->
-{l.label}
-</a>
-))}
-<a href="/booking" className="mt-3 rounded-xl  bg-gradient-to-r from-fuchsia-500 to-indigo-500 px-4 py-2 text-center border border-white/10">
-Book Now
-</a>
-</div>
-</motion.div>
-</motion.nav>
-);
+      {/* Mobile Drawer */}
+      <motion.div
+        initial={false}
+        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        className="md:hidden overflow-hidden mt-2 rounded-2xl bg-white/95 shadow"
+      >
+        <div className="flex flex-col p-4">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="py-3 text-gray-800 font-medium border-b border-gray-200 last:border-none hover:text-[#C5A46D]"
+              onClick={() => setOpen(false)}
+            >
+              {l.label}
+            </a>
+          ))}
+          <a
+            href="/booking"
+            className="mt-3 rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-center font-semibold shadow hover:bg-black hover:text-white transition"
+          >
+            Book Now
+          </a>
+        </div>
+      </motion.div>
+    </motion.nav>
+  );
 }
