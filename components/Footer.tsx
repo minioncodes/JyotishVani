@@ -23,12 +23,15 @@ export default function Footer() {
           {/* Brand / Logo */}
           <div className="space-y-4">
             <a href="/" className="inline-flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur">
-                <Image src="/logo.svg" alt="Brand logo" fill className="object-contain p-2" />
+              <div className="relative  overflow-hidden  backdrop-blur">
+                <Image src="/icon.jpg" 
+                alt="Brand logo"
+                height={150}
+                width={150}
+                
+                className="object-contain p-2 rounded-[100%]" />
               </div>
-              <span className="text-xl font-semibold tracking-wide text-zinc-100">
-                AstroVision
-              </span>
+            
             </a>
 
             {/* Socials */}
@@ -100,7 +103,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-3 text-sm text-zinc-400 md:flex-row">
           <p>© {year} AstroVision. All rights reserved.</p>
           <p>
-            Made with ❤️ in India ·{" "}
+            Developed By Digipants Network·{" "}
             <a href="/privacy" className="underline decoration-white/20 hover:decoration-indigo-400">
               Privacy Policy
             </a>

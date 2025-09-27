@@ -35,7 +35,7 @@ return (
 
 <Navbar />
 <Hero />
-<Contact />
+{/* <Contact /> */}
 
 <About />
 <Services />

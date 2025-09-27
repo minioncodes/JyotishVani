@@ -7,18 +7,20 @@ import Footer from "@/components/Footer";
 import { useState } from "react";
 import { FiCheckCircle, FiClock, FiMapPin, FiPhone, FiMail, FiHelpCircle, FiExternalLink } from "react-icons/fi";
 import CTA from "@/components/CTA";
+import StarsBg from "@/components/StarBg";
 
 export default function ContactPage() {
   return (
     <>
       <Navbar />
-
-      <main className="relative min-h-screen bg-black text-white">
-      
-        <div className="pointer-events-none fixed inset-0 -z-10">
-          <div className="absolute -top-40 -left-40 h-[34rem] w-[34rem] rounded-full bg-fuchsia-600/15 blur-3xl" />
-          <div className="absolute -bottom-40 -right-40 h-[34rem] w-[34rem] rounded-full bg-indigo-600/15 blur-3xl" />
-        </div>
+<main className="relative min-h-screen bg-black text-white overflow-x-hidden">
+{/* Subtle animated starfield */}
+<StarsBg />
+{/* Glow gradients */}
+<div className="pointer-events-none fixed inset-0">
+<div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-fuchsia-500/10 blur-3xl" />
+<div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-indigo-500/10 blur-3xl" />
+</div>
 
        
         <HeaderHero />
