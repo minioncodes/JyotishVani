@@ -48,10 +48,8 @@ export default function Page() {
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
-      {/* Optional title */}
       {blog.title && <h1 className="text-3xl font-bold mb-6">{blog.title}</h1>}
 
-      {/* Main blog image */}
       {blog.image && (
         <img
           src={blog.image}
@@ -59,14 +57,11 @@ export default function Page() {
           className="w-full rounded-lg shadow mb-6"
         />
       )}
-
-      {/* Quill HTML content */}
       <div
         className="prose prose-lg max-w-none mb-8 break-words"
         dangerouslySetInnerHTML={{ __html: blog.description }}
       />
 
-      {/* Metadata */}
       <div className="text-sm text-gray-500 space-y-1 mb-6">
         <p>Created at: {new Date(blog.createdAt).toLocaleString()}</p>
         <p>Updated at: {new Date(blog.updatedAt).toLocaleString()}</p>

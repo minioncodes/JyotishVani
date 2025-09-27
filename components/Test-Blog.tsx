@@ -36,7 +36,6 @@ export default function TestBlogPage() {
       setLoading(false);
     }
   };
-  console.log("image = ", image);
   return (
     <div className="p-6 max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Create Blog</h1>

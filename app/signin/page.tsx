@@ -28,7 +28,7 @@ export default function SignInPage() {
         setError(data.message || "Invalid credentials");
       } else {
         setSuccess("Login successful ✅");
-        console.log("Admin info:", data.admin);
+
       }
     } catch (err) {
       setError("Something went wrong. Try again.");

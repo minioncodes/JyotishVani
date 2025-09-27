@@ -187,35 +187,36 @@ export default function Horoscope() {
   const [signs, setSigns] = useState<Sign[]>([]);
   const [active, setActive] = useState<Sign | null>(null);
   const [loading, setLoading] = useState(true);
-useEffect(() => {
-  async function loadPredictions() {
-    try {
-      setLoading(true);
-      const today = new Date().toISOString().split("T")[0] + "T00:00:00+00:00";
-      const res = await fetch(`/api/horoscope?datetime=${today}`);
-      const data = await res.json();
+  useEffect(() => {
+    async function loadPredictions() {
+      try {
+        setLoading(true);
+        const today = new Date().toISOString().split("T")[0] + "T00:00:00+00:00";
+        const res = await fetch(`/api/horoscope`);
+        const data = await res.json();
+        const predictions = data?.results || [];
+        console.log("predictions = ", predictions.length);
+        if (predictions.length > 0) {
+          const mapped: Sign[] = predictions.map((p: any) => ({
+            id: p.sign?.id ?? 0,
+            name: p.sign?.name ?? "Unknown",
+            symbol: p.sign_info?.unicode_symbol || "",
+            icon: ICONS[p.sign?.name] || <FiStar />,
+            msg: shorten(p.predictions?.[0]?.prediction || "No message"),
+            predictions: p.predictions || [],
+          }));
 
-      const predictions = data?.data?.daily_predictions || [];
-
-      if (predictions.length) {
-        const mapped: Sign[] = predictions.map((p: any) => ({
-          id: p.sign?.id ?? 0,
-          name: p.sign?.name ?? "Unknown",
-          symbol: p.sign_info?.unicode_symbol || "",
-          icon: ICONS[p.sign?.name] || <FiStar />,
-          msg: shorten(p.predictions?.[0]?.prediction || "No message"),
-          predictions: p.predictions || [],
-        }));
-        setSigns(mapped);
+          setSigns(mapped);
+        }
+        console.log(signs);
+      } catch (err) {
+        console.error("Failed to load predictions", err);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      console.error("Failed to load predictions", err);
-    } finally {
-      setLoading(false);
     }
-  }
-  loadPredictions();
-}, []);
+    loadPredictions();
+  }, []);
 
   const fallback: Sign[] = Object.entries(ICONS).map(([name, icon]) => ({
     id: 0,

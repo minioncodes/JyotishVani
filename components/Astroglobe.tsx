@@ -8,8 +8,6 @@ useEffect(() => {
   async function fetchSnapshot() {
     const res = await fetch("/api/snapshot");
     const data = await res.json();
-    console.log("Fetched snapshot:", data);
-
     setSnapshot({
       tithi: data.tithi,
        paksha: data.paksha,  
