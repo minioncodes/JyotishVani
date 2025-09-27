@@ -183,6 +183,7 @@ export default function Horoscope() {
   const [signs, setSigns] = useState<Sign[]>([]);
   const [active, setActive] = useState<Sign | null>(null);
   const [loading, setLoading] = useState(true);
+<<<<<<< HEAD
 
   useEffect(() => {
     async function loadPredictions() {
@@ -205,6 +206,30 @@ export default function Horoscope() {
           }));
           setSigns(mapped);
         }
+=======
+  useEffect(() => {
+    async function loadPredictions() {
+      try {
+        setLoading(true);
+        const today = new Date().toISOString().split("T")[0] + "T00:00:00+00:00";
+        const res = await fetch(`/api/horoscope`);
+        const data = await res.json();
+        const predictions = data?.results || [];
+        console.log("predictions = ", predictions.length);
+        if (predictions.length > 0) {
+          const mapped: Sign[] = predictions.map((p: any) => ({
+            id: p.sign?.id ?? 0,
+            name: p.sign?.name ?? "Unknown",
+            symbol: p.sign_info?.unicode_symbol || "",
+            icon: ICONS[p.sign?.name] || <FiStar />,
+            msg: shorten(p.predictions?.[0]?.prediction || "No message"),
+            predictions: p.predictions || [],
+          }));
+
+          setSigns(mapped);
+        }
+        console.log(signs);
+>>>>>>> 6f4dd87630e3bce6fe4273acc1fa87614e87fa21
       } catch (err) {
         console.error("Failed to load predictions", err);
       } finally {

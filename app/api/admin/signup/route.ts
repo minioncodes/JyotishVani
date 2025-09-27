@@ -6,7 +6,6 @@ import connectDB from "@/lib/mongo";
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
-    console.log("MongoDB connected successfully");
     const { name, email, password } = await req.json();
     const existingAdmin = await AdminModel.findOne({ email });
     if (existingAdmin) {

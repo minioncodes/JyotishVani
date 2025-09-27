@@ -2,34 +2,31 @@ import { NextResponse } from "next/server";
 import { getAccessToken } from "../snapshot/route";
 
 const SIGNS = [
-  "aries",
-  "taurus",
-  "gemini",
-  "cancer",
-  "leo",
-  "virgo",
-  "libra",
-  "scorpio",
+  // "aries",
+  // "taurus",
+  // "gemini",
+  // "cancer",
+  // "leo",
+  // "virgo",
+  // "libra",
+  // "scorpio",
   "sagittarius",
   "capricorn",
   "aquarius",
   "pisces",
 ];
 
-// In-memory cache
 let cache: { datetime: string; data: any[]; timestamp: number } | null = null;
 const CACHE_TTL = 1000 * 60 * 60 * 6;
-
+console.log("get route got calleddd")
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
     const querySign = url.searchParams.get("sign");
     const datetime =
       url.searchParams.get("datetime") ||
-      new Date().toISOString().split("T")[0] + "T00:00:00+00:00";
-
+      new Date().toISOString().split("T")[0] + "T00:00:00%2B00:00";
     const now = Date.now();
-
     if (cache && cache.datetime === datetime && now - cache.timestamp < CACHE_TTL) {
       let results = cache.data;
       if (querySign) {
@@ -39,23 +36,21 @@ export async function GET(request: Request) {
       }
       return NextResponse.json({ status: "ok", datetime, predictions: results });
     }
-
     const token = await getAccessToken();
-
     async function fetchSign(sign: string) {
       const res = await fetch(
-        `https://api.prokerala.com/v2/horoscope/daily/advanced?sign=${sign}&datetime=${datetime}`,
+        `https://api.prokerala.com/v2/horoscope/daily/advanced?sign=${sign}&datetime=${datetime}&type=all`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      if (!res.ok) return { sign, error: `Failed with ${res.status}` };
-
+      if (!res.ok) {
+        const errBody = await res.text();
+        console.error("Error response from Prokerala:", res.status, errBody);
+        return { sign, error: `Failed with ${res.status}`, details: errBody };
+      }
       const data = await res.json();
-      console.log("Fetched horoscope for", sign, data);
       const dp = data?.data?.daily_predictions?.[0];
+      console.log("dp = ", dp);
       if (!dp) return { sign, error: "No prediction found" };
-
-
       return {
         sign: {
           id: dp.sign?.id,
@@ -72,7 +67,6 @@ export async function GET(request: Request) {
         })) || [],
       };
     }
-
     let results: any[] = [];
     if (querySign) {
       results = [await fetchSign(querySign)];
@@ -83,10 +77,10 @@ export async function GET(request: Request) {
         await new Promise((r) => setTimeout(r, 300));
       }
     }
+    console.log("result from the api = ", results);
 
     cache = { datetime, data: results, timestamp: now };
-
-    return NextResponse.json({ status: "ok", datetime, predictions: results });
+    return NextResponse.json({ status: "ok", datetime,  results });
   } catch (err) {
     return NextResponse.json(
       { error: "Internal Server Error", details: (err as Error).message },
@@ -94,3 +88,6 @@ export async function GET(request: Request) {
     );
   }
 }
+
+// working url = http://localhost:3000/api/horoscope?sign=aries&datetime=2025-09-26T00:00:00Z&type=all
+// current url = 'https://api.prokerala.com/v2/horoscope/daily/advanced?sign=taurus&datetime=2025-09-26T00:00:00+00:00&type=all'
