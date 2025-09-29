@@ -28,7 +28,7 @@ export default function BlogsPage() {
         const data = await res.json();
         if (res.ok) setBlogs(data.blogs);
         else setError(data.msg || "Failed to fetch blogs");
-      } catch (err) {
+      } catch {
         setError("Something went wrong");
       } finally {
         setLoading(false);
