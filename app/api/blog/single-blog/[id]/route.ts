@@ -16,7 +16,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     }
 
     return NextResponse.json({ blog }, { status: 200 });
-  } catch (e: any) {
+  } catch (e) {
     console.error("Error fetching blog:", e);
     return NextResponse.json({ msg: "Internal server error" }, { status: 500 });
   }

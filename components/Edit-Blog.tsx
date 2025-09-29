@@ -27,7 +27,6 @@ export default function EditBlogPage() {
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [deleteLoading,setDeleteLoading]=useState(false);
-  const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     if (!blogId) return;
@@ -75,7 +74,6 @@ export default function EditBlogPage() {
 
       const data = await res.json();
       if (res.ok) {
-        setResult(data.updatedBlog);
         router.push('/admin/dashboard')
       } else {
         setError(data.msg || "Failed to update blog");

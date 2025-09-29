@@ -22,7 +22,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
             return NextResponse.json({ msg: "blog not found" }, { status: 404 });
         }
         return NextResponse.json({ msg: "blog is deleted succesfully" }, { status: 200 })
-    } catch (e: any) {
+    } catch (e) {
         return NextResponse.json({ msg: "internal server err" }, { status: 500 });
     }
 }

@@ -44,7 +44,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       return NextResponse.json({ msg: "blog not found or not yours" }, { status: 404 });
     }
     return NextResponse.json({ updatedBlog }, { status: 200 });
-  } catch (e: any) {
+  } catch (e) {
     console.error("err updating blogssss", e);
     return NextResponse.json({ msg: "internal server error" }, { status: 500 });
   }

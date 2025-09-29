@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
         })
 
         return NextResponse.json({ newBlog }, { status: 201 })
-    } catch (e: any) {
+    } catch (e) {
         return NextResponse.json({ msg: "there is an error on this code" }, { status: 500 });
     }
 }
