@@ -37,12 +37,6 @@ export default function TestBlogPage() {
       setLoading(false);
     }
   };
-<<<<<<< HEAD
-=======
-  return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Create Blog</h1>
->>>>>>> 6f4dd87630e3bce6fe4273acc1fa87614e87fa21
 
   return (
     <div className="p-6 max-w-2xl mx-auto">
