@@ -25,7 +25,7 @@ export default function BookingPage() {
           </h1>
           <p className="mt-3 text-gray-700 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
             Choose a time that aligns with your cosmic journey.  
-            Available online (Google Meet) or in-person (Delhi).
+            Available online (Google Meet) or in-person (Lucknow).
           </p>
 
           {/* Booking Card */}

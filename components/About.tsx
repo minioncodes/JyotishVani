@@ -8,7 +8,7 @@ export default function About() {
   return (
     <section id="about" className="relative px-6 py-20 md:py-28">
       <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        
+
         {/* LEFT: About Jyotishvani Organisation */}
         <motion.div
           initial={{ x: -30, opacity: 0 }}
@@ -20,9 +20,9 @@ export default function About() {
             About <span className="text-[#C5A46D]">Jyotishvani</span>
           </h2>
           <p className="mt-4 text-base md:text-lg text-gray-800 leading-relaxed">
-            Jyotishvani is a dedicated astrology organisation offering complete 
-            Vedic solutions to guide individuals through life’s important decisions. 
-            With a blend of tradition and modern insights, we provide practical remedies 
+            Jyotishvani is a dedicated astrology organisation offering complete
+            Vedic solutions to guide individuals through life’s important decisions.
+            With a blend of tradition and modern insights, we provide practical remedies
             and accurate predictions rooted in ancient wisdom.
           </p>
           <ul className="mt-6 space-y-2 text-gray-900">
@@ -58,9 +58,9 @@ export default function About() {
             Shree S. K. Singh, fondly known as{" "}
             <span className="font-semibold text-[#C5A46D]">
               Banaras Wale Guruji
-            </span>, 
-            is the guiding force behind Jyotishvani. With 20+ years of experience in Vedic astrology 
-            and gemstone therapy, he has helped thousands find clarity in marriage, career, finance, 
+            </span>,
+            is the guiding force behind Jyotishvani. With 20+ years of experience in Vedic astrology
+            and gemstone therapy, he has helped thousands find clarity in marriage, career, finance,
             and health matters.
           </p>
           <Link
