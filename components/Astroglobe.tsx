@@ -4,7 +4,15 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function AstroGlobe() {
-  const [snapshot, setSnapshot] = useState<any>(null);
+  type Snapshot = {
+    tithi: string;
+    paksha: string;
+    nakshatra: string;
+    choghadiya: string;
+    remedy: string;
+  } | null;
+
+  const [snapshot, setSnapshot] = useState<Snapshot>(null);
 
   useEffect(() => {
     async function fetchSnapshot() {

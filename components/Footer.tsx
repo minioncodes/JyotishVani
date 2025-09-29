@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiMail, FiPhone, FiMapPin, FiInstagram, FiFacebook, FiTwitter } from "react-icons/fi";
+import Link from "next/link";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -19,7 +20,7 @@ export default function Footer() {
         >
           {/* Brand / Logo */}
           <div className="space-y-4">
-            <a href="/" className="inline-flex items-center gap-3">
+            <Link href="/" className="inline-flex items-center gap-3">
               <Image
                 src="/icon.jpg"
                 alt="Brand logo"
@@ -27,31 +28,31 @@ export default function Footer() {
                 width={150}
                 className="object-contain p-2 rounded-full bg-[#C5A46D]/10"
               />
-            </a>
+            </Link>
 
             {/* Socials */}
             <div className="flex items-center gap-3 pt-2">
-              <a
+              <Link
                 aria-label="Instagram"
-                href="https://instagram.com/yourhandle"
+                href="https://www.instagram.com/sksingh_astro"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#C5A46D]/10 text-[#C5A46D] transition hover:bg-[#C5A46D] hover:text-black"
               >
                 <FiInstagram />
-              </a>
-              <a
+              </Link>
+              <Link
                 aria-label="Facebook"
-                href="https://facebook.com/yourhandle"
+                href="#"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#C5A46D]/10 text-[#C5A46D] transition hover:bg-[#C5A46D] hover:text-black"
               >
                 <FiFacebook />
-              </a>
-              <a
+              </Link>
+              <Link
                 aria-label="Twitter"
-                href="https://x.com/yourhandle"
+                href="#"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#C5A46D]/10 text-[#C5A46D] transition hover:bg-[#C5A46D] hover:text-black"
               >
                 <FiTwitter />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -66,29 +67,28 @@ export default function Footer() {
                   <FiMapPin />
                 </span>
                 <div className="leading-relaxed">
-                  <p className="text-white font-medium">AstroVision Studio</p>
-                  <p>12/3 Crescent Lane, Andheri West</p>
-                  <p>Mumbai, Maharashtra 400053 — India</p>
+                  <p className="text-white font-medium">C219, Near Tularam Park, Rajajipuram</p>
+                  <p>Lucknow, Uttar Pradesh 226017 - India</p>
                 </div>
               </li>
               <li className="flex items-center gap-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#C5A46D]/10 text-[#C5A46D]">
                   <FiMail />
                 </span>
-                <a
-                  href="mailto:hello@yourdomain.com"
+                <Link
+                  href="mailto:support@jyotiswaani.com"
                   className="hover:text-[#C5A46D]"
                 >
-                  hello@yourdomain.com
-                </a>
+                  support@jyotiswaani.com
+                </Link>
               </li>
               <li className="flex items-center gap-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#C5A46D]/10 text-[#C5A46D]">
                   <FiPhone />
                 </span>
-                <a href="tel:+919876543210" className="hover:text-[#C5A46D]">
-                  +91 98765 43210
-                </a>
+                <Link href="tel:+919876543210" className="hover:text-[#C5A46D]">
+                  +91 94150 87999
+                </Link>
               </li>
             </ul>
           </div>
@@ -102,13 +102,13 @@ export default function Footer() {
           <p>© {year} AstroVision. All rights reserved.</p>
           <p>
             Developed by{" "}
-            <span className="text-[#C5A46D] font-medium">DigiPants Network</span> ·{" "}
-            <a
+            <Link href="https://digipants.com/" target="blank" className="text-[#C5A46D] font-medium">DigiPants Network Pvt.</Link> ·{" "}
+            <Link
               href="/privacy"
               className="underline decoration-transparent hover:decoration-[#C5A46D]"
             >
               Privacy Policy
-            </a>
+            </Link>
           </p>
         </div>
       </div>

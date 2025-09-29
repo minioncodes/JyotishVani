@@ -10,10 +10,10 @@ import {
   FiClock,
   FiMapPin,
   FiHelpCircle,
-  FiExternalLink,
 } from "react-icons/fi";
 import CTA from "@/components/CTA";
 import StarsBg from "@/components/StarBg";
+import Link from "next/link";
 
 export default function ContactPage() {
   return (
@@ -38,7 +38,6 @@ export default function ContactPage() {
           </div>
           <div className="space-y-6">
             <HoursLocationCard />
-            <QuickLinksCard />
           </div>
         </section>
 
@@ -61,7 +60,7 @@ function HeaderHero() {
         className="mx-auto max-w-6xl"
       >
         <nav className="text-sm text-gray-500 mb-3">
-          <a href="/" className="hover:text-[#C5A46D]">Home</a>
+          <Link href="/" className="hover:text-[#C5A46D]">Home</Link>
           <span className="mx-2">/</span>
           <span className="text-gray-700">Contact</span>
         </nav>
@@ -154,28 +153,6 @@ function HoursLocationCard() {
   );
 }
 
-function QuickLinksCard() {
-  const links = [
-    { href: "#services", label: "View services & pricing" },
-    { href: "#testimonials", label: "Read client reviews" },
-    { href: "#blogs", label: "Latest blog insights" },
-    { href: "#contact", label: "Contact form" },
-  ];
-  return (
-    <CardWrapper>
-      <h3 className="text-lg font-semibold text-black">Quick Links</h3>
-      <ul className="mt-3 space-y-2 text-sm text-gray-700">
-        {links.map((l) => (
-          <li key={l.href}>
-            <a href={l.href} className="flex items-center gap-2 hover:text-[#C5A46D]">
-              <FiExternalLink /> {l.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </CardWrapper>
-  );
-}
 
 /* ---------- FAQ ---------- */
 function FAQSection() {

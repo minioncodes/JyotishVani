@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StarsBg from "@/components/StarBg";
+import Image from "next/image";
 
 interface Blog {
   _id: string;
@@ -56,7 +57,7 @@ export default function BlogsPage() {
       {/* Blogs Content */}
       <div className="max-w-6xl mx-auto px-6 py-14 relative z-10">
         {/* Page Heading */}
-        <h1 className="text-4xl md:text-5xl font-bold text-center font-[Cinzel] mb-12 text-black">
+        <h1 className="text-4xl md:text-5xl font-bold text-center mt-[100px] font-[Cinzel] mb-12 text-black">
           Whispers from the <span className="text-[#C5A46D]">Stars ✨</span>
         </h1>
 
@@ -68,7 +69,9 @@ export default function BlogsPage() {
               className="rounded-2xl border border-[#C5A46D]/30 bg-white/90 shadow-md hover:shadow-lg transition overflow-hidden"
             >
               {blog.image && (
-                <img
+                <Image
+                width={600}
+                  height={192}
                   src={blog.image}
                   alt={blog.title}
                   className="w-full h-48 object-cover"
