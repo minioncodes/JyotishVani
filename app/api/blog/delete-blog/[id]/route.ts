@@ -5,7 +5,10 @@ import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+    req: NextRequest,
+    context: any
+) {
     try {
         await connectDB();
         const cookieStore = await cookies();
@@ -13,7 +16,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
         if (!token) {
             return NextResponse.json({ msg: "unauthorized" }, { status: 401 })
         }
-        const blogId = params.id;
+        const blogId = context.params.id;
         if (!blogId) {
             return NextResponse.json({ msg: "blog ID is required" }, { status: 400 });
         }

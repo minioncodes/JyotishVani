@@ -5,10 +5,13 @@ import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 import { uploadBlogImageToCloudinary } from "@/utils/cloudinary/image-cloudinary";
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(
+    req: NextRequest,
+    context: any
+) {
   try {
     await connectDB();
-    console.log("blog id from the api = ",params.id);
+    console.log("blog id from the api = ",context.params.id);
     const cookieStore = await cookies();
     const token = cookieStore.get("adminToken")?.value;
     if (!token) {

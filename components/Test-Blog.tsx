@@ -4,6 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
 import { quillModules, quillFormats } from "@/utils/quilConfig";
+import { useRouter } from "next/navigation";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
@@ -13,6 +14,7 @@ export default function TestBlogPage() {
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
+  const router=useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
