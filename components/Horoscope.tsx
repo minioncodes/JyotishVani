@@ -132,6 +132,7 @@ function PredictionModal({
             exit={{ scale: 0.8, opacity: 0 }}
           >
             <button
+            title="onclose"
               onClick={onClose}
               className="absolute right-4 top-4 text-gray-600 hover:text-black"
             >
@@ -183,16 +184,18 @@ export default function Horoscope() {
   const [signs, setSigns] = useState<Sign[]>([]);
   const [active, setActive] = useState<Sign | null>(null);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     async function loadPredictions() {
       try {
         setLoading(true);
         const today = new Date().toISOString().split("T")[0] + "T00:00:00+00:00";
-        const res = await fetch(`/api/horoscope`);
+        const res = await fetch(`/api/horoscope?datetime=${today}`);
         const data = await res.json();
-        const predictions = data?.results || [];
-        console.log("predictions = ", predictions.length);
-        if (predictions.length > 0) {
+
+        const predictions = data?.data?.daily_predictions || [];
+
+        if (predictions.length) {
           const mapped: Sign[] = predictions.map((p: any) => ({
             id: p.sign?.id ?? 0,
             name: p.sign?.name ?? "Unknown",
@@ -201,10 +204,8 @@ export default function Horoscope() {
             msg: shorten(p.predictions?.[0]?.prediction || "No message"),
             predictions: p.predictions || [],
           }));
-
           setSigns(mapped);
         }
-        console.log(signs);
       } catch (err) {
         console.error("Failed to load predictions", err);
       } finally {

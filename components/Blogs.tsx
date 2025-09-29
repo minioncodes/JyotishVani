@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface Blog {
   _id: string;
@@ -63,9 +64,10 @@ export default function BlogsPage() {
 
   return (
     <div className="p-6 mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center font-[Cinzel] text-black">
-        Whispers from the <span className="text-[#C5A46D]">Stars</span>
-      </h1>
+     <h1 className="mt-[100px] text-3xl font-bold mb-6 text-center font-[Cinzel] text-black">
+  Whispers from the <span className="text-[#C5A46D]">Stars</span>
+</h1>
+
 
       {/* Carousel */}
       <div className="overflow-hidden">
@@ -81,7 +83,9 @@ export default function BlogsPage() {
               whileHover={{ scale: 1.02 }}
             >
               {blog.image && (
-                <img
+                <Image
+                width={600}
+                  height={192}
                   src={blog.image}
                   alt={blog.title}
                   className="w-full h-40 object-cover"

@@ -38,7 +38,6 @@ export default function TestBlogPage() {
     }
   };
 
-
   return (
     <div className="p-6 max-w-2xl mx-auto">
       <h1 className="text-3xl font-extrabold mb-6 text-center text-indigo-700">

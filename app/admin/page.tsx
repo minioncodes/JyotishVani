@@ -41,7 +41,7 @@ export default function SignInPage() {
           router.push("/admin/dashboard");
         }, 300);
       }
-    } catch (err) {
+    } catch{
       setError("Something went wrong. Try again.");
     } finally {
       setLoading(false);
