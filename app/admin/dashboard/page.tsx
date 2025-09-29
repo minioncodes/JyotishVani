@@ -14,6 +14,7 @@ import {
 
 // Import your components
 import TestBlogPage from "@/components/Test-Blog";
+import AdminBlogs from "@/components/Admin-Blogs";
 // import EditBlogPage from "./edit-blog/page";
 // import DeleteBlogPage from "./delete-blog/page";
 
@@ -24,7 +25,7 @@ interface Admin {
 
 export default function AdminPage() {
   const [admin, setAdmin] = useState<Admin | null>(null);
-  const [activePage, setActivePage] = useState<"create" | "edit" | "delete">(
+  const [activePage, setActivePage] = useState<"create" | "edit" | "delete" |"all-blogs">(
     "create"
   );
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function AdminPage() {
     const adminData = localStorage.getItem("adminInfo");
 
     if (!token || !adminData) {
-      router.push("/admin"); // if not logged in → redirect to login
+      router.push("/admin");
       return;
     }
 
@@ -55,31 +56,23 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-indigo-50 via-white to-purple-50">
-      {/* Navbar */}
       <nav className="bg-indigo-700 text-white p-4 flex items-center justify-between shadow-md">
         <div className="flex items-center gap-2 font-bold text-lg">
           📝 Admin Dashboard
         </div>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-6 ">
           <NavButton
             label="Create Blog"
             icon={<FiPlusCircle />}
             active={activePage === "create"}
             onClick={() => setActivePage("create")}
+            
           />
           <NavButton
-            label="Edit Blog"
+            label="All-Blogs"
             icon={<FiEdit />}
-            active={activePage === "edit"}
-            onClick={() => setActivePage("edit")}
-          />
-          <NavButton
-            label="Delete Blog"
-            icon={<FiTrash />}
-            active={activePage === "delete"}
-            onClick={() => setActivePage("delete")}
+            active={activePage === "all-blogs"}
+            onClick={() => setActivePage("all-blogs")}
           />
           {admin && (
             <span className="flex items-center gap-2 font-medium bg-indigo-600 px-3 py-1 rounded-lg">
@@ -93,8 +86,6 @@ export default function AdminPage() {
             <FiLogOut /> Logout
           </button>
         </div>
-
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-2xl"
@@ -102,8 +93,6 @@ export default function AdminPage() {
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>
       </nav>
-
-      {/* Mobile Nav Dropdown */}
       {menuOpen && (
         <div className="md:hidden bg-indigo-600 text-white flex flex-col gap-3 p-4">
           <NavButton
@@ -116,20 +105,11 @@ export default function AdminPage() {
             }}
           />
           <NavButton
-            label="Edit Blog"
+            label="All-Blogs"
             icon={<FiEdit />}
-            active={activePage === "edit"}
+            active={activePage === "all-blogs"}
             onClick={() => {
-              setActivePage("edit");
-              setMenuOpen(false);
-            }}
-          />
-          <NavButton
-            label="Delete Blog"
-            icon={<FiTrash />}
-            active={activePage === "delete"}
-            onClick={() => {
-              setActivePage("delete");
+              setActivePage("all-blogs");
               setMenuOpen(false);
             }}
           />
@@ -150,12 +130,7 @@ export default function AdminPage() {
       {/* Main Content */}
       <main className="flex-grow p-6 max-w-6xl mx-auto w-full">
         {activePage === "create" && <TestBlogPage />}
-        {activePage === "edit" && (
-          <div className="text-center text-gray-600">✏️ Edit Blog Page</div>
-        )}
-        {activePage === "delete" && (
-          <div className="text-center text-gray-600">🗑️ Delete Blog Page</div>
-        )}
+        {activePage === "all-blogs" && <AdminBlogs/>}
       </main>
     </div>
   );
@@ -176,7 +151,7 @@ function NavButton({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-3 py-1 rounded-md transition 
+      className={`flex items-center gap-2 px-3 py-1 rounded-md transition cursor-pointer
         ${
           active
             ? "bg-yellow-400 text-black font-semibold"

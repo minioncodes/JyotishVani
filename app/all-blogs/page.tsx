@@ -78,8 +78,9 @@ export default function BlogsPage() {
                 <h2 className="text-lg font-semibold mb-2 line-clamp-2 text-black">
                   {blog.title}
                 </h2>
-                <p className="text-sm text-gray-700 line-clamp-3 mb-4">
-                  {blog.description}
+                <p className="text-sm text-gray-700 line-clamp-3 mb-4"
+                dangerouslySetInnerHTML={{ __html: blog.description }}
+                >
                 </p>
                 <Link
                   href={`/single-blog/${blog._id}`}

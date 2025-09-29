@@ -3,7 +3,6 @@ export const quillModules = {
     [{ header: [1, 2, false] }],
     ["bold", "italic", "underline"],
     [{ list: "ordered" }, { list: "bullet" }],
-    ["link", "image"],
     ["clean"],
   ],
 };
@@ -11,6 +10,5 @@ export const quillModules = {
 export const quillFormats = [
   "header",
   "bold", "italic", "underline",
-  "list", "bullet",
-  "link", "image"
+  "list",
 ];

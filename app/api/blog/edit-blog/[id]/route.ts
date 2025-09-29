@@ -8,7 +8,7 @@ import { uploadBlogImageToCloudinary } from "@/utils/cloudinary/image-cloudinary
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     await connectDB();
-
+    console.log("blog id from the api = ",params.id);
     const cookieStore = await cookies();
     const token = cookieStore.get("adminToken")?.value;
     if (!token) {

@@ -37,12 +37,7 @@ export default function TestBlogPage() {
       setLoading(false);
     }
   };
-<<<<<<< HEAD
-=======
-  return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Create Blog</h1>
->>>>>>> 6f4dd87630e3bce6fe4273acc1fa87614e87fa21
+
 
   return (
     <div className="p-6 max-w-2xl mx-auto">
@@ -93,23 +88,6 @@ export default function TestBlogPage() {
           {loading ? "Creating..." : "Create Blog"}
         </button>
       </form>
-
-      {result && (
-        <div className="mt-8 bg-gray-50 border rounded-lg p-4 shadow-inner">
-          <h2 className="text-lg font-semibold text-indigo-700">Result</h2>
-          <pre className="bg-white p-3 rounded mt-2 text-sm overflow-x-auto">
-            {JSON.stringify(result, null, 2)}
-          </pre>
-
-          {result.newBlog?.image && (
-            <img
-              src={result.newBlog.image}
-              alt="Uploaded Blog"
-              className="mt-4 rounded-lg shadow-md w-full object-cover"
-            />
-          )}
-        </div>
-      )}
     </div>
   );
 }
