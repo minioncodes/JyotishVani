@@ -30,7 +30,7 @@ export default function AstroGlobe() {
   }, []);
 
   return (
-    <div className="relative w-[340px] h-[340px] md:w-[480px] md:h-[480px] flex items-center justify-center">
+    <div className="relative bg-[crimson] w-[340px] h-[340px] md:w-[480px] md:h-[480px] flex items-center justify-center">
       {/* Subtle aura (keep soft) */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#0B0C10]/60 via-[#1B1F29]/50 to-[#C5A46D]/10 blur-3xl animate-pulse" />
 

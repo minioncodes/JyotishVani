@@ -36,9 +36,6 @@ export default function ContactPage() {
           <div className="mx-auto grid max-w-6xl grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left empty for balance if needed */}
           </div>
-          <div className="space-y-6">
-            <HoursLocationCard />
-          </div>
         </section>
 
         <FAQSection />
@@ -138,20 +135,6 @@ function CardWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-function HoursLocationCard() {
-  return (
-    <CardWrapper>
-      <h3 className="text-lg font-semibold text-black">Hours & Location</h3>
-      <div className="mt-3 text-sm text-gray-700">
-        <div className="flex items-center gap-2"><FiClock /> Mon–Sat • 10am–7pm IST</div>
-        <div className="mt-2 flex items-center gap-2"><FiMapPin /> Delhi (in-person) • Google Meet (online)</div>
-      </div>
-      <div className="mt-4 h-40 w-full rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 flex items-center justify-center text-xs text-gray-500">
-        Add Google Maps iframe here
-      </div>
-    </CardWrapper>
-  );
-}
 
 
 /* ---------- FAQ ---------- */

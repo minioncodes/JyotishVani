@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jyotishvani",
-  description: "Jyotishvani in Lucknow offers expert Vedic astrology, Kundli analysis, career & marriage guidance, gemstone remedies, and accurate life predictions.",
+  title: "JyotishWaani",
+  description: "JyotishWaani in Lucknow offers expert Vedic astrology, Kundli analysis, career & marriage guidance, gemstone remedies, and accurate life predictions.",
 };
 
 export default function RootLayout({
