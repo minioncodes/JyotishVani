@@ -76,10 +76,10 @@ export default function Footer() {
                   <FiMail />
                 </span>
                 <Link
-                  href="mailto:support@jyotiswaani.com"
+                  href="mailto:help@jyotiswaani.com"
                   className="hover:text-[#C5A46D]"
                 >
-                  support@jyotiswaani.com
+                  help@jyotiswaani.com
                 </Link>
               </li>
               <li className="flex items-center gap-3">
@@ -99,7 +99,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-3 text-sm text-gray-400 md:flex-row">
-          <p>© {year} AstroVision. All rights reserved.</p>
+          <p>© {year} Jyotishwaani. All rights reserved.</p>
           <p>
             Developed by{" "}
             <Link href="https://digipants.com/" target="blank" className="text-[#C5A46D] font-medium">DigiPants Network Pvt.</Link> ·{" "}

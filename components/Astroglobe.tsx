@@ -30,9 +30,9 @@ export default function AstroGlobe() {
   }, []);
 
   return (
-    <div className="relative w-[340px] h-[340px] md:w-[480px] md:h-[480px] flex items-center justify-center">
+    <div className="relative w-[340px] h-[340px] md:w-[480px] md:h-[480px] flex items-center justify-center bg-[#C5A46D] rounded-sm overflow-hidden shadow-sm">
       {/* Subtle aura (keep soft) */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#0B0C10]/60 via-[#1B1F29]/50 to-[#C5A46D]/10 blur-3xl animate-pulse" />
+      <div className="absolute inset-0 rounded-full bg-[#FAF9F6] blur-3xl  animate-pulse" />
 
       {/* Floating golden sparks (more glow than before) */}
       <div className="absolute inset-0">
@@ -105,7 +105,7 @@ export default function AstroGlobe() {
 
       {/* Snapshot overlay */}
       <div className="absolute z-20 w-full md:w-full rounded-2xl p-4">
-        <h3 className="font-semibold mb-2 text-center text-[#C5A46D] text-sm">
+        <h3 className="font-semibold mb-2 text-center text-black text-sm">
           Today’s Snapshot
         </h3>
         <div className="grid grid-cols-2 gap-2 text-xs">
