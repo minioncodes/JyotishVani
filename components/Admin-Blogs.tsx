@@ -64,7 +64,6 @@ export default function AdminBlogs() {
     if (loading) return <p className="p-6 text-center">Loading blogs...</p>;
     if (error) return <p className="p-6 text-center text-red-500">{error}</p>;
     if (blogs.length === 0) return <p className="text-center">No blogs found.</p>;
-    console.log("deleting blog id = ", deletingBlogId);
     return (
         <>
             <div className="fixed inset-0 -z-10 bg-[#FAF8F3]">

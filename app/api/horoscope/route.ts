@@ -30,7 +30,6 @@ const SIGNS = [
 
 let cache: { datetime: string; data: any[]; timestamp: number } | null = null;
 const CACHE_TTL = 1000 * 60 * 60 * 6;
-console.log("get route got calleddd")
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
@@ -61,7 +60,6 @@ export async function GET(request: Request) {
       }
       const data = await res.json();
       const dp = data?.data?.daily_predictions?.[0];
-      console.log("dp = ", dp);
       if (!dp) return { sign, error: "No prediction found" };
       return {
         sign: {
@@ -89,8 +87,6 @@ export async function GET(request: Request) {
         await new Promise((r) => setTimeout(r, 300));
       }
     }
-    console.log("result from the api = ", results);
-
     cache = { datetime, data: results, timestamp: now };
     return NextResponse.json({ status: "ok", datetime,  results });
   } catch (err) {

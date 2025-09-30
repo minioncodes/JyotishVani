@@ -21,13 +21,11 @@ export async function POST(req: NextRequest) {
         // if (!title || !description) {
         //     return NextResponse.json({ msg: "missing fileds" }, { status: 400 });
         // }
-        console.log("image file  = ",imageFile)
         let imageUrl = "";
         if (imageFile) {
             const uploaded = await uploadBlogImageToCloudinary(imageFile, "blogs");
             imageUrl = uploaded;
         }
-        console.log("image url = ",imageUrl);
         const newBlog = await BlogModel.create({
             adminId: decoded.id,
             title,
