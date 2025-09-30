@@ -8,7 +8,6 @@ export async function middleware(req: NextRequest) {
   if (!token) {
     return NextResponse.json({ message: "Token not provided" }, { status: 401 });
   }
-  console.log("token = ",token);
   try {
     const secret = new TextEncoder().encode(process.env.SECRET_KEY);
     await jwtVerify(token, secret);

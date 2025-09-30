@@ -11,7 +11,6 @@ export async function PATCH(
 ) {
   try {
     await connectDB();
-    console.log("blog id from the api = ",context.params.id);
     const cookieStore = await cookies();
     const token = cookieStore.get("adminToken")?.value;
     if (!token) {
