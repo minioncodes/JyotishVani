@@ -19,7 +19,7 @@ const reviews: Review[] = [
     text:
       "guruji's reading gave me sharp clarity on career timing. Practical remedies + exact timelines.",
     rating: 5,
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+    avatar: "https://media.istockphoto.com/id/2162083704/photo/creative-portrait-and-happy-business-woman-in-office-company-or-startup-workplace-with-bokeh.webp?a=1&b=1&s=612x612&w=0&k=20&c=QEkxfPr2UbqVBp2dxARSKcyMLPKqlhVCYnAJ3yf5PxU=",
   },
   {
     name: "Rahul M.",
@@ -27,7 +27,7 @@ const reviews: Review[] = [
     text:
       "Loved how grounded it was—no fluff. Insights on my Saturn period were spot on.",
     rating: 5,
-    avatar: "https://randomuser.me/api/portraits/men/31.jpg",
+    avatar: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
   },
   {
     name: "Meera K.",
@@ -35,14 +35,14 @@ const reviews: Review[] = [
     text:
       "The synastry session helped me understand patterns I keep repeating. Gentle and empowering.",
     rating: 5,
-    avatar: "https://randomuser.me/api/portraits/women/12.jpg",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww.",
   },
   {
     name: "Dev P.",
     role: "Founder",
     text: "Business launch muhurat worked wonders. Sales spiked in week one.",
     rating: 5,
-    avatar: "https://randomuser.me/api/portraits/men/12.jpg",
+    avatar: "https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXQlMjBtYW58ZW58MHx8MHx8fDA%3D",
   },
   {
     name: "Rhea T.",
@@ -50,7 +50,7 @@ const reviews: Review[] = [
     text:
       "Transit insights reduced my anxiety. I finally know what to focus on this quarter.",
     rating: 5,
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    avatar: "https://images.unsplash.com/photo-1602233158242-3ba0ac4d2167?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2lybHxlbnwwfHwwfHx8MA%3D%3D",
   },
   {
     name: "Aman J.",
@@ -58,7 +58,7 @@ const reviews: Review[] = [
     text:
       "Crystal-clear reading with actionable steps. The follow-up notes were gold.",
     rating: 5,
-    avatar: "https://randomuser.me/api/portraits/men/55.jpg",
+    avatar: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZmFjZXxlbnwwfHwwfHx8MA%3D%3D",
   },
 ];
 
