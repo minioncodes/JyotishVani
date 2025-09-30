@@ -50,6 +50,21 @@ const ICONS: Record<string, JSX.Element> = {
   Pisces: <FiStar />,
 };
 
+const defaultMessages: Record<string, string> = {
+  Aries: "Take bold steps today 🔥",
+  Taurus: "Stay grounded and steady 🌱",
+  Gemini: "Conversations bring clarity 💬",
+  Cancer: "Emotions guide your path 🌊",
+  Leo: "Shine with confidence ☀️",
+  Virgo: "Details bring success 📖",
+  Libra: "Seek balance and harmony ⚖️",
+  Scorpio: "Trust your instincts 🦂",
+  Sagittarius: "Adventure is calling 🎯",
+  Capricorn: "Persistence wins the day ⛰️",
+  Aquarius: "Innovate and inspire 💡",
+  Pisces: "Dreams shape your reality 🌌",
+};
+
 function shorten(text: string, len = 80) {
   return text.length > len ? text.slice(0, len).trim() + "…" : text;
 }
@@ -58,7 +73,7 @@ function Card({ s, onClick }: { s: Sign; onClick: () => void }) {
   return (
     <div
       onClick={onClick}
-      className="group mx-2 w-[240px] shrink-0 cursor-pointer  bg-white/80 p-5 shadow-md hover:shadow-xl hover:scale-105 transition"
+      className="group mx-2 w-[240px] shrink-0 cursor-pointer bg-white/80 p-5 shadow-md hover:shadow-xl hover:scale-105 transition"
     >
       <div className="flex items-center justify-center">
         <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#C5A46D]/10 text-2xl text-[#C5A46D]">
@@ -132,7 +147,7 @@ function PredictionModal({
             exit={{ scale: 0.8, opacity: 0 }}
           >
             <button
-            title="onclose"
+              title="onclose"
               onClick={onClose}
               className="absolute right-4 top-4 text-gray-600 hover:text-black"
             >
@@ -147,31 +162,46 @@ function PredictionModal({
               </h2>
             </div>
             <div className="space-y-5 max-h-[65vh] overflow-y-auto pr-2 custom-scroll">
-              {sign.predictions?.map((p, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-xl bg-[#FAF9F6] p-4 shadow-sm"
-                >
-                  <h3 className="text-lg font-semibold text-[#C5A46D]">
-                    {p.type}
-                  </h3>
-                  <p className="mt-1 text-gray-800 text-sm">{p.prediction}</p>
-                  <ul className="mt-2 space-y-1 text-xs text-gray-700">
-                    <li>
-                      <span className="font-semibold text-[#C5A46D]">Seek:</span>{" "}
-                      {p.seek}
-                    </li>
-                    <li>
-                      <span className="font-semibold text-black">Challenge:</span>{" "}
-                      {p.challenge}
-                    </li>
-                    <li>
-                      <span className="font-semibold text-gray-900">Insight:</span>{" "}
-                      {p.insight}
-                    </li>
-                  </ul>
+              {sign.predictions && sign.predictions.length > 0 ? (
+                sign.predictions.map((p, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-xl bg-[#FAF9F6] p-4 shadow-sm"
+                  >
+                    <h3 className="text-lg font-semibold text-[#C5A46D]">
+                      {p.type}
+                    </h3>
+                    <p className="mt-1 text-gray-800 text-sm">{p.prediction}</p>
+                    <ul className="mt-2 space-y-1 text-xs text-gray-700">
+                      <li>
+                        <span className="font-semibold text-[#C5A46D]">
+                          Seek:
+                        </span>{" "}
+                        {p.seek}
+                      </li>
+                      <li>
+                        <span className="font-semibold text-black">
+                          Challenge:
+                        </span>{" "}
+                        {p.challenge}
+                      </li>
+                      <li>
+                        <span className="font-semibold text-gray-900">
+                          Insight:
+                        </span>{" "}
+                        {p.insight}
+                      </li>
+                    </ul>
+                  </div>
+                ))
+              ) : (
+                <div className="rounded-xl bg-[#FAF9F6] p-4 shadow-sm">
+                  <p className="text-gray-800 text-sm">
+                    {defaultMessages[sign.name] ||
+                      "Your stars are aligning ✨"}
+                  </p>
                 </div>
-              ))}
+              )}
             </div>
           </motion.div>
         </motion.div>
@@ -189,7 +219,8 @@ export default function Horoscope() {
     async function loadPredictions() {
       try {
         setLoading(true);
-        const today = new Date().toISOString().split("T")[0] + "T00:00:00+00:00";
+        const today =
+          new Date().toISOString().split("T")[0] + "T00:00:00+00:00";
         const res = await fetch(`/api/horoscope?datetime=${today}`);
         const data = await res.json();
 
@@ -201,7 +232,9 @@ export default function Horoscope() {
             name: p.sign?.name ?? "Unknown",
             symbol: p.sign_info?.unicode_symbol || "",
             icon: ICONS[p.sign?.name] || <FiStar />,
-            msg: shorten(p.predictions?.[0]?.prediction || "No message"),
+            msg: shorten(
+              p.predictions?.[0]?.prediction || "Your stars are aligning ✨"
+            ),
             predictions: p.predictions || [],
           }));
           setSigns(mapped);
@@ -220,7 +253,7 @@ export default function Horoscope() {
     name,
     symbol: "",
     icon,
-    msg: "Your stars are aligning ✨",
+    msg: defaultMessages[name] || "Your stars are aligning ✨",
     predictions: [],
   }));
 
@@ -229,12 +262,14 @@ export default function Horoscope() {
   const row2 = [...data.slice(6), ...data.slice(0, 6)];
 
   return (
-    <section id="horoscope" className="relative overflow-hidden px-6 py-20 md:py-28">
+    <section
+      id="horoscope"
+      className="relative overflow-hidden px-6 py-20 md:py-28"
+    >
       <div className="relative ">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-black">
-            Today’s{" "}
-            <span className="text-[#C5A46D]">Horoscope</span>
+            Today’s <span className="text-[#C5A46D]">Horoscope</span>
           </h2>
           <p className="mt-3 text-sm md:text-base text-gray-700">
             Your daily dose of cosmic guidance, aligned with the stars ✨
@@ -242,11 +277,18 @@ export default function Horoscope() {
         </div>
         <div className="mt-10 space-y-6">
           {loading ? (
-            <p className="text-center text-gray-600">Loading today’s horoscopes… ✨</p>
+            <p className="text-center text-gray-600">
+              Loading today’s horoscopes… ✨
+            </p>
           ) : (
             <>
               <MarqueeRow items={row1} speed={30} onSelect={setActive} />
-              <MarqueeRow items={row2} speed={24} offset={0.5} onSelect={setActive} />
+              <MarqueeRow
+                items={row2}
+                speed={24}
+                offset={0.5}
+                onSelect={setActive}
+              />
             </>
           )}
         </div>
