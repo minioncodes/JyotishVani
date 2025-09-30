@@ -17,7 +17,7 @@ const reviews: Review[] = [
     name: "Anjali S.",
     role: "Entrepreneur",
     text:
-      "Parul’s reading gave me sharp clarity on career timing. Practical remedies + exact timelines.",
+      "guruji's reading gave me sharp clarity on career timing. Practical remedies + exact timelines.",
     rating: 5,
     avatar: "https://randomuser.me/api/portraits/women/68.jpg",
   },
