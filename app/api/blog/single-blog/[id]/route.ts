@@ -2,10 +2,13 @@ import BlogModel from "@/models/BlogModel";
 import connectDB from "@/lib/mongo";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+    req: NextRequest,
+    context: any
+) {
   try {
     await connectDB();
-    const id  = await params.id;
+    const id  = await context.params.id;
 
     if (!id) {
       return NextResponse.json({ msg: "Blog ID is required" }, { status: 400 });
@@ -16,7 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     }
 
     return NextResponse.json({ blog }, { status: 200 });
-  } catch (e: any) {
+  } catch (e) {
     console.error("Error fetching blog:", e);
     return NextResponse.json({ msg: "Internal server error" }, { status: 500 });
   }

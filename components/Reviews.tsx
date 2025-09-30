@@ -156,7 +156,7 @@ export default function Reviews() {
         {/* CTA under reviews */}
         <div className="mt-10 flex items-center justify-center">
           <a
-            href="#contact"
+            href="/booking"
             className="rounded-xl bg-[#C5A46D] px-6 py-3 font-semibold text-black shadow-md hover:bg-black hover:text-white transition"
           >
             Book your session

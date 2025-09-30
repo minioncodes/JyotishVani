@@ -8,25 +8,25 @@ const services = [
     icon: <FiHeart />,
     title: "Love & Relationships",
     desc: "Clarity on compatibility, timing, and healing patterns. Synastry + transit-based guidance.",
-    price: "₹1,999 / 30 min",
+    // price: "₹1,999 / 30 min",
   },
   {
     icon: <FiBriefcase />,
     title: "Career & Finance",
     desc: "Find the right moves and timings for growth, switches, or launches. Practical and time-bound.",
-    price: "₹2,499 / 45 min",
+    // price: "₹2,499 / 45 min",
   },
   {
     icon: <FiClock />,
     title: "Shubh Muhurat",
     desc: "Pick auspicious dates for marriage, moves, openings, investments—aligned with your chart.",
-    price: "₹1,499 / slot",
+    // price: "₹1,499 / slot",
   },
   {
     icon: <FiStar />,
     title: "Birth Chart Reading",
     desc: "Complete Kundli reading with remedies, strengths, challenges, and yearly transit roadmap.",
-    price: "₹3,999 / 60 min",
+    // price: "₹3,999 / 60 min",
   },
 ];
 
@@ -70,9 +70,7 @@ export default function Services() {
             >
               <div className="flex items-center justify-between">
                 <div className="text-2xl text-[#C5A46D]">{s.icon}</div>
-                <span className="rounded-full bg-[#C5A46D]/10 text-[#C5A46D] px-3 py-1 text-xs font-medium">
-                  {s.price}
-                </span>
+
               </div>
               <h3 className="mt-4 text-lg font-semibold text-black">
                 {s.title}
@@ -81,7 +79,7 @@ export default function Services() {
                 {s.desc}
               </p>
               <a
-                href="#contact"
+                href="/booking"
                 className="mt-5 inline-block rounded-xl bg-[#C5A46D] text-black font-medium px-4 py-2 text-sm hover:bg-black hover:text-white transition"
               >
                 Book this

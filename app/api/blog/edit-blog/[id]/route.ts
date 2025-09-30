@@ -5,10 +5,13 @@ import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 import { uploadBlogImageToCloudinary } from "@/utils/cloudinary/image-cloudinary";
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(
+    req: NextRequest,
+    context: any
+) {
   try {
     await connectDB();
-
+    console.log("blog id from the api = ",context.params.id);
     const cookieStore = await cookies();
     const token = cookieStore.get("adminToken")?.value;
     if (!token) {
@@ -44,7 +47,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       return NextResponse.json({ msg: "blog not found or not yours" }, { status: 404 });
     }
     return NextResponse.json({ updatedBlog }, { status: 200 });
-  } catch (e: any) {
+  } catch (e) {
     console.error("err updating blogssss", e);
     return NextResponse.json({ msg: "internal server error" }, { status: 500 });
   }

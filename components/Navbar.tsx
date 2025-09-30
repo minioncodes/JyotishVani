@@ -8,8 +8,8 @@ import Image from "next/image";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
+  { href: "/astrologer-info", label: "About" },
+  { href: "/services", label: "Services" },
   { href: "/all-blogs", label: "Blogs" },
   { href: "/contact", label: "Contact" },
 ];
@@ -28,7 +28,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo.jpg"
+            src="/logo.svg"
             alt="Logo"
             width={160}
             height={50}

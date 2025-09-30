@@ -21,11 +21,13 @@ export async function POST(req: NextRequest) {
         // if (!title || !description) {
         //     return NextResponse.json({ msg: "missing fileds" }, { status: 400 });
         // }
+        console.log("image file  = ",imageFile)
         let imageUrl = "";
         if (imageFile) {
             const uploaded = await uploadBlogImageToCloudinary(imageFile, "blogs");
-            imageUrl = uploaded.secure_url;
+            imageUrl = uploaded;
         }
+        console.log("image url = ",imageUrl);
         const newBlog = await BlogModel.create({
             adminId: decoded.id,
             title,
@@ -34,8 +36,7 @@ export async function POST(req: NextRequest) {
         })
 
         return NextResponse.json({ newBlog }, { status: 201 })
-    } catch (e: any) {
-
+    } catch (e) {
         return NextResponse.json({ msg: "there is an error on this code" }, { status: 500 });
     }
 }

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export async function getAccessToken() {
+async function getAccessToken() {
   const res = await fetch("https://api.prokerala.com/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },

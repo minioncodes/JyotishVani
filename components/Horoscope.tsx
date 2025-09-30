@@ -132,6 +132,7 @@ function PredictionModal({
             exit={{ scale: 0.8, opacity: 0 }}
           >
             <button
+            title="onclose"
               onClick={onClose}
               className="absolute right-4 top-4 text-gray-600 hover:text-black"
             >
@@ -183,7 +184,6 @@ export default function Horoscope() {
   const [signs, setSigns] = useState<Sign[]>([]);
   const [active, setActive] = useState<Sign | null>(null);
   const [loading, setLoading] = useState(true);
-<<<<<<< HEAD
 
   useEffect(() => {
     async function loadPredictions() {
@@ -206,30 +206,6 @@ export default function Horoscope() {
           }));
           setSigns(mapped);
         }
-=======
-  useEffect(() => {
-    async function loadPredictions() {
-      try {
-        setLoading(true);
-        const today = new Date().toISOString().split("T")[0] + "T00:00:00+00:00";
-        const res = await fetch(`/api/horoscope`);
-        const data = await res.json();
-        const predictions = data?.results || [];
-        console.log("predictions = ", predictions.length);
-        if (predictions.length > 0) {
-          const mapped: Sign[] = predictions.map((p: any) => ({
-            id: p.sign?.id ?? 0,
-            name: p.sign?.name ?? "Unknown",
-            symbol: p.sign_info?.unicode_symbol || "",
-            icon: ICONS[p.sign?.name] || <FiStar />,
-            msg: shorten(p.predictions?.[0]?.prediction || "No message"),
-            predictions: p.predictions || [],
-          }));
-
-          setSigns(mapped);
-        }
-        console.log(signs);
->>>>>>> 6f4dd87630e3bce6fe4273acc1fa87614e87fa21
       } catch (err) {
         console.error("Failed to load predictions", err);
       } finally {
@@ -276,7 +252,7 @@ export default function Horoscope() {
         </div>
         <div className="mt-10 flex justify-center">
           <a
-            href="#contact"
+            href="/contact"
             className="rounded-xl bg-[#C5A46D] px-6 py-3 text-sm font-semibold text-black shadow-md hover:bg-black hover:text-white transition"
           >
             Get your personalized reading
