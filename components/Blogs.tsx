@@ -47,13 +47,13 @@ export default function BlogsPage() {
     const updateView = () => {
       if (window.innerWidth >= 1024) {
         setCardsPerView(4);
-        setDisplayBlogs(blogs); // all blogs for desktop
+        setDisplayBlogs(blogs);
       } else if (window.innerWidth >= 640) {
         setCardsPerView(2);
-        setDisplayBlogs(blogs); // all blogs for tablets
+        setDisplayBlogs(blogs);
       } else {
         setCardsPerView(1);
-        // 🎲 pick 4 random blogs for phones
+        // pick 4 random blogs for phones
         const shuffled = [...blogs].sort(() => 0.5 - Math.random());
         setDisplayBlogs(shuffled.slice(0, 4));
       }
@@ -76,18 +76,29 @@ export default function BlogsPage() {
       </h1>
 
       {/* Carousel */}
-      <div>
-        <motion.div
-          className="flex space-x-4"
-          animate={{ x: `-${index * (100 / cardsPerView)}%` }}
-          transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        >
+      <div >
+       <motion.div
+  className="flex gap-4"
+  animate={{ x: `-${index * (100 / cardsPerView)}%` }}
+  transition={{ type: "spring", stiffness: 100, damping: 20 }}
+  drag={cardsPerView === 1 ? "x" : false}
+  dragConstraints={{ left: 0, right: 0 }}
+  onDragEnd={(_, info) => {
+    if (cardsPerView === 1) {
+      if (info.offset.x < -50 && index < maxIndex) {
+        setIndex(index + 1);
+      } else if (info.offset.x > 50 && index > 0) {
+        setIndex(index - 1);
+      }
+    }
+  }}
+>
           {displayBlogs.map((blog) => (
             <motion.div
               key={blog._id}
               className="flex-shrink-0 w-[calc(100%/1-0.5rem)] sm:w-[calc(100%/2-0.5rem)] lg:w-[calc(100%/4-0.75rem)] 
-              bg-white/10 z-auto
-              shadow-md hover:shadow-[0_0_20px_#C5A46D] overflow-hidden transition-all duration-300"
+              bg-white/10
+              shadow-md hover:shadow-[0_0_20px_#C5A46D] transition-all duration-300"
               whileHover={{ scale: 1.02 }}
             >
               {blog.image && (
@@ -103,14 +114,12 @@ export default function BlogsPage() {
                 <h2 className="text-md font-semibold mb-2 line-clamp-2 text-black group-hover:text-[#C5A46D] transition">
                   {blog.title}
                 </h2>
-
                 <p
                   className="text-sm text-gray-700 mb-4 line-clamp-3 italic"
                   dangerouslySetInnerHTML={{
                     __html: truncateHtml(blog.description, 150),
                   }}
                 />
-
                 <Link
                   href={`/single-blog/${blog._id}`}
                   className="mt-auto inline-block text-center bg-[#C5A46D] text-black px-3 py-1.5 rounded-md text-sm font-medium hover:bg-black hover:text-white transition"

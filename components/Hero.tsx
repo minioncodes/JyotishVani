@@ -3,15 +3,15 @@
 import { motion, Variants } from "framer-motion";
 import AstroGlobe from "./Astroglobe";
 
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
+const fadeInRight: Variants = {
+  hidden: { opacity: 0, x: 80 }, // starts slightly to the right
   visible: (i: number = 1) => ({
     opacity: 1,
-    y: 0,
+    x: 0,
     transition: {
       delay: i * 0.2,
-      duration: 0.8,
-      ease: [0.25, 0.1, 0.25, 1], // ✅ use cubic-bezier instead of string
+      duration: 0.9,
+      ease: [0.25, 0.1, 0.25, 1], // smooth cubic-bezier
     },
   }),
 };
@@ -26,11 +26,15 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto grid mt-20 max-w-7xl grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 items-center">
         {/* LEFT */}
-        <div className="rounded-3xl p-4 sm:p-8 md:p-12 text-center md:text-left">
+        <motion.div
+          variants={fadeInRight}
+          initial="hidden"
+          animate="visible"
+          custom={0}
+          className="rounded-3xl p-4 sm:p-8 md:p-12 text-center md:text-left"
+        >
           <motion.h1
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
+            variants={fadeInRight}
             custom={1}
             className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-extrabold text-black leading-tight"
           >
@@ -41,9 +45,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
+            variants={fadeInRight}
             custom={2}
             className="mt-4 text-sm xs:text-base md:text-lg text-gray-700 leading-relaxed max-w-xl mx-auto md:mx-0"
           >
@@ -52,9 +54,7 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
+            variants={fadeInRight}
             custom={3}
             className="mt-6 flex flex-col sm:flex-row gap-3 justify-center md:justify-start"
           >
@@ -73,21 +73,19 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
+            variants={fadeInRight}
             custom={4}
             className="mt-6 text-xs sm:text-sm text-gray-600"
           >
             ✦ Trusted by 1000+ clients • Available worldwide
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* RIGHT */}
         <motion.div
-          initial={{ scale: 0.95, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
           className="relative flex items-center justify-center max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto"
         >
           <AstroGlobe />
