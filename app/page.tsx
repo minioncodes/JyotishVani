@@ -32,8 +32,6 @@ return (
     <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
     <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#E6D5B8]/20 blur-3xl" />
   </div>
-
-  <Navbar />
   <Hero />
   {/* <Contact /> */}
   <About />
