@@ -68,7 +68,7 @@ function HeaderHero() {
           </h1>
           <p className="mt-3 text-gray-700 max-w-2xl">
             Share your birth details and your main concern—love, career, finance, or timing—
-            and I’ll reply within 24 hours with next steps and available slots.
+            and We’ll reply within 24 hours with next steps and available slots.
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm">
             <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
@@ -172,7 +172,7 @@ function FAQSection() {
             Frequently Asked <span className="text-[#C5A46D]">Questions</span>
           </h2>
           <p className="mt-2 text-sm text-gray-700">
-            Quick answers to common queries. Still unsure? Reach out and I’ll help you decide.
+            Quick answers to common queries. Still unsure? Reach out and We’ll help you decide.
           </p>
         </motion.div>
 
