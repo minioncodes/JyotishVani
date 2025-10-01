@@ -43,7 +43,7 @@ export default function BlogsPage() {
 
   return (
     <>
-      <Navbar />
+      
 
       {/* Background */}
       <div className="fixed inset-0 -z-10 bg-[#FAF8F3]">
@@ -97,7 +97,7 @@ export default function BlogsPage() {
         </div>
       </div>
 
-      <Footer />
+      
     </>
   );
 }

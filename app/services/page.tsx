@@ -1,5 +1,6 @@
 "use client";
 
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import { div } from "framer-motion/client";
@@ -31,7 +32,7 @@ export default function ServicesPage() {
 
     return (
         <div>
-            <Navbar/>
+            
             <section className="relative px-6 py-20 md:py-28 bg-gradient-to-b from-[#FAF7F2] via-[#FAF7F2]/90 to-[#F5EFE4] text-[#2B2B2B]">
                 <div className="max-w-5xl mx-auto text-center mb-16">
                     <motion.h1
@@ -93,6 +94,7 @@ export default function ServicesPage() {
                     </a>
                 </motion.div>
             </section>
+            
         </div>
     );
 }
