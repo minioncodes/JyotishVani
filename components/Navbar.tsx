@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -43,6 +43,7 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               whileHover={{ y: -2 }}
+              transition={{ duration: 0.2 }}
               className="hover:text-[#C5A46D] transition-colors"
             >
               {l.label}
@@ -67,30 +68,37 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Drawer */}
-      <motion.div
-        initial={false}
-        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
-        className="md:hidden overflow-hidden mt-2 rounded-2xl bg-white/95 shadow"
-      >
-        <div className="flex flex-col p-4">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="py-3 text-gray-800 font-medium border-b border-gray-200 last:border-none hover:text-[#C5A46D]"
-              onClick={() => setOpen(false)}
-            >
-              {l.label}
-            </a>
-          ))}
-          <a
-            href="/booking"
-            className="mt-3 rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-center font-semibold shadow hover:bg-black hover:text-white transition"
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="drawer"
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: 1, opacity: 1 }}
+            exit={{ scaleY: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="md:hidden origin-top mt-2 rounded-2xl bg-white/95 shadow"
           >
-            Book Now
-          </a>
-        </div>
-      </motion.div>
+            <div className="flex flex-col p-4">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="py-3 text-gray-800 font-medium border-b border-gray-200 last:border-none hover:text-[#C5A46D]"
+                  onClick={() => setOpen(false)}
+                >
+                  {l.label}
+                </a>
+              ))}
+              <a
+                href="/booking"
+                className="mt-3 rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-center font-semibold shadow hover:bg-black hover:text-white transition"
+              >
+                Book Now
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

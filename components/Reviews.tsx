@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FiStar } from "react-icons/fi";
 import Image from "next/image";
@@ -16,62 +17,115 @@ const reviews: Review[] = [
   {
     name: "Anjali S.",
     role: "Entrepreneur",
-    text:
-      "guruji's reading gave me sharp clarity on career timing. Practical remedies + exact timelines.",
+    text: "guruji's reading gave me sharp clarity on career timing. Practical remedies + exact timelines.",
     rating: 5,
-    avatar: "https://media.istockphoto.com/id/2162083704/photo/creative-portrait-and-happy-business-woman-in-office-company-or-startup-workplace-with-bokeh.webp?a=1&b=1&s=612x612&w=0&k=20&c=QEkxfPr2UbqVBp2dxARSKcyMLPKqlhVCYnAJ3yf5PxU=",
+    avatar:
+      "https://media.istockphoto.com/id/2162083704/photo/creative-portrait-and-happy-business-woman-in-office-company-or-startup-workplace-with-bokeh.webp?a=1&b=1&s=612x612&w=0&k=20&c=QEkxfPr2UbqVBp2dxARSKcyMLPKqlhVCYnAJ3yf5PxU=",
   },
   {
     name: "Rahul M.",
     role: "Designer",
-    text:
-      "Loved how grounded it was—no fluff. Insights on my Saturn period were spot on.",
+    text: "Loved how grounded it was—no fluff. Insights on my Saturn period were spot on.",
     rating: 5,
-    avatar: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
+    avatar:
+      "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=500&auto=format&fit=crop&q=60",
   },
   {
     name: "Meera K.",
     role: "Student",
-    text:
-      "The synastry session helped me understand patterns I keep repeating. Gentle and empowering.",
+    text: "The synastry session helped me understand patterns I keep repeating. Gentle and empowering.",
     rating: 5,
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww.",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60",
   },
   {
     name: "Dev P.",
     role: "Founder",
     text: "Business launch muhurat worked wonders. Sales spiked in week one.",
     rating: 5,
-    avatar: "https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXQlMjBtYW58ZW58MHx8MHx8fDA%3D",
+    avatar:
+      "https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?w=500&auto=format&fit=crop&q=60",
   },
   {
     name: "Rhea T.",
     role: "Product Manager",
-    text:
-      "Transit insights reduced my anxiety. I finally know what to focus on this quarter.",
+    text: "Transit insights reduced my anxiety. I finally know what to focus on this quarter.",
     rating: 5,
-    avatar: "https://images.unsplash.com/photo-1602233158242-3ba0ac4d2167?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2lybHxlbnwwfHwwfHx8MA%3D%3D",
+    avatar:
+      "https://images.unsplash.com/photo-1602233158242-3ba0ac4d2167?w=500&auto=format&fit=crop&q=60",
   },
   {
     name: "Aman J.",
     role: "Consultant",
-    text:
-      "Crystal-clear reading with actionable steps. The follow-up notes were gold.",
+    text: "Crystal-clear reading with actionable steps. The follow-up notes were gold.",
     rating: 5,
-    avatar: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZmFjZXxlbnwwfHwwfHx8MA%3D%3D",
+    avatar:
+      "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=500&auto=format&fit=crop&q=60",
   },
 ];
 
+function ReviewCard({ r }: { r: Review }) {
+  return (
+    <div className="w-80 h-60  bg-white/90 p-6 hover:scale-110 cursor-pointer transition shadow-md flex flex-col justify-between">
+      {/* top row: avatar + name */}
+      <div className="flex items-center gap-4">
+        <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#C5A46D]/40 bg-white">
+          {r.avatar ? (
+            <Image
+              src={r.avatar}
+              alt={r.name}
+              height={48}
+              width={48}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <div className="h-full w-full" />
+          )}
+        </div>
+        <div>
+          <div className="font-semibold text-black">{r.name}</div>
+          <div className="text-xs text-gray-600">{r.role}</div>
+        </div>
+      </div>
+
+      {/* rating */}
+      <div className="mt-3 flex items-center gap-1">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <FiStar
+            key={i}
+            className={`h-4 w-4 ${i < r.rating ? "text-[#C5A46D]" : "text-gray-400"}`}
+          />
+        ))}
+      </div>
+
+      {/* text */}
+      <p className="mt-3 text-gray-800 leading-relaxed text-sm line-clamp-3">
+        “{r.text}”
+      </p>
+    </div>
+  );
+}
+
 export default function Reviews() {
+  const [current, setCurrent] = useState(0);
+
+  // Auto-scroll on mobile
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % reviews.length);
+    }, 3500); // 3.5s per slide
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       id="testimonials"
-      className="relative px-6 py-20 md:py-28 overflow-hidden"
+      className="relative px-6 py-20 md:py-28"
     >
       {/* subtle golden glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_200px_at_10%_10%,rgba(197,164,109,0.08),transparent_60%),radial-gradient(600px_200px_at_90%_90%,rgba(197,164,109,0.08),transparent_60%)]" />
 
-      <div className="mx-auto ">
+      <div className="mx-auto">
         {/* Header */}
         <div className="mb-10 md:mb-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-4 p-6 rounded-2xl bg-white/80 shadow-lg">
           <div>
@@ -97,8 +151,24 @@ export default function Reviews() {
           </div>
         </div>
 
-        {/* Marquee Reviews */}
-        <div className="relative w-full overflow-hidden">
+        {/* ✅ Mobile Auto-Carousel */}
+        <div className="md:hidden relative w-full flex justify-center">
+          <motion.div
+            className="flex"
+            animate={{ x: `-${current * 100}%` }}
+            transition={{ type: "spring", stiffness: 80, damping: 20 }}
+            style={{ width: `${reviews.length * 100}%` }}
+          >
+            {reviews.map((r, idx) => (
+              <div key={idx} className="w-full flex justify-center shrink-0">
+                <ReviewCard r={r} />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* ✅ Desktop Marquee */}
+        <div className="hidden md:block relative w-full  mt-10">
           <motion.div
             className="flex gap-5 w-max"
             animate={{ x: ["0%", "-50%"] }}
@@ -109,51 +179,12 @@ export default function Reviews() {
             }}
           >
             {[...reviews, ...reviews].map((r, idx) => (
-              <div
-                key={idx}
-                className="w-80 flex-shrink-0 rounded-sm bg-white/90 p-6  hover:shadow-xl transition"
-              >
-                {/* top row: avatar + name */}
-                <div className="flex items-center gap-4">
-                  <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#C5A46D]/40 bg-white">
-                    {r.avatar ? (
-                      <Image
-                        src={r.avatar}
-                        alt={r.name}
-                        height={48}
-                        width={48}
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <div className="h-full w-full" />
-                    )}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-black">{r.name}</div>
-                    <div className="text-xs text-gray-600">{r.role}</div>
-                  </div>
-                </div>
-
-                {/* rating */}
-                <div className="mt-3 flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <FiStar
-                      key={i}
-                      className={`h-4 w-4 ${
-                        i < r.rating ? "text-[#C5A46D]" : "text-gray-400"
-                      }`}
-                    />
-                  ))}
-                </div>
-
-                {/* text */}
-                <p className="mt-3 text-gray-800 leading-relaxed">“{r.text}”</p>
-              </div>
+              <ReviewCard r={r} key={idx} />
             ))}
           </motion.div>
         </div>
 
-        {/* CTA under reviews */}
+        {/* CTA */}
         <div className="mt-10 flex items-center justify-center">
           <a
             href="/booking"
