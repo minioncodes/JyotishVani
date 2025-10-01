@@ -108,7 +108,7 @@ function PredictionModal({
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 40, ease: "easeOut" }}
           >
             <button
               onClick={onClose}
@@ -174,7 +174,7 @@ export default function Horoscope() {
         <motion.div
           className="flex gap-6 flex-nowrap"
           animate={{ x: ["0%", "-100%"] }}
-          transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
         >
           {[...doubled].map((s, i) => (
             <Card key={i} s={s} onClick={() => setActive(s)} />
