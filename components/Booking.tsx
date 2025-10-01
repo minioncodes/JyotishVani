@@ -7,7 +7,7 @@ import Footer from "./Footer";
 export default function BookingPage() {
   return (
     <>
-      <Navbar />
+      
       <section
         id="booking"
         className="relative flex min-h-[92vh] items-center justify-center px-6 py-20"
@@ -37,7 +37,7 @@ export default function BookingPage() {
           </div>
         </div>
       </section>
-      <Footer />
+      
     </>
   );
 }

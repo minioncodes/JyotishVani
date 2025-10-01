@@ -42,7 +42,7 @@ return (
   <Reviews />
   <Blogs />
   <CTA />
-  <Footer />
+  
 </main>
 
 );
