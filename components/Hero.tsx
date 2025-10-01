@@ -9,11 +9,11 @@ export default function Hero() {
       id="home"
       className="relative flex min-h-[90vh] items-center justify-center px-4 sm:px-6 lg:px-8"
     >
-      {/* Background glow accents (soft golden tones) */}
+      
       <div className="absolute -bottom-40 -right-40 h-[24rem] w-[24rem] sm:h-[30rem] sm:w-[30rem]" />
 
       <div className="relative z-10 mx-auto grid mt-20 max-w-7xl grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 items-center">
-        {/* LEFT: Text Content */}
+       
         <motion.div
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}

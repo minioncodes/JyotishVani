@@ -1,6 +1,6 @@
 "use client";
 
-import { JSX, useEffect, useState } from "react";
+import { JSX, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiSun,
@@ -65,26 +65,28 @@ const defaultMessages: Record<string, string> = {
   Pisces: "Dreams shape your reality 🌌",
 };
 
-function shorten(text: string, len = 80) {
-  return text.length > len ? text.slice(0, len).trim() + "…" : text;
-}
-
 function Card({ s, onClick }: { s: Sign; onClick: () => void }) {
   return (
     <div
       onClick={onClick}
-      className="group mx-2 w-[240px] shrink-0 cursor-pointer bg-white/80 p-5 shadow-md hover:shadow-xl hover:scale-105 transition"
+      className="group mx-2 w-[220px] shrink-0 cursor-pointer bg-white/80 p-5 rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition h-[200px] flex flex-col justify-between"
     >
-      <div className="flex items-center justify-center">
+      {/* Top: Icon + Title */}
+      <div className="flex flex-col items-center">
         <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#C5A46D]/10 text-2xl text-[#C5A46D]">
           {s.icon}
         </div>
+        <h3 className="text-center text-lg font-semibold text-black">{s.name}</h3>
       </div>
-      <h3 className="text-center text-lg font-semibold text-black">{s.name}</h3>
-      <p className="mt-1 text-center text-sm text-gray-700">{s.msg}</p>
+
+      {/* Bottom: Message */}
+      <p className="mt-2 text-center text-sm text-gray-700 line-clamp-3">
+        {s.msg}
+      </p>
     </div>
   );
 }
+
 
 function MarqueeRow({
   items,
@@ -99,7 +101,7 @@ function MarqueeRow({
 }) {
   const track = [...items, ...items];
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="hidden md:block relative w-full overflow-hidden">
       <motion.div
         className="flex"
         initial={{ x: 0 }}
@@ -120,6 +122,24 @@ function MarqueeRow({
       </motion.div>
       <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#FAF9F6] to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#FAF9F6] to-transparent" />
+    </div>
+  );
+}
+
+function MobileCarousel({
+  items,
+  onSelect,
+}: {
+  items: Sign[];
+  onSelect: (s: Sign) => void;
+}) {
+  return (
+    <div className="flex md:hidden gap-4 overflow-x-auto no-scrollbar px-2 snap-x snap-mandatory">
+      {items.map((s, i) => (
+        <div key={i} className="snap-center shrink-0">
+          <Card s={s} onClick={() => onSelect(s)} />
+        </div>
+      ))}
     </div>
   );
 }
@@ -161,47 +181,10 @@ function PredictionModal({
                 {sign.name} <span className="text-[#C5A46D]">Horoscope</span>
               </h2>
             </div>
-            <div className="space-y-5 max-h-[65vh] overflow-y-auto pr-2 custom-scroll">
-              {sign.predictions && sign.predictions.length > 0 ? (
-                sign.predictions.map((p, idx) => (
-                  <div
-                    key={idx}
-                    className="rounded-xl bg-[#FAF9F6] p-4 shadow-sm"
-                  >
-                    <h3 className="text-lg font-semibold text-[#C5A46D]">
-                      {p.type}
-                    </h3>
-                    <p className="mt-1 text-gray-800 text-sm">{p.prediction}</p>
-                    <ul className="mt-2 space-y-1 text-xs text-gray-700">
-                      <li>
-                        <span className="font-semibold text-[#C5A46D]">
-                          Seek:
-                        </span>{" "}
-                        {p.seek}
-                      </li>
-                      <li>
-                        <span className="font-semibold text-black">
-                          Challenge:
-                        </span>{" "}
-                        {p.challenge}
-                      </li>
-                      <li>
-                        <span className="font-semibold text-gray-900">
-                          Insight:
-                        </span>{" "}
-                        {p.insight}
-                      </li>
-                    </ul>
-                  </div>
-                ))
-              ) : (
-                <div className="rounded-xl bg-[#FAF9F6] p-4 shadow-sm">
-                  <p className="text-gray-800 text-sm">
-                    {defaultMessages[sign.name] ||
-                      "Your stars are aligning ✨"}
-                  </p>
-                </div>
-              )}
+            <div className="rounded-xl bg-[#FAF9F6] p-4 shadow-sm">
+              <p className="text-gray-800 text-sm">
+                {sign.msg || "Your stars are aligning ✨"}
+              </p>
             </div>
           </motion.div>
         </motion.div>
@@ -211,45 +194,11 @@ function PredictionModal({
 }
 
 export default function Horoscope() {
-  const [signs, setSigns] = useState<Sign[]>([]);
   const [active, setActive] = useState<Sign | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadPredictions() {
-      try {
-        setLoading(true);
-        const today =
-          new Date().toISOString().split("T")[0] + "T00:00:00+00:00";
-        const res = await fetch(`/api/horoscope?datetime=${today}`);
-        const data = await res.json();
-
-        const predictions = data?.data?.daily_predictions || [];
-
-        if (predictions.length) {
-          const mapped: Sign[] = predictions.map((p: any) => ({
-            id: p.sign?.id ?? 0,
-            name: p.sign?.name ?? "Unknown",
-            symbol: p.sign_info?.unicode_symbol || "",
-            icon: ICONS[p.sign?.name] || <FiStar />,
-            msg: shorten(
-              p.predictions?.[0]?.prediction || "Your stars are aligning ✨"
-            ),
-            predictions: p.predictions || [],
-          }));
-          setSigns(mapped);
-        }
-      } catch (err) {
-        console.error("Failed to load predictions", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadPredictions();
-  }, []);
-
-  const fallback: Sign[] = Object.entries(ICONS).map(([name, icon]) => ({
-    id: 0,
+  // ✅ Hardcoded 12 signs
+  const data: Sign[] = Object.entries(ICONS).map(([name, icon], idx) => ({
+    id: idx + 1,
     name,
     symbol: "",
     icon,
@@ -257,15 +206,8 @@ export default function Horoscope() {
     predictions: [],
   }));
 
-  const data = signs.length ? signs : fallback;
-  const row1 = data.slice(0, 12);
-  const row2 = [...data.slice(6), ...data.slice(0, 6)];
-
   return (
-    <section
-      id="horoscope"
-      className="relative overflow-hidden px-6 py-20 md:py-28"
-    >
+    <section id="horoscope" className="relative overflow-hidden px-6 py-20 md:py-28">
       <div className="relative ">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-black">
@@ -275,23 +217,25 @@ export default function Horoscope() {
             Your daily dose of cosmic guidance, aligned with the stars ✨
           </p>
         </div>
-        <div className="mt-10 space-y-6">
-          {loading ? (
-            <p className="text-center text-gray-600">
-              Loading today’s horoscopes… ✨
-            </p>
-          ) : (
-            <>
-              <MarqueeRow items={row1} speed={30} onSelect={setActive} />
-              <MarqueeRow
-                items={row2}
-                speed={24}
-                offset={0.5}
-                onSelect={setActive}
-              />
-            </>
-          )}
+
+        {/* ✅ Mobile Carousel */}
+        <div className="mt-10 md:hidden">
+          <div className="flex gap-4 overflow-x-auto no-scrollbar px-2 snap-x snap-mandatory">
+            {data.map((s, i) => (
+              <div key={i} className="snap-center shrink-0">
+                <Card s={s} onClick={() => setActive(s)} />
+              </div>
+            ))}
+          </div>
         </div>
+
+        {/* ✅ Desktop Grid (all in one row) */}
+        <div className="hidden md:grid mt-12 grid-cols-6 xl:grid-cols-12 gap-6">
+          {data.map((s, i) => (
+            <Card key={i} s={s} onClick={() => setActive(s)} />
+          ))}
+        </div>
+
         <div className="mt-10 flex justify-center">
           <a
             href="/contact"
@@ -305,3 +249,4 @@ export default function Horoscope() {
     </section>
   );
 }
+
