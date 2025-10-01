@@ -14,8 +14,8 @@ export default function BookingPage() {
       >
         {/* Background cosmic glow (golden + soft dark) */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F3] via-[#FFFDF8]/90 to-[#FAF8F3]" />
-        <div className="absolute -top-40 -left-40 h-[30rem] w-[30rem] rounded-full bg-[#C5A46D]/20 blur-3xl" />
-        <div className="absolute -bottom-40 -right-40 h-[30rem] w-[30rem] rounded-full bg-[#C5A46D]/20 blur-3xl" />
+        {/* <div className="absolute -top-40 -left-40 h-[30rem] w-[30rem] rounded-full bg-[#C5A46D]/20 blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 h-[30rem] w-[30rem] rounded-full bg-[#C5A46D]/20 blur-3xl" /> */}
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-4xl text-center">

@@ -76,7 +76,7 @@ export default function BlogsPage() {
       </h1>
 
       {/* Carousel */}
-      <div className="overflow-hidden">
+      <div>
         <motion.div
           className="flex space-x-4"
           animate={{ x: `-${index * (100 / cardsPerView)}%` }}
@@ -86,7 +86,7 @@ export default function BlogsPage() {
             <motion.div
               key={blog._id}
               className="flex-shrink-0 w-[calc(100%/1-0.5rem)] sm:w-[calc(100%/2-0.5rem)] lg:w-[calc(100%/4-0.75rem)] 
-              rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 
+              bg-white/10 z-auto
               shadow-md hover:shadow-[0_0_20px_#C5A46D] overflow-hidden transition-all duration-300"
               whileHover={{ scale: 1.02 }}
             >

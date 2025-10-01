@@ -66,7 +66,7 @@ const reviews: Review[] = [
 
 function ReviewCard({ r }: { r: Review }) {
   return (
-    <div className="w-80 h-60 flex-shrink-0 rounded-xl bg-white/90 p-6 hover:shadow-xl transition shadow-md flex flex-col justify-between">
+    <div className="w-80 h-60  bg-white/90 p-6 hover:scale-110 cursor-pointer transition shadow-md flex flex-col justify-between">
       {/* top row: avatar + name */}
       <div className="flex items-center gap-4">
         <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#C5A46D]/40 bg-white">
@@ -120,7 +120,7 @@ export default function Reviews() {
   return (
     <section
       id="testimonials"
-      className="relative px-6 py-20 md:py-28 overflow-hidden"
+      className="relative px-6 py-20 md:py-28"
     >
       {/* subtle golden glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_200px_at_10%_10%,rgba(197,164,109,0.08),transparent_60%),radial-gradient(600px_200px_at_90%_90%,rgba(197,164,109,0.08),transparent_60%)]" />
@@ -168,7 +168,7 @@ export default function Reviews() {
         </div>
 
         {/* ✅ Desktop Marquee */}
-        <div className="hidden md:block relative w-full overflow-hidden mt-10">
+        <div className="hidden md:block relative w-full  mt-10">
           <motion.div
             className="flex gap-5 w-max"
             animate={{ x: ["0%", "-50%"] }}
