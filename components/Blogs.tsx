@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { truncateHtml } from "@/lib/truncate_html";
 
 interface Blog {
   _id: string;
@@ -64,9 +65,9 @@ export default function BlogsPage() {
 
   return (
     <div className="p-6 mx-auto">
-     <h1 className="mt-[100px] text-3xl font-bold mb-6 text-center font-[Cinzel] text-black">
-  Whispers from the <span className="text-[#C5A46D]">Stars</span>
-</h1>
+      <h1 className="mt-[100px] text-3xl font-bold mb-6 text-center font-[Cinzel] text-black">
+        Whispers from the <span className="text-[#C5A46D]">Stars</span>
+      </h1>
 
 
       {/* Carousel */}
@@ -84,7 +85,7 @@ export default function BlogsPage() {
             >
               {blog.image && (
                 <Image
-                width={600}
+                  width={600}
                   height={192}
                   src={blog.image}
                   alt={blog.title}
@@ -95,33 +96,39 @@ export default function BlogsPage() {
                 <h2 className="text-md font-semibold mb-1 line-clamp-2 text-black">
                   {blog.title}
                 </h2>
-                <p className="text-sm text-gray-700 flex-1 line-clamp-3">
+                {/* <p className="text-sm text-gray-700 flex-1 line-clamp-3">
                   {blog.description}
+                </p> */}
+                <p className="text-sm text-gray-700 mb-4"
+                  dangerouslySetInnerHTML={{
+                    __html: truncateHtml(blog.description, 150), // trims to ~150 chars but keeps tags
+                  }}>
+
                 </p>
-                <Link
-                  href={`/single-blog/${blog._id}`}
-                  className="mt-2 inline-block text-center bg-[#C5A46D] text-black px-3 py-1.5 rounded-md text-sm font-medium hover:bg-black hover:text-white transition"
-                >
-                  View Details
-                </Link>
-              </div>
+
+              <Link
+                href={`/single-blog/${blog._id}`}
+                className="mt-2 inline-block text-center bg-[#C5A46D] text-black px-3 py-1.5 rounded-md text-sm font-medium hover:bg-black hover:text-white transition"
+              >
+                View Details
+              </Link>
+            </div>
             </motion.div>
           ))}
-        </motion.div>
-      </div>
-
-      {/* Dots */}
-      <div className="flex justify-center mt-4 space-x-2">
-        {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setIndex(i)}
-            className={`w-3 h-3 rounded-full ${
-              i === index ? "bg-[#C5A46D]" : "bg-gray-400/50"
-            }`}
-          />
-        ))}
-      </div>
+      </motion.div>
     </div>
+
+      {/* Dots */ }
+  <div className="flex justify-center mt-4 space-x-2">
+    {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+      <button
+        key={i}
+        onClick={() => setIndex(i)}
+        className={`w-3 h-3 rounded-full ${i === index ? "bg-[#C5A46D]" : "bg-gray-400/50"
+          }`}
+      />
+    ))}
+  </div>
+    </div >
   );
 }
