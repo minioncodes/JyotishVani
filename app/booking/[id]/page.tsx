@@ -38,15 +38,17 @@ export default function BookingDetailPage() {
           <div className="mt-10 w-full rounded-3xl bg-white/90 shadow-xl border border-[#C5A46D]/30 overflow-hidden">
             <CalEmbed
               calLink={option.calLink}
-              style={{ height: "100%", width: "100%" }} // give it enough height
+              style={{ height: "100%", width: "100%" }}
               config={{
-                layout: "month_view", // optional: cal.com configs
+                theme: "light", // or "dark"
+                primaryColor: "#C5A46D", // your golden theme color
+                backgroundColor: "#FAF8F3", // matches your site background
+                textColor: "#000000", // text color
               }}
             />
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 }

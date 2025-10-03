@@ -35,7 +35,7 @@ export default function BookingsPage() {
           </div>
         </div>
       </section>
-      <Footer />
+
     </>
   );
 }
