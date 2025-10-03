@@ -8,9 +8,9 @@ import Image from "next/image";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/astrologer-info", label: "About" },
+  { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/all-blogs", label: "Blogs" },
+  { href: "/blogs", label: "Blogs" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -19,9 +19,12 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -30, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      initial={{ y: "-100%", opacity: 0 }}   // start fully above viewport
+      animate={{ y: 0, opacity: 1 }}         // slide into place
+      transition={{
+        duration: 0.9,                       // slightly longer duration
+        ease: [0.25, 0.1, 0.25, 1],          // smooth cubic-bezier
+      }}
       className="fixed top-4 left-1/2 z-50 w-[92%] max-w-6xl -translate-x-1/2"
     >
       <div className="flex items-center justify-between rounded-2xl bg-white/90 backdrop-blur-md px-5 py-3 shadow-md">

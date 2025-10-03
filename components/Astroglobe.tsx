@@ -30,11 +30,20 @@ export default function AstroGlobe() {
   }, []);
 
   return (
-    <div className="relative w-[340px] h-[340px] md:w-[480px] md:h-[480px] flex items-center justify-center bg-[#C5A46D] rounded-sm overflow-hidden shadow-sm">
-      {/* Subtle aura (keep soft) */}
-      <div className="absolute inset-0 rounded-full bg-[#FAF9F6] blur-3xl  animate-pulse" />
+    // ⬇️ Wrap entire globe in motion.div for entry animation
+    <motion.div
+      initial={{ opacity: 0, y: 80 }}   // start hidden & below
+      animate={{ opacity: 1, y: 0 }}    // slide up & fade in
+      transition={{
+        duration: 1.2,
+        ease: [0.25, 0.1, 0.25, 1],     // smooth cubic-bezier
+      }}
+      className="relative w-[340px] h-[340px] md:w-[480px] md:h-[480px] flex items-center justify-center bg-[#C5A46D] rounded-sm overflow-hidden shadow-sm"
+    >
+      {/* Subtle aura */}
+      <div className="absolute inset-0 rounded-full bg-[#FAF9F6] blur-3xl animate-pulse" />
 
-      {/* Floating golden sparks (more glow than before) */}
+      {/* Floating golden sparks */}
       <div className="absolute inset-0">
         {[...Array(70)].map((_, i) => {
           const top = Math.random() * 100;
@@ -53,8 +62,8 @@ export default function AstroGlobe() {
                 left: `${left}%`,
                 width: `${size}px`,
                 height: `${size}px`,
-                backgroundColor: "#FFD97D", // strong golden
-                boxShadow: "0 0 14px 6px rgba(255,217,125,0.9)", // glowing gold
+                backgroundColor: "#FFD97D",
+                boxShadow: "0 0 14px 6px rgba(255,217,125,0.9)",
               }}
               animate={{
                 x: [0, offsetX, 0],
@@ -71,7 +80,7 @@ export default function AstroGlobe() {
         })}
       </div>
 
-      {/* Zodiac outer ring (subtle gold, not too strong) */}
+      {/* Zodiac outer ring */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center"
         animate={{ rotate: 360 }}
@@ -80,7 +89,7 @@ export default function AstroGlobe() {
         <div className="w-full h-full rounded-full border border-dashed border-[#C5A46D]/50" />
       </motion.div>
 
-      {/* Wireframe globe (soft gold strokes) */}
+      {/* Wireframe globe */}
       <motion.svg
         viewBox="0 0 200 200"
         className="absolute inset-0 w-full h-full"
@@ -94,7 +103,7 @@ export default function AstroGlobe() {
         <line x1="100" y1="20" x2="100" y2="180" stroke="#C5A46D55" />
       </motion.svg>
 
-      {/* Planet core (kept soft, not over-bright) */}
+      {/* Planet core */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center"
         animate={{ scale: [1, 1.15, 1], opacity: [1, 0.7, 1] }}
@@ -127,6 +136,6 @@ export default function AstroGlobe() {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

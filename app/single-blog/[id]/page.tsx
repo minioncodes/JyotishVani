@@ -50,7 +50,7 @@ export default function Page() {
 
   return (
     <>
-      <Navbar />
+      
 
    
       <div className="fixed inset-0 -z-10 bg-[#FAF8F3]">
@@ -90,7 +90,7 @@ export default function Page() {
         </div>
       </div>
 
-      <Footer />
+      
     </>
   );
 }

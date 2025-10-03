@@ -34,7 +34,7 @@ export default function BookingDetail() {
           </div>
         </div>
       </section>
-      <Footer />
+      
     </>
   );
 }
