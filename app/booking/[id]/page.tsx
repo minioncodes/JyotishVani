@@ -3,14 +3,22 @@
 import { useParams } from "next/navigation";
 import { bookingOptions } from "@/lib/bookingOptions";
 import Navbar from "@/components/Navbar";
-import CalEmbed from "@calcom/embed-react";
 import Footer from "@/components/Footer";
+import CalEmbed from "@calcom/embed-react";
 
-export default function BookingDetail() {
-  const { id } = useParams();
+export default function BookingDetailPage() {
+  const { id } = useParams(); // gets "quick-chat", "thirty-minute-chat", etc.
   const option = bookingOptions.find((opt) => opt.id === id);
 
-  if (!option) return <div>Invalid booking option.</div>;
+  if (!option) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <h1 className="text-2xl font-bold text-red-600">
+          Booking option not found
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -26,10 +34,14 @@ export default function BookingDetail() {
             {option.description}
           </p>
 
+          {/* Booking widget */}
           <div className="mt-10 w-full rounded-3xl bg-white/90 shadow-xl border border-[#C5A46D]/30 overflow-hidden">
             <CalEmbed
               calLink={option.calLink}
-              style={{ height: "100%", width: "100%" }}
+              style={{ height: "100%", width: "100%" }} // give it enough height
+              config={{
+                layout: "month_view", // optional: cal.com configs
+              }}
             />
           </div>
         </div>

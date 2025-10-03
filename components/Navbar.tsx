@@ -50,7 +50,7 @@ export default function Navbar() {
             </motion.a>
           ))}
           <a
-            href="/booking"
+            href="/bookings"
             className="rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-sm font-semibold shadow hover:bg-black hover:text-white transition"
           >
             Book Now
@@ -90,7 +90,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="/booking"
+                href="/bookings"
                 className="mt-3 rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-center font-semibold shadow hover:bg-black hover:text-white transition"
               >
                 Book Now
