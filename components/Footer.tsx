@@ -76,10 +76,10 @@ export default function Footer() {
                   <FiMail />
                 </span>
                 <Link
-                  href="mailto:help@jyotiswaani.com"
+                  href="mailto:help@jyotishwaani.com"
                   className="hover:text-[#C5A46D]"
                 >
-                  help@jyotiswaani.com
+                  help@jyotishwaani.com
                 </Link>
               </li>
               <li className="flex items-center gap-3">
