@@ -79,7 +79,7 @@ export default function Services() {
                 {s.desc}
               </p>
               <a
-                href="/booking"
+                href="/bookings"
                 className="mt-5 inline-block rounded-xl bg-[#C5A46D] text-black font-medium px-4 py-2 text-sm hover:bg-black hover:text-white transition"
               >
                 Book this

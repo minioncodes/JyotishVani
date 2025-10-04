@@ -59,7 +59,7 @@ export default function Hero() {
             className="mt-6 flex flex-col sm:flex-row gap-3 justify-center md:justify-start"
           >
             <a
-              href="/booking"
+              href="/bookings"
               className="rounded-xl bg-gradient-to-r from-[#C5A46D] to-[#E6D5B8] text-black px-5 py-3 text-sm sm:text-base font-semibold shadow-md hover:opacity-90 transition"
             >
               Book a Reading

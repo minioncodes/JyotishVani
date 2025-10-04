@@ -3,14 +3,22 @@
 import { useParams } from "next/navigation";
 import { bookingOptions } from "@/lib/bookingOptions";
 import Navbar from "@/components/Navbar";
-import CalEmbed from "@calcom/embed-react";
 import Footer from "@/components/Footer";
+import CalEmbed from "@calcom/embed-react";
 
-export default function BookingDetail() {
-  const { id } = useParams();
+export default function BookingDetailPage() {
+  const { id } = useParams(); // gets "quick-chat", "thirty-minute-chat", etc.
   const option = bookingOptions.find((opt) => opt.id === id);
 
-  if (!option) return <div>Invalid booking option.</div>;
+  if (!option) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <h1 className="text-2xl font-bold text-red-600">
+          Booking option not found
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -26,15 +34,21 @@ export default function BookingDetail() {
             {option.description}
           </p>
 
-          <div className="mt-10 w-full rounded-3xl bg-gradient-to-b from-[#FAF8F3] via-[#FFFDF8]/90 to-[#FAF8F3] shadow-xl border border-[#C5A46D]/30 overflow-hidden">
+          {/* Booking widget */}
+          <div className="mt-10 w-full rounded-3xl bg-white/90 shadow-xl border border-[#C5A46D]/30 overflow-hidden">
             <CalEmbed
               calLink={option.calLink}
-              style={{ height: "100%", width: "100%" , background: "linear-gradient(to bottom, #FAF8F3, rgba(255, 253, 248, 0.9), #FAF8F3"}}
+              style={{ height: "100%", width: "100%" }}
+              config={{
+                theme: "light", // or "dark"
+                primaryColor: "#C5A46D", // your golden theme color
+                backgroundColor: "#FAF8F3", // matches your site background
+                textColor: "#000000", // text color
+              }}
             />
           </div>
         </div>
       </section>
-      
     </>
   );
 }

@@ -20,7 +20,7 @@ export default function CTA() {
             Book a session now and receive a pre-reading questionnaire to maximize insights.
           </p>
           <a
-            href="/booking"
+            href="/bookings"
             className="mt-6 inline-block rounded-xl bg-[#C5A46D] text-black px-6 py-3 font-semibold shadow-md hover:bg-black hover:text-white transition"
           >
             Book Your Session
