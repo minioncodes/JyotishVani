@@ -67,8 +67,8 @@ export default function Footer() {
                   <FiMapPin />
                 </span>
                 <div className="leading-relaxed">
-                  <p className="text-white font-medium">C219, Near Tularam Park, Rajajipuram</p>
-                  <p>Lucknow, Uttar Pradesh 226017 - India</p>
+                  <p className="text-white font-medium">12/604, Indira Nagar</p>
+                  <p>Lucknow, Uttar Pradesh 226016 - India</p>
                 </div>
               </li>
               <li className="flex items-center gap-3">
