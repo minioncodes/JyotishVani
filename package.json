@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "eslint",
     "postbuild": "next-sitemap"
-
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
