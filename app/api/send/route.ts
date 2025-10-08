@@ -1,15 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+// ✅ Send message to any WhatsApp number via Cloud API
+export async function POST(req: NextRequest) {
   try {
     const { to, message } = await req.json();
 
     const res = await fetch(
-      `https://graph.facebook.com/v21.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`,
+      `https://graph.facebook.com/v20.0/${process.env.PHONE_NUMBER_ID}/messages`,
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.WHATSAPP_TOKEN}`,
+          Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -22,8 +23,10 @@ export async function POST(req: Request) {
     );
 
     const data = await res.json();
+    console.log("✅ Message sent:", data);
     return NextResponse.json(data);
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    console.error("❌ Send message error:", err);
+    return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
   }
 }
