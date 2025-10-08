@@ -60,7 +60,7 @@ export default function AstrologerInfo() {
               childhood, Guru Ji has been helping people through{" "}
               <strong className="text-[#5B4A2F]">horoscope readings</strong> and{" "}
               <strong className="text-[#5B4A2F]">gemstone recommendations</strong> since
-              2001.
+              1995.
             </p>
           </motion.div>
         </div>
@@ -77,7 +77,7 @@ export default function AstrologerInfo() {
             Why Choose Guru Ji?
           </h3>
           <ul className="space-y-3 text-[#4A4A4A]">
-            <li>✔️ 20+ years of experience in astrology and gem therapy</li>
+            <li>✔️ 30+ years of experience in astrology and gem therapy</li>
             <li>✔️ Deep connection between Vedic science and modern science</li>
             <li>✔️ Trusted by thousands across India and abroad</li>
             <li>✔️ Specializes in Marriage, Career, Finance, Health & Remedies</li>

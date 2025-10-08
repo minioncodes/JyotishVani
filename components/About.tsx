@@ -59,7 +59,7 @@ export default function About() {
             <span className="font-semibold text-[#C5A46D]">
               Banaras Wale Guruji
             </span>,
-            is the guiding force behind JyotishWaani. With 20+ years of experience in Vedic astrology
+            is the guiding force behind JyotishWaani. With 30+ years of experience in Vedic astrology
             and gemstone therapy, he has helped thousands find clarity in marriage, career, finance,
             and health matters.
           </p>
