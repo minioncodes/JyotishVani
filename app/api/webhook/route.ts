@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
     console.log("🔍 Challenge:", challenge);
 
     // ✅ Verify the webhook
-    if (mode === "subscribe" && token === process.env.VERIFY_TOKEN) {
+    if (mode === "subscribe" && token === process.env.META_VERIFY_TOKEN) {
       console.log("✅ Webhook verified successfully!");
       return new NextResponse(challenge, { status: 200 });
     } else {
