@@ -18,36 +18,32 @@ async function getHoroscope(sign: string): Promise<string> {
   }
 }
 
-// 🌙 Chatbot logic
 async function generateAstroReply(text: string): Promise<string> {
   const msg = text.toLowerCase().trim();
 
-  // Greetings
   if (["hi", "hello", "hey", "namaste"].some((g) => msg.includes(g))) {
     return "🌟 Namaste! I’m *JyotishVani*, your cosmic guide.\n\nType your *zodiac sign* (like Aries, Virgo, Scorpio) to get today’s horoscope ✨";
   }
-
-  // Zodiac recognition
   const sign = zodiacSigns.find((z) => msg.includes(z));
   if (sign) {
     return await getHoroscope(sign);
   }
 
-  // Remedies
   if (msg.includes("remedy") || msg.includes("solution")) {
     return "💫 Remedies vary by your planetary position, but a good start is to wear your ruling gemstone and chant your Moon mantra. Type your *zodiac sign* for personalized guidance.";
   }
 
-  // Lucky color
   if (msg.includes("color") || msg.includes("lucky")) {
     return "🎨 Type your zodiac sign (e.g., Leo or Aquarius) and I’ll tell you today’s *lucky color*!";
   }
 
-  // Default fallback
   return "🔮 I can tell you your horoscope, lucky color, or remedies.\nType *Hi* to start or send your zodiac sign ✨";
 }
 
-// ✅ WEBHOOK HANDLER
+
+const token = process.env.META_VERIFY_TOKEN 
+
+console.log( "Webhook token:", token );         
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const mode = searchParams.get("hub.mode");
@@ -62,8 +58,16 @@ export async function GET(req: NextRequest) {
   return new NextResponse("Forbidden", { status: 403 });
 }
 
+
+const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
+
+console.log("WhatsApp Token:", WHATSAPP_TOKEN )
 export async function POST(req: NextRequest) {
   try {
+    const WHATSAPP_PHONE_NUMBER_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
+const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
+console.log("Phone Number ID inside fn:", WHATSAPP_PHONE_NUMBER_ID);
+console.log("WhatsApp Token inside fn:", WHATSAPP_TOKEN )
     const body = await req.json();
     console.log("📩 Incoming message:", JSON.stringify(body, null, 2));
 
@@ -79,7 +83,7 @@ export async function POST(req: NextRequest) {
       const reply = await generateAstroReply(text);
 
       // ✉️ Send reply via WhatsApp API
-      await fetch(`https://graph.facebook.com/v20.0/${process.env.PHONE_NUMBER_ID}/messages`, {
+      await fetch(`https://graph.facebook.com/v20.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}`,

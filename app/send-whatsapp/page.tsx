@@ -14,7 +14,7 @@ export default function SendWhatsAppPage() {
     setResponse("");
 
     try {
-      const res = await fetch("/api/whatsapp/send", {
+      const res = await fetch("/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ to, message }),

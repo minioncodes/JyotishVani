@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// ✅ Send message to any WhatsApp number via Cloud API
+console.log("send api route got calleleddddd")
+// console.log("")
 export async function POST(req: NextRequest) {
   try {
     const { to, message } = await req.json();
 
     const res = await fetch(
-      `https://graph.facebook.com/v20.0/${process.env.PHONE_NUMBER_ID}/messages`,
+      `https://graph.facebook.com/v20.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`,
       {
         method: "POST",
         headers: {
@@ -23,10 +24,10 @@ export async function POST(req: NextRequest) {
     );
 
     const data = await res.json();
-    console.log("✅ Message sent:", data);
+    console.log(" Message sent:", data);
     return NextResponse.json(data);
   } catch (err) {
-    console.error("❌ Send message error:", err);
+    console.error("Send message error:", err);
     return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
   }
 }
