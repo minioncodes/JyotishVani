@@ -5,9 +5,10 @@ import { bookingOptions } from "@/lib/bookingOptions";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CalEmbed from "@calcom/embed-react";
+import { useState } from "react";
 
 export default function BookingDetailPage() {
-  const { id } = useParams(); // gets "quick-chat", "thirty-minute-chat", etc.
+  const { id } = useParams();
   const option = bookingOptions.find((opt) => opt.id === id);
 
   if (!option) {
@@ -33,17 +34,16 @@ export default function BookingDetailPage() {
           <p className="mt-3 text-gray-700 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
             {option.description}
           </p>
-
-          {/* Booking widget */}
           <div className="mt-10 w-full rounded-3xl bg-white/90 shadow-xl border border-[#C5A46D]/30 overflow-hidden">
             <CalEmbed
               calLink={option.calLink}
               style={{ height: "100%", width: "100%" }}
               config={{
-                theme: "light", // or "dark"
-                primaryColor: "#C5A46D", // your golden theme color
-                backgroundColor: "#FAF8F3", // matches your site background
-                textColor: "#000000", // text color
+                theme: "light",
+                primaryColor: "#C5A46D",
+                backgroundColor: "#FAF8F3",
+                textColor: "#000000",
+                // layout:"column_view" 
               }}
             />
           </div>

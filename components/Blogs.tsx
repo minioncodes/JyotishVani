@@ -42,8 +42,6 @@ export default function BlogsPage() {
     };
     fetchBlogs();
   }, []);
-
-  // Responsive cards per view
   useEffect(() => {
     const updateView = () => {
       if (window.innerWidth >= 1024) {
@@ -54,7 +52,7 @@ export default function BlogsPage() {
         setDisplayBlogs(blogs);
       } else {
         setCardsPerView(1);
-        setDisplayBlogs(blogs); // all blogs, but show only one at a time with arrows
+        setDisplayBlogs(blogs); 
       }
     };
     updateView();
@@ -73,8 +71,6 @@ export default function BlogsPage() {
       <h1 className="mt-[100px] text-3xl font-bold mb-6 text-center font-[Cinzel] text-black">
         Whispers from the <span className="text-[#C5A46D]">Stars</span>
       </h1>
-
-      {/* 📱 Phone: 1 card with arrows */}
       {cardsPerView === 1 ? (
         <div className="relative w-full max-w-md mx-auto">
           <AnimatePresence mode="wait">

@@ -16,19 +16,17 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-
   return (
     <motion.nav
-      initial={{ y: "-100%", opacity: 0 }}   // start fully above viewport
-      animate={{ y: 0, opacity: 1 }}         // slide into place
+      initial={{ y: "-100%", opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}        
       transition={{
-        duration: 0.9,                       // slightly longer duration
-        ease: [0.25, 0.1, 0.25, 1],          // smooth cubic-bezier
+        duration: 0.9,                      
+        ease: [0.25, 0.1, 0.25, 1],          
       }}
       className="fixed top-4 left-1/2 z-50 w-[92%] max-w-6xl -translate-x-1/2"
     >
       <div className="flex items-center justify-between rounded-2xl bg-white/90 backdrop-blur-md px-5 py-3 shadow-md">
-        {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
             src="/logo.svg"
@@ -38,8 +36,6 @@ export default function Navbar() {
             className="mr-2"
           />
         </Link>
-
-        {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-7 text-gray-800 font-medium">
           {links.map((l) => (
             <motion.a
@@ -59,8 +55,6 @@ export default function Navbar() {
             Book Now
           </a>
         </div>
-
-        {/* Mobile Menu Button */}
         <button
           className="md:hidden rounded-xl bg-[#C5A46D]/20 p-2 text-black hover:bg-[#C5A46D]/30"
           onClick={() => setOpen((s) => !s)}
@@ -70,7 +64,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Drawer */}
       <AnimatePresence>
         {open && (
           <motion.div
