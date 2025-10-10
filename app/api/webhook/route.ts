@@ -73,15 +73,9 @@ export async function GET(req: NextRequest) {
 
 
 
-const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
-
-console.log("WhatsApp Token:", WHATSAPP_TOKEN )
 export async function POST(req: NextRequest) {
   try {
-    const WHATSAPP_PHONE_NUMBER_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
-const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
-console.log("Phone Number ID inside fn:", WHATSAPP_PHONE_NUMBER_ID);
-console.log("WhatsApp Token inside fn:", WHATSAPP_TOKEN )
+
     const body = await req.json();
     console.log("📩 Incoming message:", JSON.stringify(body, null, 2));
 
