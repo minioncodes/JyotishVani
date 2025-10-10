@@ -17,13 +17,13 @@ async function getHoroscope(sign: string): Promise<string> {
   } catch {
     return "🌌 Sorry, the stars seem quiet right now. Try again later.";
   }
-}
+}   
 
 // 🌠 Generate bot reply text based on message
 async function generateAstroReply(text: string): Promise<string> {
   const msg = text.toLowerCase().trim();
 
-  if (["hi", "hello", "hey", "namaste"].some((g) => msg.includes(g))) {
+  if (["hi","Hi","Hii", "hii", "hello", "hey", "namaste"].some((g) => msg.includes(g))) {
     return "🌟 Namaste! I’m *JyotishWaani*, your cosmic guide.\n\nType your *zodiac sign* (like Aries, Virgo, Scorpio) to get today’s horoscope ✨";
   }
 
