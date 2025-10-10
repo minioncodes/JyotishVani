@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+// ♈️ Zodiac signs for horoscope detection
 const zodiacSigns = [
   "aries", "taurus", "gemini", "cancer", "leo", "virgo",
   "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces",
@@ -18,12 +19,14 @@ async function getHoroscope(sign: string): Promise<string> {
   }
 }
 
+// 🌠 Generate bot reply text based on message
 async function generateAstroReply(text: string): Promise<string> {
   const msg = text.toLowerCase().trim();
 
   if (["hi", "hello", "hey", "namaste"].some((g) => msg.includes(g))) {
-    return "🌟 Namaste! I’m *JyotishVani*, your cosmic guide.\n\nType your *zodiac sign* (like Aries, Virgo, Scorpio) to get today’s horoscope ✨";
+    return "🌟 Namaste! I’m *JyotishWaani*, your cosmic guide.\n\nType your *zodiac sign* (like Aries, Virgo, Scorpio) to get today’s horoscope ✨";
   }
+
   const sign = zodiacSigns.find((z) => msg.includes(z));
   if (sign) {
     return await getHoroscope(sign);
@@ -34,18 +37,13 @@ async function generateAstroReply(text: string): Promise<string> {
   }
 
   if (msg.includes("color") || msg.includes("lucky")) {
-    return "🎨 Type your zodiac sign (e.g., Leo or Aquarius) and I’ll tell you today’s *lucky color*!";
+    return "🎨 Type your zodiac sign (e.g., Leo or Aquarius) and I’ll tell you today’s *lucky color*! 🌈";
   }
 
   return "🔮 I can tell you your horoscope, lucky color, or remedies.\nType *Hi* to start or send your zodiac sign ✨";
 }
 
-
-const token = process.env.META_VERIFY_TOKEN 
-
-console.log( "Webhook token:", token );         
-
-
+// ✅ VERIFY webhook (Meta GET request)
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -57,7 +55,6 @@ export async function GET(req: NextRequest) {
     console.log("🔍 Token from Meta:", token);
     console.log("🔍 Challenge:", challenge);
 
-    // ✅ Verify the webhook
     if (mode === "subscribe" && token === process.env.META_VERIFY_TOKEN) {
       console.log("✅ Webhook verified successfully!");
       return new NextResponse(challenge, { status: 200 });
@@ -71,39 +68,48 @@ export async function GET(req: NextRequest) {
   }
 }
 
-
-
+// ✅ HANDLE incoming WhatsApp messages
 export async function POST(req: NextRequest) {
   try {
-
     const body = await req.json();
-    console.log("📩 Incoming message:", JSON.stringify(body, null, 2));
+    console.log("📩 Incoming webhook:", JSON.stringify(body, null, 2));
 
-    const change = body.entry?.[0]?.changes?.[0]?.value;
-    const message = change?.messages?.[0];
+    const message = body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
     const from = message?.from;
     const text = message?.text?.body;
 
-    if (from && text) {
-      console.log(`💬 Message from ${from}: ${text}`);
+    if (!from || !text) {
+      console.log("⚪ No message body detected, skipping...");
+      return new NextResponse("EVENT_RECEIVED", { status: 200 });
+    }
 
-      // 🔮 Generate astrology-based reply
-      const reply = await generateAstroReply(text);
+    console.log(`💬 Message from ${from}: ${text}`);
 
-      // ✉️ Send reply via WhatsApp API
-      await fetch(`https://graph.facebook.com/v20.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messaging_product: "whatsapp",
-          to: from,
-          type: "text",
-          text: { body: reply },
-        }),
-      });
+    // Generate dynamic astrology-based reply
+    const reply = await generateAstroReply(text);
+
+    // 🟢 Send auto-reply via WhatsApp API
+    const url = `https://graph.facebook.com/v20.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messaging_product: "whatsapp",
+        to: from,
+        type: "text",
+        text: { body: reply },
+      }),
+    });
+
+    const textRes = await res.text();
+    console.log("📤 WhatsApp API status:", res.status);
+    console.log("📤 WhatsApp API response:", textRes);
+
+    if (!res.ok) {
+      console.error("⚠️ Failed to send reply. Check token, permissions, or 24h window.");
     }
 
     return new NextResponse("EVENT_RECEIVED", { status: 200 });
