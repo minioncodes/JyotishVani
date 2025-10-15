@@ -8,32 +8,26 @@ interface Slot {
 }
 
 export default function Home() {
-  const [slots, setSlots] = useState<Slot[] | {}>({});
+  const [slots, setSlots] = useState<Slot[]>([]);
   const [loading, setLoading] = useState(false);
+  const [activeSlot, setActiveSlot] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("/api/slots");
-      if (!response) {
-
-      }
       const data = await response.json();
-      console.log("data = ", data);
-      setSlots(data.slots);
+      setSlots(data.slots || []);
     }
     fetchData();
   }, []);
+
   const handleLogin = async () => {
     setLoading(true);
     try {
       const res = await fetch("/api/auth");
       const data = await res.json();
-      console.log("data from the handlelogin = ",data);
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert("Failed to get auth URL");
-      }
+      if (data.url) window.location.href = data.url;
+      else alert("Failed to get auth URL");
     } catch (err) {
       console.error("Login error:", err);
     } finally {
@@ -41,18 +35,42 @@ export default function Home() {
     }
   };
 
+  const handleBooking = async (slot: Slot) => {
+    setActiveSlot(slot.start); // 👈 Only this slot will load
+    try {
+      await fetch("/api/google/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          start: slot.start,
+          end: slot.end,
+          summary: "Astrology Consultation",
+          description: "Video session for horoscope reading",
+          attendees: [{ email: "aryan@digipants.com" }],
+        }),
+      });
+      alert("Booking successful!");
+    } catch (e: any) {
+      console.error(e.message);
+    } finally {
+      setActiveSlot(null);
+    }
+  };
 
   return (
     <div className="p-6">
       <h1 className="text-2xl mb-4 font-bold">Available Slots</h1>
+
       <button
-        className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer"
+        className="bg-blue-500 text-white px-4 py-2 rounded"
         onClick={handleLogin}
+        disabled={loading}
       >
-        Login with Google
+        {loading ? "Connecting..." : "Login with Google"}
       </button>
+
       <div className="mt-6 space-y-4">
-        {Array.isArray(slots) && slots.length > 0 ? (
+        {slots.length > 0 ? (
           slots.map((slot, idx) => (
             <div
               key={idx}
@@ -62,11 +80,17 @@ export default function Home() {
                 {new Date(slot.start).toLocaleString()} -{" "}
                 {new Date(slot.end).toLocaleTimeString()}
               </span>
+
               <button
-                className="bg-green-500 text-white px-4 py-2 rounded"
-                disabled={loading}
+                onClick={() => handleBooking(slot)}
+                disabled={activeSlot === slot.start}
+                className={`px-4 py-2 rounded text-white ${
+                  activeSlot === slot.start
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-green-500 hover:bg-green-600"
+                }`}
               >
-                Book
+                {activeSlot === slot.start ? "Booking..." : "Book Now"}
               </button>
             </div>
           ))
@@ -77,6 +101,7 @@ export default function Home() {
     </div>
   );
 }
+
 
 
 

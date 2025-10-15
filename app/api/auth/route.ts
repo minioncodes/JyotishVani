@@ -14,9 +14,10 @@ export async function GET() {
         prompt: "select_account",
         scope: [
             "https://www.googleapis.com/auth/calendar",
-            "https://www.googleapis.com/auth/calendar.events.readonly"
+            "https://www.googleapis.com/auth/calendar.events",
+            "https://www.googleapis.com/auth/gmail.send",
+            "https://www.googleapis.com/auth/userinfo.email"
         ],
     });
-    //   console.log("auth url = ",authUrl);
     return NextResponse.json({ url: authUrl });
 }

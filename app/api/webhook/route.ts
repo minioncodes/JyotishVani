@@ -41,23 +41,17 @@ async function generateAstroReply(text: string): Promise<string> {
 }
 
 
-const token = process.env.META_VERIFY_TOKEN 
+const token = process.env.META_VERIFY_TOKEN
 
-console.log( "Webhook token:", token );         
+console.log("Webhook token:", token);
 
-
+console.log("hiii from the webhook route ..............")
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const mode = searchParams.get("hub.mode");
     const token = searchParams.get("hub.verify_token");
     const challenge = searchParams.get("hub.challenge");
-
-    console.log("🔍 Mode:", mode);
-    console.log("🔍 Token from Meta:", token);
-    console.log("🔍 Challenge:", challenge);
-
-    // ✅ Verify the webhook
     if (mode === "subscribe" && token === process.env.META_VERIFY_TOKEN) {
       console.log("✅ Webhook verified successfully!");
       return new NextResponse(challenge, { status: 200 });
@@ -75,13 +69,13 @@ export async function GET(req: NextRequest) {
 
 const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
 
-console.log("WhatsApp Token:", WHATSAPP_TOKEN )
+console.log("WhatsApp Token:", WHATSAPP_TOKEN)
 export async function POST(req: NextRequest) {
   try {
     const WHATSAPP_PHONE_NUMBER_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
-const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
-console.log("Phone Number ID inside fn:", WHATSAPP_PHONE_NUMBER_ID);
-console.log("WhatsApp Token inside fn:", WHATSAPP_TOKEN )
+    const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
+    console.log("Phone Number ID inside fn:", WHATSAPP_PHONE_NUMBER_ID);
+    console.log("WhatsApp Token inside fn:", WHATSAPP_TOKEN)
     const body = await req.json();
     console.log("📩 Incoming message:", JSON.stringify(body, null, 2));
 
@@ -111,7 +105,7 @@ console.log("WhatsApp Token inside fn:", WHATSAPP_TOKEN )
         }),
       });
     }
-
+    
     return new NextResponse("EVENT_RECEIVED", { status: 200 });
   } catch (err) {
     console.error("⚠️ Webhook error:", err);
