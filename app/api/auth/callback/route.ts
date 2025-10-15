@@ -24,5 +24,5 @@ export async function GET(req: Request) {
     path: "/",
   });
 
-  return NextResponse.redirect("http://localhost:3000/test-booking2");
+  return NextResponse.redirect("https://www.jyotishwaani.com/test-booking2");
 }
