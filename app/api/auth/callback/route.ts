@@ -14,15 +14,13 @@ export async function GET(req: Request) {
     process.env.GOOGLE_CLIENT_SECRET,
     process.env.GOOGLE_REDIRECT_URI
   );
-
   const { tokens } = await oauth2Client.getToken(code);
-
-  const cookieStore=await cookies();
+  const cookieStore = await cookies();
   cookieStore.set("google_tokens", JSON.stringify(tokens), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     path: "/",
   });
 
-  return NextResponse.redirect("https://www.jyotishwaani.com/test-booking2");
+  return NextResponse.redirect("http://localhost:3000/test-booking2");
 }

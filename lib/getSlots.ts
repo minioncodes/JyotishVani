@@ -37,3 +37,4 @@ export const getAvailableSlots = async (tokens: any) => {
   }
   return slots;
 };
+// N/A
