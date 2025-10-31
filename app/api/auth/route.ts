@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
-import { getgoogleClient } from "@/lib/googleClient";
 import { google } from "googleapis";
 
 export async function GET() {
@@ -11,7 +10,7 @@ export async function GET() {
     );
     const authUrl = oauth2Client.generateAuthUrl({
         access_type: "offline",
-        prompt: "select_account",
+        prompt: "consent",
         scope: [
             "https://www.googleapis.com/auth/calendar",
             "https://www.googleapis.com/auth/calendar.events",
