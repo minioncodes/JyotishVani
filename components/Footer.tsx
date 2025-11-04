@@ -34,14 +34,14 @@ export default function Footer() {
             <div className="flex items-center gap-3 pt-2">
               <Link
                 aria-label="Instagram"
-                href="https://www.instagram.com/sksingh_astro"
+                href="https://www.instagram.com/jyotish_waani/"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#C5A46D]/10 text-[#C5A46D] transition hover:bg-[#C5A46D] hover:text-black"
               >
                 <FiInstagram />
               </Link>
               <Link
                 aria-label="Facebook"
-                href="#"
+                href="https://www.facebook.com/banaraswaleguruji"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#C5A46D]/10 text-[#C5A46D] transition hover:bg-[#C5A46D] hover:text-black"
               >
                 <FiFacebook />
