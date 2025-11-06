@@ -20,7 +20,7 @@ export default function AstrologerInfo() {
           >
             <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src="https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2019/12/horoscope-1577638518.jpg" // replace with actual astrologer image path
+                src="/Acharya Sumit Tiwari.jpg" // replace with actual astrologer image path
                 alt="Astrologer Acharya Sumit Tiwari"
                 fill
                 className="object-cover"
