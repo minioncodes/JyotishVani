@@ -20,8 +20,8 @@ export default function AstrologerInfo() {
           >
             <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src="/sk-singh.jpg" // replace with actual astrologer image path
-                alt="Astrologer S. K. Singh"
+                src="https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2019/12/horoscope-1577638518.jpg" // replace with actual astrologer image path
+                alt="Astrologer Acharya Sumit Tiwari"
                 fill
                 className="object-cover"
               />
@@ -39,11 +39,11 @@ export default function AstrologerInfo() {
               PRASIDH BANARAS WALE GURUJI
             </h1>
             <h2 className="text-lg font-semibold text-[#B38B46] mb-4">
-              Pandit Shree S. K. Singh
+              Acharya Sumit Tiwari
             </h2>
 
             <p className="text-[#4A4A4A] mb-4 leading-relaxed">
-              Shree S. K. Singh Guru Ji, widely known as{" "}
+              Acharya Sumit Tiwari ji, widely known as{" "}
               <strong className="text-[#5B4A2F]">“Banaras Wale Guruji”</strong>, was born on
               10th January 1974 in the sacred city of Mirzapur, Uttar Pradesh. A
               post-graduate in the science stream, his deep curiosity for spiritual

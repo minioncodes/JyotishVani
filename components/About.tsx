@@ -45,17 +45,17 @@ export default function About() {
         >
           <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-lg">
             <Image
-              src="/sk-singh.jpg" // replace with actual astrologer image path
-              alt="Astrologer S. K. Singh"
+              src="https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2019/12/horoscope-1577638518.jpg" // replace with actual astrologer image path
+              alt="Astrologer Acharya Sumit Tiwari"
               fill
               className="object-cover"
             />
           </div>
           <h3 className="text-xl font-semibold text-black">
-            Astrologer <span className="text-[#C5A46D]">S. K. Singh</span>
+            Astrologer <span className="text-[#C5A46D]">Acharya Sumit Tiwari</span>
           </h3>
           <p className="text-gray-800 leading-relaxed">
-            Shree S. K. Singh, fondly known as{" "}
+            Acharya Sumit Tiwari, fondly known as{" "}
             <span className="font-semibold text-[#C5A46D]">
               Banaras Wale Guruji
             </span>,
