@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
+import Navbar from "@/components/Navbar";
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +38,9 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+    <> 
+    <Navbar/>
+       <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <div className="w-full max-w-sm p-6 bg-white shadow-lg rounded-xl">
         <h1 className="text-2xl font-bold mb-6 text-center">Admin Sign In</h1>
 
@@ -75,6 +77,7 @@ export default function SignInPage() {
           <p className="text-green-600 mt-4 text-sm text-center">{success}</p>
         )}
       </div>
-    </div>
+    </div></>
+
   );
 }

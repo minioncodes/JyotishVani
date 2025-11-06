@@ -15,6 +15,7 @@ import Blogs from "@/components/Blogs";
 import Horoscope from "@/components/Horoscope";
 
 
+
 export default function Page() {
 useEffect(() => {
 // Prevent flashing scrollbar shift on mount
@@ -24,7 +25,7 @@ document.documentElement.style.scrollBehavior = "smooth";
 
 return (
 <main className="relative min-h-screen bg-[#FAF9F6] text-black overflow-x-hidden">
-  {/* Subtle animated starfield (make stars golden glow instead of white) */}
+  <Navbar/>
   <StarsBg />
 
   {/* Glow gradients (swap neon with soft golden haze) */}
