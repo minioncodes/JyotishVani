@@ -15,8 +15,7 @@ import {
 // Import your components
 import TestBlogPage from "@/components/Test-Blog";
 import AdminBlogs from "@/components/Admin-Blogs";
-// import EditBlogPage from "./edit-blog/page";
-// import DeleteBlogPage from "./delete-blog/page";
+import AdminLeads from "@/components/Leadspage";
 
 interface Admin {
   name: string;
@@ -25,7 +24,7 @@ interface Admin {
 
 export default function AdminPage() {
   const [admin, setAdmin] = useState<Admin | null>(null);
-  const [activePage, setActivePage] = useState<"create" | "edit" | "delete" |"all-blogs">(
+  const [activePage, setActivePage] = useState<"create" | "edit" | "delete" | "all-blogs" | "leads">(
     "create"
   );
   const [menuOpen, setMenuOpen] = useState(false);
@@ -56,9 +55,9 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-indigo-50 via-white to-purple-50">
-      <nav className="bg-indigo-700 text-white p-4 flex items-center justify-between shadow-md">
+      <nav className="bg-blue-900 text-white p-4 flex items-center justify-between shadow-md">
         <div className="flex items-center gap-2 font-bold text-lg">
-          📝 Admin Dashboard
+          Admin Dashboard
         </div>
         <div className="hidden md:flex items-center gap-6 ">
           <NavButton
@@ -66,13 +65,19 @@ export default function AdminPage() {
             icon={<FiPlusCircle />}
             active={activePage === "create"}
             onClick={() => setActivePage("create")}
-            
+
           />
           <NavButton
             label="All-Blogs"
             icon={<FiEdit />}
             active={activePage === "all-blogs"}
             onClick={() => setActivePage("all-blogs")}
+          />
+          <NavButton
+            label="Leads"
+            icon={<FiEdit />}
+            active={activePage === "leads"}
+            onClick={() => setActivePage("leads")}
           />
           {admin && (
             <span className="flex items-center gap-2 font-medium bg-indigo-600 px-3 py-1 rounded-lg">
@@ -94,7 +99,7 @@ export default function AdminPage() {
         </button>
       </nav>
       {menuOpen && (
-        <div className="md:hidden bg-indigo-600 text-white flex flex-col gap-3 p-4">
+        <div className="md:hidden bg-blue-900 text-white flex flex-col gap-3 p-4">
           <NavButton
             label="Create Blog"
             icon={<FiPlusCircle />}
@@ -113,6 +118,15 @@ export default function AdminPage() {
               setMenuOpen(false);
             }}
           />
+          <NavButton
+            label="All-Leads"
+            icon={<FiEdit />}
+            active={activePage === "leads"}
+            onClick={() => {
+              setActivePage("leads");
+              setMenuOpen(false);
+            }}
+          />
           {admin && (
             <span className="flex items-center gap-2 font-medium mt-2">
               <FiUser /> {admin.name}
@@ -126,11 +140,10 @@ export default function AdminPage() {
           </button>
         </div>
       )}
-
-      {/* Main Content */}
       <main className="flex-grow p-6 max-w-6xl mx-auto w-full">
         {activePage === "create" && <TestBlogPage />}
-        {activePage === "all-blogs" && <AdminBlogs/>}
+        {activePage === "all-blogs" && <AdminBlogs />}
+        {activePage==="leads" && <AdminLeads/>}
       </main>
     </div>
   );
@@ -152,10 +165,9 @@ function NavButton({
     <button
       onClick={onClick}
       className={`flex items-center gap-2 px-3 py-1 rounded-md transition cursor-pointer
-        ${
-          active
-            ? "bg-yellow-400 text-black font-semibold"
-            : "hover:bg-indigo-500"
+        ${active
+          ? "bg-yellow-400 text-black font-semibold"
+          : "hover:bg-indigo-500"
         }
       `}
     >

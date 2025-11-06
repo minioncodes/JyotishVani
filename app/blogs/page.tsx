@@ -46,6 +46,7 @@ export default function BlogsPage() {
       
 
       {/* Background */}
+      <Navbar/>
       <div className="fixed inset-0 -z-10 bg-[#FAF8F3]">
         <StarsBg />
         <div className="pointer-events-none absolute inset-0">
