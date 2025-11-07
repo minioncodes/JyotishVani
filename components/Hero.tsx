@@ -24,7 +24,7 @@ export default function Hero() {
     >
       <div className="absolute -bottom-40 -right-40 h-[24rem] w-[24rem] sm:h-[30rem] sm:w-[30rem]" />
 
-      <div className="relative z-10 mx-auto grid mt-20 max-w-7xl grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 items-center">
+      <div className="relative z-10 mx-auto grid mt-25 sm:mt-12 lg:mt-20 max-w-7xl grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 items-center">
         {/* LEFT */}
         <motion.div
           variants={fadeInRight}
@@ -86,7 +86,12 @@ export default function Hero() {
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-          className="relative flex items-center justify-center max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto"
+          className="
+relative flex items-center justify-center 
+max-w-xs sm:max-w-sm md:max-w-full lg:max-w-lg 
+mx-auto
+"
+
         >
           <AstroGlobe />
         </motion.div>

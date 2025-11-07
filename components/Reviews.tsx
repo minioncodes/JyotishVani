@@ -109,18 +109,11 @@ function ReviewCard({ r }: { r: Review }) {
 export default function Reviews() {
   const [current, setCurrent] = useState(0);
 
-  // Auto-scroll on mobile
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % reviews.length);
-    }, 3500); // 3.5s per slide
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section
       id="testimonials"
-      className="relative px-6 py-20 md:py-28"
+      className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28"
     >
       {/* subtle golden glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_200px_at_10%_10%,rgba(197,164,109,0.08),transparent_60%),radial-gradient(600px_200px_at_90%_90%,rgba(197,164,109,0.08),transparent_60%)]" />
@@ -151,38 +144,29 @@ export default function Reviews() {
           </div>
         </div>
 
-        {/* ✅ Mobile Auto-Carousel */}
-        <div className="md:hidden relative w-full flex justify-center">
-          <motion.div
-            className="flex"
-            animate={{ x: `-${current * 100}%` }}
-            transition={{ type: "spring", stiffness: 80, damping: 20 }}
-            style={{ width: `${reviews.length * 100}%` }}
-          >
-            {reviews.map((r, idx) => (
-              <div key={idx} className="w-full flex justify-center shrink-0">
-                <ReviewCard r={r} />
-              </div>
-            ))}
-          </motion.div>
-        </div>
+        {/* ✅ MOBILE + TABLET manual swipe */}
+<div className="block lg:hidden overflow-hidden">
+  <div className="flex gap-5 overflow-x-auto no-scrollbar px-2 snap-x snap-mandatory">
+    {reviews.map((r, idx) => (
+      <div key={idx} className="snap-center shrink-0">
+        <ReviewCard r={r} />
+      </div>
+    ))}
+  </div>
+</div>
 
-        {/* ✅ Desktop Marquee */}
-        <div className="hidden md:block relative w-full  mt-10">
-          <motion.div
-            className="flex gap-5 w-max"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 40,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          >
-            {[...reviews, ...reviews].map((r, idx) => (
-              <ReviewCard r={r} key={idx} />
-            ))}
-          </motion.div>
-        </div>
+{/* ✅ DESKTOP marquee */}
+<div className="hidden lg:block relative w-full mt-10">
+  <motion.div
+    className="flex gap-5 w-max"
+    animate={{ x: ["0%", "-50%"] }}
+    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+  >
+    {[...reviews, ...reviews].map((r, idx) => (
+      <ReviewCard r={r} key={idx} />
+    ))}
+  </motion.div>
+</div>
 
         {/* CTA */}
         <div className="mt-10 flex items-center justify-center">

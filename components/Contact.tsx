@@ -92,7 +92,7 @@ export default function Contact() {
     <>
       {loading && <LoaderOverlay />}
 
-      <section id="contact" className="relative px-6 py-20 md:py-28">
+      <section id="contact" className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28">
         <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-5 gap-8">
           {/* Info Card */}
           <motion.div

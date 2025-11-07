@@ -67,10 +67,11 @@ export default function BlogsPage() {
   const maxIndex = Math.max(0, displayBlogs.length - cardsPerView);
 
   return (
-    <div className="p-6 mx-auto">
-      <h1 className="mt-[100px] text-3xl font-bold mb-6 text-center font-[Cinzel] text-black">
-        Whispers from the <span className="text-[#C5A46D]">Stars</span>
-      </h1>
+    <section id="blogs" className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28">
+      <div className="mx-auto max-w-6xl">
+        <h1 className="text-3xl font-bold mb-8 text-center font-[Cinzel] text-black">
+          Whispers from the <span className="text-[#C5A46D]">Stars</span>
+        </h1>
       {cardsPerView === 1 ? (
         <div className="relative w-full max-w-md mx-auto">
           <AnimatePresence mode="wait">
@@ -186,6 +187,7 @@ export default function BlogsPage() {
           </div>
         </>
       )}
-    </div>
+      </div>
+    </section>
   );
 }

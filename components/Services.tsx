@@ -32,17 +32,18 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative px-6 py-20 md:py-28">
+    <section id="services" className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
-        <div className="mb-8 md:mb-12 flex items-end justify-between">
-          <h2 className="text-3xl md:text-4xl font-bold text-black">
-            Our <span className="text-[#C5A46D]">Services</span>
-          </h2>
-          <span className="text-sm text-gray-700">
-            Transparent pricing • Secure online sessions
-          </span>
-        </div>
+        <div className="mb-8 md:mb-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-2 md:gap-0">
+  <h2 className="text-3xl md:text-4xl font-bold text-black">
+    Our <span className="text-[#C5A46D]">Services</span>
+  </h2>
+  <span className="text-sm text-gray-700">
+    Transparent pricing • Secure online sessions
+  </span>
+</div>
+
 
         {/* Service Cards */}
         <motion.div
