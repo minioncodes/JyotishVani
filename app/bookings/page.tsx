@@ -23,7 +23,7 @@ export default function Home() {
     setEmail(e.target.value);
   }
   const map_Payment_Duration = new Map<number, number>();
-  map_Payment_Duration.set(30, 2);
+  map_Payment_Duration.set(30, 1500);
   map_Payment_Duration.set(45, 3000);
   map_Payment_Duration.set(60, 5000);
   const fetchSlots = async () => {

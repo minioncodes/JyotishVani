@@ -67,10 +67,11 @@ export default function Footer() {
                   <FiMapPin />
                 </span>
                 <div className="leading-relaxed">
-                  <p className="text-white font-medium">12/604, Indira Nagar</p>
-                  <p>Lucknow, Uttar Pradesh 226016 - India</p>
+                  <p className="text-white font-medium">C-219 Near Tula Ram Park Rajajipuram </p>
+                  <p>Lucknow U.P 226017- India</p>
                 </div>
               </li>
+
               <li className="flex items-center gap-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#C5A46D]/10 text-[#C5A46D]">
                   <FiMail />
@@ -87,7 +88,8 @@ export default function Footer() {
                   <FiPhone />
                 </span>
                 <Link href="tel:+919876543210" className="hover:text-[#C5A46D]">
-                  +91 94150 87999
+                  +91 9415087999
+                  +91 9452464332
                 </Link>
               </li>
             </ul>
