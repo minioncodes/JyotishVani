@@ -55,19 +55,16 @@ export default function About() {
             Astrologer <span className="text-[#C5A46D]">Acharya Sumit Tiwari</span>
           </h3>
           <p className="text-gray-800 leading-relaxed">
-            Acharya Sumit Tiwari, fondly known as{" "}
             <span className="font-semibold text-[#C5A46D]">
-              Banaras Wale Guruji
-            </span>,
-            is the guiding force behind JyotishWaani. With 30+ years of experience in Vedic astrology
-            and gemstone therapy, he has helped thousands find clarity in marriage, career, finance,
-            and health matters.
+              Acharya Sumit Tiwari&nbsp;
+            </span>
+is a well known Lucknow based astrologer with 13+ years experience. He offers simple, logical and effective remedies, is well published, highly academically qualified in Jyotish and has helped many people remove hurdles through accurate scientific Kundli analysis.
           </p>
           <Link
             href="/astrologer-info"
             className="inline-block text-sm font-medium text-[#C5A46D] hover:text-black transition"
           >
-            → More about Guru Ji
+            → More about Acharya Ji
           </Link>
         </motion.div>
 
