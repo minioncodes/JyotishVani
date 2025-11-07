@@ -6,7 +6,7 @@ const PHONE_ID = process.env.WHATSAPP_PHONE_NUMBER_ID!;
 const WA_TOKEN = process.env.WHATSAPP_TOKEN!;
 const WA_URL = `https://graph.facebook.com/${GRAPH_VERSION}/${PHONE_ID}/messages`;
 
-// ✅ GET Verify (Webhook verification)
+// ✅ GET — Meta verification
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const mode = searchParams.get("hub.mode");
@@ -19,11 +19,11 @@ export async function GET(req: NextRequest) {
   return new NextResponse("Forbidden", { status: 403 });
 }
 
-// 🪐 Send helper
+// 🪐 Send message (text / button / list)
 async function sendWhatsAppMessage(to: string, type: string, payload: any) {
   const body =
     type === "text"
-      ? { messaging_product: "whatsapp", to, type: "text", text: { body: payload.body } }
+      ? { messaging_product: "whatsapp", to, type: "text", text: payload }
       : type === "button"
       ? { messaging_product: "whatsapp", to, type: "interactive", interactive: { type: "button", ...payload } }
       : { messaging_product: "whatsapp", to, type: "interactive", interactive: { type: "list", ...payload } };
@@ -33,35 +33,29 @@ async function sendWhatsAppMessage(to: string, type: string, payload: any) {
     headers: { Authorization: `Bearer ${WA_TOKEN}`, "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
-
-  const text = await res.text();
-  console.log("📤 WA:", res.status, text);
+  const txt = await res.text();
+  console.log("📤 WA:", res.status, txt);
 }
 
-// ✅ POST Webhook (Handle messages)
+// ✅ POST — Handle incoming messages
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const message = body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
-    const from = message?.from;
-
+    const msg = body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
+    const from = msg?.from;
     if (!from) return NextResponse.json({ ok: true });
 
-    // Determine text or button click
     const text =
-      message.text?.body ||
-      message.interactive?.button_reply?.title ||
-      message.interactive?.list_reply?.title ||
+      msg.text?.body ||
+      msg.interactive?.button_reply?.title ||
+      msg.interactive?.list_reply?.title ||
       "";
 
     if (!text) return NextResponse.json({ ok: true });
 
     console.log(`💬 ${from}: ${text}`);
 
-    // Generate reply
     const { type, payload } = await generateAstroReply(text);
-
-    // Send WhatsApp message accordingly
     await sendWhatsAppMessage(from, type, payload);
 
     return NextResponse.json({ ok: true });

@@ -1,20 +1,21 @@
-// /lib/botLogic.ts
+
 
 const SIGNS = [
-  "aries","taurus","gemini","cancer","leo","virgo",
-  "libra","scorpio","sagittarius","capricorn","aquarius","pisces",
+  "aries","taurus","gemini","cancer","leo",
+  "virgo","libra","scorpio","sagittarius","capricorn",
+  "aquarius","pisces",
 ];
 
 type AztroDay = "today" | "tomorrow" | "yesterday";
 
-// 🔮 Fetch from Aztro API
+// 🔮 Fetch Aztro API
 async function fetchAztro(sign: string, day: AztroDay = "today") {
   const res = await fetch(`https://aztro.sameerkumar.website/?sign=${sign}&day=${day}`, { method: "POST" });
   if (!res.ok) throw new Error(`Aztro API error: ${res.status}`);
   return res.json();
 }
 
-// 🪐 Format horoscope reply
+// 🪐 Format horoscope message
 export async function getHoroscope(sign: string, day: AztroDay = "today"): Promise<string> {
   try {
     const d = await fetchAztro(sign, day);
@@ -32,11 +33,10 @@ export async function getHoroscope(sign: string, day: AztroDay = "today"): Promi
       `⏰ *Lucky Time:* ${d.lucky_time}`,
     ].join("\n");
   } catch {
-    return "🌌 Sorry, I couldn’t fetch your horoscope right now. Please try again.";
+    return "🌌 Sorry, I couldn’t fetch your horoscope right now. Please try again later.";
   }
 }
 
-// 🎯 Detect sign/day from text
 function detectSign(text: string): string | null {
   const lower = text.toLowerCase();
   return SIGNS.find((s) => lower.includes(s)) || null;
@@ -48,34 +48,33 @@ function detectDay(text: string): AztroDay {
   return "today";
 }
 
-// 🧠 Generate message response
+// ✅ Generate WhatsApp message (text, list, or buttons)
 export async function generateAstroReply(text: string): Promise<{ type: string; payload: any }> {
   const msg = text.toLowerCase().trim();
 
-  // 🌟 Greeting menu
+  // 🏁 Start / Menu → Show Zodiac list (first 10 only)
   if (["hi", "hello", "hey", "namaste", "menu", "start"].some((g) => msg.includes(g))) {
     return {
       type: "list",
       payload: {
         header: { type: "text", text: "🌟 Welcome to JyotishWaani" },
-        body: { text: "Choose your zodiac sign to view your daily horoscope ✨" },
+        body: { text: "Choose your zodiac sign to get your daily horoscope 🔮" },
         footer: { text: "Powered by Aztro API" },
         action: {
           button: "Select Zodiac Sign",
           sections: [
             {
-              title: "Fire Signs 🔥",
-              rows: SIGNS.slice(0, 4).map((s) => ({
+              title: "Choose Your Sign",
+              rows: SIGNS.slice(0, 10).map((s) => ({
                 id: `sign_${s}`,
                 title: s.charAt(0).toUpperCase() + s.slice(1),
               })),
             },
             {
-              title: "Earth / Air / Water Signs 🌎💨💧",
-              rows: SIGNS.slice(4).map((s) => ({
-                id: `sign_${s}`,
-                title: s.charAt(0).toUpperCase() + s.slice(1),
-              })),
+              title: "More Options",
+              rows: [
+                { id: "more_signs", title: "♒ Aquarius & ♓ Pisces" },
+              ],
             },
           ],
         },
@@ -83,13 +82,40 @@ export async function generateAstroReply(text: string): Promise<{ type: string; 
     };
   }
 
-  // ♈ Direct sign detection
+  // ♒ “More Signs” → show last two
+  if (msg.includes("more") || msg.includes("aquarius") || msg.includes("pisces")) {
+    return {
+      type: "list",
+      payload: {
+        header: { type: "text", text: "🌌 More Zodiac Signs" },
+        body: { text: "Choose your sign from the remaining ones 💫" },
+        footer: { text: "Powered by Aztro API" },
+        action: {
+          button: "Select Sign",
+          sections: [
+            {
+              title: "Remaining Signs",
+              rows: SIGNS.slice(10).map((s) => ({
+                id: `sign_${s}`,
+                title: s.charAt(0).toUpperCase() + s.slice(1),
+              })),
+            },
+            {
+              title: "Back to All",
+              rows: [{ id: "main_menu", title: "🔙 Back to All Signs" }],
+            },
+          ],
+        },
+      },
+    };
+  }
+
+  // ♈ Direct sign → Horoscope + 3 buttons
   const sign = detectSign(msg);
   if (sign) {
     const day = detectDay(msg);
     const body = await getHoroscope(sign, day);
 
-    // 🪙 Attach 3 buttons (limit)
     return {
       type: "button",
       payload: {
@@ -105,7 +131,15 @@ export async function generateAstroReply(text: string): Promise<{ type: string; 
     };
   }
 
-  // ❓ Unknown input fallback
+  // 🔙 Back to Main Menu
+  if (msg.includes("back") || msg.includes("main")) {
+    return {
+      type: "text",
+      payload: { body: "💫 Type *Hi* to open the main zodiac menu again." },
+    };
+  }
+
+  // 🌀 Fallback
   return {
     type: "text",
     payload: {
