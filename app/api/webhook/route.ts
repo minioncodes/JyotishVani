@@ -6,7 +6,7 @@ const PHONE_ID = process.env.WHATSAPP_PHONE_NUMBER_ID!;
 const WA_TOKEN = process.env.WHATSAPP_TOKEN!;
 const WA_URL = `https://graph.facebook.com/${GRAPH_VERSION}/${PHONE_ID}/messages`;
 
-// ✅ GET — Meta verification
+// ✅ Verify webhook
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const mode = searchParams.get("hub.mode");
@@ -19,25 +19,47 @@ export async function GET(req: NextRequest) {
   return new NextResponse("Forbidden", { status: 403 });
 }
 
-// 🪐 Send message (text / button / list)
+// 🟢 Send typing indicator
+async function sendTypingOn(to: string) {
+  try {
+    await fetch(WA_URL, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${WA_TOKEN}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        messaging_product: "whatsapp",
+        to,
+        type: "action",
+        status: "typing_on",
+      }),
+    });
+  } catch (err) {
+    console.warn("⚠️ Typing indicator failed:", err);
+  }
+}
+
+// 🪐 Send WhatsApp messages
 async function sendWhatsAppMessage(to: string, type: string, payload: any) {
   const body =
     type === "text"
       ? { messaging_product: "whatsapp", to, type: "text", text: payload }
-      : type === "button"
-      ? { messaging_product: "whatsapp", to, type: "interactive", interactive: { type: "button", ...payload } }
-      : { messaging_product: "whatsapp", to, type: "interactive", interactive: { type: "list", ...payload } };
+      : {
+          messaging_product: "whatsapp",
+          to,
+          type: "interactive",
+          interactive: { type: "button", ...payload },
+        };
 
   const res = await fetch(WA_URL, {
     method: "POST",
     headers: { Authorization: `Bearer ${WA_TOKEN}`, "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
-  const txt = await res.text();
-  console.log("📤 WA:", res.status, txt);
+
+  const text = await res.text();
+  console.log("📤 WA:", res.status, text);
 }
 
-// ✅ POST — Handle incoming messages
+// ✅ Handle incoming webhook
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -54,6 +76,10 @@ export async function POST(req: NextRequest) {
     if (!text) return NextResponse.json({ ok: true });
 
     console.log(`💬 ${from}: ${text}`);
+
+    // Simulate typing...
+    await sendTypingOn(from);
+    await new Promise((r) => setTimeout(r, 1500));
 
     const { type, payload } = await generateAstroReply(text);
     await sendWhatsAppMessage(from, type, payload);
