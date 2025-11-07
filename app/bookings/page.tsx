@@ -3,6 +3,7 @@
 import React, { ReactHTMLElement, useEffect, useState } from "react";
 import { loadRazorpay } from "@/utils/loadRazorpay";
 import Navbar from "@/components/Navbar";
+import { LoadingSpinner } from "@/components/LoadingSpinner";
 
 interface Slot {
   start: string;
@@ -43,7 +44,6 @@ export default function Home() {
     fetchSlots();
   }, [selectedDate, duration]);
   const handlePayment = async (slot: Slot) => {
-    setLoading(true);
     setActiveSlot(slot.start);
     const loaded = await loadRazorpay();
     if (!loaded) {
@@ -51,14 +51,17 @@ export default function Home() {
       return;
     }
     if (!email) {
-      alert("please enter your email first to proceed..!");
+      setBookingLoading(false);
+      setLoading(false);
       setActiveSlot(null);
+      alert("please enter your email first to proceed..!");
       return;
     }
     const confirmEmail = window.confirm(`Is this your correct email?\n${email}`);
     if (!confirmEmail) {
       alert("Booking cancelled. Please check your email and try again.");
       setLoading(false);
+      setBookingLoading(false);
       setActiveSlot(null);
       return;
     }
@@ -70,7 +73,6 @@ export default function Home() {
       }),
     }).then((res) => res.json());
     const { order, key } = orderRes;
-    console.log("order from the page = ", orderRes);
     const options = {
       key,
       amount: orderRes.amount,
@@ -98,6 +100,7 @@ export default function Home() {
           setDuration(30);
           fetchSlots();
         } catch (error) {
+          setBookingLoading(false)
           console.error("Booking error:", error);
           alert("Something went wrong while confirming booking!");
         } finally {
@@ -157,8 +160,7 @@ export default function Home() {
           </div>
         </div>
 
-        {loading && <p className="text-[#7a7a7a] mb-4">Loading available slots...</p>}
-
+        {loading && <LoadingSpinner/>}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full mt-6 max-w-3xl">
           {slots.length > 0 ? (
             slots.map((slot, idx) => (
@@ -218,8 +220,7 @@ export default function Home() {
               </div>
             ))
           ) : (
-            <p className="col-span-full text-center text-[#7a7a7a]">
-              No free slots found for this date.
+            <p className="">
             </p>
           )}
         </div>
