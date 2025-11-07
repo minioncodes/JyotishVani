@@ -35,16 +35,9 @@ export default function AstrologerInfo() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Acharya Sumit Tiwari is a Famous Astrologer in Lucknow with experience of more than 13 years. He provides very Simple and Logical remedies which are very Effective. His articles are also published in various News Portals. He holds Post Graduation in Astrology (M. A. Jyotirvigyan) from Lucknow University, Shastri in Vedic Jyotish from Central Sanskrit University, Lucknow and B. Com. from Lucknow University.
-He helped many people, from his readings and predictions, to reduce the hurdles in their path. If you choose him, you have already made one of the best decisions in your life.
-Contact Acharya Ji for Scientific and Logical Analysis of Kundli. */}
             <h1 className="text-3xl md:text-4xl font-bold mb-4 font-[Cinzel] text-[#5B4A2F]">
-              Acharya ji
-            </h1>
-            <h2 className="text-lg font-semibold text-[#B38B46] mb-4">
               Acharya Sumit Tiwari
-            </h2>
-
+            </h1>
             <p className="text-[#4A4A4A] mb-4 leading-relaxed">
               <strong className="text-[#5B4A2F]">Acharya Sumit Tiwari&nbsp;</strong> is a Famous Astrologer in Lucknow with experience of more than 13 years. He provides very Simple and Logical remedies which are very Effective. His articles are also published in various News Portals. 
             </p>
@@ -186,6 +179,26 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
   </div>
 </motion.div>
 
+
+{/* Astro Taglines Philosophy Section */}
+<motion.div
+  initial={{ y: 30, opacity: 0 }}
+  whileInView={{ y: 0, opacity: 1 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 0.6 }}
+  className="mt-20 max-w-4xl mx-auto"
+>
+  <h3 className="text-3xl md:text-4xl font-bold mb-10 text-center text-[#5B4A2F] font-[Cinzel]">
+    Astro Philosophy
+  </h3>
+
+  <ul className="space-y-6 text-lg italic text-[#4A4A4A] leading-relaxed list-disc pl-6">
+    <li>“Stars impel but do not compel.”</li>
+    <li>“A child is born on that day and hour when the celestial rays are in mathematical harmony with his individual karma.”</li>
+    <li>“Millionaires don’t use astrology — Billionaires do.”</li>
+    <li>“Jyotisha is the art of seeing light, of guiding, of counseling based on the truth called the horoscope.”</li>
+  </ul>
+</motion.div>
 
 
         {/* Why Choose */}
