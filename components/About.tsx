@@ -35,7 +35,7 @@ export default function About() {
           </ul>
         </motion.div>
 
-        {/* RIGHT: Guru Ji Section */}
+        {/* RIGHT: Acharya Ji Section */}
         <motion.div
           initial={{ x: 30, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}

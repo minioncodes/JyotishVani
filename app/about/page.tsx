@@ -64,7 +64,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
   className="mt-16 max-w-5xl mx-auto"
 >
   <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-[#5B4A2F] font-[Cinzel]">
-    About Guru Ji
+    About Acharya Ji
   </h2>
 
   <div className="relative">
@@ -210,7 +210,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
           className="mt-16 max-w-4xl mx-auto bg-white/60 backdrop-blur-xl rounded-3xl p-8 border border-[#E6D9B8]/50 shadow-xl"
         >
           <h3 className="text-2xl font-bold mb-6 text-center text-[#B38B46]">
-            Why Choose Guru Ji?
+            Why Choose Acharya Ji?
           </h3>
           <ul className="space-y-3 text-[#4A4A4A]">
             <li>✔️ 30+ years of experience in astrology and gem therapy</li>
@@ -221,7 +221,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
           </ul>
         </motion.div>
 
-        {/* Guru Ji Belief */}
+        {/* Acharya Ji Belief */}
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -230,7 +230,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
           className="mt-12 max-w-4xl mx-auto text-center"
         >
           <h3 className="text-2xl font-bold mb-4 text-[#B38B46]">
-            📜 Guru Ji’s Belief
+            📜 Acharya Ji’s Belief
           </h3>
           <p className="text-[#4A4A4A] italic leading-relaxed">
             “Just as Earth is 2/3 water and 1/3 land, so is the human body. When
