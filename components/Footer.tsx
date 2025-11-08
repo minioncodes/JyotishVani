@@ -46,13 +46,6 @@ export default function Footer() {
               >
                 <FiFacebook />
               </Link>
-              <Link
-                aria-label="Twitter"
-                href="#"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#C5A46D]/10 text-[#C5A46D] transition hover:bg-[#C5A46D] hover:text-black"
-              >
-                <FiTwitter />
-              </Link>
             </div>
           </div>
 
