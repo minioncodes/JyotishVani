@@ -97,7 +97,7 @@ export default function Footer() {
           <p>© {year} Jyotishwaani. All rights reserved.</p>
           <p>
             Developed by{" "}
-            <Link href="https://digipants.com/" target="blank" className="text-[#C5A46D] font-medium">DigiPants Network Pvt.</Link> ·{" "}
+            <Link href="https://digipants.com/" target="blank" className="text-[#C5A46D] font-small">DigiPants Network Pvt.</Link> ·{" "}
             <Link
               href="/privacy"
               className="underline decoration-transparent hover:decoration-[#C5A46D]"
