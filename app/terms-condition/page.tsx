@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar"
 export default function TermsAndConditions() {
   return (
     <>
-    <Navbar/>
         <div className="min-h-screen top-30" style={{ backgroundColor: "#F5F1E8" }}>
       {/* Header */}
       <header className="sticky top-0 z-10 backdrop-blur-sm" style={{ backgroundColor: "#F5F1E8" }}>

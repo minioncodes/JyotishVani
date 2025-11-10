@@ -23,7 +23,6 @@ export default function BookingDetailPage() {
 
   return (
     <>
-      <Navbar />
       <section className="relative flex min-h-[92vh] items-center justify-center px-6 py-20">
         <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F3] via-[#FFFDF8]/90 to-[#FAF8F3]" />
 

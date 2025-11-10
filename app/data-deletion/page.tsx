@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 export default function DataDeletionPage() {
   return (
     <>
-    <Navbar/>
       <main className="mx-auto max-w-4xl px-6 py-16 text-gray-800 leading-relaxed">
         <h1 className="text-4xl font-bold text-center text-indigo-700 mb-10">
           Data Deletion Policy
