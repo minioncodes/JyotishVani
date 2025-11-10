@@ -10,27 +10,72 @@ export default function AstroGlobe() {
     nakshatra: string;
     choghadiya: string;
     remedy: string;
+      updatedAt?: string;
   } | null;
 
   const [snapshot, setSnapshot] = useState<Snapshot>(null);
 
-  useEffect(() => {
-    async function fetchSnapshot() {
-      const res = await fetch("/api/snapshot");
+useEffect(() => {
+  let isMounted = true;
+  let interval: NodeJS.Timeout | null = null;
+
+  async function fetchSnapshot() {
+    try {
+      const res = await fetch("/api/snapshot", { cache: "no-store" });
       const data = await res.json();
+      if (!isMounted) return;
+
       setSnapshot({
         tithi: data.tithi,
         paksha: data.paksha,
         nakshatra: data.nakshatra,
         choghadiya: data.choghadiya,
         remedy: "Offer water to Sun",
+        updatedAt: data.updatedAt || new Date().toLocaleTimeString(),
       });
+    } catch (err) {
+      console.error("Snapshot fetch failed:", err);
     }
-    fetchSnapshot();
-  }, []);
+  }
+
+  // ✅ Fetch once on mount
+  fetchSnapshot();
+
+  // 🧠 Function to handle tab visibility
+  function handleVisibilityChange() {
+    if (document.hidden) {
+      
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+        console.log(" Auto-refresh paused (tab inactive)");
+      }
+    } else {
+    
+      fetchSnapshot();
+      interval = setInterval(fetchSnapshot, 60 * 1000); // every 1 minute
+      
+    }
+  }
+
+  if (!document.hidden) {
+    interval = setInterval(fetchSnapshot, 60 * 1000);
+  }
+
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+
+  
+  return () => {
+    isMounted = false;
+    if (interval) clearInterval(interval);
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+  };
+}, []);
+
 
   return (
-    // ⬇️ Wrap entire globe in motion.div for entry animation
+    // Wrap entire globe in motion.div for entry animation
     <motion.div
       initial={{ opacity: 0, y: 80 }}   // start hidden & below
       animate={{ opacity: 1, y: 0 }}    // slide up & fade in
