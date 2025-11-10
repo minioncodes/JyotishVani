@@ -18,7 +18,6 @@ import Link from "next/link";
 export default function ContactPage() {
   return (
     <>
-      <Navbar/>
       <main className="relative min-h-screen bg-[#FAF8F3] text-black overflow-x-hidden">
         {/* Subtle animated starfield */}
         <StarsBg />

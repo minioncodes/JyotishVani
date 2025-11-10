@@ -109,7 +109,8 @@ export default function Contact() {
             <div className="mt-6 space-y-3 text-gray-700 text-sm">
               <div>📧 help@jyotishwaani.com</div>
               <div>📞 +91 94150 87999</div>
-              <div>🕒 Mon–Sat • 10am–7pm IST</div>
+              <div>📞 +91 94524 64332</div>
+              <div>🕒 Mon–Sat • 10am–6pm IST</div>
             </div>
 
             <div className="mt-6 rounded-2xl bg-[#FFFDF8] border border-[#C5A46D]/40 p-4 text-sm text-gray-700 shadow">

@@ -5,30 +5,27 @@ import { FiStar, FiHeart, FiBriefcase, FiClock } from "react-icons/fi";
 
 const services = [
   {
+    icon: <FiStar />,
+    title: "Kundli Analysis",
+    desc: "Detailed reading of birth chart with graha strength, yogas, doshas, dasha influence and predictive roadmap.",
+  },
+  {
     icon: <FiHeart />,
-    title: "Love & Relationships",
-    desc: "Clarity on compatibility, timing, and healing patterns. Synastry + transit-based guidance.",
-    // price: "₹1,999 / 30 min",
+    title: "Kundli Matching",
+    desc: "Comprehensive marriage gun milan + modern compatibility + dasha based cross timing alignment.",
   },
   {
     icon: <FiBriefcase />,
-    title: "Career & Finance",
-    desc: "Find the right moves and timings for growth, switches, or launches. Practical and time-bound.",
-    // price: "₹2,499 / 45 min",
+    title: "Education",
+    desc: "Right direction, field suitability, foreign chances, exam timing judgement based on dasha + transit.",
   },
   {
     icon: <FiClock />,
-    title: "Shubh Muhurat",
-    desc: "Pick auspicious dates for marriage, moves, openings, investments—aligned with your chart.",
-    // price: "₹1,499 / slot",
-  },
-  {
-    icon: <FiStar />,
-    title: "Birth Chart Reading",
-    desc: "Complete Kundli reading with remedies, strengths, challenges, and yearly transit roadmap.",
-    // price: "₹3,999 / 60 min",
+    title: "Marriage / Marital Life",
+    desc: "Marriage timing, spouse nature, post marriage patterns, challenges + remedies for stability & harmony.",
   },
 ];
+
 
 export default function Services() {
   return (
@@ -67,7 +64,8 @@ export default function Services() {
                 show: { y: 0, opacity: 1 },
               }}
               whileHover={{ y: -6 }}
-              className="group rounded-2xl bg-white/80 p-6 shadow-lg hover:shadow-xl transition"
+              className="group rounded-2xl bg-white/80 p-6 shadow-lg hover:shadow-xl transition flex flex-col"
+
             >
               <div className="flex items-center justify-between">
                 <div className="text-2xl text-[#C5A46D]">{s.icon}</div>
@@ -76,19 +74,30 @@ export default function Services() {
               <h3 className="mt-4 text-lg font-semibold text-black">
                 {s.title}
               </h3>
-              <p className="mt-2 text-gray-700 text-sm leading-relaxed">
+              <p className="mt-2 mb-4 text-gray-700 text-sm leading-relaxed">
                 {s.desc}
               </p>
               <a
                 href="/bookings"
-                className="mt-5 inline-block rounded-xl bg-[#C5A46D] text-black font-medium px-4 py-2 text-sm hover:bg-black hover:text-white transition"
+                className="mt-auto inline-block text-center rounded-xl bg-[#C5A46D] text-black font-medium px-4 py-2 text-sm hover:bg-black hover:text-white transition"
+
               >
                 Book this
               </a>
             </motion.div>
           ))}
         </motion.div>
+      {/* View All Services Button */}
+<div className="flex justify-center mt-10">
+  <a
+    href="/services"
+    className="rounded-xl bg-[#C5A46D] text-black font-semibold px-6 py-3 text-sm md:text-base hover:bg-black hover:text-white transition"
+  >
+    View All Services
+  </a>
+</div>
       </div>
+
     </section>
   );
 }

@@ -7,7 +7,6 @@ import Navbar from "@/components/Navbar";
 export default function AstrologerInfo() {
   return (
     <div>
-      <Navbar/>
       <section className="relative px-6 py-20 md:py-28 bg-gradient-to-b from-[#FAF7F2] via-[#FAF7F2]/90 to-[#F5EFE4] text-[#2B2B2B]">
         <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left: Image */}
@@ -79,7 +78,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
       {/* Branch 1 */}
       <li className="grid grid-cols-1 md:grid-cols-2 items-center">
         {/* Card */}
-        <div className="md:pr-10 md:text-right">
+        <div className="md:pr-10 md:text-left">
           <div className="relative inline-block bg-gradient-to-br from-[#FAF6E8] to-[#F5EEE1] border border-[#CAB27A] rounded-2xl p-6 shadow-sm shadow-[#E9DFC7] mx-auto max-w-xl">
             
             <p className="leading-relaxed text-[#4A4A4A]">
@@ -119,16 +118,20 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
       {/* Branch 3 */}
       <li className="grid grid-cols-1 md:grid-cols-2 items-center">
         {/* Card */}
-        <div className="md:pr-10 md:text-right">
+        <div className="md:pr-10 md:text-left">
           <div className="relative inline-block bg-gradient-to-br from-[#FAF6E8] to-[#F5EEE1] border border-[#CAB27A] rounded-2xl p-6 shadow-sm shadow-[#E9DFC7] mx-auto max-w-xl">
-            {/* He fulfilled their wish by completing his Intermediate education and later pursued a Postgraduate degree in Astrology from Lucknow University, despite facing resistance from his family. */}
-            <p className="leading-relaxed text-[#4A4A4A]">
-              He fulfilled his Parents wish by completing his{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Intermediate</strong> education and later pursued a{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Postgraduate degree in Astrology</strong> from{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Lucknow University</strong>, despite facing resistance from his family.
-            </p>
-          </div>
+<p className="leading-relaxed text-[#4A4A4A]">
+  He honoured his parents’ wish by completing his{" "}
+  <strong className="text-[#7A5A2B] font-semibold">Intermediate</strong> education. Later, driven by his inner calling towards astrology, he pursued <strong className="text-[#7A5A2B] font-semibold">Shastri in Vedic Jyotish</strong> from Central Sanskrit University, Lucknow along with a <strong className="text-[#7A5A2B] font-semibold">B.Com</strong> from Lucknow University.
+  <br /><br />
+  Despite facing resistance from his family, he remained committed to his path and eventually completed his{" "}
+  <strong className="text-[#7A5A2B] font-semibold">Postgraduate degree in Astrology</strong> from{" "}
+  <strong className="text-[#7A5A2B] font-semibold">Lucknow University</strong>.
+  <br /><br />
+</p>
+
+</div>
+
         </div>
         {/* Node */}
         <div className="flex justify-center my-4 md:my-0">
@@ -161,7 +164,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
       {/* Branch 5 */}
       <li className="grid grid-cols-1 md:grid-cols-2 items-center">
         {/* Card */}
-        <div className="md:pr-10 md:text-right">
+        <div className="md:pr-10 md:text-left">
           <div className="relative inline-block bg-gradient-to-br from-[#FAF6E8] to-[#F5EEE1] border border-[#CAB27A] rounded-2xl p-6 shadow-sm shadow-[#E9DFC7] mx-auto max-w-xl">
             
             <p className="leading-relaxed text-[#4A4A4A]">
@@ -192,10 +195,10 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
   </h3>
 
   <ul className="space-y-6 text-lg italic text-[#4A4A4A] leading-relaxed list-disc pl-6">
-    <li>“Stars impel but do not compel.”</li>
-    <li>“A child is born on that day and hour when the celestial rays are in mathematical harmony with his individual karma.”</li>
-    <li>“Millionaires don’t use astrology — Billionaires do.”</li>
-    <li>“Jyotisha is the art of seeing light, of guiding, of counseling based on the truth called the horoscope.”</li>
+    <li>“Stars impel but do not compel. -  Alan Leo" </li>
+    <li>“A child is born on that day and hour when the celestial rays are in mathematical harmony with his individual karma. - Sri Yukteswar Giri”</li>
+    <li>“Millionaires don’t use astrology Billionaires do. - J.P. Morgan”</li>
+    <li>“Jyotisha is the art of seeing light, of guiding, of counseling based on the truth called the horoscope. - Dr. B.V. Raman”</li>
   </ul>
 </motion.div>
 
@@ -232,11 +235,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
             📜 Acharya Ji’s Belief
           </h3>
           <p className="text-[#4A4A4A] italic leading-relaxed">
-            “Just as Earth is 2/3 water and 1/3 land, so is the human body. When
-            planetary forces affect oceans, they also impact human lives. Great
-            sages created astrology to decode these cosmic signals — but today,
-            due to misinformation, it's often misunderstood. Astrology, if
-            practiced with honesty, is a divine science that can change lives.”
+            “Science measures gravity; astrology interprets meaning. Both emerge from the same cosmic order. The magnetic fields that stir tides also influence the subtle energy within us. True astrology is not prediction — it is alignment, awareness, and harmony with universal design.”
           </p>
         </motion.div>
       </section>

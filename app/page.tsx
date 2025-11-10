@@ -25,7 +25,6 @@ document.documentElement.style.scrollBehavior = "smooth";
 
 return (
 <main className="relative min-h-screen bg-[#FAF9F6] text-black overflow-x-hidden">
-  <Navbar/>
   <StarsBg />
 
   {/* Glow gradients (swap neon with soft golden haze) */}

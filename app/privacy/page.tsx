@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <Navbar/>
       <main className="relative min-h-screen bg-gradient-to-b from-white via-[#FAF8F3] to-white px-6 py-16 mt-10">
         <div className="max-w-5xl mx-auto">
           {/* Heading */}
