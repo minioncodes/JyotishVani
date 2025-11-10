@@ -52,16 +52,16 @@ export default function About() {
             />
           </div>
           <h3 className="text-xl font-semibold text-black">
-            Astrologer <span className="text-[#C5A46D]">Acharya Sumit Tiwari</span>
+            Vedic Astrologer <span className="text-[#C5A46D]">Acharya Sumit Tiwari</span>
           </h3>
           <p className="text-gray-800 leading-relaxed">
             <span className="font-semibold text-[#C5A46D]">
-              Acharya Sumit Tiwari&nbsp;
+              Acharya Sumit Tiwari (Vedic Astrologer)&nbsp;
             </span>
-is a well known Lucknow based astrologer with 13+ years experience. He offers simple, logical and effective remedies, is well published, highly academically qualified in Jyotish and has helped many people remove hurdles through accurate scientific Kundli analysis.
+is a well known Lucknow based astrologer with 19+ years experience. He offers simple, logical and effective remedies, is well published, highly academically qualified in Jyotish and has helped many people remove hurdles through accurate scientific Kundli analysis.
           </p>
           <Link
-            href="/astrologer-info"
+            href="/about"
             className="inline-block text-sm font-medium text-[#C5A46D] hover:text-black transition"
           >
             → More about Acharya Ji
