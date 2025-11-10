@@ -1,4 +1,3 @@
-// /lib/botLogic.ts
 
 const SIGNS = [
   "aries", "taurus", "gemini", "cancer", "leo", "virgo",
@@ -7,32 +6,34 @@ const SIGNS = [
 
 type AztroDay = "today" | "tomorrow" | "yesterday";
 
-// 🔮 Fetch from Aztro API
+
 async function fetchAztro(sign: string, day: AztroDay = "today") {
   const res = await fetch(`https://aztro.sameerkumar.website/?sign=${sign}&day=${day}`, { method: "POST" });
+  console.log(res);
   if (!res.ok) throw new Error(`Aztro API error: ${res.status}`);
   return res.json();
 }
 
-// 🪐 Format message
+
 export async function getHoroscope(sign: string, day: AztroDay = "today"): Promise<string> {
   try {
     const d = await fetchAztro(sign, day);
+    console.log(d + " from getHoroscope");     
     return [
-      `✨ *${sign.toUpperCase()}* — ${day.toUpperCase()}`,
-      `🗓 *Date Range:* ${d.date_range}`,
-      `📅 *Date:* ${d.current_date}`,
+      ` *${sign.toUpperCase()}* — ${day.toUpperCase()}`,
+      ` *Date Range:* ${d.date_range}`,
+      ` *Date:* ${d.current_date}`,
       ``,
       `${d.description}`,
       ``,
-      `❤️ *Compatibility:* ${d.compatibility}`,
-      `💫 *Mood:* ${d.mood}`,
-      `🌈 *Lucky Color:* ${d.color}`,
-      `🔢 *Lucky Number:* ${d.lucky_number}`,
-      `⏰ *Lucky Time:* ${d.lucky_time}`,
+      `*Compatibility:* ${d.compatibility}`,
+      ` *Mood:* ${d.mood}`,
+      ` *Lucky Color:* ${d.color}`,
+      ` *Lucky Number:* ${d.lucky_number}`,
+      ` *Lucky Time:* ${d.lucky_time}`,
     ].join("\n");
   } catch {
-    return "🌌 Sorry, I couldn’t fetch your horoscope right now. Please try again.";
+    return " Sorry, I couldn’t fetch your horoscope right now. Please try again.";
   }
 }
 
@@ -48,17 +49,17 @@ function detectDay(text: string): AztroDay {
   return "today";
 }
 
-// 💫 Generate proper message payload
+//  Generate proper message payload
 export async function generateAstroReply(text: string): Promise<{ type: string; payload: any }> {
   const msg = text.toLowerCase().trim();
 
-  // 🟢 Greeting / Menu
+  //  Greeting / Menu
   if (["hi", "hello", "hey", "namaste", "menu", "start"].some((g) => msg.includes(g))) {
     return {
       type: "text",
       payload: {
         body: [
-          "🌟 *Welcome to JyotishWaani!*",
+          " *Welcome to JyotishWaani!*",
           "",
           "Type your *zodiac sign* (like Aries, Virgo, Leo) to see your horoscope 🔮",
           "",
@@ -66,35 +67,35 @@ export async function generateAstroReply(text: string): Promise<{ type: string; 
           "• `leo tomorrow` → tomorrow's horoscope",
           "• `virgo yesterday` → yesterday's horoscope",
           "",
-          "✨ Powered by Aztro API",
+          " Powered by Aztro API",
         ].join("\n"),
       },
     };
   }
 
-  // ♈ Horoscope logic
+  //  Horoscope logic
   const sign = detectSign(msg);
   if (sign) {
     const day = detectDay(msg);
     const body = await getHoroscope(sign, day);
 
-    // 🧭 Include 3 buttons
+    //  Include 3 buttons
     return {
       type: "button",
       payload: {
         body: { text: body },
         action: {
           buttons: [
-            { type: "reply", reply: { id: `today_${sign}`, title: "Today 🔮" } },
-            { type: "reply", reply: { id: `tomorrow_${sign}`, title: "Tomorrow 🌞" } },
-            { type: "reply", reply: { id: `yesterday_${sign}`, title: "Yesterday 🌙" } },
+            { type: "reply", reply: { id: `today_${sign}`, title: "Today " } },
+            { type: "reply", reply: { id: `tomorrow_${sign}`, title: "Tomorrow " } },
+            { type: "reply", reply: { id: `yesterday_${sign}`, title: "Yesterday" } },
           ],
         },
       },
     };
   }
 
-  // 🔙 Default fallback
+  //  Default fallback
   return {
     type: "text",
     payload: {
