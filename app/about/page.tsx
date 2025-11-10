@@ -36,10 +36,10 @@ export default function AstrologerInfo() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-3xl md:text-4xl font-bold mb-4 font-[Cinzel] text-[#5B4A2F]">
-              Acharya Sumit Tiwari
+              Acharya Sumit Tiwari 
             </h1>
             <p className="text-[#4A4A4A] mb-4 leading-relaxed">
-              <strong className="text-[#5B4A2F]">Acharya Sumit Tiwari&nbsp;</strong> is a Famous Astrologer in Lucknow with experience of more than 13 years. He provides very Simple and Logical remedies which are very Effective. His articles are also published in various News Portals. 
+              <strong className="text-[#5B4A2F]">Acharya Sumit Tiwari (Vedic Astrologer)&nbsp;</strong> is a Famous Astrologer in Lucknow with experience of more than 19+ years. He provides very Simple and Logical remedies which are very Effective. His articles are also published in various News Portals. 
             </p>
             <p className="text-[#4A4A4A] mb-4 leading-relaxed">
               He holds Post Graduation in Astrology (M. A. Jyotirvigyan) from Lucknow University, Shastri in Vedic Jyotish from Central Sanskrit University, Lucknow and B. Com. from Lucknow University.
@@ -64,7 +64,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
   className="mt-16 max-w-5xl mx-auto"
 >
   <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-[#5B4A2F] font-[Cinzel]">
-    About Guru Ji
+    About Acharya Ji
   </h2>
 
   <div className="relative">
@@ -83,7 +83,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
           <div className="relative inline-block bg-gradient-to-br from-[#FAF6E8] to-[#F5EEE1] border border-[#CAB27A] rounded-2xl p-6 shadow-sm shadow-[#E9DFC7] mx-auto max-w-xl">
             
             <p className="leading-relaxed text-[#4A4A4A]">
-              From the age of four, his grandfather observed a natural inclination towards{" "}
+              From the age of 4, his grandfather observed a natural inclination towards{" "}
               <strong className="text-[#7A5A2B] font-semibold">spiritual practices</strong>. Several astrologers
               studied his birth chart and predicted a life path closely tied to{" "}
               <strong className="text-[#7A5A2B] font-semibold">Spirituality &amp; Jyotish</strong>.
@@ -110,8 +110,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
             
             <p className="leading-relaxed text-[#4A4A4A]">
               This view was affirmed by{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Shri Parmeshwar Dwivedi Ji</strong>, a respected{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Bhrigu Samhita</strong> scholar.
+              <strong className="text-[#7A5A2B] font-semibold">Padamshri Prof. B K Shukla</strong>, in year 2007.{" "}
             </p>
           </div>
         </div>
@@ -122,12 +121,12 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
         {/* Card */}
         <div className="md:pr-10 md:text-right">
           <div className="relative inline-block bg-gradient-to-br from-[#FAF6E8] to-[#F5EEE1] border border-[#CAB27A] rounded-2xl p-6 shadow-sm shadow-[#E9DFC7] mx-auto max-w-xl">
-            
+            {/* He fulfilled their wish by completing his Intermediate education and later pursued a Postgraduate degree in Astrology from Lucknow University, despite facing resistance from his family. */}
             <p className="leading-relaxed text-[#4A4A4A]">
-              After the passing of his parents, he completed{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Intermediate</strong> as per their wish and later pursued{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Post Graduation in Astrology</strong> from{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Lucknow University</strong>, despite family resistance.
+              He fulfilled his Parents wish by completing his{" "}
+              <strong className="text-[#7A5A2B] font-semibold">Intermediate</strong> education and later pursued a{" "}
+              <strong className="text-[#7A5A2B] font-semibold">Postgraduate degree in Astrology</strong> from{" "}
+              <strong className="text-[#7A5A2B] font-semibold">Lucknow University</strong>, despite facing resistance from his family.
             </p>
           </div>
         </div>
@@ -210,10 +209,10 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
           className="mt-16 max-w-4xl mx-auto bg-white/60 backdrop-blur-xl rounded-3xl p-8 border border-[#E6D9B8]/50 shadow-xl"
         >
           <h3 className="text-2xl font-bold mb-6 text-center text-[#B38B46]">
-            Why Choose Guru Ji?
+            Why Choose Acharya Ji?
           </h3>
           <ul className="space-y-3 text-[#4A4A4A]">
-            <li>✔️ 30+ years of experience in astrology and gem therapy</li>
+            <li>✔️ 19+ years of experience in astrology and gem therapy</li>
             <li>✔️ Deep connection between Vedic science and modern science</li>
             <li>✔️ Trusted by thousands across India and abroad</li>
             <li>✔️ Specializes in Marriage, Career, Finance, Health & Remedies</li>
@@ -221,7 +220,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
           </ul>
         </motion.div>
 
-        {/* Guru Ji Belief */}
+        {/* Acharya Ji Belief */}
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -230,7 +229,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
           className="mt-12 max-w-4xl mx-auto text-center"
         >
           <h3 className="text-2xl font-bold mb-4 text-[#B38B46]">
-            📜 Guru Ji’s Belief
+            📜 Acharya Ji’s Belief
           </h3>
           <p className="text-[#4A4A4A] italic leading-relaxed">
             “Just as Earth is 2/3 water and 1/3 land, so is the human body. When

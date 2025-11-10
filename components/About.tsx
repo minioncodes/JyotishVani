@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function About() {
   return (
-    <section id="about" className="relative px-6 py-20 md:py-28">
+    <section id="about" className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28">
       <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
         {/* LEFT: About JyotishWaani Organisation */}
@@ -35,7 +35,7 @@ export default function About() {
           </ul>
         </motion.div>
 
-        {/* RIGHT: Guru Ji Section */}
+        {/* RIGHT: Acharya Ji Section */}
         <motion.div
           initial={{ x: 30, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -52,16 +52,16 @@ export default function About() {
             />
           </div>
           <h3 className="text-xl font-semibold text-black">
-            Astrologer <span className="text-[#C5A46D]">Acharya Sumit Tiwari</span>
+            Vedic Astrologer <span className="text-[#C5A46D]">Acharya Sumit Tiwari</span>
           </h3>
           <p className="text-gray-800 leading-relaxed">
             <span className="font-semibold text-[#C5A46D]">
-              Acharya Sumit Tiwari&nbsp;
+              Acharya Sumit Tiwari (Vedic Astrologer)&nbsp;
             </span>
-is a well known Lucknow based astrologer with 13+ years experience. He offers simple, logical and effective remedies, is well published, highly academically qualified in Jyotish and has helped many people remove hurdles through accurate scientific Kundli analysis.
+is a well known Lucknow based astrologer with 19+ years experience. He offers simple, logical and effective remedies, is well published, highly academically qualified in Jyotish and has helped many people remove hurdles through accurate scientific Kundli analysis.
           </p>
           <Link
-            href="/astrologer-info"
+            href="/about"
             className="inline-block text-sm font-medium text-[#C5A46D] hover:text-black transition"
           >
             → More about Acharya Ji

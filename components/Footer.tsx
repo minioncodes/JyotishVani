@@ -46,13 +46,6 @@ export default function Footer() {
               >
                 <FiFacebook />
               </Link>
-              <Link
-                aria-label="Twitter"
-                href="#"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#C5A46D]/10 text-[#C5A46D] transition hover:bg-[#C5A46D] hover:text-black"
-              >
-                <FiTwitter />
-              </Link>
             </div>
           </div>
 
@@ -104,7 +97,7 @@ export default function Footer() {
           <p>© {year} Jyotishwaani. All rights reserved.</p>
           <p>
             Developed by{" "}
-            <Link href="https://digipants.com/" target="blank" className="text-[#C5A46D] font-medium">DigiPants Network Pvt.</Link> ·{" "}
+            <Link href="https://digipants.com/" target="blank" className="text-[#C5A46D] font-small">DigiPants Network Pvt.</Link> ·{" "}
             <Link
               href="/privacy"
               className="underline decoration-transparent hover:decoration-[#C5A46D]"
