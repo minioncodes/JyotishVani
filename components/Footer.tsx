@@ -21,14 +21,15 @@ export default function Footer() {
           {/* Brand / Logo */}
           <div className="space-y-4">
             <Link href="/" className="inline-flex items-center gap-3">
-              <Image
-                src="/icon.jpg"
-                alt="Brand logo"
-                height={150}
-                width={150}
-                className="object-contain p-2 rounded-full bg-[#C5A46D]/10"
-              />
-            </Link>
+  <Image
+    src="/Jyotishwaani.svg"
+    alt="Brand logo"
+    height={150}
+    width={150}
+    className="object-contain rounded-full animate-spin-ltr"
+  />
+</Link>
+
 
             {/* Socials */}
             <div className="flex items-center gap-3 pt-2">
