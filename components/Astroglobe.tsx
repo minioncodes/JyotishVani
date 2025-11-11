@@ -4,74 +4,73 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function AstroGlobe() {
-  type Snapshot = {
+ type Snapshot = {
     tithi: string;
     paksha: string;
     nakshatra: string;
-    choghadiya: string;
+    // choghadiya: string;
+    rahuKaal: string;
+      // amritKaal: string;
     remedy: string;
-      updatedAt?: string;
+    updatedAt?: string;
   } | null;
 
   const [snapshot, setSnapshot] = useState<Snapshot>(null);
 
-useEffect(() => {
-  let isMounted = true;
-  let interval: NodeJS.Timeout | null = null;
+  useEffect(() => {
+    let isMounted = true;
+    let interval: NodeJS.Timeout | null = null;
 
-  async function fetchSnapshot() {
-    try {
-      const res = await fetch("/api/snapshot", { cache: "no-store" });
-      const data = await res.json();
-      if (!isMounted) return;
+    async function fetchSnapshot() {
+      try {
+        const res = await fetch("/api/snapshot", { cache: "no-store" });
+        const data = await res.json();
+        if (!isMounted) return;
 
-      setSnapshot({
-        tithi: data.tithi,
-        paksha: data.paksha,
-        nakshatra: data.nakshatra,
-        choghadiya: data.choghadiya,
-        remedy: "Offer water to Sun",
-        updatedAt: data.updatedAt || new Date().toLocaleTimeString(),
-      });
-    } catch (err) {
-      console.error("Snapshot fetch failed:", err);
-    }
-  }
-
-  // ✅ Fetch once on mount
-  fetchSnapshot();
-
-  // 🧠 Function to handle tab visibility
-  function handleVisibilityChange() {
-    if (document.hidden) {
-      
-      if (interval) {
-        clearInterval(interval);
-        interval = null;
-        console.log(" Auto-refresh paused (tab inactive)");
+        setSnapshot({
+          tithi: data.tithi,
+          paksha: data.paksha,
+          nakshatra: data.nakshatra,
+          // choghadiya: data.choghadiya,
+          rahuKaal: data.rahuKaal,
+            //  amritKaal: data.amritKaal,
+          remedy: "Offer water to Sun",
+          updatedAt: data.updatedAt || new Date().toLocaleTimeString(),
+        });
+      } catch (err) {
+        console.error("Snapshot fetch failed:", err);
       }
-    } else {
-    
-      fetchSnapshot();
-      interval = setInterval(fetchSnapshot, 60 * 1000); // every 1 minute
-      
     }
-  }
 
-  if (!document.hidden) {
-    interval = setInterval(fetchSnapshot, 60 * 1000);
-  }
+    fetchSnapshot();
 
+    function handleVisibilityChange() {
+      if (document.hidden) {
+        if (interval) {
+          clearInterval(interval);
+          interval = null;
+          console.log("Auto-refresh paused (tab inactive)");
+        }
+      } else {
+        fetchSnapshot();
+        interval = setInterval(fetchSnapshot, 60 * 1000);
+        console.log("Auto-refresh resumed (tab active)");
+      }
+    }
 
-  document.addEventListener("visibilitychange", handleVisibilityChange);
+    if (!document.hidden) {
+      interval = setInterval(fetchSnapshot, 60 * 1000);
+    }
 
-  
-  return () => {
-    isMounted = false;
-    if (interval) clearInterval(interval);
-    document.removeEventListener("visibilitychange", handleVisibilityChange);
-  };
-}, []);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      isMounted = false;
+      if (interval) clearInterval(interval);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
 
 
   return (
@@ -167,7 +166,10 @@ useEffect(() => {
             ["Tithi", snapshot?.tithi],
             ["Paksha", snapshot?.paksha],
             ["Nakshatra", snapshot?.nakshatra],
-            ["Choghadiya", snapshot?.choghadiya],
+            // ["Choghadiya", snapshot?.choghadiya],
+             ["Rahu Kaal", snapshot?.rahuKaal],
+            //  ["Amrit Kaal", snapshot?.amritKaal],
+             
           ].map(([label, value]) => (
             <div
               key={label}
@@ -179,6 +181,7 @@ useEffect(() => {
               </div>
             </div>
           ))}
+          
         </div>
       </div>
     </motion.div>
