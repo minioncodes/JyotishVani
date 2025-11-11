@@ -3,16 +3,20 @@ import { NextResponse } from "next/server";
 let cachedToken: string | null = null;
 let tokenExpiry = 0;
 
-// Fetch and cache access token
+
+const userCache = new Map<string, { data: any; timestamp: number }>();
+
+
+const CACHE_TTL = 12 * 60 * 60 * 1000;
+
 async function getAccessToken() {
   const now = Date.now();
-
   if (cachedToken && now < tokenExpiry) {
-    console.log("Using cached token (valid until)", new Date(tokenExpiry).toLocaleTimeString());
+    console.log("Using cached token until", new Date(tokenExpiry).toLocaleTimeString());
     return cachedToken;
   }
 
-  console.log("Requesting new Prokerala access token...");
+  console.log("Fetching new Prokerala token...");
   const res = await fetch("https://api.prokerala.com/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -33,7 +37,7 @@ async function getAccessToken() {
   const data = await res.json();
   cachedToken = data.access_token;
   tokenExpiry = now + (data.expires_in - 60) * 1000;
-  console.log("New token cached until", new Date(tokenExpiry).toLocaleTimeString());
+  console.log("Token cached until", new Date(tokenExpiry).toLocaleTimeString());
   return cachedToken;
 }
 
@@ -42,11 +46,29 @@ function isNowBetween(start: string, end: string): boolean {
   return now >= new Date(start) && now <= new Date(end);
 }
 
-export async function GET() {
+// ---------- MAIN HANDLER ----------
+export async function GET(req: Request) {
   try {
+    const ip =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      "unknown-user";
+
+    const now = Date.now();
+
+
+    const cached = userCache.get(ip);
+    if (cached && now - cached.timestamp < CACHE_TTL) {
+      console.log(`Serving cached snapshot for ${ip}`);
+      return NextResponse.json(cached.data, {
+        headers: { "Cache-Control": "no-store" },
+      });
+    }
+
+    console.log(`No valid cache for ${ip}, fetching fresh snapshot...`);
+
     const token = await getAccessToken();
-    const now = new Date();
-    const datetime = now.toISOString().split(".")[0] + "+05:30";
+    const currentTime = new Date();
+    const datetime = currentTime.toISOString().split(".")[0] + "+05:30";
     const coordinates = "28.6139,77.2090";
     const encodedDatetime = encodeURIComponent(datetime);
 
@@ -55,7 +77,7 @@ export async function GET() {
       cache: "no-store" as RequestCache,
     };
 
-    // Panchang
+    // Fetch Panchang
     const panchangRes = await fetch(
       `https://api.prokerala.com/v2/astrology/panchang?ayanamsa=1&coordinates=${coordinates}&datetime=${encodedDatetime}`,
       fetchOpts
@@ -63,15 +85,7 @@ export async function GET() {
     if (!panchangRes.ok) throw new Error(`Panchang fetch failed: ${panchangRes.status}`);
     const panchangData = await panchangRes.json();
 
-    // Choghadiya
-    // const choghadiyaRes = await fetch(
-    //   `https://api.prokerala.com/v2/astrology/choghadiya?ayanamsa=1&coordinates=${coordinates}&datetime=${encodedDatetime}`,
-    //   fetchOpts
-    // );
-    // if (!choghadiyaRes.ok) throw new Error(`Choghadiya fetch failed: ${choghadiyaRes.status}`);
-    // const choghadiyaData = await choghadiyaRes.json();
-
-    // Inauspicious & auspicious periods
+    // Fetch inauspicious periods (Rahu etc.)
     const inauspiciousRes = await fetch(
       `https://api.prokerala.com/v2/astrology/inauspicious-period?ayanamsa=1&coordinates=${coordinates}&datetime=${encodedDatetime}`,
       fetchOpts
@@ -80,20 +94,14 @@ export async function GET() {
       throw new Error(`Inauspicious fetch failed: ${inauspiciousRes.status}`);
     const inauspiciousData = await inauspiciousRes.json();
 
-    // Parse snapshot data
+    // Extract values
     const currentTithi =
       panchangData?.data?.tithi?.find((t: any) => isNowBetween(t.start, t.end)) ||
       panchangData?.data?.tithi?.[0];
-
     const currentNakshatra =
       panchangData?.data?.nakshatra?.find((n: any) => isNowBetween(n.start, n.end)) ||
       panchangData?.data?.nakshatra?.[0];
 
-    // const currentMuhurat =
-    //   choghadiyaData?.data?.muhurat?.find((m: any) => isNowBetween(m.start, m.end)) ||
-    //   choghadiyaData?.data?.muhurat?.[0];
-
-    // Rahu Kaal
     const rahu = inauspiciousData?.data?.muhurat?.find((m: any) => m.name === "Rahu");
     const rahuPeriod = rahu?.period?.[0];
     const rahuKaal = rahuPeriod
@@ -106,44 +114,28 @@ export async function GET() {
         })}`
       : "—";
 
-    // // Amrit Kaal
-    // const amrit = inauspiciousData?.data?.muhurat?.find((m: any) => m.name === "Amrit");
-    // const amritPeriod = amrit?.period?.[0];
-    // const amritKaal = amritPeriod
-    //   ? `${new Date(amritPeriod.start).toLocaleTimeString("en-IN", {
-    //       hour: "2-digit",
-    //       minute: "2-digit",
-    //     })}–${new Date(amritPeriod.end).toLocaleTimeString("en-IN", {
-    //       hour: "2-digit",
-    //       minute: "2-digit",
-    //     })}`
-    //   : "—";
+    const snapshot = {
+      tithi: currentTithi?.name || "—",
+      paksha: currentTithi?.paksha || "—",
+      nakshatra: currentNakshatra?.name || "—",
+      rahuKaal,
+      updatedAt: currentTime.toLocaleTimeString("en-IN", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    };
 
-    return NextResponse.json(
-      {
-        tithi: currentTithi?.name || "—",
-        paksha: currentTithi?.paksha || "—",
-        nakshatra: currentNakshatra?.name || "—",
-        // choghadiya: currentMuhurat
-        //   ? `${currentMuhurat.name} (${currentMuhurat.type})`
-        //   : "—",
-        rahuKaal,
-        // amritKaal,
-        updatedAt: now.toLocaleTimeString("en-IN", {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      },
-      {
-        headers: {
-          "Cache-Control": "no-store, no-cache, must-revalidate",
-        },
-      }
-    );
+
+    userCache.set(ip, { data: snapshot, timestamp: now });
+    console.log(`Cached new snapshot for ${ip} until ${new Date(now + CACHE_TTL).toLocaleTimeString()}`);
+
+    return NextResponse.json(snapshot, {
+      headers: { "Cache-Control": "no-store" },
+    });
   } catch (err: any) {
     console.error("Snapshot API error:", err.message);
     return NextResponse.json(
-      { error: "Failed to fetch live snapshot", details: err.message },
+      { error: "Failed to fetch snapshot", details: err.message },
       { status: 500 }
     );
   }
