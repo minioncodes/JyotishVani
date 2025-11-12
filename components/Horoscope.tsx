@@ -14,6 +14,12 @@ type Sign = {
   msg: string;
 };
 
+type Prediction = {
+  type: string;
+  prediction: string;
+  challenge: string;
+};
+
 const ICONS: Record<string, JSX.Element> = {
   Aries: <FiZap />,
   Taurus: <FiAnchor />,
@@ -49,18 +55,7 @@ function Card({ s, onClick }: { s: Sign; onClick: () => void }) {
     <button
       onClick={onClick}
       aria-label={`${s.name} horoscope`}
-      className="
-        group relative shrink-0 select-none
-        min-w-[240px] h-[200px] 
-        rounded-2xl p-4
-        text-left
-        bg-white/65 backdrop-blur-md
-        border border-white/20
-        transition-all duration-300
-        hover:shadow-[0_12px_36px_rgba(197,164,109,0.45)]
-        hover:-translate-y-0.5
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A46D]/60
-      "
+      className="group relative shrink-0 select-none min-w-[240px] h-[200px] rounded-2xl p-4 text-left bg-white/65 backdrop-blur-md border border-white/20 transition-all duration-300 hover:shadow-[0_12px_36px_rgba(197,164,109,0.45)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A46D]/60"
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 rounded-2xl"
         style={{ boxShadow:"inset 0 0 0 1px rgba(197,164,109,0.28), 0 1px 0 rgba(255,255,255,0.4)" }}
@@ -80,22 +75,81 @@ function Card({ s, onClick }: { s: Sign; onClick: () => void }) {
   );
 }
 
-function PredictionModal({ sign, onClose }: { sign: Sign | null; onClose: () => void; }) {
+function PredictionModal({
+  sign,
+  predictions,
+  loading,
+  onClose,
+}: {
+  sign: string | null;
+  predictions: Prediction[] | null;
+  loading: boolean;
+  onClose: () => void;
+}) {
   return (
     <AnimatePresence>
       {sign && (
-        <motion.div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <motion.div className="relative max-w-2xl w-[92%] sm:w-full rounded-2xl bg-white/95 p-6 shadow-2xl text-black"
-            initial={{ scale: 0.96, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.96, opacity: 0 }}
-            transition={{ duration: 0.22, ease: "easeOut" }}>
-            <button onClick={onClose} className="absolute right-4 top-4 text-gray-600 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A46D]/60 rounded-md">
-              <FiX size={22}/>
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="relative max-w-2xl w-[92%] sm:w-full rounded-2xl bg-white/95 p-6 shadow-2xl text-black"
+            initial={{ scale: 0.96, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.96, opacity: 0 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+          >
+            <button
+              onClick={onClose}
+              className="absolute right-4 top-4 text-gray-600 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A46D]/60 rounded-md"
+            >
+              <FiX size={22} />
             </button>
-            <h2 className="text-2xl font-bold mb-4">{sign.name} <span className="text-[#C5A46D]">Horoscope</span></h2>
-            <div className="rounded-xl bg-[#FAF9F6] p-4 shadow-sm border border-[#E6D5B8]/50">
-              <p className="text-gray-800 text-sm">{sign.msg}</p>
-            </div>
+            <h2 className="text-2xl font-bold mb-4">
+              {sign} <span className="text-[#C5A46D]">Horoscope</span>
+            </h2>
+
+            <div className="rounded-2xl bg-gradient-to-br from-[#FAF9F6] to-[#F4EEDF] p-6 shadow-inner border border-[#E6D5B8]/60 max-h-[70vh] overflow-y-auto">
+  {loading && (
+    <p className="text-center text-gray-600 text-sm italic animate-pulse">
+      Fetching your stars...
+    </p>
+  )}
+
+  {!loading && predictions && predictions.length > 0 ? (
+    <div className="space-y-6">
+      {predictions.map((p, idx) => (
+        <div
+          key={p.type}
+          className="relative rounded-xl bg-white/70 p-5 shadow-sm hover:shadow-md border border-[#E6D5B8]/40 transition-all duration-300"
+        >
+          <span className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-[#C5A46D] to-[#E6D5B8] rounded-l-lg" />
+          <h3 className="font-semibold text-[#8F733F] text-xl mb-2 tracking-wide">
+            {p.type}
+          </h3>
+
+          <p className="text-gray-800 text-[15px] leading-relaxed font-[500]">
+            {p.prediction}
+          </p>
+
+          <p className="mt-3 text-[14px] italic text-[#B94B4B] font-medium bg-[#FDF4F4] px-3 py-2 rounded-lg border border-[#F6D1D1]/60">
+            ⚠️ <span className="font-semibold">Challenge:</span> {p.challenge}
+          </p>
+        </div>
+      ))}
+    </div>
+  ) : (
+    !loading && (
+      <p className="text-center text-gray-600 text-sm italic">
+        No prediction found.
+      </p>
+    )
+  )}
+</div>
+
           </motion.div>
         </motion.div>
       )}
@@ -104,7 +158,9 @@ function PredictionModal({ sign, onClose }: { sign: Sign | null; onClose: () => 
 }
 
 export default function Horoscope() {
-  const [active, setActive] = useState<Sign | null>(null);
+  const [activeSign, setActiveSign] = useState<string | null>(null);
+  const [predictions, setPredictions] = useState<Prediction[] | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
@@ -114,8 +170,19 @@ export default function Horoscope() {
     return () => window.removeEventListener("resize", fn);
   }, []);
 
-  const open = (s: Sign) => {
-    return;
+  const open = async (s: Sign) => {
+    setActiveSign(s.name);
+    setLoading(true);
+    setPredictions(null);
+    try {
+      const res = await fetch(`/api/horoscope?sign=${s.name.toLowerCase()}`, { cache: "no-store" });
+      const data = await res.json();
+      if (data.success) setPredictions(data.predictions);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const data: Sign[] = Object.entries(ICONS).map(([name, icon], idx) => ({
@@ -152,18 +219,23 @@ export default function Horoscope() {
           const cRect = (child as HTMLElement).getBoundingClientRect();
           const cCenter = cRect.left + cRect.width / 2;
           const dist = Math.abs(cCenter - centerX);
-          if (dist < minDist) { minDist = dist; nearest = i; }
+          if (dist < minDist) {
+            minDist = dist;
+            nearest = i;
+          }
         });
         setIndex(nearest);
       });
     };
     container.addEventListener("scroll", onScroll, { passive: true });
-    return () => { container.removeEventListener("scroll", onScroll); if (rAF.current) cancelAnimationFrame(rAF.current); };
+    return () => {
+      container.removeEventListener("scroll", onScroll);
+      if (rAF.current) cancelAnimationFrame(rAF.current);
+    };
   }, []);
 
   return (
     <section id="horoscope" className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28">
-
       <style jsx global>{`
         @keyframes marqueeX { 0% {transform: translateX(0%);} 100% {transform: translateX(-50%);} }
       `}</style>
@@ -179,7 +251,9 @@ export default function Horoscope() {
 
       {/* Phone + Tab slider */}
       <div className="mt-10 md:block lg:hidden">
-        <div ref={sliderRef} className="flex gap-4 overflow-x-auto no-scrollbar px-2 snap-x snap-mandatory scroll-smooth"
+        <div
+          ref={sliderRef}
+          className="flex gap-4 overflow-x-auto no-scrollbar px-2 snap-x snap-mandatory scroll-smooth"
           aria-label="Horoscope slider"
         >
           {data.map((s, i) => (
@@ -191,8 +265,13 @@ export default function Horoscope() {
 
         <div className="mt-5 flex justify-center gap-2" aria-label="Slide navigation">
           {data.map((_, i) => (
-            <button key={i} onClick={() => goTo(i)} aria-label={`Go to ${data[i].name}`}
-              className={`h-2.5 w-2.5 rounded-full transition-all ${index === i ? "bg-[#C5A46D] w-6" : "bg-gray-300"}`}
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Go to ${data[i].name}`}
+              className={`h-2.5 w-2.5 rounded-full transition-all ${
+                index === i ? "bg-[#C5A46D] w-6" : "bg-gray-300"
+              }`}
             />
           ))}
         </div>
@@ -210,10 +289,20 @@ export default function Horoscope() {
       </div>
 
       <div className="mt-10 flex justify-center">
-        <a href="/contact" className="rounded-xl bg-[#C5A46D] px-6 py-3 text-sm font-semibold text-black shadow-md hover:bg-black hover:text-white transition">
+        <a
+          href="/contact"
+          className="rounded-xl bg-[#C5A46D] px-6 py-3 text-sm font-semibold text-black shadow-md hover:bg-black hover:text-white transition"
+        >
           Get your personalized reading
         </a>
       </div>
+
+      <PredictionModal
+        sign={activeSign}
+        predictions={predictions}
+        loading={loading}
+        onClose={() => setActiveSign(null)}
+      />
     </section>
   );
 }
