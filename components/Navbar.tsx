@@ -28,14 +28,18 @@ export default function Navbar() {
     >
       <div className="flex items-center justify-between rounded-2xl bg-white/90 backdrop-blur-md px-5 py-3 shadow-md">
         <Link href="/" className="flex items-center">
-          <Image
-            src="/logo.svg"
-            alt="Logo"
-            width={160}
-            height={50}
-            className="mr-2"
-          />
-        </Link>
+  <Image
+    src="/Jyotishwaani.svg"
+    alt="Logo"
+    width={25}
+    height={25}
+    className="mr-1 object-contain rounded-full animate-spin-ltr"
+  />
+  <span className="text-xl font-bold">
+    JyotishWaani
+  </span>
+</Link>
+
         <div className="hidden md:flex items-center gap-7 text-gray-800 font-medium">
           {links.map((l) => (
             <motion.a

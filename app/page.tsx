@@ -13,6 +13,8 @@ import Footer from "@/components/Footer";
 import StarsBg from "@/components/StarBg";
 import Blogs from "@/components/Blogs";
 import Horoscope from "@/components/Horoscope";
+import TranslateButton from "@/components/TranslateButton";
+import Translate from "@/components/Translate";
 
 
 
@@ -34,7 +36,9 @@ return (
   </div>
   <Hero />
   {/* <Contact /> */}
+  {/* <TranslateButton/> */}
   <About />
+  {/* <Translate/> */}
   <Services />
   <Horoscope />
   <Reviews />
