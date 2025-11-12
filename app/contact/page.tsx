@@ -71,7 +71,7 @@ function HeaderHero() {
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm">
             <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
-              Vedic • Transit • Tarot
+              Vedic
             </span>
             <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
               Online / In-person (Delhi)
