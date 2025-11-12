@@ -36,9 +36,9 @@ return (
   </div>
   <Hero />
   {/* <Contact /> */}
-  <TranslateButton/>
+  {/* <TranslateButton/> */}
   <About />
-  <Translate/>
+  {/* <Translate/> */}
   <Services />
   <Horoscope />
   <Reviews />
