@@ -54,8 +54,8 @@ export default function Page() {
       <div className="fixed inset-0 -z-10 bg-[#FAF8F3]">
         <StarsBg />
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
-          <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
+          <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
+          <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
         </div>
       </div>
 
@@ -77,7 +77,7 @@ export default function Page() {
 
       
         <div
-          className="prose prose-lg max-w-none mb-6 break-words bg-white/90 border border-[#C5A46D]/30 p-6 md:p-8 rounded-2xl shadow-md text-gray-900"
+          className="prose prose-lg max-w-none mb-6 break-words bg-white/90 border border-[#B22222]/30 p-6 md:p-8 rounded-2xl shadow-md text-gray-900"
           dangerouslySetInnerHTML={{ __html: blog.description }}
         />
 

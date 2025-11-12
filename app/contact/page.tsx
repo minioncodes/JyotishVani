@@ -23,8 +23,8 @@ export default function ContactPage() {
         <StarsBg />
         {/* Glow gradients */}
         <div className="pointer-events-none fixed inset-0">
-          <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
-          <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
+          <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
+          <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
         </div>
 
         <HeaderHero />
@@ -56,27 +56,27 @@ function HeaderHero() {
         className="mx-auto max-w-6xl"
       >
         <nav className="text-sm text-gray-500 mb-3">
-          <Link href="/" className="hover:text-[#C5A46D]">Home</Link>
+          <Link href="/" className="hover:text-[#B22222]">Home</Link>
           <span className="mx-2">/</span>
           <span className="text-gray-700">Contact</span>
         </nav>
 
-        <div className="rounded-3xl bg-white/90 border border-[#C5A46D]/30 p-6 md:p-10 shadow-xl">
+        <div className="rounded-3xl bg-white/90 border border-[#B22222]/30 p-6 md:p-10 shadow-xl">
           <h1 className="text-3xl md:text-5xl font-extrabold text-black">
-            Let’s <span className="text-[#C5A46D]">connect.</span>
+            Let’s <span className="text-[#B22222]">connect.</span>
           </h1>
           <p className="mt-3 text-gray-700 max-w-2xl">
             Share your birth details and your main concern—love, career, finance, or timing—
             and We’ll reply within 24 hours with next steps and available slots.
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm">
-            <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
+            <span className="rounded-xl bg-[#FFFDF8] border border-[#B22222]/30 px-3 py-1 text-gray-700">
               Vedic
             </span>
-            <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
+            <span className="rounded-xl bg-[#FFFDF8] border border-[#B22222]/30 px-3 py-1 text-gray-700">
               Online / In-person (Lucknow)
             </span>
-            <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
+            <span className="rounded-xl bg-[#FFFDF8] border border-[#B22222]/30 px-3 py-1 text-gray-700">
               Secure & private
             </span>
           </div>
@@ -103,10 +103,10 @@ function TrustStrip() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.45 }}
-            className="rounded-2xl bg-white/90 border border-[#C5A46D]/30 p-4 shadow-md"
+            className="rounded-2xl bg-white/90 border border-[#B22222]/30 p-4 shadow-md"
           >
             <div className="flex items-center gap-3">
-              <div className="text-lg text-[#C5A46D]">{it.icon}</div>
+              <div className="text-lg text-[#B22222]">{it.icon}</div>
               <div>
                 <div className="font-semibold text-black">{it.label}</div>
                 <div className="text-xs text-gray-600">{it.sub}</div>
@@ -127,7 +127,7 @@ function CardWrapper({ children }: { children: React.ReactNode }) {
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.45 }}
-      className="rounded-2xl bg-white/90 border border-[#C5A46D]/30 p-5 shadow-md"
+      className="rounded-2xl bg-white/90 border border-[#B22222]/30 p-5 shadow-md"
     >
       {children}
     </motion.div>
@@ -168,7 +168,7 @@ function FAQSection() {
           className="mb-6"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-black">
-            Frequently Asked <span className="text-[#C5A46D]">Questions</span>
+            Frequently Asked <span className="text-[#B22222]">Questions</span>
           </h2>
           <p className="mt-2 text-sm text-gray-700">
             Quick answers to common queries. Still unsure? Reach out and We’ll help you decide.
@@ -193,14 +193,14 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.4 }}
-      className="rounded-2xl bg-white/90 border border-[#C5A46D]/30 p-5 shadow-md"
+      className="rounded-2xl bg-white/90 border border-[#B22222]/30 p-5 shadow-md"
     >
       <button
         onClick={() => setOpen((s) => !s)}
         className="flex w-full items-center justify-between text-left text-black"
       >
         <span className="font-medium">{question}</span>
-        <FiHelpCircle className={`transition-transform ${open ? "rotate-45 text-[#C5A46D]" : ""}`} />
+        <FiHelpCircle className={`transition-transform ${open ? "rotate-45 text-[#B22222]" : ""}`} />
       </button>
       <motion.div
         initial={false}

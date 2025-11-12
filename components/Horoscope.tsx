@@ -61,7 +61,7 @@ function Card({ s, onClick }: { s: Sign; onClick: () => void }) {
         style={{ boxShadow:"inset 0 0 0 1px rgba(197,164,109,0.28), 0 1px 0 rgba(255,255,255,0.4)" }}
       />
       <div className="flex flex-col items-center pt-2">
-        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#C5A46D]/20 to-[#E6D5B8]/40 text-2xl text-[#C5A46D] shadow-sm transition-transform duration-300 group-hover:scale-110">
+        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#B22222]/20 to-[#E68F8F]/40 text-2xl text-[#B22222] shadow-sm transition-transform duration-300 group-hover:scale-110">
           {s.icon}
         </div>
         <h3 className="text-center text-lg font-semibold text-black transition-colors duration-300 group-hover:text-[#8F733F]">
@@ -242,7 +242,7 @@ export default function Horoscope() {
 
       <div className="mx-auto max-w-5xl text-center">
         <h2 className="text-3xl md:text-5xl font-bold text-black">
-          Today’s <span className="text-[#C5A46D]">Horoscope</span>
+          Today’s <span className="text-[#B22222]">Horoscope</span>
         </h2>
         <p className="mt-3 text-sm md:text-base text-gray-700">
           Your daily dose of cosmic guidance, aligned with the stars ✨

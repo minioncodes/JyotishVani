@@ -14,14 +14,14 @@ export default function CTA() {
           className="rounded-3xl bg-white/90 p-10 shadow-lg"
         >
           <h3 className="text-3xl md:text-4xl font-bold text-black">
-            Ready to <span className="text-[#C5A46D]">Find Clarity?</span>
+            Ready to <span className="text-[#B22222]">Find Clarity?</span>
           </h3>
           <p className="mt-3 text-gray-700">
             Book a session now and receive a pre-reading questionnaire to maximize insights.
           </p>
           <a
             href="/bookings"
-            className="mt-6 inline-block rounded-xl bg-[#C5A46D] text-black px-6 py-3 font-semibold shadow-md hover:bg-black hover:text-white transition"
+            className="mt-6 inline-block rounded-xl bg-[#B22222] text-white px-6 py-3 font-semibold shadow-md hover:bg-black hover:text-white transition"
           >
             Book Your Session
           </a>

@@ -69,7 +69,7 @@ function ReviewCard({ r }: { r: Review }) {
     <div className="w-80 h-60  bg-white/90 p-6 hover:scale-110 cursor-pointer transition shadow-md flex flex-col justify-between">
       {/* top row: avatar + name */}
       <div className="flex items-center gap-4">
-        <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#C5A46D]/40 bg-white">
+        <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#B22222]/40 bg-white">
           {r.avatar ? (
             <Image
               src={r.avatar}
@@ -93,7 +93,7 @@ function ReviewCard({ r }: { r: Review }) {
         {Array.from({ length: 5 }).map((_, i) => (
           <FiStar
             key={i}
-            className={`h-4 w-4 ${i < r.rating ? "text-[#C5A46D]" : "text-gray-400"}`}
+            className={`h-4 w-4 ${i < r.rating ? "text-[#B22222]" : "text-gray-400"}`}
           />
         ))}
       </div>
@@ -123,7 +123,7 @@ export default function Reviews() {
         <div className="mb-10 md:mb-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-4 p-6 rounded-2xl bg-white/80 shadow-lg">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-black">
-              What <span className="text-[#C5A46D]">Clients Say</span>
+              What <span className="text-[#B22222]">Clients Say</span>
             </h2>
             <p className="mt-2 text-gray-700">
               Real experiences. Real results. Compassionate, accurate, and
@@ -132,10 +132,10 @@ export default function Reviews() {
           </div>
 
           {/* rating badge */}
-          <div className="flex items-center gap-2 rounded-xl bg-[#C5A46D]/10 px-4 py-2">
+          <div className="flex items-center gap-2 rounded-xl bg-[#B22222]/10 px-4 py-2">
             <div className="flex -mr-1">
               {Array.from({ length: 5 }).map((_, i) => (
-                <FiStar key={i} className="h-4 w-4 text-[#C5A46D]" />
+                <FiStar key={i} className="h-4 w-4 text-[#B22222]" />
               ))}
             </div>
             <span className="text-sm text-gray-800">
@@ -172,7 +172,7 @@ export default function Reviews() {
         <div className="mt-10 flex items-center justify-center">
           <a
             href="/bookings"
-            className="rounded-xl bg-[#C5A46D] px-6 py-3 font-semibold text-black shadow-md hover:bg-black hover:text-white transition"
+            className="rounded-xl bg-[#B22222] px-6 py-3 font-semibold text-white shadow-md hover:bg-black hover:text-white transition"
           >
             Book your session
           </a>

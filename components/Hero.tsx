@@ -39,7 +39,7 @@ export default function Hero() {
             className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-extrabold text-black leading-tight"
           >
             Unlock Your{" "}
-            <span className="bg-gradient-to-r from-[#C5A46D] to-[#E6D5B8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#B22222] to-[#E68F8F] bg-clip-text text-transparent">
               Cosmic Destiny
             </span>
           </motion.h1>
@@ -60,13 +60,13 @@ export default function Hero() {
           >
             <a
               href="/bookings"
-              className="rounded-xl bg-gradient-to-r from-[#C5A46D] to-[#E6D5B8] text-black px-5 py-3 text-sm sm:text-base font-semibold shadow-md hover:opacity-90 transition"
+              className="rounded-xl bg-gradient-to-r from-[#B22222] to-[#E68F8F] text-white px-5 py-3 text-sm sm:text-base font-semibold shadow-md hover:opacity-90 transition"
             >
               Book a Reading
             </a>
             <a
               href="#services"
-              className="rounded-xl border border-[#C5A46D] text-[#C5A46D] px-5 py-3 text-sm sm:text-base font-semibold hover:bg-[#C5A46D]/10 transition"
+              className="rounded-xl border border-[#B22222] text-[#B22222] px-5 py-3 text-sm sm:text-base font-semibold hover:bg-[#B22222]/10 transition"
             >
               Explore Services
             </a>

@@ -34,7 +34,7 @@ export default function Services() {
         {/* Header */}
         <div className="mb-8 md:mb-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-2 md:gap-0">
   <h2 className="text-3xl md:text-4xl font-bold text-black">
-    Our <span className="text-[#C5A46D]">Services</span>
+    Our <span className="text-[#B22222]">Services</span>
   </h2>
   <span className="text-sm text-gray-700">
     Transparent pricing • Secure online sessions
@@ -68,7 +68,7 @@ export default function Services() {
 
             >
               <div className="flex items-center justify-between">
-                <div className="text-2xl text-[#C5A46D]">{s.icon}</div>
+                <div className="text-2xl text-[#B22222]">{s.icon}</div>
 
               </div>
               <h3 className="mt-4 text-lg font-semibold text-black">
@@ -79,7 +79,7 @@ export default function Services() {
               </p>
               <a
                 href="/bookings"
-                className="mt-auto inline-block text-center rounded-xl bg-[#C5A46D] text-black font-medium px-4 py-2 text-sm hover:bg-black hover:text-white transition"
+                className="mt-auto inline-block text-center rounded-xl bg-[#B22222] text-white font-medium px-4 py-2 text-sm hover:bg-black hover:text-white transition"
 
               >
                 Book this
@@ -91,7 +91,7 @@ export default function Services() {
 <div className="flex justify-center mt-10">
   <a
     href="/services"
-    className="rounded-xl bg-[#C5A46D] text-black font-semibold px-6 py-3 text-sm md:text-base hover:bg-black hover:text-white transition"
+    className="rounded-xl bg-[#B22222] text-white font-semibold px-6 py-3 text-sm md:text-base hover:bg-black hover:text-white transition"
   >
     View All Services
   </a>

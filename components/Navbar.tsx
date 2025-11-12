@@ -47,20 +47,20 @@ export default function Navbar() {
               href={l.href}
               whileHover={{ y: -2 }}
               transition={{ duration: 0.2 }}
-              className="hover:text-[#C5A46D] transition-colors"
+              className="hover:text-[#B22222] transition-colors"
             >
               {l.label}
             </motion.a>
           ))}
           <a
             href="/bookings"
-            className="rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-sm font-semibold shadow hover:bg-black hover:text-white transition"
+            className="rounded-xl bg-[#B22222] text-white px-4 py-2 text-sm font-semibold shadow hover:bg-black hover:text-white transition"
           >
             Book Now
           </a>
         </div>
         <button
-          className="md:hidden rounded-xl bg-[#C5A46D]/20 p-2 text-black hover:bg-[#C5A46D]/30"
+          className="md:hidden rounded-xl bg-[#B22222]/20 p-2 text-black hover:bg-[#B22222]/30"
           onClick={() => setOpen((s) => !s)}
           aria-label="Menu"
         >
@@ -83,7 +83,7 @@ export default function Navbar() {
                 <a
                   key={l.href}
                   href={l.href}
-                  className="py-3 text-gray-800 font-medium border-b border-gray-200 last:border-none hover:text-[#C5A46D]"
+                  className="py-3 text-gray-800 font-medium border-b border-gray-200 last:border-none hover:text-[#B22222]"
                   onClick={() => setOpen(false)}
                 >
                   {l.label}
@@ -91,7 +91,7 @@ export default function Navbar() {
               ))}
               <a
                 href="/bookings"
-                className="mt-3 rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-center font-semibold shadow hover:bg-black hover:text-white transition"
+                className="mt-3 rounded-xl bg-[#B22222] text-white px-4 py-2 text-center font-semibold shadow hover:bg-black hover:text-white transition"
               >
                 Book Now
               </a>

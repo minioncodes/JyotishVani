@@ -19,7 +19,7 @@ export default function AstrologerInfo() {
           >
             <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src="/Acharya Sumit Tiwari.jpg" // replace with actual astrologer image path
+                src="/Acharya ji (2).jpg" // replace with actual astrologer image path
                 alt="Astrologer Acharya Sumit Tiwari"
                 fill
                 className="object-cover"
@@ -34,21 +34,21 @@ export default function AstrologerInfo() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-3xl md:text-4xl font-bold mb-4 font-[Cinzel] text-[#5B4A2F]">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 font-[Cinzel] text-[#B22222]">
               Acharya Sumit Tiwari 
             </h1>
             <p className="text-[#4A4A4A] mb-4 leading-relaxed">
-              <strong className="text-[#5B4A2F]">Acharya Sumit Tiwari (Vedic Astrologer)&nbsp;</strong> is a Famous Astrologer in Lucknow with experience of more than 19+ years. He provides very Simple and Logical remedies which are very Effective. His articles are also published in various News Portals. 
+              <strong className="text-[#B22222]">Acharya Sumit Tiwari (Vedic Astrologer)&nbsp;</strong> is a Famous Astrologer in Lucknow with experience of more than 19+ years. He provides very Simple and Logical remedies which are very Effective. His articles are also published in various News Portals. 
             </p>
             <p className="text-[#4A4A4A] mb-4 leading-relaxed">
-             He holds a <strong className="text-[#5B4A2F]">B.Com</strong>{" "} from Lucknow University, a <strong className="text-[#5B4A2F]">Shastri </strong>{" "}in Vedic Jyotish from Central Sanskrit University, Lucknow, and a Post-Graduation in Astrology <strong className="text-[#5B4A2F]">(M.A. Jyotirvigyan)</strong>{" "} from Lucknow University under the guidence of Padamshri Professor B.K. Shukla He has helped many people through his readings and predictions to overcome obstacles in their paths.
+             He holds a <strong className="text-[#B22222]">B.Com</strong>{" "} from Lucknow University, a <strong className="text-[#B22222]">Shastri </strong>{" "}in Vedic Jyotish from Central Sanskrit University, Lucknow, and a Post-Graduation in Astrology <strong className="text-[#B22222]">(M.A. Jyotirvigyan)</strong>{" "} from Lucknow University under the guidence of Padamshri Professor B.K. Shukla He has helped many people through his readings and predictions to overcome obstacles in their paths.
             </p>
             <p className="text-[#4A4A4A] mb-6 leading-relaxed">
 If you choose him, you have already made one of the best decisions in your life.
 Contact Acharya Ji for {" "}
-              <strong className="text-[#5B4A2F]">Scientific</strong> and{" "}
-              <strong className="text-[#5B4A2F]">Logical Analysis</strong> of{" "}
-              <strong className="text-[#5B4A2F]">Kundli.</strong>
+              <strong className="text-[#B22222]">Scientific</strong> and{" "}
+              <strong className="text-[#B22222]">Logical Analysis</strong> of{" "}
+              <strong className="text-[#B22222]">Kundli.</strong>
             </p>
           </motion.div>
         </div>
@@ -61,7 +61,7 @@ Contact Acharya Ji for {" "}
   transition={{ duration: 0.6 }}
   className="mt-16 max-w-5xl mx-auto"
 >
-  <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-[#5B4A2F] font-[Cinzel]">
+  <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-[#B22222] font-[Cinzel]">
     About Acharya Ji
   </h2>
 
@@ -82,15 +82,15 @@ Contact Acharya Ji for {" "}
             
             <p className="leading-relaxed text-[#4A4A4A]">
               From the early age, his family observed a natural inclination towards{" "}
-              <strong className="text-[#7A5A2B] font-semibold">spiritual practices</strong>. Several astrologers
+              <strong className="text-[#B22222] font-semibold">spiritual practices</strong>. Several astrologers
               studied his birth chart and predicted a life path closely tied to{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Spirituality &amp; Jyotish</strong>.
+              <strong className="text-[#B22222] font-semibold">Spirituality &amp; Jyotish</strong>.
             </p>
           </div>
         </div>
         {/* Node */}
         <div className="flex justify-center my-4 md:my-0">
-          <span className="text-2xl font-bold text-[#B38B46] drop-shadow-sm select-none">↓</span>
+          <span className="text-2xl font-bold text-[#B22222] drop-shadow-sm select-none">↓</span>
 
         </div>
       </li>
@@ -99,7 +99,7 @@ Contact Acharya Ji for {" "}
       <li className="grid grid-cols-1 md:grid-cols-2 items-center">
         {/* Node */}
         <div className="flex justify-center order-2 md:order-1 my-4 md:my-0">
-          <span className="text-2xl font-bold text-[#B38B46] drop-shadow-sm select-none">↓</span>
+          <span className="text-2xl font-bold text-[#B22222] drop-shadow-sm select-none">↓</span>
 
         </div>
         {/* Card */}
@@ -107,7 +107,7 @@ Contact Acharya Ji for {" "}
           <div className="relative inline-block bg-gradient-to-br from-[#FAF6E8] to-[#F5EEE1] border border-[#CAB27A] rounded-2xl p-6 shadow-sm shadow-[#E9DFC7] mx-auto max-w-xl">
             
             <p className="leading-relaxed text-[#4A4A4A]">
-              He was Blessed by His Guru A Great Sanskrit Scholar and Katha Vyas <strong className="text-[#5B4A2F]">Param Pujya Swami Maheshanand Saraswati Ji Maharaj</strong>. By having Swami Ji's Guidance and Companionship He was Entered in tha Path of Spirituality. A true path of Sadhna.
+              He was Blessed by His Guru A Great Sanskrit Scholar and Katha Vyas <strong className="text-[#B22222]">Param Pujya Swami Maheshanand Saraswati Ji Maharaj</strong>. By having Swami Ji's Guidance and Companionship He was Entered in tha Path of Spirituality. A true path of Sadhna.
             </p>
           </div>
         </div>
@@ -121,9 +121,9 @@ Contact Acharya Ji for {" "}
             
             <p className="leading-relaxed text-[#4A4A4A]">
               Over the years, he has guided respected individuals across Uttar Pradesh through{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Spiritual Practices</strong>,{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Astrology</strong>, and{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Gem Consultation</strong>.
+              <strong className="text-[#B22222] font-semibold">Spiritual Practices</strong>,{" "}
+              <strong className="text-[#B22222] font-semibold">Astrology</strong>, and{" "}
+              <strong className="text-[#B22222] font-semibold">Gem Consultation</strong>.
             </p>
           </div>
         </div>
@@ -142,7 +142,7 @@ Contact Acharya Ji for {" "}
   transition={{ duration: 0.6 }}
   className="mt-20 max-w-4xl mx-auto"
 >
-  <h3 className="text-3xl md:text-4xl font-bold mb-10 text-center text-[#5B4A2F] font-[Cinzel]">
+  <h3 className="text-3xl md:text-4xl font-bold mb-10 text-center text-[#B22222] font-[Cinzel]">
     Astro Philosophy
   </h3>
 
@@ -161,9 +161,9 @@ Contact Acharya Ji for {" "}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="mt-16 max-w-4xl mx-auto bg-white/60 backdrop-blur-xl rounded-3xl p-8 border border-[#E6D9B8]/50 shadow-xl"
+          className="mt-16 max-w-4xl mx-auto bg-white/60 backdrop-blur-xl rounded-3xl p-8 border border-[#B22222]/50 shadow-xl"
         >
-          <h3 className="text-2xl font-bold mb-6 text-center text-[#B38B46]">
+          <h3 className="text-2xl font-bold mb-6 text-center text-[#B22222]">
             Why Choose Acharya Ji?
           </h3>
           <ul className="space-y-3 text-[#4A4A4A]">
@@ -183,7 +183,7 @@ Contact Acharya Ji for {" "}
           transition={{ duration: 0.6 }}
           className="mt-12 max-w-4xl mx-auto text-center"
         >
-          <h3 className="text-2xl font-bold mb-4 text-[#B38B46]">
+          <h3 className="text-2xl font-bold mb-4 text-[#B22222]">
             📜 Acharya Ji’s Belief
           </h3>
           <p className="text-[#4A4A4A] italic leading-relaxed">

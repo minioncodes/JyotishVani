@@ -26,7 +26,7 @@ export default function BookingDetail() {
             {option.description}
           </p>
 
-          <div className="mt-10 w-full rounded-3xl bg-gradient-to-b from-[#FAF8F3] via-[#FFFDF8]/90 to-[#FAF8F3] shadow-xl border border-[#C5A46D]/30 overflow-hidden">
+          <div className="mt-10 w-full rounded-3xl bg-gradient-to-b from-[#FAF8F3] via-[#FFFDF8]/90 to-[#FAF8F3] shadow-xl border border-[#B22222]/30 overflow-hidden">
             <CalEmbed
               calLink={option.calLink}
               style={{ height: "100%", width: "100%" , background: "linear-gradient(to bottom, #FAF8F3, rgba(255, 253, 248, 0.9), #FAF8F3"}}
