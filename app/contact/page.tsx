@@ -74,7 +74,7 @@ function HeaderHero() {
               Vedic
             </span>
             <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
-              Online / In-person (Delhi)
+              Online / In-person (Lucknow)
             </span>
             <span className="rounded-xl bg-[#FFFDF8] border border-[#C5A46D]/30 px-3 py-1 text-gray-700">
               Secure & private
