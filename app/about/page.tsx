@@ -41,12 +41,11 @@ export default function AstrologerInfo() {
               <strong className="text-[#5B4A2F]">Acharya Sumit Tiwari (Vedic Astrologer)&nbsp;</strong> is a Famous Astrologer in Lucknow with experience of more than 19+ years. He provides very Simple and Logical remedies which are very Effective. His articles are also published in various News Portals. 
             </p>
             <p className="text-[#4A4A4A] mb-4 leading-relaxed">
-              He holds Post Graduation in Astrology (M. A. Jyotirvigyan) from Lucknow University, Shastri in Vedic Jyotish from Central Sanskrit University, Lucknow and B. Com. from Lucknow University.
-He helped many people, from his readings and predictions, to reduce the hurdles in their path.
+             He holds a <strong className="text-[#5B4A2F]">B.Com</strong>{" "} from Lucknow University, a <strong className="text-[#5B4A2F]">Shastri </strong>{" "}in Vedic Jyotish from Central Sanskrit University, Lucknow, and a Post-Graduation in Astrology <strong className="text-[#5B4A2F]">(M.A. Jyotirvigyan)</strong>{" "} from Lucknow University under the guidence of Padamshri Professor B.K. Shukla He has helped many people through his readings and predictions to overcome obstacles in their paths.
             </p>
             <p className="text-[#4A4A4A] mb-6 leading-relaxed">
 If you choose him, you have already made one of the best decisions in your life.
-Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
+Contact Acharya Ji for {" "}
               <strong className="text-[#5B4A2F]">Scientific</strong> and{" "}
               <strong className="text-[#5B4A2F]">Logical Analysis</strong> of{" "}
               <strong className="text-[#5B4A2F]">Kundli.</strong>
@@ -82,7 +81,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
           <div className="relative inline-block bg-gradient-to-br from-[#FAF6E8] to-[#F5EEE1] border border-[#CAB27A] rounded-2xl p-6 shadow-sm shadow-[#E9DFC7] mx-auto max-w-xl">
             
             <p className="leading-relaxed text-[#4A4A4A]">
-              From the age of 4, his grandfather observed a natural inclination towards{" "}
+              From the early age, his family observed a natural inclination towards{" "}
               <strong className="text-[#7A5A2B] font-semibold">spiritual practices</strong>. Several astrologers
               studied his birth chart and predicted a life path closely tied to{" "}
               <strong className="text-[#7A5A2B] font-semibold">Spirituality &amp; Jyotish</strong>.
@@ -108,54 +107,7 @@ Contact Acharya Ji for Scientific and Logical Analysis of Kundli.{" "}
           <div className="relative inline-block bg-gradient-to-br from-[#FAF6E8] to-[#F5EEE1] border border-[#CAB27A] rounded-2xl p-6 shadow-sm shadow-[#E9DFC7] mx-auto max-w-xl">
             
             <p className="leading-relaxed text-[#4A4A4A]">
-              This view was affirmed by{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Padamshri Prof. B K Shukla</strong>, in year 2007.{" "}
-            </p>
-          </div>
-        </div>
-      </li>
-
-      {/* Branch 3 */}
-      <li className="grid grid-cols-1 md:grid-cols-2 items-center">
-        {/* Card */}
-        <div className="md:pr-10 md:text-left">
-          <div className="relative inline-block bg-gradient-to-br from-[#FAF6E8] to-[#F5EEE1] border border-[#CAB27A] rounded-2xl p-6 shadow-sm shadow-[#E9DFC7] mx-auto max-w-xl">
-<p className="leading-relaxed text-[#4A4A4A]">
-  He honoured his parents’ wish by completing his{" "}
-  <strong className="text-[#7A5A2B] font-semibold">Intermediate</strong> education. Later, driven by his inner calling towards astrology, he pursued <strong className="text-[#7A5A2B] font-semibold">Shastri in Vedic Jyotish</strong> from Central Sanskrit University, Lucknow along with a <strong className="text-[#7A5A2B] font-semibold">B.Com</strong> from Lucknow University.
-  <br /><br />
-  Despite facing resistance from his family, he remained committed to his path and eventually completed his{" "}
-  <strong className="text-[#7A5A2B] font-semibold">Postgraduate degree in Astrology</strong> from{" "}
-  <strong className="text-[#7A5A2B] font-semibold">Lucknow University</strong>.
-  <br /><br />
-</p>
-
-</div>
-
-        </div>
-        {/* Node */}
-        <div className="flex justify-center my-4 md:my-0">
-          <span className="text-2xl font-bold text-[#B38B46] drop-shadow-sm select-none">↓</span>
-
-        </div>
-      </li>
-
-      {/* Branch 4 (right on md+) */}
-      <li className="grid grid-cols-1 md:grid-cols-2 items-center">
-        {/* Node */}
-        <div className="flex justify-center order-2 md:order-1 my-4 md:my-0">
-          <span className="text-2xl font-bold text-[#B38B46] drop-shadow-sm select-none">↓</span>
-
-        </div>
-        {/* Card */}
-        <div className="order-1 md:order-2 md:pl-10">
-          <div className="relative inline-block bg-gradient-to-br from-[#FAF6E8] to-[#F5EEE1] border border-[#CAB27A] rounded-2xl p-6 shadow-sm shadow-[#E9DFC7] mx-auto max-w-xl">
-            
-            <p className="leading-relaxed text-[#4A4A4A]">
-              From the age of nine, he learned{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Kundli</strong> making and interpretation under{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Maheshanand Saraswati (Dandi Swami)</strong> of{" "}
-              <strong className="text-[#7A5A2B] font-semibold">Naimisharanya</strong>.
+              He was Blessed by His Guru A Great Sanskrit Scholar and Katha Vyas <strong className="text-[#5B4A2F]">Param Pujya Swami Maheshanand Saraswati Ji Maharaj</strong>. By having Swami Ji's Guidance and Companionship He was Entered in tha Path of Spirituality. A true path of Sadhna.
             </p>
           </div>
         </div>
