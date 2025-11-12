@@ -22,10 +22,10 @@ export default function Footer() {
           <div className="space-y-4">
             <Link href="/" className="inline-flex items-center gap-3">
   <Image
-    src="/Jyotishwaani.svg"
+    src="/icon.jpg"
     alt="Brand logo"
-    height={150}
-    width={150}
+    height={80}
+    width={80}
     className="object-contain rounded-full animate-spin-ltr"
   />
 </Link>

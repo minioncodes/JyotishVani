@@ -29,7 +29,7 @@ export default function Navbar() {
       <div className="flex items-center justify-between rounded-2xl bg-white/90 backdrop-blur-md px-5 py-3 shadow-md">
         <Link href="/" className="flex items-center">
   <Image
-    src="/Jyotishwaani.svg"
+    src="/icon.jpg"
     alt="Logo"
     width={25}
     height={25}
