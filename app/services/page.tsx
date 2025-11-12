@@ -43,15 +43,15 @@ export default function AstroCategories() {
               show: { opacity: 1, y: 0 },
             }}
             whileHover={{ y: -6 }}
-            className="relative bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center text-center group cursor-pointer border border-[#C5A46D20] aspect-square p-6 overflow-hidden"
+            className="relative bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center text-center group cursor-pointer border border-[#B2222220] aspect-square p-6 overflow-hidden"
 
 
           >
-            <div className="text-4xl text-[#C5A46D] mb-3">{i.icon}</div>
+            <div className="text-4xl text-[#B22222] mb-3">{i.icon}</div>
             <h3 className="font-semibold text-black text-lg md:text-xl">{i.name}</h3>
             <p className="text-[11px] text-black/60 mt-1 font-medium">{i.caption}</p>
 
-            <div className="absolute inset-0 rounded-3xl bg-[#C5A46D15] backdrop-blur-sm opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center p-8">
+            <div className="absolute inset-0 rounded-3xl bg-[#B2222215] backdrop-blur-sm opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center p-8">
               <p className="text-black/90 text-base leading-relaxed font-medium">{i.about}</p>
             </div>
           </motion.div>

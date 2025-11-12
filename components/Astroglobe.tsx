@@ -82,7 +82,7 @@ export default function AstroGlobe() {
         duration: 1.2,
         ease: [0.25, 0.1, 0.25, 1],     // smooth cubic-bezier
       }}
-      className="relative w-[340px] h-[340px] md:w-[480px] md:h-[480px] flex items-center justify-center bg-[#C5A46D] rounded-sm overflow-hidden shadow-sm"
+      className="relative w-[340px] h-[340px] md:w-[480px] md:h-[480px] flex items-center justify-center bg-[#B22222] rounded-sm overflow-hidden shadow-sm"
     >
       {/* Subtle aura */}
       <div className="absolute inset-0 rounded-full bg-[#FAF9F6] blur-3xl animate-pulse" />
@@ -130,7 +130,7 @@ export default function AstroGlobe() {
         animate={{ rotate: 360 }}
         transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
       >
-        <div className="w-full h-full rounded-full border border-dashed border-[#C5A46D]/50" />
+        <div className="w-full h-full rounded-full border border-dashed border-[#B22222]/50" />
       </motion.div>
 
       {/* Wireframe globe */}
@@ -140,11 +140,11 @@ export default function AstroGlobe() {
         animate={{ rotate: 360 }}
         transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
       >
-        <circle cx="100" cy="100" r="80" fill="none" stroke="#C5A46D99" strokeWidth="1" />
-        <circle cx="100" cy="100" r="60" fill="none" stroke="#C5A46D66" strokeWidth="0.7" />
-        <circle cx="100" cy="100" r="40" fill="none" stroke="#C5A46D66" strokeWidth="0.7" />
-        <line x1="20" y1="100" x2="180" y2="100" stroke="#C5A46D55" />
-        <line x1="100" y1="20" x2="100" y2="180" stroke="#C5A46D55" />
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#B2222299" strokeWidth="1" />
+        <circle cx="100" cy="100" r="60" fill="none" stroke="#B2222266" strokeWidth="0.7" />
+        <circle cx="100" cy="100" r="40" fill="none" stroke="#B2222266" strokeWidth="0.7" />
+        <line x1="20" y1="100" x2="180" y2="100" stroke="#B2222255" />
+        <line x1="100" y1="20" x2="100" y2="180" stroke="#B2222255" />
       </motion.svg>
 
       {/* Planet core */}
@@ -153,7 +153,7 @@ export default function AstroGlobe() {
         animate={{ scale: [1, 1.15, 1], opacity: [1, 0.7, 1] }}
         transition={{ duration: 3, repeat: Infinity }}
       >
-        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F9E6A6] via-[#C5A46D] to-[#0B0C10] blur-xl shadow-[0_0_40px_15px_rgba(255,217,125,0.6)]" />
+        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F9E6A6] via-[#B22222] to-[#0B0C10] blur-xl shadow-[0_0_40px_15px_rgba(255,217,125,0.6)]" />
       </motion.div>
 
       {/* Snapshot overlay */}
@@ -175,7 +175,7 @@ export default function AstroGlobe() {
               key={label}
               className="rounded-lg border border-[#FFD97D]/50 p-2 bg-white/90 shadow"
             >
-              <div className="text-[#C5A46D] text-xs font-medium">{label}</div>
+              <div className="text-[#B22222] text-xs font-medium">{label}</div>
               <div className="mt-1 text-base text-black font-semibold">
                 {value || "Loading..."}
               </div>

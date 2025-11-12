@@ -59,14 +59,14 @@ function Card({ s, onClick }: { s: Sign; onClick: () => void }) {
         transition-all duration-300
         hover:shadow-[0_12px_36px_rgba(197,164,109,0.45)]
         hover:-translate-y-0.5
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A46D]/60
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B22222]/60
       "
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 rounded-2xl"
         style={{ boxShadow:"inset 0 0 0 1px rgba(197,164,109,0.28), 0 1px 0 rgba(255,255,255,0.4)" }}
       />
       <div className="flex flex-col items-center pt-2">
-        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#C5A46D]/20 to-[#E6D5B8]/40 text-2xl text-[#C5A46D] shadow-sm transition-transform duration-300 group-hover:scale-110">
+        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#B22222]/20 to-[#E68F8F]/40 text-2xl text-[#B22222] shadow-sm transition-transform duration-300 group-hover:scale-110">
           {s.icon}
         </div>
         <h3 className="text-center text-lg font-semibold text-black transition-colors duration-300 group-hover:text-[#8F733F]">
@@ -89,11 +89,11 @@ function PredictionModal({ sign, onClose }: { sign: Sign | null; onClose: () => 
           <motion.div className="relative max-w-2xl w-[92%] sm:w-full rounded-2xl bg-white/95 p-6 shadow-2xl text-black"
             initial={{ scale: 0.96, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.96, opacity: 0 }}
             transition={{ duration: 0.22, ease: "easeOut" }}>
-            <button onClick={onClose} className="absolute right-4 top-4 text-gray-600 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A46D]/60 rounded-md">
+            <button onClick={onClose} className="absolute right-4 top-4 text-gray-600 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B22222]/60 rounded-md">
               <FiX size={22}/>
             </button>
-            <h2 className="text-2xl font-bold mb-4">{sign.name} <span className="text-[#C5A46D]">Horoscope</span></h2>
-            <div className="rounded-xl bg-[#FAF9F6] p-4 shadow-sm border border-[#E6D5B8]/50">
+            <h2 className="text-2xl font-bold mb-4">{sign.name} <span className="text-[#B22222]">Horoscope</span></h2>
+            <div className="rounded-xl bg-[#FAF9F6] p-4 shadow-sm border border-[#E68F8F]/50">
               <p className="text-gray-800 text-sm">{sign.msg}</p>
             </div>
           </motion.div>
@@ -170,7 +170,7 @@ export default function Horoscope() {
 
       <div className="mx-auto max-w-5xl text-center">
         <h2 className="text-3xl md:text-5xl font-bold text-black">
-          Today’s <span className="text-[#C5A46D]">Horoscope</span>
+          Today’s <span className="text-[#B22222]">Horoscope</span>
         </h2>
         <p className="mt-3 text-sm md:text-base text-gray-700">
           Your daily dose of cosmic guidance, aligned with the stars ✨
@@ -192,7 +192,7 @@ export default function Horoscope() {
         <div className="mt-5 flex justify-center gap-2" aria-label="Slide navigation">
           {data.map((_, i) => (
             <button key={i} onClick={() => goTo(i)} aria-label={`Go to ${data[i].name}`}
-              className={`h-2.5 w-2.5 rounded-full transition-all ${index === i ? "bg-[#C5A46D] w-6" : "bg-gray-300"}`}
+              className={`h-2.5 w-2.5 rounded-full transition-all ${index === i ? "bg-[#B22222] w-6" : "bg-gray-300"}`}
             />
           ))}
         </div>
@@ -210,7 +210,7 @@ export default function Horoscope() {
       </div>
 
       <div className="mt-10 flex justify-center">
-        <a href="/contact" className="rounded-xl bg-[#C5A46D] px-6 py-3 text-sm font-semibold text-black shadow-md hover:bg-black hover:text-white transition">
+        <a href="/contact" className="rounded-xl bg-[#B22222] px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-black hover:text-white transition">
           Get your personalized reading
         </a>
       </div>

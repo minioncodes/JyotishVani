@@ -36,14 +36,14 @@ export default function Footer() {
               <Link
                 aria-label="Instagram"
                 href="https://www.instagram.com/jyotish_waani/"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#C5A46D]/10 text-[#C5A46D] transition hover:bg-[#C5A46D] hover:text-black"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#B22222]/10 text-[#B22222] transition hover:bg-[#B22222] hover:text-black"
               >
                 <FiInstagram />
               </Link>
               <Link
                 aria-label="Facebook"
                 href="https://www.facebook.com/banaraswaleguruji"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#C5A46D]/10 text-[#C5A46D] transition hover:bg-[#C5A46D] hover:text-black"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#B22222]/10 text-[#B22222] transition hover:bg-[#B22222] hover:text-black"
               >
                 <FiFacebook />
               </Link>
@@ -52,12 +52,12 @@ export default function Footer() {
 
           {/* Address / Contact */}
           <div className="space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-[#C5A46D]">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-[#B22222]">
               Get in touch
             </h4>
             <ul className="space-y-4 text-sm text-gray-300">
               <li className="flex items-start gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#C5A46D]/10 text-[#C5A46D]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#B22222]/10 text-[#B22222]">
                   <FiMapPin />
                 </span>
                 <div className="leading-relaxed">
@@ -67,21 +67,21 @@ export default function Footer() {
               </li>
 
               <li className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#C5A46D]/10 text-[#C5A46D]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#B22222]/10 text-[#B22222]">
                   <FiMail />
                 </span>
                 <Link
                   href="mailto:help@jyotishwaani.com"
-                  className="hover:text-[#C5A46D]"
+                  className="hover:text-[#B22222]"
                 >
                   help@jyotishwaani.com
                 </Link>
               </li>
               <li className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#C5A46D]/10 text-[#C5A46D]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#B22222]/10 text-[#B22222]">
                   <FiPhone />
                 </span>
-                <Link href="tel:+919876543210" className="hover:text-[#C5A46D]">
+                <Link href="tel:+919876543210" className="hover:text-[#B22222]">
                   +91 9415087999
                   +91 9452464332
                 </Link>
@@ -91,17 +91,17 @@ export default function Footer() {
         </motion.div>
 
         {/* Divider */}
-        <div className="my-8 h-px w-full bg-gradient-to-r from-transparent via-[#C5A46D]/30 to-transparent" />
+        <div className="my-8 h-px w-full bg-gradient-to-r from-transparent via-[#B22222]/30 to-transparent" />
 
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-3 text-sm text-gray-400 md:flex-row">
           <p>© {year} Jyotishwaani. All rights reserved.</p>
           <p>
             Developed by{" "}
-            <Link href="https://digipants.com/" target="blank" className="text-[#C5A46D] font-small">DigiPants Network Pvt.</Link> ·{" "}
+            <Link href="https://digipants.com/" target="blank" className="text-[#B22222] font-small">DigiPants Network Pvt.</Link> ·{" "}
             <Link
               href="/privacy"
-              className="underline decoration-transparent hover:decoration-[#C5A46D]"
+              className="underline decoration-transparent hover:decoration-[#B22222]"
             >
               Privacy Policy
             </Link>

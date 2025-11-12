@@ -17,7 +17,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-black">
-            About <span className="text-[#C5A46D]">JyotishWaani</span>
+            About <span className="text-[#B22222]">JyotishWaani</span>
           </h2>
           <p className="mt-4 text-base md:text-lg text-gray-800 leading-relaxed">
             JyotishWaani is a dedicated astrology organisation offering complete
@@ -45,24 +45,24 @@ export default function About() {
         >
           <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-lg">
             <Image
-              src="/Acharya Sumit Tiwari.jpg" // replace with actual astrologer image path
+              src="/Acharya ji (2).jpg" // replace with actual astrologer image path
               alt="Astrologer Acharya Sumit Tiwari"
               fill
               className="object-cover"
             />
           </div>
           <h3 className="text-xl font-semibold text-black">
-            Vedic Astrologer <span className="text-[#C5A46D]">Acharya Sumit Tiwari</span>
+            Vedic Astrologer <span className="text-[#B22222]">Acharya Sumit Tiwari</span>
           </h3>
           <p className="text-gray-800 leading-relaxed">
-            <span className="font-semibold text-[#C5A46D]">
+            <span className="font-semibold text-[#B22222]">
               Acharya Sumit Tiwari (Vedic Astrologer)&nbsp;
             </span>
 is a well known Lucknow based astrologer with 19+ years experience. He offers simple, logical and effective remedies, is well published, highly academically qualified in Jyotish and has helped many people remove hurdles through accurate scientific Kundli analysis.
           </p>
           <Link
             href="/about"
-            className="inline-block text-sm font-medium text-[#C5A46D] hover:text-black transition"
+            className="inline-block text-sm font-medium text-[#B22222] hover:text-black transition"
           >
             → More about Acharya Ji
           </Link>
