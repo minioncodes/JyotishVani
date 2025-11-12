@@ -102,17 +102,25 @@ export async function GET(req: Request) {
       panchangData?.data?.nakshatra?.find((n: any) => isNowBetween(n.start, n.end)) ||
       panchangData?.data?.nakshatra?.[0];
 
-    const rahu = inauspiciousData?.data?.muhurat?.find((m: any) => m.name === "Rahu");
-    const rahuPeriod = rahu?.period?.[0];
-    const rahuKaal = rahuPeriod
-      ? `${new Date(rahuPeriod.start).toLocaleTimeString("en-IN", {
-          hour: "2-digit",
-          minute: "2-digit",
-        })}–${new Date(rahuPeriod.end).toLocaleTimeString("en-IN", {
-          hour: "2-digit",
-          minute: "2-digit",
-        })}`
-      : "—";
+ // Find Rahu period that is currently active, else next one
+const rahu = inauspiciousData?.data?.muhurat?.find((m: any) => m.name === "Rahu");
+
+let rahuPeriod = rahu?.period?.find((p: any) => isNowBetween(p.start, p.end));
+if (!rahuPeriod && rahu?.period?.length) {
+  // if not active, pick today's period (first one)
+  rahuPeriod = rahu.period[0];
+}
+
+const rahuKaal = rahuPeriod
+  ? `${new Date(rahuPeriod.start).toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}–${new Date(rahuPeriod.end).toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}`
+  : "—";
+
 
     const snapshot = {
       tithi: currentTithi?.name || "—",
