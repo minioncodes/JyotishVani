@@ -7,7 +7,7 @@ let tokenExpiry = 0;
 const userCache = new Map<string, { data: any; timestamp: number }>();
 
 
-const CACHE_TTL = 12 * 60 * 60 * 1000;
+const CACHE_TTL = 6* 60 * 60 * 1000;
 
 async function getAccessToken() {
   const now = Date.now();
@@ -68,7 +68,12 @@ export async function GET(req: Request) {
 
     const token = await getAccessToken();
     const currentTime = new Date();
-    const datetime = currentTime.toISOString().split(".")[0] + "+05:30";
+   
+const datetime =
+  new Date()
+    .toLocaleString("sv-SE", { timeZone: "Asia/Kolkata" }) 
+    .replace(" ", "T") + "+05:30";
+
     const coordinates = "28.6139,77.2090";
     const encodedDatetime = encodeURIComponent(datetime);
 
