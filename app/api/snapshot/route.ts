@@ -109,13 +109,14 @@ const datetime =
 
  // Find Rahu period that is currently active, else next one
 const rahu = inauspiciousData?.data?.muhurat?.find((m: any) => m.name === "Rahu");
+console.log("Rahu data:", rahu);
 
 let rahuPeriod = rahu?.period?.find((p: any) => isNowBetween(p.start, p.end));
 if (!rahuPeriod && rahu?.period?.length) {
   // if not active, pick today's period (first one)
   rahuPeriod = rahu.period[0];
 }
-
+console.log("Rahu period:", rahuPeriod);
 const rahuKaal = rahuPeriod
   ? `${new Date(rahuPeriod.start).toLocaleTimeString("en-IN", {
       hour: "2-digit",
