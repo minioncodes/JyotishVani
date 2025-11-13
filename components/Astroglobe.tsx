@@ -21,26 +21,29 @@ export default function AstroGlobe() {
     let isMounted = true;
     let interval: NodeJS.Timeout | null = null;
 
-    async function fetchSnapshot() {
-      try {
-        const res = await fetch("/api/snapshot", { cache: "no-store" });
-        const data = await res.json();
-        if (!isMounted) return;
+   async function fetchSnapshot() {
+  try {
+    const res = await fetch("/api/snapshot", { cache: "no-store" });
+    const data = await res.json();
+    if (!isMounted) return;
 
-        setSnapshot({
-          tithi: data.tithi,
-          paksha: data.paksha,
-          nakshatra: data.nakshatra,
-          // choghadiya: data.choghadiya,
-          rahuKaal: data.rahuKaal,
-            //  amritKaal: data.amritKaal,
-          remedy: "Offer water to Sun",
-          updatedAt: data.updatedAt || new Date().toLocaleTimeString(),
-        });
-      } catch (err) {
-        console.error("Snapshot fetch failed:", err);
-      }
-    }
+    const snap = data.data || data;  // handle both structures
+
+setSnapshot({
+  tithi: snap.tithi,
+  paksha: snap.paksha,
+  nakshatra: snap.nakshatra,
+  rahuKaal: snap.rahuKaal,
+  remedy: "Offer water to Sun",
+  updatedAt: snap.updatedAt,
+});
+
+
+  } catch (err) {
+    console.error("Snapshot fetch failed:", err);
+  }
+}
+
 
     fetchSnapshot();
 
