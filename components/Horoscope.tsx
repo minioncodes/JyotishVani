@@ -291,7 +291,7 @@ export default function Horoscope() {
       <div className="mt-10 flex justify-center">
         <a
           href="/contact"
-          className="rounded-xl bg-[#B22222] px-6 py-3 text-sm font-semibold text-black shadow-md hover:bg-black hover:text-white transition"
+          className="rounded-xl bg-[#B22222] px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-black hover:text-white transition"
         >
           Get your personalized reading
         </a>
