@@ -1,41 +1,12 @@
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/Redis";
+import { redis } from "@/lib/redis";
+import { getProkeralaToken } from "@/lib/prokerala";
 
-let cachedToken: string | null = null;
-let tokenExpiry = 0;
-
-const SNAPSHOT_TTL = 6 * 60 * 60;
 const TZ = "Asia/Kolkata";
+const SNAP_KEY = "snapshot:";
 
-async function getAccessToken() {
-  const now = Date.now();
-  if (cachedToken && now < tokenExpiry - 60000) return cachedToken;
-
-  console.log("🔄 Refreshing token…");
-
-  const res = await fetch("https://api.prokerala.com/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      grant_type: "client_credentials",
-      client_id: process.env.PROKERALA_CLIENT_ID!,
-      client_secret: process.env.PROKERALA_CLIENT_SECRET!,
-    }),
-  });
-
-  const json = await res.json();
-  cachedToken = json.access_token;
-  tokenExpiry = now + json.expires_in * 1000;
-
-  return cachedToken;
-}
-
-function todayIST() {
-  return new Date().toLocaleDateString("sv-SE", { timeZone: TZ });
-}
-
-function toISTDate(d: Date) {
-  return d.toLocaleDateString("sv-SE", { timeZone: TZ });
+function nowIST() {
+  return new Date(new Date().toLocaleString("en-US", { timeZone: TZ }));
 }
 
 function toISTTime(iso: string) {
@@ -46,26 +17,28 @@ function toISTTime(iso: string) {
   });
 }
 
-function isNowBetween(start: string, end: string) {
-  const now = Date.now();
-  return now >= Date.parse(start) && now <= Date.parse(end);
-}
-
 export async function GET() {
   try {
-    const today = todayIST();
-    const cacheKey = `snapshot:${today}`;
+    const now = nowIST();
+    const today = now.toLocaleDateString("sv-SE", { timeZone: TZ });
+    const cacheKey = `${SNAP_KEY}${today}`;
 
-    const cached = await redis.get(cacheKey);
-    if (cached) {
-      console.log("♻️ Cached snapshot used");
-      return NextResponse.json(cached);
-    }
+   const cached = (await redis.get(cacheKey)) as
+  | { data: any; expiresAt: number }
+  | null;
 
-    const token = await getAccessToken();
+if (cached && cached.expiresAt > Date.now()) {
+  console.log("♻️ Cached snapshot used");
+  return NextResponse.json(cached.data);
+}
+
+
+    console.log("🌙 Fetching fresh snapshot...");
+
+    const token = await getProkeralaToken();
     const datetime = `${today}T00:00:00+05:30`;
     const encoded = encodeURIComponent(datetime);
-    const coordinates = "28.6139,77.2090";
+    const coords = "28.6139,77.2090";
 
     const opts = {
       headers: { Authorization: `Bearer ${token}` },
@@ -75,57 +48,80 @@ export async function GET() {
     // Panchang
     const pan = await (
       await fetch(
-        `https://api.prokerala.com/v2/astrology/panchang?ayanamsa=1&coordinates=${coordinates}&datetime=${encoded}`,
+        `https://api.prokerala.com/v2/astrology/panchang?ayanamsa=1&coordinates=${coords}&datetime=${encoded}`,
         opts
       )
     ).json();
 
-    // Inauspicious Periods
+    // Inauspicious (for Rahu)
     const ina = await (
       await fetch(
-        `https://api.prokerala.com/v2/astrology/inauspicious-period?ayanamsa=1&coordinates=${coordinates}&datetime=${encoded}`,
+        `https://api.prokerala.com/v2/astrology/inauspicious-period?ayanamsa=1&coordinates=${coords}&datetime=${encoded}`,
         opts
       )
     ).json();
 
+    // Parse tithi / nakshatra
     const tithis = pan?.data?.tithi || [];
     const nakshas = pan?.data?.nakshatra || [];
 
-    const currentTithi =
-      tithis.find((t: any) => isNowBetween(t.start, t.end)) || tithis[0];
+    const tithi = tithis.find((t: any) => Date.now() >= Date.parse(t.start) && Date.now() <= Date.parse(t.end)) || tithis[0];
+    const nakshatra = nakshas.find((n: any) => Date.now() >= Date.parse(n.start) && Date.now() <= Date.parse(n.end)) || nakshas[0];
 
-    const currentNakshatra =
-      nakshas.find((n: any) => isNowBetween(n.start, n.end)) || nakshas[0];
-
+    // Parse Rahu Kaal
     const rahu = ina?.data?.muhurat?.find((x: any) => x.name === "Rahu");
-    const periods = rahu?.period || [];
+    const p = rahu?.period || [];
 
-    const todayPeriods = periods.filter(
-      (p: any) => todayIST() === toISTDate(new Date(p.start))
+    const todayPeriods = p.filter(
+      (x: any) =>
+        new Date(x.start).toLocaleDateString("sv-SE", { timeZone: TZ }) === today
     );
 
-    const rahuPeriod =
-      todayPeriods.find((p: any) => isNowBetween(p.start, p.end)) ||
+    const activeRahu =
+      todayPeriods.find(
+        (x: any) => Date.now() >= Date.parse(x.start) && Date.now() <= Date.parse(x.end)
+      ) ||
       todayPeriods[0] ||
-      periods[0];
+      p[0];
 
-    const rahuKaal = rahuPeriod
-      ? `${toISTTime(rahuPeriod.start)}–${toISTTime(rahuPeriod.end)}`
+    const rahuKaal = activeRahu
+      ? `${toISTTime(activeRahu.start)}–${toISTTime(activeRahu.end)}`
       : "—";
 
+    // 2️⃣ Build snapshot
     const snapshot = {
-      tithi: currentTithi?.name || "—",
-      paksha: currentTithi?.paksha || "—",
-      nakshatra: currentNakshatra?.name || "—",
+      tithi: tithi?.name || "—",
+      paksha: tithi?.paksha || "—",
+      nakshatra: nakshatra?.name || "—",
       rahuKaal,
-      updatedAt: new Date().toLocaleTimeString("en-IN", {
+      updatedAt: now.toLocaleTimeString("en-IN", {
         hour: "2-digit",
         minute: "2-digit",
         timeZone: TZ,
       }),
     };
 
-    await redis.set(cacheKey, snapshot, { ex: SNAPSHOT_TTL });
+    // 3️⃣ Calculate dynamic TTL (until next event)
+    const upcomingTimes = [];
+
+    if (tithi?.end) upcomingTimes.push(Date.parse(tithi.end));
+    if (nakshatra?.end) upcomingTimes.push(Date.parse(nakshatra.end));
+    if (activeRahu?.end) upcomingTimes.push(Date.parse(activeRahu.end));
+
+    // Always flush at midnight too
+    const midnight = new Date(`${today}T23:59:59+05:30`).getTime();
+    upcomingTimes.push(midnight);
+
+    const nextEvent = Math.min(...upcomingTimes);
+    const ttlSeconds = Math.max(60, Math.floor((nextEvent - Date.now()) / 1000)); // min 60 sec
+
+    console.log("⏳ Snapshot TTL (seconds):", ttlSeconds);
+
+    // 4️⃣ Save structured cache
+    await redis.set(cacheKey, {
+      data: snapshot,
+      expiresAt: Date.now() + ttlSeconds * 1000,
+    });
 
     return NextResponse.json(snapshot);
   } catch (err: any) {

@@ -1,86 +1,103 @@
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/Redis";
+import { redis } from "@/lib/redis";
+import { getProkeralaToken } from "@/lib/prokerala";
 
-let cachedToken: string | null = null;
-let tokenExpiry = 0;
+const TZ = "Asia/Kolkata";
+const HORO_KEY = "horo:";
 
-const HORO_TTL = 12 * 60 * 60; // 12 hours
+type Prediction = {
+  type: string;
+  prediction: string;
+  challenge: string;
+};
 
-async function getAccessToken() {
-  const now = Date.now();
-  if (cachedToken && now < tokenExpiry - 60000) return cachedToken;
-
-  console.log("🔄 Fetching Prokerala token…");
-
-  const res = await fetch("https://api.prokerala.com/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      grant_type: "client_credentials",
-      client_id: process.env.PROKERALA_CLIENT_ID!,
-      client_secret: process.env.PROKERALA_CLIENT_SECRET!,
-    }),
-  });
-
-  if (!res.ok) throw new Error("Token fetch failed");
-
-  const data = await res.json();
-  cachedToken = data.access_token;
-  tokenExpiry = now + data.expires_in * 1000;
-
-  return cachedToken;
-}
+export type HoroscopeDayCache = Record<
+  string,
+  {
+    date: string;
+    predictions: Prediction[];
+  }
+>;
 
 function todayIST() {
-  return new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Kolkata" });
+  return new Date().toLocaleDateString("sv-SE", { timeZone: TZ });
 }
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const sign = searchParams.get("sign")?.toLowerCase() || "aries";
-    const today = todayIST();
-    const cacheKey = `horo:${sign}:${today}`;
 
-    const cached = await redis.get(cacheKey);
-    if (cached) {
-      console.log(`♻️ Using cached: ${sign}`);
-      return NextResponse.json({ success: true, ...cached, cached: true });
+    const today = todayIST();
+    const cacheKey = `${HORO_KEY}${today}`;
+
+    // 1️⃣ Check Redis first
+    const cached = (await redis.get(cacheKey)) as HoroscopeDayCache | null;
+
+    if (cached && cached[sign]) {
+      console.log(`♻️ Cached horoscope returned for ${sign}`);
+      return NextResponse.json({ success: true, ...cached[sign], cached: true });
     }
 
-    const token = await getAccessToken();
+    // 2️⃣ Missing? → Fetch all 12 signs at once
+    console.log("🌙 Fetching ALL 12 signs from Prokerala...");
+
+    const token = await getProkeralaToken();
     const datetime = `${today}T00:00:00+05:30`;
 
-    const params = new URLSearchParams({ sign, type: "all", datetime });
-    const url = `https://api.prokerala.com/v2/horoscope/daily/advanced?${params}`;
+    const signs = [
+      "aries",
+      "taurus",
+      "gemini",
+      "cancer",
+      "leo",
+      "virgo",
+      "libra",
+      "scorpio",
+      "sagittarius",
+      "capricorn",
+      "aquarius",
+      "pisces",
+    ];
 
-    const response = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-      cache: "no-store",
-    });
+    let finalCache: HoroscopeDayCache = {};
 
-    if (!response.ok) {
-      return NextResponse.json(
-        { success: false, error: "Horoscope fetch failed" },
-        { status: 500 }
-      );
+    for (const s of signs) {
+      const params = new URLSearchParams({ sign: s, type: "all", datetime });
+      const url = `https://api.prokerala.com/v2/horoscope/daily/advanced?${params}`;
+
+      const res = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+        cache: "no-store",
+      });
+
+      const json = await res.json();
+
+      const predictions =
+        json?.data?.daily_predictions?.[0]?.predictions?.map((p: any) => ({
+          type: p.type,
+          prediction: p.prediction,
+          challenge: p.challenge,
+        })) || [];
+
+      finalCache[s] = {
+        date: datetime,
+        predictions,
+      };
     }
 
-    const json = await response.json();
-    const predictions =
-      json?.data?.daily_predictions?.[0]?.predictions?.map((p: any) => ({
-        type: p.type,
-        prediction: p.prediction,
-        challenge: p.challenge,
-      })) ?? [];
+    // 3️⃣ Save all 12 signs to Redis (24h)
+    await redis.set(cacheKey, finalCache, {
+      ex: 24 * 60 * 60,
+    });
 
-    const finalData = { sign, date: datetime, predictions };
-
-    await redis.set(cacheKey, finalData, { ex: HORO_TTL });
-
-    return NextResponse.json({ success: true, ...finalData, cached: false });
+    return NextResponse.json({
+      success: true,
+      ...finalCache[sign],
+      cached: false,
+    });
   } catch (err: any) {
-    console.error("Horoscope Error:", err);
+    console.error("Horoscope error:", err);
     return NextResponse.json({ success: false, error: err.message });
   }
 }
