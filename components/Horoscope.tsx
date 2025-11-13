@@ -55,7 +55,7 @@ function Card({ s, onClick }: { s: Sign; onClick: () => void }) {
     <button
       onClick={onClick}
       aria-label={`${s.name} horoscope`}
-      className="group relative shrink-0 select-none min-w-[240px] h-[200px] rounded-2xl p-4 text-left bg-white/65 backdrop-blur-md border border-white/20 transition-all duration-300 hover:shadow-[0_12px_36px_rgba(197,164,109,0.45)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A46D]/60"
+      className="group relative shrink-0 select-none min-w-[240px] h-[200px] rounded-2xl p-4 text-left bg-white/65 backdrop-blur-md border border-white/20 transition-all duration-300 hover:shadow-[0_12px_36px_rgba(197,164,109,0.45)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B22222]/60"
     >
       <span aria-hidden className="pointer-events-none absolute inset-0 rounded-2xl"
         style={{ boxShadow:"inset 0 0 0 1px rgba(197,164,109,0.28), 0 1px 0 rgba(255,255,255,0.4)" }}
@@ -104,12 +104,12 @@ function PredictionModal({
           >
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 text-gray-600 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A46D]/60 rounded-md"
+              className="absolute right-4 top-4 text-gray-600 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B22222]/60 rounded-md"
             >
               <FiX size={22} />
             </button>
             <h2 className="text-2xl font-bold mb-4">
-              {sign} <span className="text-[#C5A46D]">Horoscope</span>
+              {sign} <span className="text-[#B22222]">Horoscope</span>
             </h2>
 
             <div className="rounded-2xl bg-gradient-to-br from-[#FAF9F6] to-[#F4EEDF] p-6 shadow-inner border border-[#E6D5B8]/60 max-h-[70vh] overflow-y-auto">
@@ -126,7 +126,7 @@ function PredictionModal({
           key={p.type}
           className="relative rounded-xl bg-white/70 p-5 shadow-sm hover:shadow-md border border-[#E6D5B8]/40 transition-all duration-300"
         >
-          <span className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-[#C5A46D] to-[#E6D5B8] rounded-l-lg" />
+          <span className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-[#B22222] to-[#E6D5B8] rounded-l-lg" />
           <h3 className="font-semibold text-[#8F733F] text-xl mb-2 tracking-wide">
             {p.type}
           </h3>
@@ -270,7 +270,7 @@ export default function Horoscope() {
               onClick={() => goTo(i)}
               aria-label={`Go to ${data[i].name}`}
               className={`h-2.5 w-2.5 rounded-full transition-all ${
-                index === i ? "bg-[#C5A46D] w-6" : "bg-gray-300"
+                index === i ? "bg-[#B22222] w-6" : "bg-gray-300"
               }`}
             />
           ))}
@@ -291,7 +291,7 @@ export default function Horoscope() {
       <div className="mt-10 flex justify-center">
         <a
           href="/contact"
-          className="rounded-xl bg-[#C5A46D] px-6 py-3 text-sm font-semibold text-black shadow-md hover:bg-black hover:text-white transition"
+          className="rounded-xl bg-[#B22222] px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-black hover:text-white transition"
         >
           Get your personalized reading
         </a>

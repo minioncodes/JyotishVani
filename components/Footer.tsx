@@ -94,19 +94,32 @@ export default function Footer() {
         <div className="my-8 h-px w-full bg-gradient-to-r from-transparent via-[#B22222]/30 to-transparent" />
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-3 text-sm text-gray-400 md:flex-row">
-          <p>© {year} Jyotishwaani. All rights reserved.</p>
-          <p>
-            Developed by{" "}
-            <Link href="https://digipants.com/" target="blank" className="text-[#B22222] font-small">DigiPants Network Pvt.</Link> ·{" "}
-            <Link
-              href="/privacy"
-              className="underline decoration-transparent hover:decoration-[#B22222]"
-            >
-              Privacy Policy
-            </Link>
-          </p>
-        </div>
+{/* Bottom bar */}
+<div className="flex flex-col items-center justify-between gap-3 text-sm text-gray-400 md:flex-row">
+  <p>© {year} Jyotishwaani. All rights reserved.</p>
+
+  <p>
+    Developed by{" "}
+    <Link href="https://digipants.com/" target="blank" className="text-[#B22222] font-small">
+      DigiPants Network Pvt.
+    </Link>{" "}
+    ·{" "}
+    <Link
+      href="/privacy"
+      className="underline decoration-transparent hover:decoration-[#B22222]"
+    >
+      Privacy Policy
+    </Link>{" "}
+    ·{" "}
+    <Link
+      href="/disclaimer"
+      className="underline decoration-transparent hover:decoration-[#B22222]"
+    >
+      Disclaimer
+    </Link>
+  </p>
+</div>
+
       </div>
     </footer>
   );
