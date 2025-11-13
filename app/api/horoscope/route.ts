@@ -1,9 +1,9 @@
+// app/api/horoscope/route.ts
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/Redis";
-import { getProkeralaToken } from "@/lib/prokerala";
 
 const TZ = "Asia/Kolkata";
-const HORO_KEY = "horo:";
+const HORO_KEY_PREFIX = "horo:";
 
 type Prediction = {
   type: string;
@@ -11,7 +11,7 @@ type Prediction = {
   challenge: string;
 };
 
-export type HoroscopeDayCache = Record<
+type HoroscopeDay = Record<
   string,
   {
     date: string;
@@ -26,78 +26,46 @@ function todayIST() {
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const sign = searchParams.get("sign")?.toLowerCase() || "aries";
+    const sign = searchParams.get("sign")?.toLowerCase();
+
+    if (!sign) {
+      return NextResponse.json(
+        { success: false, error: "Missing sign" },
+        { status: 400 }
+      );
+    }
 
     const today = todayIST();
-    const cacheKey = `${HORO_KEY}${today}`;
+    const cacheKey = `${HORO_KEY_PREFIX}${today}`;
 
-    // 1️⃣ Check Redis first
-    const cached = (await redis.get(cacheKey)) as HoroscopeDayCache | null;
+    const dayData = (await redis.get(cacheKey)) as HoroscopeDay | null;
 
-    if (cached && cached[sign]) {
-      console.log(`♻️ Cached horoscope returned for ${sign}`);
-      return NextResponse.json({ success: true, ...cached[sign], cached: true });
+    if (!dayData || !dayData[sign]) {
+      return NextResponse.json(
+        {
+          success: false,
+          ready: false,
+          message:
+            "Horoscope not generated yet. Prefetch job has to run for today.",
+        },
+        { status: 503 }
+      );
     }
 
-    // 2️⃣ Missing? → Fetch all 12 signs at once
-    console.log("🌙 Fetching ALL 12 signs from Prokerala...");
-
-    const token = await getProkeralaToken();
-    const datetime = `${today}T00:00:00+05:30`;
-
-    const signs = [
-      "aries",
-      "taurus",
-      "gemini",
-      "cancer",
-      "leo",
-      "virgo",
-      "libra",
-      "scorpio",
-      "sagittarius",
-      "capricorn",
-      "aquarius",
-      "pisces",
-    ];
-
-    let finalCache: HoroscopeDayCache = {};
-
-    for (const s of signs) {
-      const params = new URLSearchParams({ sign: s, type: "all", datetime });
-      const url = `https://api.prokerala.com/v2/horoscope/daily/advanced?${params}`;
-
-      const res = await fetch(url, {
-        headers: { Authorization: `Bearer ${token}` },
-        cache: "no-store",
-      });
-
-      const json = await res.json();
-
-      const predictions =
-        json?.data?.daily_predictions?.[0]?.predictions?.map((p: any) => ({
-          type: p.type,
-          prediction: p.prediction,
-          challenge: p.challenge,
-        })) || [];
-
-      finalCache[s] = {
-        date: datetime,
-        predictions,
-      };
-    }
-
-    // 3️⃣ Save all 12 signs to Redis (24h)
-    await redis.set(cacheKey, finalCache, {
-      ex: 24 * 60 * 60,
-    });
+    const { date, predictions } = dayData[sign];
 
     return NextResponse.json({
       success: true,
-      ...finalCache[sign],
-      cached: false,
+      sign,
+      date,
+      predictions,
+      cached: true,
     });
   } catch (err: any) {
-    console.error("Horoscope error:", err);
-    return NextResponse.json({ success: false, error: err.message });
+    console.error("Horoscope read error:", err);
+    return NextResponse.json(
+      { success: false, error: err.message },
+      { status: 500 }
+    );
   }
 }
