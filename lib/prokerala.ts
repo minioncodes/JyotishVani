@@ -1,4 +1,4 @@
-import { redis } from "./redis";
+import { redis } from "./Redis";
 
 let cachedToken: string | null = null;
 let tokenExpiry = 0;

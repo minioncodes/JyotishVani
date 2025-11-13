@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
+import { redis } from "@/lib/Redis";
 import { getProkeralaToken } from "@/lib/prokerala";
 
 const TZ = "Asia/Kolkata";
