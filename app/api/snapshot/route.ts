@@ -36,8 +36,6 @@ export async function GET() {
     }
     const coordinates = "28.6139,77.2090";
     const encodedDatetime = encodeURIComponent(datetime);
-
-
     const panchangRes = await fetch(
       `https://api.prokerala.com/v2/astrology/panchang?ayanamsa=1&coordinates=${coordinates}&datetime=${encodedDatetime}`,
       { headers: { Authorization: `Bearer ${token}` } }

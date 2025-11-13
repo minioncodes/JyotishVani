@@ -37,10 +37,8 @@ export async function POST(req: Request) {
         const requestedEnd = new Date(end).getTime();
         const overlapping = busySlots.filter(slot => {
             if (!slot.start || !slot.end) return false;
-
             const busyStart = new Date(slot.start).getTime();
             const busyEnd = new Date(slot.end).getTime();
-
             const overlaps =
                 (requestedStart < busyEnd && requestedEnd > busyStart);
 
