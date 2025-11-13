@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -13,7 +12,6 @@ import Footer from "@/components/Footer";
 import StarsBg from "@/components/StarBg";
 import Blogs from "@/components/Blogs";
 import Horoscope from "@/components/Horoscope";
-
 
 
 export default function Page() {
