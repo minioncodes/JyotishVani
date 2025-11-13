@@ -1,100 +1,63 @@
 "use client";
 
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
-import { div } from "framer-motion/client";
-import { FiStar, FiHeart, FiSun, FiGlobe } from "react-icons/fi";
+import { FiStar, FiHeart, FiBriefcase, FiClock, FiTrendingUp, FiRadio, FiDollarSign, FiUsers, FiFeather } from "react-icons/fi";
 
-export default function ServicesPage() {
-    const services = [
-        {
-            icon: <FiStar className="text-4xl text-[#B38B46]" />,
-            title: "Personal Horoscope Reading",
-            desc: "Detailed analysis of your birth chart for career, love, health, and finances with actionable guidance.",
-        },
-        {
-            icon: <FiHeart className="text-4xl text-[#B38B46]" />,
-            title: "Relationship & Compatibility",
-            desc: "Discover cosmic alignment with your partner and learn how planetary influences affect your bond.",
-        },
-        {
-            icon: <FiSun className="text-4xl text-[#B38B46]" />,
-            title: "Gemstone Recommendations",
-            desc: "Get personalized gemstone suggestions to enhance positive energies and reduce planetary challenges.",
-        },
-        {
-            icon: <FiGlobe className="text-4xl text-[#B38B46]" />,
-            title: "Yearly Forecast",
-            desc: "A complete astrological roadmap for the upcoming year to help you plan important decisions confidently.",
-        },
-    ];
+const items = [
+  { icon: <FiStar />, name: "Kundli Analysis", caption:"Decode Your Birth Blueprint", about:"Detailed analysis of planetary placements, yogas, doshas & predictive roadmap." },
+  { icon: <FiHeart />, name: "Kundli Matching", caption:"Before You Commit Forever", about:"Compatibility, guna milan, modern psychological matching + timing alignment." },
+  { icon: <FiBriefcase />, name: "Education", caption:"Right Field. Right Timing.", about:"Right field, exam timing, foreign prospects & direction of study." },
+  { icon: <FiClock />, name: "Marriage / Marital Life", caption:"Your Marriage Karma Map", about:"Marriage timing, spouse nature, conflict resolution & post marriage patterns." },
+  { icon: <FiHeart />, name: "Love & Relationship", caption:"Heart + Karma Alignment", about:"Love future, patterns, next relationship chances, healing & heart alignment." },
+  { icon: <FiTrendingUp />, name: "Career / Business / Job", caption:"Growth That Is Written", about:"Career growth, business success, switch timing, job stability judgement." },
+  { icon: <FiRadio />, name: "E-Pooja", caption:"Rituals. Energy. Healing.", about:"Online personalized pooja, anushthan & ritualistic karmic balancing." },
+  { icon: <FiDollarSign />, name: "Health / Wealth", caption:"Body + Fortune Direction", about:"Ayushya, Sade Sati impact, disease patterns & wealth flow mapping." },
+  { icon: <FiUsers />, name: "Child", caption:"Future Generation Karma", about:"Child birth prediction, child astrology & parent-child karmic alignment." },
+  { icon: <FiFeather />, name: "Puja / Anushthan", caption:"Powerful Vedic Remedies", about:"Special pujas, remedies, planetary propitiation & authentic traditional rituals." },
+];
 
-    return (
-        <>
-            <Navbar/>
-            <section className="relative px-6 py-20 md:py-28 bg-gradient-to-b from-[#FAF7F2] via-[#FAF7F2]/90 to-[#F5EFE4] text-[#2B2B2B]">
-                <div className="max-w-5xl mx-auto text-center mb-16">
-                    <motion.h1
-                        initial={{ y: -20, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-4xl md:text-5xl font-extrabold font-[Cinzel] text-[#5B4A2F]"
-                    >
-                        Our Astrology Services
-                    </motion.h1>
-                    <motion.p
-                        initial={{ y: 20, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="mt-6 max-w-3xl mx-auto text-lg text-[#4A4A4A]"
-                    >
-                        Explore our range of personalized astrology services designed to bring
-                        clarity, confidence, and cosmic alignment to every stage of your life.
-                    </motion.p>
-                </div>
+export default function AstroCategories() {
+  return (
+    <section className="px-6 mt-10 py-14 md:py-20 lg:py-28">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{
+          hidden: { opacity: 0 },
+          show: {
+            opacity: 1,
+            transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+          },
+        }}
+        className="mx-auto max-w-7xl grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6"
 
-                <div className="mx-auto grid max-w-6xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10">
-                    {services.map((service, i) => (
-                        <motion.div
-                            key={service.title}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: i * 0.1 }}
-                            className="bg-white/70 backdrop-blur-xl rounded-3xl p-8 border border-[#E6D9B8]/50 shadow-xl hover:shadow-2xl transition"
-                        >
-                            <div className="flex items-center justify-center mb-6">
-                                {service.icon}
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 text-[#5B4A2F] text-center">
-                                {service.title}
-                            </h3>
-                            <p className="text-[#4A4A4A] leading-relaxed text-center">
-                                {service.desc}
-                            </p>
-                        </motion.div>
-                    ))}
-                </div>
+      >
 
-                <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="mt-20 text-center"
-                >
-                    <a
-                        href="/contact"
-                        className="inline-block px-8 py-4 rounded-xl bg-[#B38B46] text-white font-semibold shadow hover:bg-[#a17b3e] transition"
-                    >
-                        Book a Reading
-                    </a>
-                </motion.div>
-            </section>
-            
-        </>
-    );
+        {items.map((i) => (
+          <motion.div
+            key={i.name}
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              show: { opacity: 1, y: 0 },
+            }}
+            whileHover={{ y: -6 }}
+            className="relative bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center text-center group cursor-pointer border border-[#B2222220] aspect-square p-6 overflow-hidden"
+
+
+          >
+            <div className="text-4xl text-[#B22222] mb-3">{i.icon}</div>
+            <h3 className="font-semibold text-black text-lg md:text-xl">{i.name}</h3>
+            <p className="text-[11px] text-black/60 mt-1 font-medium">{i.caption}</p>
+
+            <div className="absolute inset-0 rounded-3xl bg-[#B2222215] backdrop-blur-sm opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center p-8">
+              <p className="text-black/90 text-base leading-relaxed font-medium">{i.about}</p>
+            </div>
+          </motion.div>
+        ))}
+
+      </motion.div>
+    </section>
+  );
 }

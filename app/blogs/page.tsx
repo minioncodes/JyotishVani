@@ -45,13 +45,12 @@ export default function BlogsPage() {
     <>
       
 
-      {/* Background */}
-      <Navbar/>
+
       <div className="fixed inset-0 -z-10 bg-[#FAF8F3]">
         <StarsBg />
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
-          <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#C5A46D]/15 blur-3xl" />
+          <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
+          <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
         </div>
       </div>
 
@@ -59,7 +58,7 @@ export default function BlogsPage() {
       <div className="max-w-6xl mx-auto px-6 py-14 relative z-10">
         {/* Page Heading */}
         <h1 className="text-4xl md:text-5xl font-bold text-center mt-[100px] font-[Cinzel] mb-12 text-black">
-          Whispers from the <span className="text-[#C5A46D]">Stars ✨</span>
+          Whispers from the <span className="text-[#B22222]">Stars ✨</span>
         </h1>
 
         {/* Blog Grid */}
@@ -67,7 +66,7 @@ export default function BlogsPage() {
           {blogs.map((blog) => (
             <div
               key={blog._id}
-              className="rounded-2xl border border-[#C5A46D]/30 bg-white/90 shadow-md hover:shadow-lg transition overflow-hidden"
+              className="rounded-2xl border border-[#B22222]/30 bg-white/90 shadow-md hover:shadow-lg transition overflow-hidden"
             >
               {blog.image && (
                 <Image
@@ -88,7 +87,7 @@ export default function BlogsPage() {
                 </p>
                 <Link
                   href={`/single-blog/${blog._id}`}
-                  className="inline-block rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-sm font-medium shadow hover:bg-black hover:text-white transition"
+                  className="inline-block rounded-xl bg-[#B22222] text-white px-4 py-2 text-sm font-medium shadow hover:bg-black hover:text-white transition"
                 >
                   Read More
                 </Link>

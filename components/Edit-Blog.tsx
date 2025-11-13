@@ -144,6 +144,7 @@ export default function EditBlogPage() {
           />
         )}
         <input
+          title="image"
           type="file"
           accept="image/*"
           className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 

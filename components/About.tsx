@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function About() {
   return (
-    <section id="about" className="relative px-6 py-20 md:py-28">
+    <section id="about" className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28">
       <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
         {/* LEFT: About JyotishWaani Organisation */}
@@ -17,7 +17,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-black">
-            About <span className="text-[#C5A46D]">JyotishWaani</span>
+            About <span className="text-[#B22222]">JyotishWaani</span>
           </h2>
           <p className="mt-4 text-base md:text-lg text-gray-800 leading-relaxed">
             JyotishWaani is a dedicated astrology organisation offering complete
@@ -35,7 +35,7 @@ export default function About() {
           </ul>
         </motion.div>
 
-        {/* RIGHT: Guru Ji Section */}
+        {/* RIGHT: Acharya Ji Section */}
         <motion.div
           initial={{ x: 30, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -45,29 +45,26 @@ export default function About() {
         >
           <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-lg">
             <Image
-              src="/sk-singh.jpg" // replace with actual astrologer image path
-              alt="Astrologer S. K. Singh"
+              src="/Acharya ji (2).jpg" // replace with actual astrologer image path
+              alt="Astrologer Acharya Sumit Tiwari"
               fill
               className="object-cover"
             />
           </div>
           <h3 className="text-xl font-semibold text-black">
-            Astrologer <span className="text-[#C5A46D]">S. K. Singh</span>
+            Vedic Astrologer <span className="text-[#B22222]">Acharya Sumit Tiwari</span>
           </h3>
           <p className="text-gray-800 leading-relaxed">
-            Shree S. K. Singh, fondly known as{" "}
-            <span className="font-semibold text-[#C5A46D]">
-              Banaras Wale Guruji
-            </span>,
-            is the guiding force behind JyotishWaani. With 30+ years of experience in Vedic astrology
-            and gemstone therapy, he has helped thousands find clarity in marriage, career, finance,
-            and health matters.
+            <span className="font-semibold text-[#B22222]">
+              Acharya Sumit Tiwari (Vedic Astrologer)&nbsp;
+            </span>
+is a well known Lucknow based astrologer with 19+ years experience. He offers simple, logical and effective remedies, is well published, highly academically qualified in Jyotish and has helped many people remove hurdles through accurate scientific Kundli analysis.
           </p>
           <Link
-            href="/astrologer-info"
-            className="inline-block text-sm font-medium text-[#C5A46D] hover:text-black transition"
+            href="/about"
+            className="inline-block text-sm font-medium text-[#B22222] hover:text-black transition"
           >
-            → More about Guru Ji
+            → More about Acharya Ji
           </Link>
         </motion.div>
 

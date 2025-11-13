@@ -28,14 +28,18 @@ export default function Navbar() {
     >
       <div className="flex items-center justify-between rounded-2xl bg-white/90 backdrop-blur-md px-5 py-3 shadow-md">
         <Link href="/" className="flex items-center">
-          <Image
-            src="/logo.svg"
-            alt="Logo"
-            width={160}
-            height={50}
-            className="mr-2"
-          />
-        </Link>
+  <Image
+    src="/icon.jpg"
+    alt="Logo"
+    width={25}
+    height={25}
+    className="mr-1 object-contain rounded-full animate-spin-ltr"
+  />
+  <span className="text-xl font-bold">
+    JyotishWaani
+  </span>
+</Link>
+
         <div className="hidden md:flex items-center gap-7 text-gray-800 font-medium">
           {links.map((l) => (
             <motion.a
@@ -43,20 +47,20 @@ export default function Navbar() {
               href={l.href}
               whileHover={{ y: -2 }}
               transition={{ duration: 0.2 }}
-              className="hover:text-[#C5A46D] transition-colors"
+              className="hover:text-[#B22222] transition-colors"
             >
               {l.label}
             </motion.a>
           ))}
           <a
             href="/bookings"
-            className="rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-sm font-semibold shadow hover:bg-black hover:text-white transition"
+            className="rounded-xl bg-[#B22222] text-white px-4 py-2 text-sm font-semibold shadow hover:bg-black hover:text-white transition"
           >
             Book Now
           </a>
         </div>
         <button
-          className="md:hidden rounded-xl bg-[#C5A46D]/20 p-2 text-black hover:bg-[#C5A46D]/30"
+          className="md:hidden rounded-xl bg-[#B22222]/20 p-2 text-black hover:bg-[#B22222]/30"
           onClick={() => setOpen((s) => !s)}
           aria-label="Menu"
         >
@@ -79,7 +83,7 @@ export default function Navbar() {
                 <a
                   key={l.href}
                   href={l.href}
-                  className="py-3 text-gray-800 font-medium border-b border-gray-200 last:border-none hover:text-[#C5A46D]"
+                  className="py-3 text-gray-800 font-medium border-b border-gray-200 last:border-none hover:text-[#B22222]"
                   onClick={() => setOpen(false)}
                 >
                   {l.label}
@@ -87,7 +91,7 @@ export default function Navbar() {
               ))}
               <a
                 href="/bookings"
-                className="mt-3 rounded-xl bg-[#C5A46D] text-black px-4 py-2 text-center font-semibold shadow hover:bg-black hover:text-white transition"
+                className="mt-3 rounded-xl bg-[#B22222] text-white px-4 py-2 text-center font-semibold shadow hover:bg-black hover:text-white transition"
               >
                 Book Now
               </a>

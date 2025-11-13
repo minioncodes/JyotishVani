@@ -6,12 +6,11 @@ import Footer from "@/components/Footer";
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <Navbar/>
       <main className="relative min-h-screen bg-gradient-to-b from-white via-[#FAF8F3] to-white px-6 py-16 mt-10">
         <div className="max-w-5xl mx-auto">
           {/* Heading */}
           <h1 className="text-4xl font-bold text-center mb-8 text-gray-900 font-[Cinzel]">
-            Privacy <span className="text-[#C5A46D]">Policy</span>
+            Privacy <span className="text-[#B22222]">Policy</span>
           </h1>
 
           {/* Last updated */}
@@ -146,7 +145,7 @@ export default function PrivacyPolicyPage() {
                 you can reach us at:{" "}
                 <a
                   href="mailto:help@jyotishwaani.com"
-                  className="text-[#C5A46D] underline"
+                  className="text-[#B22222] underline"
                 >
                   help@jyotishwaani.com
                 </a>

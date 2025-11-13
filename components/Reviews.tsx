@@ -69,7 +69,7 @@ function ReviewCard({ r }: { r: Review }) {
     <div className="w-80 h-60  bg-white/90 p-6 hover:scale-110 cursor-pointer transition shadow-md flex flex-col justify-between">
       {/* top row: avatar + name */}
       <div className="flex items-center gap-4">
-        <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#C5A46D]/40 bg-white">
+        <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#B22222]/40 bg-white">
           {r.avatar ? (
             <Image
               src={r.avatar}
@@ -93,7 +93,7 @@ function ReviewCard({ r }: { r: Review }) {
         {Array.from({ length: 5 }).map((_, i) => (
           <FiStar
             key={i}
-            className={`h-4 w-4 ${i < r.rating ? "text-[#C5A46D]" : "text-gray-400"}`}
+            className={`h-4 w-4 ${i < r.rating ? "text-[#B22222]" : "text-gray-400"}`}
           />
         ))}
       </div>
@@ -109,18 +109,11 @@ function ReviewCard({ r }: { r: Review }) {
 export default function Reviews() {
   const [current, setCurrent] = useState(0);
 
-  // Auto-scroll on mobile
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % reviews.length);
-    }, 3500); // 3.5s per slide
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section
       id="testimonials"
-      className="relative px-6 py-20 md:py-28"
+      className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28"
     >
       {/* subtle golden glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_200px_at_10%_10%,rgba(197,164,109,0.08),transparent_60%),radial-gradient(600px_200px_at_90%_90%,rgba(197,164,109,0.08),transparent_60%)]" />
@@ -130,7 +123,7 @@ export default function Reviews() {
         <div className="mb-10 md:mb-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-4 p-6 rounded-2xl bg-white/80 shadow-lg">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-black">
-              What <span className="text-[#C5A46D]">Clients Say</span>
+              What <span className="text-[#B22222]">Clients Say</span>
             </h2>
             <p className="mt-2 text-gray-700">
               Real experiences. Real results. Compassionate, accurate, and
@@ -139,10 +132,10 @@ export default function Reviews() {
           </div>
 
           {/* rating badge */}
-          <div className="flex items-center gap-2 rounded-xl bg-[#C5A46D]/10 px-4 py-2">
+          <div className="flex items-center gap-2 rounded-xl bg-[#B22222]/10 px-4 py-2">
             <div className="flex -mr-1">
               {Array.from({ length: 5 }).map((_, i) => (
-                <FiStar key={i} className="h-4 w-4 text-[#C5A46D]" />
+                <FiStar key={i} className="h-4 w-4 text-[#B22222]" />
               ))}
             </div>
             <span className="text-sm text-gray-800">
@@ -151,44 +144,35 @@ export default function Reviews() {
           </div>
         </div>
 
-        {/* ✅ Mobile Auto-Carousel */}
-        <div className="md:hidden relative w-full flex justify-center">
-          <motion.div
-            className="flex"
-            animate={{ x: `-${current * 100}%` }}
-            transition={{ type: "spring", stiffness: 80, damping: 20 }}
-            style={{ width: `${reviews.length * 100}%` }}
-          >
-            {reviews.map((r, idx) => (
-              <div key={idx} className="w-full flex justify-center shrink-0">
-                <ReviewCard r={r} />
-              </div>
-            ))}
-          </motion.div>
-        </div>
+        {/* ✅ MOBILE + TABLET manual swipe */}
+<div className="block lg:hidden overflow-hidden">
+  <div className="flex gap-5 overflow-x-auto no-scrollbar px-2 snap-x snap-mandatory">
+    {reviews.map((r, idx) => (
+      <div key={idx} className="snap-center shrink-0">
+        <ReviewCard r={r} />
+      </div>
+    ))}
+  </div>
+</div>
 
-        {/* ✅ Desktop Marquee */}
-        <div className="hidden md:block relative w-full  mt-10">
-          <motion.div
-            className="flex gap-5 w-max"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 40,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          >
-            {[...reviews, ...reviews].map((r, idx) => (
-              <ReviewCard r={r} key={idx} />
-            ))}
-          </motion.div>
-        </div>
+{/* ✅ DESKTOP marquee */}
+<div className="hidden lg:block relative w-full mt-10">
+  <motion.div
+    className="flex gap-5 w-max"
+    animate={{ x: ["0%", "-50%"] }}
+    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+  >
+    {[...reviews, ...reviews].map((r, idx) => (
+      <ReviewCard r={r} key={idx} />
+    ))}
+  </motion.div>
+</div>
 
         {/* CTA */}
         <div className="mt-10 flex items-center justify-center">
           <a
             href="/bookings"
-            className="rounded-xl bg-[#C5A46D] px-6 py-3 font-semibold text-black shadow-md hover:bg-black hover:text-white transition"
+            className="rounded-xl bg-[#B22222] px-6 py-3 font-semibold text-white shadow-md hover:bg-black hover:text-white transition"
           >
             Book your session
           </a>

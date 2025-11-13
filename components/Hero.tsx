@@ -24,7 +24,7 @@ export default function Hero() {
     >
       <div className="absolute -bottom-40 -right-40 h-[24rem] w-[24rem] sm:h-[30rem] sm:w-[30rem]" />
 
-      <div className="relative z-10 mx-auto grid mt-20 max-w-7xl grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 items-center">
+      <div className="relative z-10 mx-auto grid mt-25 sm:mt-12 lg:mt-20 max-w-7xl grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 items-center">
         {/* LEFT */}
         <motion.div
           variants={fadeInRight}
@@ -39,7 +39,7 @@ export default function Hero() {
             className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-extrabold text-black leading-tight"
           >
             Unlock Your{" "}
-            <span className="bg-gradient-to-r from-[#C5A46D] to-[#E6D5B8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#B22222] to-[#E68F8F] bg-clip-text text-transparent">
               Cosmic Destiny
             </span>
           </motion.h1>
@@ -60,13 +60,13 @@ export default function Hero() {
           >
             <a
               href="/bookings"
-              className="rounded-xl bg-gradient-to-r from-[#C5A46D] to-[#E6D5B8] text-black px-5 py-3 text-sm sm:text-base font-semibold shadow-md hover:opacity-90 transition"
+              className="rounded-xl bg-gradient-to-r from-[#B22222] to-[#E68F8F] text-white px-5 py-3 text-sm sm:text-base font-semibold shadow-md hover:opacity-90 transition"
             >
               Book a Reading
             </a>
             <a
               href="#services"
-              className="rounded-xl border border-[#C5A46D] text-[#C5A46D] px-5 py-3 text-sm sm:text-base font-semibold hover:bg-[#C5A46D]/10 transition"
+              className="rounded-xl border border-[#B22222] text-[#B22222] px-5 py-3 text-sm sm:text-base font-semibold hover:bg-[#B22222]/10 transition"
             >
               Explore Services
             </a>
@@ -86,7 +86,12 @@ export default function Hero() {
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-          className="relative flex items-center justify-center max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto"
+          className="
+relative flex items-center justify-center 
+max-w-xs sm:max-w-sm md:max-w-full lg:max-w-lg 
+mx-auto
+"
+
         >
           <AstroGlobe />
         </motion.div>
