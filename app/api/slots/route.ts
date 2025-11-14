@@ -19,10 +19,6 @@ export async function GET(req: Request) {
     oAuth2Client.setCredentials({
       refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
     });
-    console.log("refresh token = ",process.env.GOOGLE_REFRESH_TOKEN);
-    console.log("google client id = ",process.env.GOOGLE_CLIENT_ID);
-    console.log("google client secret = ",process.env.GOOGLE_CLIENT_SECRET);
-    console.log("redirect uri = ",process.env.GOOGLE_REDIRECT_URI);
     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
     const { searchParams } = new URL(req.url);
     const dateParam = searchParams.get("date");
@@ -68,9 +64,8 @@ export async function GET(req: Request) {
     }
     return NextResponse.json({ success:true,slots,durtion:SLOT_DURATION_MINUTES});
   } catch (error: any) {
-    console.log("error message = ",error.response);
     return NextResponse.json(
-      { error: error.message },
+      { error: error.message || "Failed to fetch available slots" },
       { status: 500 }
     );
   }

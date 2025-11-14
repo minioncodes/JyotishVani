@@ -26,7 +26,7 @@ export default function BlogsPage() {
     const fetchBlogs = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/${locale}/api/blog/all-blogs`);
+        const res = await fetch('/api/blog/all-blogs');
         const data = await res.json();
         if (res.ok) setBlogs(data.blogs);
         else setError(data.msg || t("errors.fetchFailed"));

@@ -16,7 +16,6 @@ export async function GET(req: Request) {
   );
   const { tokens } = await oauth2Client.getToken(code);
   const cookieStore = await cookies();
-  console.log("tokens = ",tokens);
   cookieStore.set("google_tokens", JSON.stringify(tokens), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",

@@ -34,7 +34,7 @@ export default function BlogsPage() {
     const fetchBlogs = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/${locale}/api/blog/all-blogs`, {
+        const res = await fetch('/api/blog/all-blogs', {
           cache: "no-store",
         });
         const data = await res.json();
@@ -203,6 +203,7 @@ export default function BlogsPage() {
             <div className="flex justify-center mt-5 gap-2">
               {Array.from({ length: maxIndex + 1 }).map((_, i) => (
                 <button
+                title="btn"
                   key={i}
                   onClick={() => setIndex(i)}
                   className={`w-3 h-3 rounded-full transition ${
