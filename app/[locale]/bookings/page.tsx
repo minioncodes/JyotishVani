@@ -122,42 +122,47 @@ export default function Home() {
           Book Your Astrology Consultation
         </h1>
 
-        <div className="flex flex-col md:flex-row gap-6 items-center mb-10">
-          <div>
-            <label className="block mb-1 font-semibold text-[#4a4a4a]">Select Date:</label>
-            <input
-              type="date"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              className="border border-[#d9c9a3] bg-[#fffaf3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#d9c28f]"
-            />
-          </div>
+<div className="flex flex-col md:flex-row gap-6 md:items-end mb-10">
+  <div className="flex flex-col">
+    <label className="block mb-1 font-semibold text-[#4a4a4a]">Select Date:</label>
+    <input
+      type="date"
+      value={selectedDate}
+      onChange={(e) => setSelectedDate(e.target.value)}
+      className="border border-[#B22222] bg-[#fffaf3] rounded-lg px-3 py-2 
+                 focus:outline-none focus:ring-2 focus:ring-[#B22222]"
+    />
+  </div>
 
-          <div>
-            <label className="block mb-1 font-semibold text-[#4a4a4a]">Enter your email</label>
-            <input
-              placeholder="Enter your email"
-              value={email}
-              onChange={handleEmail}
-              className="border border-[#d9c9a3] bg-[#fffaf3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#d9c28f]"
-            />
-          </div>
+  <div className="flex flex-col">
+    <label className="block mb-1 font-semibold text-[#4a4a4a]">Enter your email</label>
+    <input
+      placeholder="Enter your email"
+      value={email}
+      onChange={handleEmail}
+      className="border border-[#B22222] bg-[#fffaf3] rounded-lg px-3 py-2 
+                 focus:outline-none focus:ring-2 focus:ring-[#B22222]"
+    />
+  </div>
 
-          <div className="flex gap-2">
-            {[30, 45, 60].map((d) => (
-              <button
-                key={d}
-                onClick={() => setDuration(d)}
-                className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${duration === d
-                  ? "bg-[#d9c28f] text-black"
-                  : "bg-[#f5f2e9] text-[#3d3d3d] hover:bg-[#e8d9b1]"
-                  }`}
-              >
-                {d} min
-              </button>
-            ))}
-          </div>
-        </div>
+  <div className="flex gap-2">
+    {[30, 45, 60].map((d) => (
+      <button
+        key={d}
+        onClick={() => setDuration(d)}
+        className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
+          duration === d
+            ? "bg-[#B22222] text-white"
+            : "bg-[#f5f2e9] text-[#3d3d3d] hover:bg-[#e8b3b1]"
+        }`}
+      >
+        {d} min
+      </button>
+    ))}
+  </div>
+</div>
+
+
 
         {loading && <LoadingSpinner/>}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full mt-6 max-w-3xl">
@@ -184,7 +189,7 @@ export default function Home() {
                   disabled={activeSlot === slot.start}
                   className={`w-full px-4 py-2 rounded-md font-semibold transition-all duration-200 flex justify-center items-center gap-2 ${activeSlot === slot.start
                     ? "bg-[#e0d5b8] text-gray-600 cursor-not-allowed"
-                    : "bg-[#d9c28f] text-black hover:bg-[#caae6c]"
+                    : "bg-[#B22222] text-white hover:bg-[#caae6c]"
                     }`}
                 >
                   {activeSlot === slot.start ? (
@@ -226,7 +231,7 @@ export default function Home() {
         {bookingLoading && (
           <div className="fixed inset-0 bg-[#fffaf3]/80 backdrop-blur-sm flex flex-col items-center justify-center z-50 transition-opacity">
             <div className="flex flex-col items-center gap-4">
-              <div className="h-12 w-12 border-4 border-[#d9c28f] border-t-transparent rounded-full animate-spin"></div>
+              <div className="h-12 w-12 border-4 border-[#B22222] border-t-transparent rounded-full animate-spin"></div>
               <p className="text-[#4a3f2b] text-lg font-semibold tracking-wide">
                 Confirming your booking...
               </p>
