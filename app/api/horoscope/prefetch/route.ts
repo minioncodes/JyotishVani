@@ -33,7 +33,9 @@ export async function GET(req: Request) {
     const secret = searchParams.get("secret");
     const force = searchParams.get("force") === "1";
 
-    if (PREFETCH_SECRET && secret !== PREFETCH_SECRET) {
+    const isCron = req.headers.get("x-vercel-cron") === "1";
+
+    if (!isCron && PREFETCH_SECRET && secret !== PREFETCH_SECRET) {
       return NextResponse.json(
         { success: false, error: "Unauthorized" },
         { status: 401 }
@@ -110,7 +112,7 @@ export async function GET(req: Request) {
     }
 
     // store all 12 signs under a single key, TTL ~ 26h
-    await redis.set(cacheKey, dayData, { ex: 26 * 60 * 60 });
+    await redis.set(cacheKey, dayData, { ex: 24 * 60 * 60 });
 
     return NextResponse.json({
       success: true,
