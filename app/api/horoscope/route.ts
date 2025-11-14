@@ -1,10 +1,10 @@
-// app/api/horoscope/route.ts
+
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/Redis";
 
 const TZ = "Asia/Kolkata";
 const HORO_KEY_PREFIX = "horo:";
-
+// prefech
 type Prediction = {
   type: string;
   prediction: string;

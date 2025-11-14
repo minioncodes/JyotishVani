@@ -1,4 +1,4 @@
-// app/api/horoscope/prefetch/route.ts
+
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/Redis";
 import { getProkeralaToken } from "@/lib/prokerala";
