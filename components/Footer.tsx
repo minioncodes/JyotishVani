@@ -40,7 +40,7 @@ export default function Footer() {
                 alt="JyotishWaani Logo"
                 height={80}
                 width={80}
-                className="object-contain rounded-full shadow-lg hover:shadow-[#B22222]/50 transition-all duration-300"
+                className="object-contain rounded-full animate-spin-ltr"
               />
             </Link>
 

@@ -52,7 +52,7 @@ export default function Navbar() {
             alt="Logo"
             width={32}
             height={32}
-            className="rounded-full object-contain"
+            className="object-contain rounded-full animate-spin-ltr"
           />
           <span className="text-xl font-bold">{t("brand")}</span>
         </Link>

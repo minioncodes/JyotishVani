@@ -1,125 +1,104 @@
 import { NextResponse } from "next/server";
+import { redis } from "@/lib/Redis";
+import { getProkeralaToken } from "@/lib/prokerala";
 
-let cachedToken: string | null = null;
-let tokenExpiry = 0;
+const TZ = "Asia/Kolkata";
+const SNAPSHOT_TTL_SECONDS = 2 * 60 * 60; // 2 hours cache
 
+function istNowISO() {
+  return new Date().toLocaleString("sv-SE", { timeZone: TZ });
+}
 
-const userCache = new Map<string, { data: any; timestamp: number }>();
+function todayIST(): string {
+  return new Date().toLocaleDateString("sv-SE", { timeZone: TZ }); // yyyy-mm-dd
+}
 
+function toISTDate(d: Date): string {
+  return d.toLocaleDateString("sv-SE", { timeZone: TZ });
+}
 
-const CACHE_TTL = 12 * 60 * 60 * 1000;
-
-async function getAccessToken() {
-  const now = Date.now();
-  if (cachedToken && now < tokenExpiry) {
-    console.log("Using cached token until", new Date(tokenExpiry).toLocaleTimeString());
-    return cachedToken;
-  }
-
-  console.log("Fetching new Prokerala token...");
-  const res = await fetch("https://api.prokerala.com/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      grant_type: "client_credentials",
-      client_id: process.env.PROKERALA_CLIENT_ID || "",
-      client_secret: process.env.PROKERALA_CLIENT_SECRET || "",
-    }),
-    cache: "no-store",
+function toISTTime(iso: string): string {
+  return new Date(iso).toLocaleTimeString("en-IN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: TZ,
   });
-
-  if (!res.ok) {
-    const text = await res.text();
-    console.error("Token fetch failed:", res.status, text);
-    throw new Error(`Token fetch failed: ${res.status}`);
-  }
-
-  const data = await res.json();
-  cachedToken = data.access_token;
-  tokenExpiry = now + (data.expires_in - 60) * 1000;
-  console.log("Token cached until", new Date(tokenExpiry).toLocaleTimeString());
-  return cachedToken;
 }
 
-function isNowBetween(start: string, end: string): boolean {
-  const now = new Date();
-  return now >= new Date(start) && now <= new Date(end);
+function isBetweenNow(start: string, end: string): boolean {
+  const now = Date.now();
+  return now >= Date.parse(start) && now <= Date.parse(end);
 }
 
-// ---------- MAIN HANDLER ----------
-export async function GET(req: Request) {
+
+export async function GET() {
   try {
-    const ip =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      "unknown-user";
-
-    const now = Date.now();
+    const today = todayIST();
+    const cacheKey = `snapshot:${today}`;
 
 
-    const cached = userCache.get(ip);
-    if (cached && now - cached.timestamp < CACHE_TTL) {
-      console.log(`Serving cached snapshot for ${ip}`);
-      return NextResponse.json(cached.data, {
-        headers: { "Cache-Control": "no-store" },
-      });
+    const cached = await redis.get(cacheKey);
+
+    if (cached) {
+      console.log("♻️ Using cached snapshot");
+      return NextResponse.json({ ...cached, cached: true });
     }
 
-    console.log(`No valid cache for ${ip}, fetching fresh snapshot...`);
 
-    const token = await getAccessToken();
-    const currentTime = new Date();
-    const datetime = currentTime.toISOString().split(".")[0] + "+05:30";
+    console.log("🌕 Fetching fresh snapshot");
+    const token = await getProkeralaToken();
+
+    const datetime = `${today}T00:00:00+05:30`;
+    const encoded = encodeURIComponent(datetime);
     const coordinates = "28.6139,77.2090";
-    const encodedDatetime = encodeURIComponent(datetime);
 
-    const fetchOpts = {
+    const fetchOptions = {
       headers: { Authorization: `Bearer ${token}` },
       cache: "no-store" as RequestCache,
     };
 
-    // Fetch Panchang
+    // --- Panchang ---
     const panchangRes = await fetch(
-      `https://api.prokerala.com/v2/astrology/panchang?ayanamsa=1&coordinates=${coordinates}&datetime=${encodedDatetime}`,
-      fetchOpts
+      `https://api.prokerala.com/v2/astrology/panchang?ayanamsa=1&coordinates=${coordinates}&datetime=${encoded}`,
+      fetchOptions
     );
-    if (!panchangRes.ok) throw new Error(`Panchang fetch failed: ${panchangRes.status}`);
-    const panchangData = await panchangRes.json();
+    const panchang = await panchangRes.json();
 
-    // Fetch inauspicious periods (Rahu etc.)
-    const inauspiciousRes = await fetch(
-      `https://api.prokerala.com/v2/astrology/inauspicious-period?ayanamsa=1&coordinates=${coordinates}&datetime=${encodedDatetime}`,
-      fetchOpts
-    );
-    if (!inauspiciousRes.ok)
-      throw new Error(`Inauspicious fetch failed: ${inauspiciousRes.status}`);
-    const inauspiciousData = await inauspiciousRes.json();
+    const tithis: any[] = panchang?.data?.tithi || [];
+    const nakshatras: any[] = panchang?.data?.nakshatra || [];
 
-    // Extract values
     const currentTithi =
-      panchangData?.data?.tithi?.find((t: any) => isNowBetween(t.start, t.end)) ||
-      panchangData?.data?.tithi?.[0];
+      tithis.find((t) => isBetweenNow(t.start, t.end)) || tithis[0];
+
     const currentNakshatra =
-      panchangData?.data?.nakshatra?.find((n: any) => isNowBetween(n.start, n.end)) ||
-      panchangData?.data?.nakshatra?.[0];
+      nakshatras.find((n) => isBetweenNow(n.start, n.end)) || nakshatras[0];
 
- // Find Rahu period that is currently active, else next one
-const rahu = inauspiciousData?.data?.muhurat?.find((m: any) => m.name === "Rahu");
+    // --- Rahu kaal ---
+    const inaRes = await fetch(
+      `https://api.prokerala.com/v2/astrology/inauspicious-period?ayanamsa=1&coordinates=${coordinates}&datetime=${encoded}`,
+      fetchOptions
+    );
+    const ina = await inaRes.json();
 
-let rahuPeriod = rahu?.period?.find((p: any) => isNowBetween(p.start, p.end));
-if (!rahuPeriod && rahu?.period?.length) {
-  // if not active, pick today's period (first one)
-  rahuPeriod = rahu.period[0];
-}
+    const rahu = ina?.data?.muhurat?.find((m: any) => m.name === "Rahu");
+    const periods: { start: string; end: string }[] = Array.isArray(
+      rahu?.period
+    )
+      ? rahu.period
+      : [];
 
-const rahuKaal = rahuPeriod
-  ? `${new Date(rahuPeriod.start).toLocaleTimeString("en-IN", {
-      hour: "2-digit",
-      minute: "2-digit",
-    })}–${new Date(rahuPeriod.end).toLocaleTimeString("en-IN", {
-      hour: "2-digit",
-      minute: "2-digit",
-    })}`
-  : "—";
+    const todayPeriods = periods.filter(
+      (p) => todayIST() === toISTDate(new Date(p.start))
+    );
+
+    const rahuPeriod =
+      todayPeriods.find((p) => isBetweenNow(p.start, p.end)) ||
+      todayPeriods[0] ||
+      periods[0];
+
+    const rahuKaal = rahuPeriod
+      ? `${toISTTime(rahuPeriod.start)}–${toISTTime(rahuPeriod.end)}`
+      : "—";
 
 
     const snapshot = {
@@ -127,23 +106,21 @@ const rahuKaal = rahuPeriod
       paksha: currentTithi?.paksha || "—",
       nakshatra: currentNakshatra?.name || "—",
       rahuKaal,
-      updatedAt: currentTime.toLocaleTimeString("en-IN", {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      fetchedAtIST: istNowISO(),
+      expiresAtIST: new Date(
+        Date.now() + SNAPSHOT_TTL_SECONDS * 1000
+      ).toLocaleString("en-IN", { timeZone: TZ }),
+      lastRefreshISO: new Date().toISOString(),
     };
 
+    // ---------------------- STORE IN REDIS ----------------------
+    await redis.set(cacheKey, snapshot, { ex: SNAPSHOT_TTL_SECONDS });
 
-    userCache.set(ip, { data: snapshot, timestamp: now });
-    console.log(`Cached new snapshot for ${ip} until ${new Date(now + CACHE_TTL).toLocaleTimeString()}`);
-
-    return NextResponse.json(snapshot, {
-      headers: { "Cache-Control": "no-store" },
-    });
+    return NextResponse.json({ ...snapshot, cached: false });
   } catch (err: any) {
-    console.error("Snapshot API error:", err.message);
+    console.error("❌ Snapshot Error:", err);
     return NextResponse.json(
-      { error: "Failed to fetch snapshot", details: err.message },
+      { success: false, error: err.message },
       { status: 500 }
     );
   }
