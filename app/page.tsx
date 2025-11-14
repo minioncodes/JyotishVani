@@ -7,8 +7,8 @@ import Reviews from "@/components/Reviews";
 import CTA from "@/components/CTA";
 import Contact from "@/components/Contact";
 import Blogs from "@/components/Blogs";
-import Horoscope from "@/components/Horoscope";
 import StarsBg from "@/components/StarBg";
+import Horoscope from "@/components/Horoscope";
 
 export default function Page() {
   return (
@@ -23,7 +23,7 @@ export default function Page() {
       <Hero />
       <About />
       <Services />
-      <Horoscope />
+      <Horoscope/>
       <Reviews />
       <Blogs />
       <CTA />

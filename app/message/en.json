@@ -358,5 +358,47 @@
     "viewDetails": "View Details",
     "prev": "Previous",
     "next": "Next"
+  },
+  "horoscope": {
+    "headingPrefix": "Today’s",
+    "headingAccent": "Horoscope",
+    "subtitle": "Your daily dose of cosmic guidance, aligned with the stars ✨",
+    "cta": "Get your personalized reading",
+
+    "signs": {
+      "Aries": "Aries",
+      "Taurus": "Taurus",
+      "Gemini": "Gemini",
+      "Cancer": "Cancer",
+      "Leo": "Leo",
+      "Virgo": "Virgo",
+      "Libra": "Libra",
+      "Scorpio": "Scorpio",
+      "Sagittarius": "Sagittarius",
+      "Capricorn": "Capricorn",
+      "Aquarius": "Aquarius",
+      "Pisces": "Pisces"
+    },
+
+    "messages": {
+      "Aries": "Take bold steps today",
+      "Taurus": "Stay grounded and steady",
+      "Gemini": "Conversations bring clarity",
+      "Cancer": "Emotions guide your path",
+      "Leo": "Shine with confidence",
+      "Virgo": "Details bring success",
+      "Libra": "Seek balance and harmony",
+      "Scorpio": "Trust your instincts",
+      "Sagittarius": "Adventure is calling",
+      "Capricorn": "Persistence wins the day",
+      "Aquarius": "Innovate and inspire",
+      "Pisces": "Dreams shape your reality"
+    },
+
+    "modal": {
+      "loading": "Fetching your stars...",
+      "challenge": "Challenge",
+      "noPrediction": "No prediction found."
+    }
   }
 }
