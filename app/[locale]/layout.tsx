@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "../globals.css";
@@ -8,19 +10,15 @@ export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "hi" }];
 }
 
-export default async function LocaleLayout({
-  children,
-  params: { locale },
-}: {
+export default async function LocaleLayout(props: {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  let messages;
-  try {
-    messages = (await import(`../message/${locale}.json`)).default;
-  } catch {
-    messages = (await import(`../message/hi.json`)).default;
-  }
+  const { children } = props;
+
+  const { locale } = await props.params;
+
+  const messages = await getMessages({ locale });
 
   return (
     <html lang={locale}>
