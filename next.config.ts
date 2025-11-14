@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev"],
@@ -6,7 +9,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**", 
+        hostname: "**",
       },
       {
         protocol: "http",
@@ -14,10 +17,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "randomuser.me", 
+        hostname: "randomuser.me",
       },
     ],
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
