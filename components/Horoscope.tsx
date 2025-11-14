@@ -2,6 +2,7 @@
 
 import { JSX, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import {
   FiSun,
@@ -327,12 +328,12 @@ export default function Horoscope() {
       </div>
 
       <div className="mt-10 flex justify-center">
-        <a
+        <Link
           href="/contact"
           className="rounded-xl bg-[#B22222] px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-black hover:text-white transition"
         >
           {t("cta")}
-        </a>
+        </Link>
       </div>
 
       <PredictionModal
