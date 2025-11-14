@@ -16,8 +16,6 @@ export interface ILead extends Document {
 }
 
 export type Lead = ILead;
-
-
 const LeadSchema = new Schema<ILead>(
     {
         name: { type: String, required: true },
