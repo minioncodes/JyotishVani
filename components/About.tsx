@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function About() {
+  const t = useTranslations("about");
+
   return (
     <section id="about" className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28">
       <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -17,21 +20,18 @@ export default function About() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-black">
-            About <span className="text-[#B22222]">JyotishWaani</span>
+            {t("sectionTitle")}
           </h2>
           <p className="mt-4 text-base md:text-lg text-gray-800 leading-relaxed">
-            JyotishWaani is a dedicated astrology organisation offering complete
-            Vedic solutions to guide individuals through life’s important decisions.
-            With a blend of tradition and modern insights, we provide practical remedies
-            and accurate predictions rooted in ancient wisdom.
+            {t("orgBody")}
           </p>
           <ul className="mt-6 space-y-2 text-gray-900">
-            <li>✦ Birth Chart (Kundli) analysis & personalised remedies</li>
-            <li>✦ Career, Business & Finance astrology</li>
-            <li>✦ Marriage, Relationship & Compatibility guidance</li>
-            <li>✦ Health, Education & Family insights</li>
-            <li>✦ Muhurat selection for auspicious beginnings</li>
-            <li>✦ Gemstone and Mantra recommendations</li>
+            <li>{t("bullet1")}</li>
+            <li>{t("bullet2")}</li>
+            <li>{t("bullet3")}</li>
+            <li>{t("bullet4")}</li>
+            <li>{t("bullet5")}</li>
+            <li>{t("bullet6")}</li>
           </ul>
         </motion.div>
 
@@ -45,26 +45,26 @@ export default function About() {
         >
           <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-lg">
             <Image
-              src="/Acharya ji (2).jpg" // replace with actual astrologer image path
-              alt="Astrologer Acharya Sumit Tiwari"
+              src="/Acharya ji (2).jpg"
+              alt="Astrologer Acharya Ji"
               fill
               className="object-cover"
             />
           </div>
           <h3 className="text-xl font-semibold text-black">
-            Vedic Astrologer <span className="text-[#B22222]">Acharya Sumit Tiwari</span>
+            {t("acharyaHeading")}
           </h3>
           <p className="text-gray-800 leading-relaxed">
             <span className="font-semibold text-[#B22222]">
-              Acharya Sumit Tiwari (Vedic Astrologer)&nbsp;
+              {t("acharyaLead")}&nbsp;
             </span>
-is a well known Lucknow based astrologer with 19+ years experience. He offers simple, logical and effective remedies, is well published, highly academically qualified in Jyotish and has helped many people remove hurdles through accurate scientific Kundli analysis.
+            {t("acharyaBodyRest")}
           </p>
           <Link
             href="/about"
             className="inline-block text-sm font-medium text-[#B22222] hover:text-black transition"
           >
-            → More about Acharya Ji
+            {t("moreLink")}
           </Link>
         </motion.div>
 
