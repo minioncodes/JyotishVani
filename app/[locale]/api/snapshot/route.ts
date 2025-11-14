@@ -130,7 +130,7 @@ export async function GET(req: Request) {
     const todayISTPeriods = periods.filter(
       (p) => toISTDateKey(new Date(p.start)) === todayIST
     );
-    let rahuPeriod =
+    const rahuPeriod =
       todayISTPeriods.find((p) => isNowBetween(p.start, p.end)) ||
       todayISTPeriods[0] ||
       periods.find((p) => isNowBetween(p.start, p.end)) ||

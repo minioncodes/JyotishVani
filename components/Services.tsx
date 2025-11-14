@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { FiStar, FiHeart, FiBriefcase, FiClock } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 
@@ -75,24 +76,24 @@ export default function Services() {
               <p className="mt-2 mb-4 text-gray-700 text-sm leading-relaxed">
                 {s.desc}
               </p>
-              <a
+              <Link
                 href="/bookings"
                 className="mt-auto inline-block text-center rounded-xl bg-[#B22222] text-white font-medium px-4 py-2 text-sm hover:bg-black hover:text-white transition"
               >
                 {t("bookThis")}
-              </a>
+              </Link>
             </motion.div>
           ))}
         </motion.div>
 
         {/* View All Services Button */}
         <div className="flex justify-center mt-10">
-          <a
+          <Link
             href="/services"
             className="rounded-xl bg-[#B22222] text-white font-semibold px-6 py-2 text-sm md:text-base hover:bg-black hover:text-white transition"
           >
             {t("viewAll")}
-          </a>
+          </Link>
         </div>
       </div>
     </section>

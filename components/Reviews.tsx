@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FiStar } from "react-icons/fi";
 import Image from "next/image";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 
@@ -168,12 +169,12 @@ export default function Reviews() {
 
         {/* CTA */}
         <div className="mt-10 flex items-center justify-center">
-          <a
+          <Link
             href="/bookings"
             className="rounded-xl bg-[#B22222] px-6 py-3 font-semibold text-white shadow-md hover:bg-black transition"
           >
             {t("cta")}
-          </a>
+          </Link>
         </div>
       </div>
     </section>

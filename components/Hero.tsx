@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, Variants } from "framer-motion";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import AstroGlobe from "./Astroglobe";
 
@@ -60,12 +61,12 @@ export default function Hero() {
             custom={3}
             className="mt-6 flex flex-col sm:flex-row gap-3 justify-center md:justify-start"
           >
-            <a
+            <Link
               href="/bookings"
               className="rounded-xl bg-gradient-to-r from-[#B22222] to-[#E68F8F] text-white px-5 py-3 text-sm sm:text-base font-semibold shadow-md hover:opacity-90 transition"
             >
               {t('book')}
-            </a>
+            </Link>
             <a
               href="#services"
               className="rounded-xl border border-[#B22222] text-[#B22222] px-5 py-3 text-sm sm:text-base font-semibold hover:bg-[#B22222]/10 transition"

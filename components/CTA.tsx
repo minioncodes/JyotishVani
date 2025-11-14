@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export default function CTA() {
   const t = useTranslations("cta");
@@ -23,12 +24,12 @@ export default function CTA() {
           <p className="mt-3 text-gray-700">
             {t("body")}
           </p>
-          <a
+          <Link
             href="/bookings"
             className="mt-6 inline-block rounded-xl bg-[#B22222] text-white px-6 py-3 text-sm md:text-base font-semibold shadow-md hover:bg-black hover:text-white transition"
           >
             {t("button")}
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
