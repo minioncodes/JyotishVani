@@ -70,14 +70,16 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 }
 
+type LocaleLayoutProps = {
+  children: ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
 export default async function LocaleLayout({
   children,
   params,
-}: {
-  children: ReactNode;
-  params: { locale: string };
-}) {
-  const { locale } = params;
+}: LocaleLayoutProps) {
+  const { locale } = await params;
 
   const messages = await getMessages({ locale });
 
