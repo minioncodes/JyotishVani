@@ -93,12 +93,15 @@ export default function Home() {
               attendees: [{ email: email }],
             }),
           });
-          const sendPaymentDetailsEmail=await fetch('api/google/sendDetailsEmail',{
+          const bookingDetails=await bookingRes.json();
+          setMeetLink(bookingDetails.event.meetLink);
+          const sendPaymentDetailsEmail=await fetch('/api/google/senddetailsemail',{
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify({
               email,
               selectedDate,
+              meetLink
             })
           })
           const sendEmailData=await sendPaymentDetailsEmail.json();

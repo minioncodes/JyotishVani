@@ -1,24 +1,25 @@
 import { google } from "googleapis";
-interface userDetails{
-    userEmaiL:string;
-    slotDate:string;
-    // googleMeetLink:string;
-
+interface userDetails {
+  email: string;
+  slotDate: string;
+  amount:number;
+  meetLink:string;
+  timing:Date;
 }
+
 console.log("Send payment details to gmail called....")
 
 export async function sendPaymentDetailsEmail(user: userDetails) {
   try {
-    console.log("Email received in API:", user.userEmaiL);
-    if (!user.userEmaiL || !user.userEmaiL.includes("@")) {
-      throw new Error("Invalid email: " + user.userEmaiL);
+    console.log("Email received in API:", user.email);
+    if (!user.email || !user.email.includes("@")) {
+      throw new Error("Invalid email: " + user.email);
     }
     const oAuth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID,
       process.env.GOOGLE_CLIENT_SECRET,
       process.env.GOOGLE_REDIRECT_URI
     );
-
     oAuth2Client.setCredentials({
       refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
     });
@@ -27,7 +28,7 @@ export async function sendPaymentDetailsEmail(user: userDetails) {
 
     const messageParts = [
       `From: Jyotishwaani <me>`,
-      `To: ${user.userEmaiL.trim()}`,
+      `To: ${user.email.trim()}`,
       `Subject: Your Jyotishwaani Booking Confirmation`,
       `Content-Type: text/html; charset="UTF-8"`,
       "",
