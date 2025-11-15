@@ -23,7 +23,6 @@ export default function BookingDetailPage() {
 
   return (
     <>
-      <Navbar />
       <section className="relative flex min-h-[92vh] items-center justify-center px-6 py-20">
         <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F3] via-[#FFFDF8]/90 to-[#FAF8F3]" />
 
@@ -34,13 +33,13 @@ export default function BookingDetailPage() {
           <p className="mt-3 text-gray-700 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
             {option.description}
           </p>
-          <div className="mt-10 w-full rounded-3xl bg-white/90 shadow-xl border border-[#C5A46D]/30 overflow-hidden">
+          <div className="mt-10 w-full rounded-3xl bg-white/90 shadow-xl border border-[#B22222]/30 overflow-hidden">
             <CalEmbed
               calLink={option.calLink}
               style={{ height: "100%", width: "100%" }}
               config={{
                 theme: "light",
-                primaryColor: "#C5A46D",
+                primaryColor: "#B22222",
                 backgroundColor: "#FAF8F3",
                 textColor: "#000000",
                 // layout:"column_view" 

@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "JyotishWaani | Vedic Astrology, Kundli Analysis & Remedies in Lucknow",
   description:
-    "JyotishWaani offers expert Vedic astrology services in Lucknow — personalized Kundli analysis, marriage & career predictions, gemstone recommendations, and spiritual remedies guided by Banaras Wale Guru Ji.",
+    "JyotishWaani offers expert Vedic astrology services in Lucknow — personalized Kundli analysis, marriage & career predictions, gemstone recommendations, and spiritual remedies guided by Banaras Wale Acharya Ji.",
   keywords: [
     "JyotishWaani",
     "Astrology in Lucknow",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "Career astrology",
     "Gemstone recommendations",
     "Astrologer in Lucknow",
-    "Banaras Wale Guru Ji",
+    "Banaras Wale Acharya Ji",
     "Online astrology consultation",
   ],
   authors: [{ name: "JyotishWaani Team" }],
@@ -76,6 +76,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Navbar/>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth`}
       >

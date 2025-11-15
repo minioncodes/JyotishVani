@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar"
 export default function RefundPolicyPage() {
   return (
     <>
-    <Navbar/>
         <div style={{ backgroundColor: "#F5F1E8" }} className="min-h-screen py-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}

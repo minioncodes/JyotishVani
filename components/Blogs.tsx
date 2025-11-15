@@ -67,10 +67,11 @@ export default function BlogsPage() {
   const maxIndex = Math.max(0, displayBlogs.length - cardsPerView);
 
   return (
-    <div className="p-6 mx-auto">
-      <h1 className="mt-[100px] text-3xl font-bold mb-6 text-center font-[Cinzel] text-black">
-        Whispers from the <span className="text-[#C5A46D]">Stars</span>
-      </h1>
+    <section id="blogs" className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28">
+      <div className="mx-auto max-w-6xl">
+        <h1 className="text-3xl font-bold mb-8 text-center font-[Cinzel] text-black">
+          Whispers from the <span className="text-[#B22222]">Stars</span>
+        </h1>
       {cardsPerView === 1 ? (
         <div className="relative w-full max-w-md mx-auto">
           <AnimatePresence mode="wait">
@@ -103,7 +104,7 @@ export default function BlogsPage() {
                 />
                 <Link
                   href={`/single-blog/${displayBlogs[index]?._id}`}
-                  className="mt-auto inline-block text-center bg-[#C5A46D] text-black px-3 py-1.5 rounded-md text-sm font-medium hover:bg-black hover:text-white transition"
+                  className="mt-auto inline-block text-center bg-[#B22222] text-white px-3 py-1.5 rounded-md text-sm font-medium hover:bg-black hover:text-white transition"
                 >
                   View Details
                 </Link>
@@ -139,7 +140,7 @@ export default function BlogsPage() {
               <motion.div
                 key={blog._id}
                 className="flex-shrink-0 w-[calc(100%/1-0.5rem)] sm:w-[calc(100%/2-0.5rem)] lg:w-[calc(100%/4-0.75rem)] 
-                bg-white/10 shadow-md hover:shadow-[0_0_20px_#C5A46D] transition-all duration-300"
+                bg-white/10 shadow-md hover:shadow-[0_0_20px_#B22222] transition-all duration-300"
                 whileHover={{ scale: 1.02 }}
               >
                 {blog.image && (
@@ -152,7 +153,7 @@ export default function BlogsPage() {
                   />
                 )}
                 <div className="p-4 flex flex-col h-[220px] justify-between">
-                  <h2 className="text-md font-semibold mb-2 line-clamp-2 text-black group-hover:text-[#C5A46D] transition">
+                  <h2 className="text-md font-semibold mb-2 line-clamp-2 text-black group-hover:text-[#B22222] transition">
                     {blog.title}
                   </h2>
                   <p
@@ -163,7 +164,7 @@ export default function BlogsPage() {
                   />
                   <Link
                     href={`/single-blog/${blog._id}`}
-                    className="mt-auto inline-block text-center bg-[#C5A46D] text-black px-3 py-1.5 rounded-md text-sm font-medium hover:bg-black hover:text-white transition"
+                    className="mt-auto inline-block text-center bg-[#B22222] text-white px-3 py-1.5 rounded-md text-sm font-medium hover:bg-black hover:text-white transition"
                   >
                     View Details
                   </Link>
@@ -179,13 +180,14 @@ export default function BlogsPage() {
                 key={i}
                 onClick={() => setIndex(i)}
                 className={`w-3 h-3 rounded-full ${
-                  i === index ? "bg-[#C5A46D]" : "bg-gray-400/50"
+                  i === index ? "bg-[#B22222]" : "bg-gray-400/50"
                 }`}
               />
             ))}
           </div>
         </>
       )}
-    </div>
+      </div>
+    </section>
   );
 }

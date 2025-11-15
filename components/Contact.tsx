@@ -78,7 +78,7 @@ export default function Contact() {
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-        className="w-12 h-12 border-4 border-[#C5A46D] border-t-transparent rounded-full mb-4"
+        className="w-12 h-12 border-4 border-[#B22222] border-t-transparent rounded-full mb-4"
       />
       <p className="text-gray-700 font-medium text-sm md:text-base">
         Please wait… we’re aligning your stars
@@ -92,7 +92,7 @@ export default function Contact() {
     <>
       {loading && <LoaderOverlay />}
 
-      <section id="contact" className="relative px-6 py-20 md:py-28">
+      <section id="contact" className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28">
         <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-5 gap-8">
           {/* Info Card */}
           <motion.div
@@ -103,16 +103,17 @@ export default function Contact() {
             className="md:col-span-2 self-center rounded-3xl bg-white/90 shadow-xl p-6 md:p-8"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-black">
-              Contact <span className="text-[#C5A46D]">Us</span>
+              Contact <span className="text-[#B22222]">Us</span>
             </h2>
 
             <div className="mt-6 space-y-3 text-gray-700 text-sm">
               <div>📧 help@jyotishwaani.com</div>
               <div>📞 +91 94150 87999</div>
-              <div>🕒 Mon–Sat • 10am–7pm IST</div>
+              <div>📞 +91 94524 64332</div>
+              <div>🕒 Mon–Sat • 10am–6pm IST</div>
             </div>
 
-            <div className="mt-6 rounded-2xl bg-[#FFFDF8] border border-[#C5A46D]/40 p-4 text-sm text-gray-700 shadow">
+            <div className="mt-6 rounded-2xl bg-[#FFFDF8] border border-[#B22222]/40 p-4 text-sm text-gray-700 shadow">
               <p className="font-medium text-black">For the most accurate reading:</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>Provide your exact birth date, time, and city.</li>
@@ -129,7 +130,7 @@ export default function Contact() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
             onSubmit={handleSubmit}
-            className="md:col-span-3 rounded-3xl bg-white/95 shadow-xl border border-[#C5A46D]/30 p-6 md:p-10 flex flex-col justify-center"
+            className="md:col-span-3 rounded-3xl bg-white/95 shadow-xl border border-[#B22222]/30 p-6 md:p-10 flex flex-col justify-center"
           >
             {/* Basic Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -139,7 +140,7 @@ export default function Contact() {
                   name="name"
                   onChange={handleChange}
                   value={form.name}
-                  className="rounded-xl border border-[#C5A46D]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#C5A46D]/60"
+                  className="rounded-xl border border-[#B22222]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#B22222]/60"
                   placeholder="Your full name"
                   required
                 />
@@ -151,7 +152,7 @@ export default function Contact() {
                   name="email"
                   onChange={handleChange}
                   value={form.email}
-                  className="rounded-xl border border-[#C5A46D]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#C5A46D]/60"
+                  className="rounded-xl border border-[#B22222]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#B22222]/60"
                   placeholder="you@example.com"
                   required
                 />
@@ -165,7 +166,7 @@ export default function Contact() {
                   name="phoneNumber"
                   onChange={handleChange}
                   value={form.phoneNumber}
-                  className="rounded-xl border border-[#C5A46D]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#C5A46D]/60"
+                  className="rounded-xl border border-[#B22222]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#B22222]/60"
                   placeholder="+91 9XXXXXXXXX"
                   required
                 />
@@ -181,7 +182,7 @@ export default function Contact() {
                   name="dateofbirth"
                   onChange={handleChange}
                   value={form.dateofbirth}
-                  className="rounded-xl border border-[#C5A46D]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#C5A46D]/60"
+                  className="rounded-xl border border-[#B22222]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#B22222]/60"
                   required
                 />
               </label>
@@ -193,7 +194,7 @@ export default function Contact() {
                   onChange={handleChange}
                   value={form.time}
                   step="60"
-                  className="rounded-xl border border-[#C5A46D]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#C5A46D]/60"
+                  className="rounded-xl border border-[#B22222]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#B22222]/60"
                   required
                 />
               </label>
@@ -204,7 +205,7 @@ export default function Contact() {
                   autoComplete="off"
                   onChange={handleChange}
                   value={form.birthplace}
-                  className="rounded-xl border border-[#C5A46D]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#C5A46D]/60"
+                  className="rounded-xl border border-[#B22222]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#B22222]/60"
                   placeholder="City, Country"
                   required
                 />
@@ -219,7 +220,7 @@ export default function Contact() {
                   name="service"
                   value={form.service}
                   onChange={handleChange}
-                  className="rounded-xl border border-[#C5A46D]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#C5A46D]/60"
+                  className="rounded-xl border border-[#B22222]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#B22222]/60"
                   required
                 >
                   <option value="">Select Service</option>
@@ -239,7 +240,7 @@ export default function Contact() {
                   name="concern"
                   value={form.concern}
                   onChange={handleChange}
-                  className="rounded-xl border border-[#C5A46D]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#C5A46D]/60"
+                  className="rounded-xl border border-[#B22222]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#B22222]/60"
                   required
                 >
                   <option value="">Select Concern</option>
@@ -261,7 +262,7 @@ export default function Contact() {
                 onChange={handleChange}
                 value={form.description}
                 rows={3}
-                className="rounded-xl border border-[#C5A46D]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#C5A46D]/60"
+                className="rounded-xl border border-[#B22222]/30 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#B22222]/60"
                 placeholder="Tell me what clarity you want…"
               />
             </label>
@@ -271,19 +272,19 @@ export default function Contact() {
               <input
                 type="checkbox"
                 required
-                className="mt-1 accent-[#C5A46D]"
+                className="mt-1 accent-[#B22222]"
               />
               <span>
                 I consent to sharing my details for astrological analysis and agree to the{" "}
-                <a href="#" className="underline hover:text-[#C5A46D]">terms</a> &{" "}
-                <a href="#" className="underline hover:text-[#C5A46D]">privacy policy</a>.
+                <a href="#" className="underline hover:text-[#B22222]">terms</a> &{" "}
+                <a href="#" className="underline hover:text-[#B22222]">privacy policy</a>.
               </span>
             </label>
 
             <button
               type="submit"
               disabled={submitting}
-              className="mt-6 w-full rounded-xl bg-[#C5A46D] text-black px-6 py-3 font-semibold shadow-md hover:bg-black hover:text-white transition disabled:opacity-60"
+              className="mt-6 w-full rounded-xl bg-[#B22222] text-white px-6 py-3 font-semibold shadow-md hover:bg-black hover:text-white transition disabled:opacity-60"
             >
               {submitting ? "Submitting…" : "Submit"}
             </button>

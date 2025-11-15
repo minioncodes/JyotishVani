@@ -126,7 +126,6 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
       <div className="min-h-screen bg-gradient-to-b from-[#fffaf3] to-[#fefcf8] flex flex-col items-center p-8">
         <h1 className="text-4xl font-extrabold text-[#2c2c2c] mb-8 text-center mt-15">
           Book Your Astrology Consultation
