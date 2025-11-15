@@ -1,0 +1,404 @@
+{
+  "hero": {
+    "heading": "Unlock Your",
+    "highlight": "Cosmic Destiny",
+    "description": "Personalized astrology readings for love, career, and life path. Get clarity, confidence, and cosmic alignment with every session.",
+    "book": "Book a Reading",
+    "explore": "Explore Services",
+    "trusted": "✦ Trusted by 1000+ clients • Available worldwide"
+  },
+  "navbar": {
+    "brand": "JyotishWaani",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "blogs": "Blogs",
+    "contact": "Contact",
+    "bookNow": "Book Now",
+    "switchToHindi": "हिन्दी",
+    "switchToEnglish": "English"
+  },
+  "about": {
+    "sectionTitle": "About JyotishWaani",
+    "orgHeading": "About JyotishWaani",
+    "orgBody": "JyotishWaani is a dedicated astrology organisation offering complete Vedic solutions to guide individuals through life’s important decisions. With a blend of tradition and modern insights, we provide practical remedies and accurate predictions rooted in ancient wisdom.",
+    "bullet1": "✦ Birth Chart (Kundli) analysis & personalised remedies",
+    "bullet2": "✦ Career, Business & Finance astrology",
+    "bullet3": "✦ Marriage, Relationship & Compatibility guidance",
+    "bullet4": "✦ Health, Education & Family insights",
+    "bullet5": "✦ Muhurat selection for auspicious beginnings",
+    "bullet6": "✦ Gemstone and Mantra recommendations",
+    "acharyaHeading": "Vedic Astrologer Acharya Sumit Tiwari",
+    "acharyaLead": "Acharya Sumit Tiwari (Vedic Astrologer) is a well known Lucknow based astrologer with 19+ years experience.",
+    "acharyaBodyRest": " He is known for practical and effective remedies, is well published, highly academically qualified in Jyotish and has helped many people remove hurdles through accurate scientific Kundli analysis.",
+    "moreLink": "→ More about Acharya Ji"
+  },
+  "services": {
+    "sectionTitle": "Our Services",
+    "sectionSubtitle": "Transparent pricing • Secure online sessions",
+    "items": {
+      "s1Title": "Kundli Analysis",
+      "s1Desc": "Detailed reading of birth chart with graha strength, yogas, doshas, dasha influence and predictive roadmap.",
+      "s2Title": "Kundli Matching",
+      "s2Desc": "Comprehensive marriage gun milan + modern compatibility + dasha based cross timing alignment.",
+      "s3Title": "Education",
+      "s3Desc": "Right direction, field suitability, foreign chances, exam timing judgement based on dasha + transit.",
+      "s4Title": "Marriage / Marital Life",
+      "s4Desc": "Marriage timing, spouse nature, post marriage patterns, challenges + remedies for stability & harmony."
+    },
+    "bookThis": "Book this",
+    "viewAll": "View All Services"
+  },
+  "cta": {
+    "headingMain": "Ready to",
+    "headingHighlight": "Find Clarity?",
+    "body": "Book a session now and receive a pre-reading questionnaire to maximize insights.",
+    "button": "Book Your Session"
+  },
+  "astrologerPage": {
+  "hero": {
+    "imageAlt": "Astrologer Acharya Sumit Tiwari",
+    "name": "Acharya Sumit Tiwari",
+    "p1": "Acharya Sumit Tiwari (Vedic Astrologer) is a well-known astrologer in Lucknow with more than 19+ years of experience. He offers very simple and logical remedies that are highly effective. His articles have also been published in various news portals.",
+    "p2": "He holds a B.Com from Lucknow University, a Shastri degree in Vedic Jyotish from Central Sanskrit University, Lucknow, and a post-graduation in Astrology (M.A. Jyotirvigyan) from Lucknow University under the guidance of Padma Shri Professor B.K. Shukla. He has helped many people through his readings and predictions to overcome obstacles in their lives.",
+    "p3": "If you choose him, you’ve already made one of the best decisions of your life. Contact Acharya Ji for scientific and logical analysis of your Kundli."
+  },
+  "timeline": {
+    "heading": "About Acharya Ji",
+    "branch1": "From an early age, his family observed a natural inclination towards spiritual practices. Several astrologers studied his birth chart and predicted a life path closely aligned with spirituality and Jyotish.",
+    "branch2": "He was blessed by his Guru, the great Sanskrit scholar and Katha Vyas, Param Pujya Swami Maheshanand Saraswati Ji Maharaj. Under Swami Ji’s guidance and companionship, he entered the path of spirituality — a true path of sadhana.",
+    "branch3": "Over the years, he has guided respected individuals across Uttar Pradesh through spiritual practices, astrology, and gem consultation."
+  },
+  "astroPhilosophy": {
+    "heading": "Astro Philosophy",
+    "q1": "“Stars impel but do not compel.” – Alan Leo",
+    "q2": "“A child is born on that day and hour when the celestial rays are in mathematical harmony with his individual karma.” – Sri Yukteswar Giri",
+    "q3": "“Millionaires don’t use astrology, billionaires do.” – J. P. Morgan",
+    "q4": "“Jyotisha is the art of seeing light, of guiding, of counseling based on the truth called the horoscope.” – Dr. B. V. Raman"
+  },
+  "whyChoose": {
+    "heading": "Why Choose Acharya Ji?",
+    "li1": "✔️ 19+ years of experience in astrology and gem therapy",
+    "li2": "✔️ Deep understanding of the connection between Vedic science and modern science",
+    "li3": "✔️ Trusted by thousands of people across India and abroad",
+    "li4": "✔️ Specializes in marriage, career, finance, health and remedial guidance",
+    "li5": "✔️ Blends spiritual clarity with practical, real-world solutions"
+  },
+  "belief": {
+    "heading": "Acharya Ji’s Belief",
+    "body": "“Science measures gravity; astrology interprets meaning. Both emerge from the same cosmic order. The magnetic fields that stir tides also influence the subtle energy within us. True astrology is not prediction — it is alignment, awareness and harmony with universal design.”"
+  }
+},
+"blogsPage": {
+  "heading": {
+    "part1": "Whispers from the",
+    "part2": "Stars ✨"
+  },
+  "loading": "Loading blogs...",
+  "noBlogs": "No blogs found.",
+  "readMore": "Read More",
+  "errors": {
+    "fetchFailed": "Failed to fetch blogs",
+    "somethingWrong": "Something went wrong"
+  }
+},
+"astroCategories": {
+  "bookNow": "Book Now",
+  "kundliAnalysis": {
+    "name": "Kundli Analysis",
+    "caption": "Decode Your Birth Blueprint",
+    "about": "Detailed analysis of planetary placements, yogas, doshas & predictive roadmap."
+  },
+  "kundliMatching": {
+    "name": "Kundli Matching",
+    "caption": "Before You Commit Forever",
+    "about": "Compatibility, guna milan, modern psychological matching + timing alignment."
+  },
+  "education": {
+    "name": "Education",
+    "caption": "Right Field. Right Timing.",
+    "about": "Right field, exam timing, foreign prospects & direction of study."
+  },
+  "marriageLife": {
+    "name": "Marriage / Marital Life",
+    "caption": "Your Marriage Karma Map",
+    "about": "Marriage timing, spouse nature, conflict resolution & post marriage patterns."
+  },
+  "loveRelationship": {
+    "name": "Love & Relationship",
+    "caption": "Heart + Karma Alignment",
+    "about": "Love future, patterns, next relationship chances, healing & heart alignment."
+  },
+  "careerBusiness": {
+    "name": "Career / Business / Job",
+    "caption": "Growth That Is Written",
+    "about": "Career growth, business success, switch timing, job stability judgement."
+  },
+  "ePooja": {
+    "name": "E-Pooja",
+    "caption": "Rituals. Energy. Healing.",
+    "about": "Online personalized pooja, anushthan & ritualistic karmic balancing."
+  },
+  "healthWealth": {
+    "name": "Health / Wealth",
+    "caption": "Body + Fortune Direction",
+    "about": "Ayushya, Sade Sati impact, disease patterns & wealth flow mapping."
+  },
+  "child": {
+    "name": "Child",
+    "caption": "Future Generation Karma",
+    "about": "Child birth prediction, child astrology & parent-child karmic alignment."
+  },
+  "pujaAnushthan": {
+    "name": "Puja / Anushthan",
+    "caption": "Powerful Vedic Remedies",
+    "about": "Special pujas, remedies, planetary propitiation & authentic traditional rituals."
+  }
+},
+  "contact": {
+    "header": {
+      "home": "Home",
+      "contact": "Contact",
+      "title1": "Let’s",
+      "title2": "connect.",
+      "description": "Share your birth details and your main concern—love, career, finance, or timing—and we will reply within 24 hours with next steps and available slots.",
+      "tag1": "Vedic",
+      "tag2": "Online / In-person (Lucknow)",
+      "tag3": "Secure & private"
+    },
+    "trust": {
+      "sessions": "1,000+ sessions",
+      "since": "Since 2017",
+      "reply": "Avg. reply: 4h",
+      "timing": "Mon–Sat, 10am–7pm IST",
+      "rating": "5.0 rating",
+      "verified": "Verified reviews"
+    },
+    "faq": {
+      "title1": "Frequently Asked",
+      "title2": "Questions",
+      "subtitle": "Quick answers to common queries. Still unsure? Reach out and we’ll help you decide.",
+      "q1": "What details do you need for an accurate reading?",
+      "a1": "Your full name, date of birth, exact birth time, and place of birth. For synastry, details for both people.",
+      "q2": "How are sessions conducted?",
+      "a2": "Online via Google Meet or in-person in Lucknow. You’ll receive a meeting link and a short pre-reading form.",
+      "q3": "Do you provide remedies?",
+      "a3": "Yes—personalized, practical remedies (mantra, routine, gemstones only if needed). No fear-based upselling.",
+      "q4": "What is the reschedule/cancel policy?",
+      "a4": "Free reschedule up to 12 hours before the session. Refunds available if you cancel 24 hours prior."
+    }
+  },
+  "disclaimer": {
+    "title": "Disclaimer",
+    "updated": "Last Updated",
+
+    "s1_title": "1. General Disclaimer",
+    "s1_text": "The information, guidance, and opinions provided on this website JyotishWaani and during any consultation, report, message, or communication (collectively, the “Services”) are based on traditional astrological principles and the personal interpretation of Acharya Sumit Tiwari. Astrology is a subject of belief and interpretation, and outcomes can vary from person to person.",
+
+    "s2_title": "2. Not a Substitute for Professional Advice",
+    "s2_text": "Nothing on this website or within our Services should be treated as a substitute for professional advice in areas such as medical, legal, financial, psychological, or any other licensed field. Always consult a qualified professional for such matters.",
+
+    "s3_title": "3. Accuracy & Limitation of Liability",
+    "s3_text1": "While we make reasonable efforts to provide accurate and insightful information, we do not guarantee the accuracy, completeness, timeliness, or specific results of any prediction, suggestion, or recommendation. All decisions you take based on our Services are your own responsibility.",
+    "s3_text2": "By using our Services, you agree that JyotishWaani and its representatives shall not be liable for any direct, indirect, incidental, consequential, or special loss or damage connected with your use of our Services.",
+
+    "s4_title": "4. User Responsibility",
+    "s4_li1": "You acknowledge that you are using our Services voluntarily and at your own discretion.",
+    "s4_li2": "You agree that any action you take based on our guidance is your personal choice.",
+    "s4_li3": "You understand that astrology is a guiding tool and not a guaranteed solution.",
+
+    "s5_title": "5. Age Restriction",
+    "s5_text": "Our Services are not intended for individuals under 18 years of age without the consent and supervision of a parent or legal guardian.",
+
+    "s6_title": "6. Updates to This Disclaimer",
+    "s6_text": "JyotishWaani reserves the right to modify or update this Disclaimer or any content on the website at any time without prior notice. Continued use of the website means you accept such changes."
+  },
+  "privacy": {
+    "title": "Privacy",
+    "highlight": "Policy",
+    "updated": "Last Updated",
+
+    "s1_title": "1. Introduction",
+    "s1_text": "At JyotishWaani, we value your trust and are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you access our astrology services, website, and mobile platforms.",
+
+    "s2_title": "2. Information We Collect",
+    "s2_text": "We may collect the following types of information:",
+    "s2_li1": "Personal details such as your name, email, phone number, and date of birth",
+    "s2_li2": "Birth details including date, time, and place of birth for horoscope and Kundli analysis",
+    "s2_li3": "Payment and billing details for paid consultations",
+    "s2_li4": "Technical data such as IP address, browser type, and device information",
+
+    "s3_title": "3. How We Use Your Information",
+    "s3_text": "Your information is used for purposes such as:",
+    "s3_li1": "Providing personalized horoscope, Kundli, and astrological guidance",
+    "s3_li2": "Improving our website, content, and user experience",
+    "s3_li3": "Processing bookings, consultations, and payments",
+    "s3_li4": "Sending service updates or newsletters (only if you opt in)",
+    "s3_li5": "Ensuring platform security and fraud prevention",
+
+    "s4_title": "4. Data Sharing & Disclosure",
+    "s4_text": "We respect your privacy. Your data will never be sold. Limited information may be shared with trusted third parties for:",
+    "s4_li1": "Secure payment processing",
+    "s4_li2": "Email or notification delivery",
+    "s4_li3": "Legal compliance when required",
+
+    "s5_title": "5. Data Security",
+    "s5_text": "We adopt strict technical and organizational measures to protect your data. However, no online data transfer method is 100% secure.",
+
+    "s6_title": "6. Your Rights",
+    "s6_text": "You have the right to access, correct, or request deletion of your personal data. Contact us for any such requests.",
+
+    "s7_title": "7. Third-Party Links",
+    "s7_text": "Our website may include links to third-party sites. We are not responsible for their privacy practices or content. Review their policies for more information.",
+
+    "s8_title": "8. Updates to This Policy",
+    "s8_text": "This Privacy Policy may be updated to reflect changes in our services or regulations. Updates will be posted on this page.",
+
+    "s9_title": "9. Contact Us",
+    "s9_text": "If you have any questions about this Privacy Policy, contact us at:"
+  },
+   "astroGlobe": {
+    "title": "Today’s Snapshot",
+    "tithi": "Tithi",
+    "paksha": "Paksha",
+    "nakshatra": "Nakshatra",
+    "rahuKaal": "Rahu Kaal",
+    "loading": "Loading..."
+  },
+  "reviews": {
+    "title": {
+      "part1": "What",
+      "part2": "Clients Say"
+    },
+    "subtitle": "Real experiences. Real results. Compassionate, accurate, and actionable guidance.",
+    "ratingBadge": "5.0 average • 1k+ sessions",
+    "cta": "Book your session",
+
+    "r1": {
+      "name": "Anjali S.",
+      "role": "Entrepreneur",
+      "text": "Guruji's reading gave me sharp clarity on career timing. Practical remedies + exact timelines."
+    },
+    "r2": {
+      "name": "Rahul M.",
+      "role": "Designer",
+      "text": "Loved how grounded it was—no fluff. Insights on my Saturn period were spot on."
+    },
+    "r3": {
+      "name": "Meera K.",
+      "role": "Student",
+      "text": "The synastry session helped me understand patterns I keep repeating. Gentle and empowering."
+    },
+    "r4": {
+      "name": "Dev P.",
+      "role": "Founder",
+      "text": "Business launch muhurat worked wonders. Sales spiked in week one."
+    },
+    "r5": {
+      "name": "Rhea T.",
+      "role": "Product Manager",
+      "text": "Transit insights reduced my anxiety. I finally know what to focus on this quarter."
+    },
+    "r6": {
+      "name": "Aman J.",
+      "role": "Consultant",
+      "text": "Crystal-clear reading with actionable steps. The follow-up notes were gold."
+    }
+  },
+  "footer": {
+    "getInTouch": "Get in touch",
+    "privacy": "Privacy Policy",
+    "disclaimer": "Disclaimer",
+    "rightsReserved": " All rights reserved.",
+    "developedBy": "Developed by"
+  },
+  "contact1": {
+    "contact": "Contact",
+    "us": "Us",
+    "loadingText": "Please wait… aligning your stars",
+    "bestResults": "For the most accurate reading:",
+    "tip1": "Provide your exact birth date, time, and city.",
+    "tip2": "Share your main concern clearly.",
+    "tip3": "Be open—astrology guides best when approached with trust.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "WhatsApp / Phone",
+    "dob": "Date of Birth",
+    "time": "Time",
+    "birthplace": "Birth Place",
+    "birthPlaceholder": "City, Country",
+    "service": "Service",
+    "selectService": "Select Service",
+    "s1": "Kundli / Birth Chart Analysis",
+    "s2": "Career & Job Guidance",
+    "s3": "Marriage / Relationship Compatibility",
+    "s4": "Health & Wellbeing Astrology",
+    "s5": "Remedy & Ritual Guidance",
+    "s6": "Spiritual Path Consultation",
+    "concern": "Concern",
+    "selectConcern": "Select Concern",
+    "c1": "Delays or life obstacles",
+    "c2": "Relationship conflicts",
+    "c3": "Financial instability",
+    "c4": "Emotional imbalance",
+    "c5": "Childbirth / family planning",
+    "yourQuestion": "Your specific question",
+    "questionPlaceholder": "Tell me what clarity you want…",
+    "consent": "I consent to sharing my details and agree to",
+    "privacy": "Privacy Policy",
+    "terms": "Disclaimer",
+    "submit": "Submit"
+  },
+  "blogs": {
+    "heading": "Whispers from the Stars",
+    "headingHighlight": "Stars",
+    "loading": "Loading blogs...",
+    "error": "Something went wrong.",
+    "noBlogs": "No blogs found.",
+    "viewDetails": "View Details",
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "horoscope": {
+    "headingPrefix": "Today’s",
+    "headingAccent": "Horoscope",
+    "subtitle": "Your daily dose of cosmic guidance, aligned with the stars ✨",
+    "cta": "Get your personalized reading",
+
+    "signs": {
+      "Aries": "Aries",
+      "Taurus": "Taurus",
+      "Gemini": "Gemini",
+      "Cancer": "Cancer",
+      "Leo": "Leo",
+      "Virgo": "Virgo",
+      "Libra": "Libra",
+      "Scorpio": "Scorpio",
+      "Sagittarius": "Sagittarius",
+      "Capricorn": "Capricorn",
+      "Aquarius": "Aquarius",
+      "Pisces": "Pisces"
+    },
+
+    "messages": {
+      "Aries": "Take bold steps today",
+      "Taurus": "Stay grounded and steady",
+      "Gemini": "Conversations bring clarity",
+      "Cancer": "Emotions guide your path",
+      "Leo": "Shine with confidence",
+      "Virgo": "Details bring success",
+      "Libra": "Seek balance and harmony",
+      "Scorpio": "Trust your instincts",
+      "Sagittarius": "Adventure is calling",
+      "Capricorn": "Persistence wins the day",
+      "Aquarius": "Innovate and inspire",
+      "Pisces": "Dreams shape your reality"
+    },
+
+    "modal": {
+      "loading": "Fetching your stars...",
+      "challenge": "Challenge",
+      "noPrediction": "No prediction found."
+    }
+  }
+}
