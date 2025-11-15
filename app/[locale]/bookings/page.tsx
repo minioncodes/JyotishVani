@@ -4,7 +4,6 @@ import React, { ReactHTMLElement, useEffect, useState } from "react";
 import { loadRazorpay } from "@/utils/loadRazorpay";
 import Navbar from "@/components/Navbar";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
-
 interface Slot {
   start: string;
   end: string;
@@ -94,6 +93,16 @@ export default function Home() {
               attendees: [{ email: email }],
             }),
           });
+          const sendPaymentDetailsEmail=await fetch('api/google/sendDetailsEmail',{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+              email,
+              selectedDate,
+            })
+          })
+          const sendEmailData=await sendPaymentDetailsEmail.json();
+          console.log(sendEmailData);
           const data = await bookingRes.json();
           alert("Booking confirmed!");
           setEmail("");
@@ -164,7 +173,7 @@ export default function Home() {
 
 
 
-        {loading && <LoadingSpinner/>}
+        {loading && <LoadingSpinner />}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full mt-6 max-w-3xl">
           {slots.length > 0 ? (
             slots.map((slot, idx) => (
