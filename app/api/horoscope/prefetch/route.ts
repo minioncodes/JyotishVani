@@ -1,4 +1,3 @@
-
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/Redis";
 import { getProkeralaToken } from "@/lib/prokerala";
@@ -6,7 +5,6 @@ import { getProkeralaToken } from "@/lib/prokerala";
 const TZ = "Asia/Kolkata";
 const HORO_KEY_PREFIX = "horo:";
 
-// basic guard so random people can't spam your prefetch
 const PREFETCH_SECRET = process.env.HORO_PREFETCH_SECRET;
 
 type Prediction = {
@@ -23,19 +21,29 @@ type HoroscopeDay = Record<
   }
 >;
 
+// Always compute today's date in IST using full ISO
 function todayIST() {
-  return new Date().toLocaleDateString("sv-SE", { timeZone: TZ }); // yyyy-mm-dd
+  const now = new Date();
+  return new Intl.DateTimeFormat("sv-SE", {
+    timeZone: TZ,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
 }
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
+
     const secret = searchParams.get("secret");
     const force = searchParams.get("force") === "1";
 
+    // Cron header from wrapper
     const isCron = req.headers.get("x-vercel-cron") === "1";
 
-    if (!isCron && PREFETCH_SECRET && secret !== PREFETCH_SECRET) {
+    // ✔ FIX 1 — Allow cron even when secret is missing
+    if (!isCron && secret !== PREFETCH_SECRET) {
       return NextResponse.json(
         { success: false, error: "Unauthorized" },
         { status: 401 }
@@ -45,6 +53,7 @@ export async function GET(req: Request) {
     const today = todayIST();
     const cacheKey = `${HORO_KEY_PREFIX}${today}`;
 
+    // Skip if already prefetched (unless force=1)
     if (!force) {
       const existing = (await redis.get(cacheKey)) as HoroscopeDay | null;
       if (existing) {
@@ -83,16 +92,17 @@ export async function GET(req: Request) {
         datetime,
       });
 
-      const url = `https://api.prokerala.com/v2/horoscope/daily/advanced?${params.toString()}`;
+      const url =
+        "https://api.prokerala.com/v2/horoscope/daily/advanced?" +
+        params.toString();
 
       const res = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
-        cache: "no-store",
+       
       });
 
       if (!res.ok) {
-        const text = await res.text();
-        console.error(`Prokerala error for ${sign}:`, res.status, text);
+        console.error(`Prokerala error for ${sign}:`, res.status);
         continue;
       }
 
@@ -111,8 +121,8 @@ export async function GET(req: Request) {
       };
     }
 
-    // store all 12 signs under a single key, TTL ~ 26h
-    await redis.set(cacheKey, dayData, { ex: 24 * 60 * 60 });
+    // ✔ FIX 2 — Store for 26 hours so data never expires before next cron
+    await redis.set(cacheKey, dayData, { ex: 26 * 60 * 60 });
 
     return NextResponse.json({
       success: true,
