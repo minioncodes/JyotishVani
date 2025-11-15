@@ -1,10 +1,9 @@
-
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/Redis";
 
 const TZ = "Asia/Kolkata";
 const HORO_KEY_PREFIX = "horo:";
-// prefech
+
 type Prediction = {
   type: string;
   prediction: string;
@@ -19,8 +18,15 @@ type HoroscopeDay = Record<
   }
 >;
 
+// Must match prefetch logic EXACTLY
 function todayIST() {
-  return new Date().toLocaleDateString("sv-SE", { timeZone: TZ });
+  const now = new Date();
+  return new Intl.DateTimeFormat("sv-SE", {
+    timeZone: TZ,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
 }
 
 export async function GET(req: Request) {
@@ -35,7 +41,7 @@ export async function GET(req: Request) {
       );
     }
 
-    const today = todayIST();
+    const today = todayIST(); // must match prefetch
     const cacheKey = `${HORO_KEY_PREFIX}${today}`;
 
     const dayData = (await redis.get(cacheKey)) as HoroscopeDay | null;
