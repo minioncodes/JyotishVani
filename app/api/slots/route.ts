@@ -39,12 +39,14 @@ export async function GET(req: Request) {
     const WORK_END_HOUR = 22;
     const baseDateRaw = dateParam ? new Date(dateParam) : new Date();
     const baseIST = ist(baseDateRaw);
-    const dayStartIST = new Date(baseIST);
-    dayStartIST.setHours(WORK_START_HOUR, 0, 0, 0);
-    const dayEndIST = new Date(baseIST);
-    dayEndIST.setHours(WORK_END_HOUR, 59, 59, 999);
-    const timeMin = fromIST(dayStartIST).toISOString();
-    const timeMax = fromIST(dayEndIST).toISOString();
+    const dayStartIST = new Date(
+      `${baseDate.toISOString().split("T")[0]}T${WORK_START_HOUR}:00:00+05:30`
+    );
+    const dayEndIST = new Date(
+      `${baseDate.toISOString().split("T")[0]}T${WORK_END_HOUR}:59:59+05:30`
+    );
+    const timeMin = dayStartIST.toISOString();
+    const timeMax = dayEndIST.toISOString();
     const freeBusy = await calendar.freebusy.query({
       requestBody: {
         timeMin,
