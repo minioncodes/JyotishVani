@@ -1,6 +1,5 @@
 'use client';
 
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -29,7 +28,7 @@ export default function Navbar() {
 
   // Locale switch logic
   const switchLocale = () => {
-    const nextLocale = locale === "en" ? "hi" : "en";
+    const nextLocale = locale === "hi" ? "en" : "hi";
     const cleanPath = pathname.replace(/^\/(en|hi)/, "");
     router.push(`/${nextLocale}${cleanPath}`);
   };
@@ -37,12 +36,7 @@ export default function Navbar() {
   const isHindi = locale === "hi";
 
   return (
-    <motion.nav
-      initial={{ y: "-100%", opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-6xl z-50"
-    >
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-6xl z-50">
       <div className="flex items-center justify-between px-5 py-3 bg-white/90 backdrop-blur-md rounded-2xl shadow">
 
         {/* BRAND */}
@@ -52,7 +46,7 @@ export default function Navbar() {
             alt="Logo"
             width={32}
             height={32}
-            className="object-contain rounded-full animate-spin-ltr"
+            className="object-contain rounded-full"
           />
           <span className="text-xl font-bold">{t("brand")}</span>
         </Link>
@@ -79,22 +73,78 @@ export default function Navbar() {
           </Link>
 
           {/* LANGUAGE SWITCH */}
-          <button
+          <div
             onClick={switchLocale}
-            className="border border-[#B22222] text-[#B22222] px-4 py-2 rounded-xl font-semibold hover:bg-[#B22222]/10 transition"
+            className={`
+              relative 
+              w-24 h-8
+              sm:w-28 sm:h-9
+              flex items-center 
+              rounded-full cursor-pointer 
+              transition-all duration-300 select-none
+              ${isHindi ? "bg-[#B22222]" : "bg-gray-400"}
+            `}
           >
-            {isHindi ? t("switchToEnglish") : t("switchToHindi")}
-          </button>
+            <span className="absolute left-2 text-white text-[10px] sm:text-xs font-semibold">
+              Hindi
+            </span>
+
+            <span className="absolute right-2 text-white text-[10px] sm:text-xs font-semibold">
+              English
+            </span>
+
+            <div
+              className={`
+                absolute 
+                bg-white rounded-full shadow-md flex items-center justify-center 
+                text-[10px] sm:text-xs font-semibold 
+                transition-all duration-300
+                w-12 h-8
+                sm:w-14 sm:h-9
+                ${isHindi ? "translate-x-0" : "translate-x-12 sm:translate-x-14"}
+              `}
+            >
+              {isHindi ? "हिन्दी" : "EN"}
+            </div>
+          </div>
         </div>
 
-        {/* MOBILE: LANGUAGE SWITCH BEFORE MENU */}
+        {/* MOBILE: LANGUAGE SWITCH + MENU BUTTON */}
         <div className="flex md:hidden items-center gap-3">
-          <button
+          <div
             onClick={switchLocale}
-            className="border border-[#B22222] text-[#B22222] px-3 py-1.5 rounded-xl text-sm font-semibold hover:bg-[#B22222]/10 transition"
+            className={`
+              relative 
+              w-20 h-7
+              sm:w-28 sm:h-8
+              flex items-center 
+              rounded-full cursor-pointer 
+              transition-all duration-300 select-none
+              ${isHindi ? "bg-[#B22222]" : "bg-gray-400"}
+            `}
           >
-            {isHindi ? "EN" : "HI"}
-          </button>
+            <span className="absolute left-2 text-white text-[9px] sm:text-xs font-semibold">
+              Hindi
+            </span>
+
+            <span className="absolute right-2 text-white text-[9px] sm:text-xs font-semibold">
+              English
+            </span>
+
+            <div
+              className={`
+                absolute 
+                bg-white rounded-full shadow-md flex items-center justify-center 
+                text-[9px] sm:text-xs font-semibold 
+                transition-all duration-300
+                w-10 h-7
+                sm:w-14 sm:h-9
+                ${isHindi ? "translate-x-0" : "translate-x-10 sm:translate-x-14"}
+              `}
+            >
+              {isHindi ? "हि" : "EN"}
+            </div>
+          </div>
 
           <button
             className="p-2 bg-[#B22222]/20 rounded-xl"
@@ -105,42 +155,33 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* MOBILE MENU */}
-<AnimatePresence>
-  {open && (
-    <motion.div
-      initial={{ scaleY: 0, opacity: 0 }}
-      animate={{ scaleY: 1, opacity: 1 }}
-      exit={{ scaleY: 0, opacity: 0 }}
-      transition={{ duration: 0.35 }}
-      className="md:hidden origin-top bg-white/95 rounded-2xl shadow mt-2"
-    >
-      <div className="flex flex-col p-4">
+      {/* MOBILE MENU (NO ANIMATION) */}
+      {open && (
+        <div className="md:hidden bg-white/95 rounded-2xl shadow mt-2">
+          <div className="flex flex-col p-4">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={`/${locale}${l.href}`}
+                onClick={() => setOpen(false)}
+                className={`py-3 text-gray-900 font-medium hover:text-[#B22222] ${
+                  activeLink(l.href) ? "text-[#B22222] font-semibold" : ""
+                }`}
+              >
+                {t(l.key)}
+              </Link>
+            ))}
 
-        {links.map((l) => (
-          <Link
-            key={l.href}
-            href={`/${locale}${l.href}`}
-            onClick={() => setOpen(false)}
-            className={`py-3 text-gray-900 font-medium hover:text-[#B22222] ${
-              activeLink(l.href) ? "text-[#B22222] font-semibold" : ""
-            }`}
-          >
-            {t(l.key)}
-          </Link>
-        ))}
-
-        <Link
-          href={`/${locale}/bookings`}
-          onClick={() => setOpen(false)}
-          className="mt-3 bg-[#B22222] text-white px-4 py-2 rounded-xl text-center font-semibold shadow hover:bg-black transition"
-        >
-          {t("bookNow")}
-        </Link>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
-    </motion.nav>
+            <Link
+              href={`/${locale}/bookings`}
+              onClick={() => setOpen(false)}
+              className="mt-3 bg-[#B22222] text-white px-4 py-2 rounded-xl text-center font-semibold shadow hover:bg-black transition"
+            >
+              {t("bookNow")}
+            </Link>
+          </div>
+        </div>
+      )}
+    </nav>
   );
 }

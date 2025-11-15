@@ -10,7 +10,7 @@ export default function AstrologerInfo() {
   return (
     <div>
       <section className="relative px-6 py-20 md:py-28 bg-gradient-to-b from-[#FAF7F2] via-[#FAF7F2]/90 to-[#F5EFE4] text-[#2B2B2B]">
-        <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="mx-auto mt-10 max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left: Image */}
           <motion.div
             initial={{ x: -30, opacity: 0 }}

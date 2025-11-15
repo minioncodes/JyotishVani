@@ -1,7 +1,7 @@
 // i18n/request.ts
 import { getRequestConfig } from "next-intl/server";
 
-const locales = ["en", "hi"] as const;
+const locales = ["hi", "en"] as const;
 type Locale = (typeof locales)[number];
 
 export default getRequestConfig(async ({ locale }) => {

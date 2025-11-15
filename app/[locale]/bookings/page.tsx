@@ -189,7 +189,7 @@ export default function Home() {
                   disabled={activeSlot === slot.start}
                   className={`w-full px-4 py-2 rounded-md font-semibold transition-all duration-200 flex justify-center items-center gap-2 ${activeSlot === slot.start
                     ? "bg-[#e0d5b8] text-gray-600 cursor-not-allowed"
-                    : "bg-[#B22222] text-white hover:bg-[#caae6c]"
+                    : "bg-[#B22222] text-white hover:bg-[#6e0000]"
                     }`}
                 >
                   {activeSlot === slot.start ? (
