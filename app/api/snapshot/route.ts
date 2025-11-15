@@ -71,7 +71,7 @@ export async function GET() {
 
     const fetchOptions = {
       headers: { Authorization: `Bearer ${token}` },
-      cache: "no-store" as RequestCache,
+     
     };
 
     // Panchang API

@@ -98,7 +98,7 @@ export async function GET(req: Request) {
 
       const res = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
-        cache: "no-store",
+       
       });
 
       if (!res.ok) {
