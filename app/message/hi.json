@@ -400,5 +400,26 @@
       "challenge": "चुनौती",
       "noPrediction": "आज के लिए विस्तृत भविष्यवाणी उपलब्ध नहीं।"
     }
+  },
+  "booking": {
+    "title": "अपनी ज्योतिष परामर्श बुक करें",
+    "selectDate": "तारीख चुनें",
+    "enterEmail": "अपना ईमेल दर्ज करें",
+    "placeholderEmail": "अपना ईमेल दर्ज करें",
+    "min": "मिनट",
+    "razorpayError": "Razorpay SDK लोड नहीं हुआ।",
+    "confirmEmail": "क्या यह आपका सही ईमेल है?",
+    "emailWrong": "बुकिंग रद्द। कृपया ईमेल जांचें।",
+    "consultation": "परामर्श बुकिंग",
+    "summary": "ज्योतिष परामर्श",
+    "description": "कुंडली पढ़ने का वीडियो सत्र",
+    "bookingSuccess": "बुकिंग सफल!",
+    "bookingFailed": "बुकिंग की पुष्टि में त्रुटि हुई!",
+    "bookingCancelled": "बुकिंग रद्द।",
+    "emailRequired": "कृपया आगे बढ़ने से पहले ईमेल दर्ज करें।",
+    "booking": "बुक किया जा रहा है...",
+    "bookNow": "अभी बुक करें",
+    "noSlots": "कोई स्लॉट उपलब्ध नहीं",
+    "confirming": "बुकिंग की पुष्टि की जा रही है..."
   }
 }
