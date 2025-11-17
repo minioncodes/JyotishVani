@@ -200,7 +200,7 @@ export default function Horoscope() {
     setPredictions(null);
     try {
       const res = await fetch(
-        `/api/horoscope?sign=${s.actualName.toLowerCase()}`,
+        `/api/horoscope/get?sign=${s.actualName.toLowerCase()}`,
         { cache: "no-store" }
       );
       const data = await res.json();

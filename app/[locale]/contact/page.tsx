@@ -16,12 +16,6 @@ import { useTranslations, useLocale } from "next-intl";
 export default function ContactPage() {
   return (
     <main className="relative min-h-screen bg-[#FAF8F3] text-black overflow-x-hidden">
-      <StarsBg />
-
-      <div className="pointer-events-none fixed inset-0">
-        <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
-        <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
-      </div>
 
       <HeaderHero />
       <TrustStrip />

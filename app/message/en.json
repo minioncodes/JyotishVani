@@ -400,5 +400,26 @@
       "challenge": "Challenge",
       "noPrediction": "No prediction found."
     }
+  },
+"booking": {
+    "title": "Book Your Astrology Consultation",
+    "selectDate": "Select Date",
+    "enterEmail": "Enter your email",
+    "placeholderEmail": "Enter your email",
+    "min": "min",
+    "razorpayError": "Razorpay SDK failed to load.",
+    "confirmEmail": "Is this your correct email?",
+    "emailWrong": "Booking cancelled. Please check your email.",
+    "consultation": "Consultation Booking",
+    "summary": "Astrology Consultation",
+    "description": "Video session for horoscope reading",
+    "bookingSuccess": "Booking confirmed!",
+    "bookingFailed": "Something went wrong while confirming booking!",
+    "bookingCancelled": "Booking cancelled.",
+    "emailRequired": "Please enter your email first to proceed.",
+    "booking": "Booking...",
+    "bookNow": "Book Now",
+    "noSlots": "No slots available",
+    "confirming": "Confirming your booking..."
   }
 }
