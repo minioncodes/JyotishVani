@@ -18,15 +18,13 @@ type HoroscopeDay = Record<
   }
 >;
 
-// Must match prefetch logic EXACTLY
-function todayIST() {
-  const now = new Date();
+function todayIST(): string {
   return new Intl.DateTimeFormat("sv-SE", {
     timeZone: TZ,
     year: "numeric",
     month: "2-digit",
-    day: "2-digit",
-  }).format(now);
+    day: "2-digit"
+  }).format(new Date());
 }
 
 export async function GET(req: Request) {
@@ -41,34 +39,35 @@ export async function GET(req: Request) {
       );
     }
 
-    const today = todayIST(); // must match prefetch
+    const today = todayIST();
     const cacheKey = `${HORO_KEY_PREFIX}${today}`;
 
-    const dayData = (await redis.get(cacheKey)) as HoroscopeDay | null;
+    const raw = await redis.get(cacheKey);
 
-    if (!dayData || !dayData[sign]) {
+    // Safe parse for both Upstash (object) & ioredis (string)
+    const data: HoroscopeDay | null =
+      raw && typeof raw === "string"
+        ? JSON.parse(raw)
+        : (raw as HoroscopeDay | null);
+
+    if (!data || !data[sign]) {
       return NextResponse.json(
         {
           success: false,
           ready: false,
-          message:
-            "Horoscope not generated yet. Prefetch job has to run for today.",
+          message: "Horoscope not ready. Prefetch cron has not run yet."
         },
         { status: 503 }
       );
     }
 
-    const { date, predictions } = dayData[sign];
-
     return NextResponse.json({
       success: true,
       sign,
-      date,
-      predictions,
-      cached: true,
+      date: data[sign].date,
+      predictions: data[sign].predictions
     });
   } catch (err: any) {
-    console.error("Horoscope read error:", err);
     return NextResponse.json(
       { success: false, error: err.message },
       { status: 500 }
