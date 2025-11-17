@@ -21,7 +21,6 @@ export async function POST(req: Request) {
         const startDate = new Date(start);
         const dayStart = new Date(startDate.setHours(0, 0, 0, 0));
         const dayEnd = new Date(startDate.setHours(23, 59, 59, 999));
-
         const freeBusyQuery = await calendar.freebusy.query({
             requestBody: {
                 timeMin: dayStart.toISOString(),
@@ -85,6 +84,7 @@ export async function POST(req: Request) {
                 link: eventData.htmlLink,
                 attendees: eventData.attendees,
             },
+            
         });
     } catch (error: any) {
         console.error("Booking error:", error);
