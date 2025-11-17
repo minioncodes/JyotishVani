@@ -33,7 +33,7 @@ export default function AstroCategories() {
   ];
 
   return (
-    <section className="px-6 mt-10 py-14 md:py-20 lg:py-28">
+    <section className="px-6 py-14 md:py-20 lg:py-28 relative bg-gradient-to-b from-[#FAF7F2] via-[#FAF7F2]/90 to-[#F5EFE4] text-[#2B2B2B]">
       <motion.div
         initial="hidden"
         whileInView="show"
@@ -45,7 +45,7 @@ export default function AstroCategories() {
             transition: { staggerChildren: 0.12, delayChildren: 0.05 }
           }
         }}
-        className="mx-auto max-w-7xl grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6"
+        className="mx-auto mt-10 max-w-7xl grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6"
       >
         {items.map((i) => (
           <motion.div

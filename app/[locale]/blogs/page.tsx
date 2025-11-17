@@ -50,16 +50,10 @@ export default function BlogsPage() {
 
   return (
     <>
-      <div className="fixed inset-0 -z-10 bg-[#FAF8F3]">
-        <StarsBg />
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-40 -left-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
-          <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
-        </div>
-      </div>
 
-      {/* Blogs Content */}
-      <div className="max-w-6xl mx-auto px-6 py-14 relative z-10">
+<section className="relative px-6 py-20 md:py-28 bg-gradient-to-b from-[#FAF7F2] via-[#FAF7F2]/90 to-[#F5EFE4] text-[#2B2B2B]">
+        {/* Blogs Content */}
+      <div className="max-w-6xl mx-auto px-6 py-14 relative z-10 ">
         {/* Page Heading */}
         <h1 className="text-4xl md:text-5xl font-bold text-center mt-[100px] font-[Cinzel] mb-12 text-black">
           {t("heading.part1")}{" "}
@@ -103,6 +97,7 @@ export default function BlogsPage() {
           ))}
         </div>
       </div>
+</section>
     </>
   );
 }
