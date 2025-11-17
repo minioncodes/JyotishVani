@@ -122,7 +122,7 @@ export default function BlogsPage() {
                   />
 
                   <Link
-                    href={`/single-blog/${blogs[index]?._id}`}
+                    href={`/${locale}/single-blog/${blogs[index]?._id}`}
                     className="mt-4 block text-center bg-[#B22222] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-black transition"
                   >
                     {t("viewDetails")}
@@ -188,7 +188,7 @@ export default function BlogsPage() {
                       />
 
                       <Link
-                        href={`/single-blog/${blog._id}`}
+                        href={`/${locale}/single-blog/${blog._id}`}
                         className="mt-auto inline-block text-center bg-[#B22222] text-white px-3 py-1.5 rounded-md text-sm font-medium hover:bg-black transition"
                       >
                         {t("viewDetails")}
