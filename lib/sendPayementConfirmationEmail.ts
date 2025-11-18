@@ -39,7 +39,7 @@ export async function sendPaymentDetailsEmail(user: userDetails) {
     <div style="background-color:#f7f4ef; padding:24px; font-family:Arial, sans-serif; color:#333;">
 
     <div style="text-align:center; margin-bottom:24px;">
-      <img src="cid:jyotish-logo" alt="Jyotishwaani Logo" width="90" style="margin-bottom:12px;" />
+      <img src="https://res.cloudinary.com/demznoxwp/image/upload/v1763460668/icon_px3ymr.jpg" alt="Jyotishwaani Logo" width="90" style="margin-bottom:12px;" />
       <h2 style="margin:0; color:#b35a5a; font-weight:600;">
         Jyotishwaani Your Personal Astrology Guidance
       </h2>
@@ -51,7 +51,7 @@ export async function sendPaymentDetailsEmail(user: userDetails) {
       border-radius:12px;
       border:1px solid #e5d9c8;
       box-shadow:0 2px 6px rgba(0,0,0,0.08);
-      background-image:url('cid:jyotish-bg');
+      background-image:url('');
       background-size:cover;
       background-position:center;
     ">
