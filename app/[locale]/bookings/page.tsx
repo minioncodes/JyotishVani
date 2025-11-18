@@ -153,7 +153,7 @@ export default function Home() {
       },
       theme: { color: "#3399cc" },
     };
-
+    
     const razorpay = new (window as any).Razorpay(options);
     razorpay.open();
     setLoading(false);
@@ -268,7 +268,7 @@ export default function Home() {
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-600">{t("noSlots")}</p>
+            <div className="col-span-3 flex justify-center items-center text-gray-600">{t("noSlots")}</div>
           )}
         </div>
 
