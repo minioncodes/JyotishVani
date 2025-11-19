@@ -16,6 +16,7 @@ import {
 import TestBlogPage from "@/components/Test-Blog";
 import AdminBlogs from "@/components/Admin-Blogs";
 import AdminLeads from "@/components/Leadspage";
+import { useLocale } from "next-intl";
 
 interface Admin {
   name: string;
@@ -29,13 +30,14 @@ export default function AdminPage() {
   );
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
+  const locale = useLocale();
 
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
     const adminData = localStorage.getItem("adminInfo");
 
     if (!token || !adminData) {
-      router.push("/admin");
+      router.push(`${locale}/admin`);
       return;
     }
 
@@ -43,19 +45,19 @@ export default function AdminPage() {
       setAdmin(JSON.parse(adminData));
     } catch (err) {
       console.error("Invalid admin data in localStorage", err);
-      router.push("/admin");
+      router.push(`${locale}/admin`);
     }
   }, [router]);
 
   const logout = () => {
     localStorage.removeItem("adminToken");
     localStorage.removeItem("adminInfo");
-    router.push("/admin");
+    router.push(`${locale}/admin`);
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-indigo-50 via-white to-purple-50">
-      <nav className="bg-blue-900 text-white p-4 flex items-center justify-between shadow-md">
+      <nav className="bg-blue-900 mt-20 text-white p-4 flex items-center justify-between shadow-md">
         <div className="flex items-center gap-2 font-bold text-lg">
           Admin Dashboard
         </div>

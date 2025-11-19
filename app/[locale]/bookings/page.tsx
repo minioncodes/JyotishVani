@@ -94,9 +94,23 @@ export default function Home() {
       name: "Jyotishwaani",
       description: t("consultation"),
       order_id: order.id,
-      handler: async function () {
+      handler: async function (response: any) {
         try {
           setBookingLoading(true);
+          const verifyPayment = await fetch("/api/payment/verify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_signature: response.razorpay_signature
+            })
+          })
+          const verifyData = await verifyPayment.json();
+          if (!verifyData.success) {
+            alert("Payment Verification Failed !.No Booking Done")
+            return;
+          }
           const bookingRes = await fetch("/api/google/book", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -108,9 +122,24 @@ export default function Home() {
               attendees: [{ email: email }],
             }),
           });
-
-          await bookingRes.json();
-          alert(t("bookingSuccess"));
+          const bookingDetails = await bookingRes.json();
+          const link = bookingDetails.event.meetLink;
+          setMeetLink(bookingDetails.event.meetLink);
+          const sendPaymentDetailsEmail = await
+            fetch('/api/google/senddetailsemail', {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email,
+                slotDate: selectedDate,
+                meetLink: link,
+                timing: slot.start,
+                meetAmount: map_Payment_Duration.get(duration)
+              })
+            })
+          const sendEmailData = await sendPaymentDetailsEmail.json();
+          console.log(sendEmailData);
+          alert("Booking confirmed!");
           setEmail("");
           setDuration(30);
           fetchSlots();
@@ -124,7 +153,7 @@ export default function Home() {
       },
       theme: { color: "#3399cc" },
     };
-
+    
     const razorpay = new (window as any).Razorpay(options);
     razorpay.open();
     setLoading(false);
@@ -137,22 +166,17 @@ export default function Home() {
         <h1 className="text-4xl font-extrabold text-[#2c2c2c] mb-8 text-center mt-15">
           {t("title")}
         </h1>
-
         <div className="flex flex-col md:flex-row gap-6 md:items-end mb-10">
-
           <div className="flex flex-col">
-            <label className="block mb-1 font-semibold text-[#4a4a4a]">
-              {t("selectDate")}
-            </label>
+            <label className="block mb-1 font-semibold text-[#4a4a4a]">Select Date:</label>
             <input
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
               className="border border-[#B22222] bg-[#fffaf3] rounded-lg px-3 py-2 
-              focus:outline-none focus:ring-2 focus:ring-[#B22222]"
+                 focus:outline-none focus:ring-2 focus:ring-[#B22222]"
             />
           </div>
-
           <div className="flex flex-col">
             <label className="block mb-1 font-semibold text-[#4a4a4a]">
               {t("enterEmail")}
@@ -171,17 +195,18 @@ export default function Home() {
               <button
                 key={d}
                 onClick={() => setDuration(d)}
-                className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
-                  duration === d
-                    ? "bg-[#B22222] text-white"
-                    : "bg-[#f5f2e9] text-[#3d3d3d] hover:bg-[#e8b3b1]"
-                }`}
+                className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${duration === d
+                  ? "bg-[#B22222] text-white"
+                  : "bg-[#f5f2e9] text-[#3d3d3d] hover:bg-[#e8b3b1]"
+                  }`}
               >
                 {d} {t("min")}
               </button>
             ))}
           </div>
+
         </div>
+
 
         {loading && <LoadingSpinner />}
 
@@ -207,11 +232,10 @@ export default function Home() {
                 <button
                   onClick={() => handlePayment(slot)}
                   disabled={activeSlot === slot.start}
-                  className={`w-full px-4 py-2 rounded-md font-semibold transition-all duration-200 flex justify-center items-center gap-2 ${
-                    activeSlot === slot.start
-                      ? "bg-[#e0d5b8] text-gray-600 cursor-not-allowed"
-                      : "bg-[#B22222] text-white hover:bg-[#6e0000]"
-                  }`}
+                  className={`w-full px-4 py-2 rounded-md font-semibold transition-all duration-200 flex justify-center items-center gap-2 ${activeSlot === slot.start
+                    ? "bg-[#e0d5b8] text-gray-600 cursor-not-allowed"
+                    : "bg-[#B22222] text-white hover:bg-[#6e0000]"
+                    }`}
                 >
                   {activeSlot === slot.start ? (
                     <>
@@ -244,7 +268,7 @@ export default function Home() {
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-600">{t("noSlots")}</p>
+            <div className="col-span-3 flex justify-center items-center text-gray-600">{t("noSlots")}</div>
           )}
         </div>
 
