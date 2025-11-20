@@ -46,7 +46,7 @@ export async function GET() {
     console.log("Today IST:", today);
 
     // load today snapshot from DB
-    let snapshot = await Snapshot.findOne({ date: today });
+    const snapshot = await Snapshot.findOne({ date: today });
     const expired = snapshot ? isExpired(snapshot.lastRefreshISO) : true;
 
     if (snapshot && !expired) {
