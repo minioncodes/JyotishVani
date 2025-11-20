@@ -3,7 +3,7 @@ import { redis } from "@/lib/Redis";
 import { getProkeralaToken } from "@/lib/prokerala";
 
 const TZ = "Asia/Kolkata";
-const SNAPSHOT_TTL_SECONDS = 4* 60 * 60; // 24 hours 
+const SNAPSHOT_TTL_SECONDS = 0.01* 60 * 60; // 24 hours 
 const SNAPSHOT_SECRET = process.env.SNAPSHOT_SECRET;
 
 // Default coordinates (Delhi) – you can change this or make it dynamic later
