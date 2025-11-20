@@ -1,162 +1,130 @@
-// app/api/horoscope/prefetch/route.ts
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/Redis";
+import Horoscope from "@/models/Horoscope";
+import connectDB from "@/lib/mongo";
 import { getProkeralaToken } from "@/lib/prokerala";
 
-const TZ = "Asia/Kolkata";
-const HORO_KEY_PREFIX = "horo:";
-const PREFETCH_SECRET = process.env.HORO_PREFETCH_SECRET;
-
-type ZodiacSign =
-  | "aries"
-  | "taurus"
-  | "gemini"
-  | "cancer"
-  | "leo"
-  | "virgo"
-  | "libra"
-  | "scorpio"
-  | "sagittarius"
-  | "capricorn"
-  | "aquarius"
-  | "pisces";
-
-type Prediction = {
-  type: string;
-  prediction: string;
-  challenge: string | null;
-};
-
-type HoroscopeDay = Record<
-  ZodiacSign,
-  {
-    date: string;
-    predictions: Prediction[];
-  }
->;
-
-const SIGNS: ZodiacSign[] = [
-  "aries",
-  "taurus",
-  "gemini",
-  "cancer",
-  "leo",
-  "virgo",
-  "libra",
-  "scorpio",
-  "sagittarius",
-  "capricorn",
-  "aquarius",
-  "pisces",
+const SIGNS = [
+  "aries","taurus","gemini","cancer","leo",
+  "virgo","libra","scorpio","sagittarius","capricorn",
+  "aquarius","pisces"
 ];
 
-function todayIST(): string {
+function todayIST() {
   return new Intl.DateTimeFormat("sv-SE", {
-    timeZone: TZ,
+    timeZone: "Asia/Kolkata",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   }).format(new Date());
 }
 
-export async function GET(req: Request) {
+async function fetchSign(sign: string, dateTime: string, token: string) {
+  console.log(`Fetching sign: ${sign}`);
+
+  const params = new URLSearchParams({
+    sign,
+    type: "all",
+    datetime: dateTime,
+  });
+
+  const url = "https://api.prokerala.com/v2/horoscope/daily/advanced?" + params;
+
+  console.log(`Calling Prokerala URL: ${url}`);
+
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  console.log(`Response for ${sign}: status ${res.status}`);
+
+  if (!res.ok) {
+    const text = await res.text();
+    console.log(`Error response for ${sign}: ${text}`);
+    return { success: false, status: res.status, error: text };
+  }
+
+  const json = await res.json();
+  const predictions = json?.data?.daily_predictions?.[0]?.predictions ?? [];
+
+  console.log(`Predictions count for ${sign}: ${predictions.length}`);
+
+  await Horoscope.findOneAndUpdate(
+    { sign, date: dateTime.split("T")[0] },
+    {
+      predictions: predictions.map((p: any) => ({
+        type: p.type,
+        prediction: p.prediction,
+        challenge: p.challenge,
+      })),
+      date: dateTime.split("T")[0],
+    },
+    { upsert: true }
+  );
+
+  console.log(`Saved ${sign} to MongoDB`);
+
+  return { success: true };
+}
+
+export async function GET() {
   try {
-    const url = new URL(req.url);
-    const secret = url.searchParams.get("secret");
-    const force = url.searchParams.get("force") === "1";
+    console.log("=== PREFETCH STARTED ===");
 
-    const isCron =
-      req.headers.get("x-vercel-cron") !== null ||
-      req.headers.get("x-vercel-scheduled") !== null;
-
-    // Only allow:
-    // - Vercel Cron requests
-    // - OR manual requests with the correct secret
-    if (!isCron && secret !== PREFETCH_SECRET) {
-      return NextResponse.json(
-        { success: false, error: "Forbidden" },
-        { status: 403 }
-      );
-    }
+    await connectDB();
+    console.log("MongoDB connected");
 
     const today = todayIST();
-    const cacheKey = `${HORO_KEY_PREFIX}${today}`;
+    const dateTime = `${today}T00:00:00+05:30`;
 
-    // If data already exists for today and not forced, do nothing
-    if (!force) {
-      const existing = await redis.get(cacheKey);
-      if (existing) {
-        return NextResponse.json({
-          success: true,
-          alreadyPrefetched: true,
-          date: today,
-        });
-      }
-    }
+    console.log("Today IST:", today);
 
+    console.log("Deleting older horoscope entries...");
+    await Horoscope.deleteMany({ date: { $ne: today } });
+    console.log("Old data cleared");
+
+    console.log("Fetching Prokerala token...");
     const token = await getProkeralaToken();
-    const datetime = `${today}T00:00:00+05:30`;
+    if (!token) throw new Error("Token is null");
+    console.log("Token fetched OK");
 
-    const output: Partial<HoroscopeDay> = {};
+    const BATCH_SIZE = 5;
+    let totalSaved = 0;
 
-    // Single call per sign (no 3x retry loop to avoid token storms)
-    for (const sign of SIGNS) {
-      try {
-        const params = new URLSearchParams({
-          sign,
-          type: "all",
-          datetime,
-        });
+    for (let i = 0; i < SIGNS.length; i += BATCH_SIZE) {
+      const batch = SIGNS.slice(i, i + BATCH_SIZE);
 
-        const res = await fetch(
-          "https://api.prokerala.com/v2/horoscope/daily/advanced?" + params,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+      console.log(`Starting batch: ${batch.join(", ")}`);
 
-        if (!res.ok) {
-          console.error(
-            `Failed to fetch horoscope for ${sign}. Status: ${res.status}`
-          );
-          continue;
-        }
+      const results = await Promise.all(
+        batch.map((sign) => fetchSign(sign, dateTime, token))
+      );
 
-        const json = await res.json();
+      const saved = results.filter(r => r.success).length;
+      totalSaved += saved;
 
-        const predictions =
-          json?.data?.daily_predictions?.[0]?.predictions?.map(
-            (p: any): Prediction => ({
-              type: p.type,
-              prediction: p.prediction,
-              challenge: p.challenge ?? null,
-            })
-          ) ?? [];
+      console.log(`Batch saved: ${saved}/${batch.length}`);
 
-        output[sign] = {
-          date: datetime,
-          predictions,
-        };
-      } catch (err) {
-        console.error(`Error while fetching horoscope for ${sign}:`, err);
+      if (i + BATCH_SIZE < SIGNS.length) {
+        console.log("Waiting 65 seconds before next batch...");
+        await new Promise((resolve) => setTimeout(resolve, 65000));
       }
     }
 
-    // Save final object for all signs in Redis for ~26 hours
-    await redis.set(cacheKey, JSON.stringify(output), {
-      ex: 26 * 60 * 60, // 26 hours
-    });
+    console.log("=== PREFETCH COMPLETED ===");
+    console.log(`Total saved signs: ${totalSaved}/12`);
 
     return NextResponse.json({
       success: true,
-      storedSigns: Object.keys(output),
-      date: today,
-      forced: force,
-      cron: isCron,
+      message: "Horoscope fetch completed",
+      saved: totalSaved,
     });
+
   } catch (err: any) {
+    console.log("=== PREFETCH ERROR ===");
+    console.log(err);
+
     return NextResponse.json(
-      { success: false, error: err?.message ?? "Internal server error" },
+      { success: false, error: err.message },
       { status: 500 }
     );
   }
