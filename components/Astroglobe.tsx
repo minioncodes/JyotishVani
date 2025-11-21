@@ -18,52 +18,47 @@ export default function AstroGlobe() {
 
   const [snapshot, setSnapshot] = useState<Snapshot>(null);
 
-  useEffect(() => {
-    let isMounted = true;
-    let interval: NodeJS.Timeout | null = null;
+ useEffect(() => {
+  let isMounted = true;
+  let controller = new AbortController();
 
-    async function fetchSnapshot() {
-      try {
-        const res = await fetch("/api/snapshot", { cache: "no-store" });
-        const data = await res.json();
-        if (!isMounted) return;
+  async function fetchSnapshot() {
+    try {
+      const res = await fetch("/api/freesnap", {
+        cache: "no-store",
+        signal: controller.signal
+      });
 
-        setSnapshot({
-          tithi: data.tithi,
-          paksha: data.paksha,
-          nakshatra: data.nakshatra,
-          rahuKaal: data.rahuKaal,
-          remedy: data.remedy || "Offer water to Sun",
-          updatedAt: data.updatedAt || new Date().toLocaleTimeString(),
-        });
-      } catch (err) {
+      const data = await res.json();
+      if (!isMounted) return;
+
+      setSnapshot({
+        tithi: data.tithi,
+        paksha: data.paksha,
+        nakshatra: data.nakshatra,
+        rahuKaal: data.rahuKaal,
+        remedy: data.remedy ?? "Offer water to Sun",
+        updatedAt: data.updatedAt ?? new Date().toLocaleTimeString(),
+      });
+    } catch (err: any) {
+      if (err.name !== "AbortError") {
         console.error("Snapshot fetch failed:", err);
       }
     }
+  }
 
-    fetchSnapshot();
+  fetchSnapshot();
 
-    if (!document.hidden) {
-      interval = setInterval(fetchSnapshot, 60 * 1000);
-    }
+  // refresh every 10 min (snapshot changes only every 2 hours)
+  const interval = setInterval(fetchSnapshot, 10 * 60 * 1000);
 
-    function handleVisibilityChange() {
-      if (document.hidden) {
-        if (interval) clearInterval(interval);
-      } else {
-        fetchSnapshot();
-        interval = setInterval(fetchSnapshot, 60 * 1000);
-      }
-    }
+  return () => {
+    isMounted = false;
+    controller.abort();
+    clearInterval(interval);
+  };
+}, []);
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    return () => {
-      isMounted = false;
-      if (interval) clearInterval(interval);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
 
   return (
     <motion.div
