@@ -20,7 +20,7 @@ export default function AstroGlobe() {
 
  useEffect(() => {
   let isMounted = true;
-  let controller = new AbortController();
+  const controller = new AbortController();
 
   async function fetchSnapshot() {
     try {
