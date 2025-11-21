@@ -2,7 +2,7 @@
 import connectDB from "@/lib/mongo";
 import Snapshot from "@/models/Snapshot";
 
-const FRESHNESS_WINDOW = 60 * 60 * 1000; // 1 hour
+const FRESHNESS_WINDOW = 60 * 60 * 2000; // 1 hour
 
 function convertTo12Hour(time: string) {
   if (!time) return "N/A";
