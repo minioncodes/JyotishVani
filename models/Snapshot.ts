@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+﻿import { Schema, model, models } from "mongoose";
 
 export interface SnapshotDoc {
   tithi: string;
@@ -6,6 +6,7 @@ export interface SnapshotDoc {
   paksha: string;
   rahuKaal: string;
   updatedAt: string;
+  nextRefreshISO: string | null;
 }
 
 const SnapshotSchema = new Schema<SnapshotDoc>(
@@ -15,6 +16,7 @@ const SnapshotSchema = new Schema<SnapshotDoc>(
     paksha: String,
     rahuKaal: String,
     updatedAt: String,
+    nextRefreshISO: String,
   },
   { timestamps: false }
 );
