@@ -71,28 +71,32 @@ export async function GET(req: Request) {
       ...(freeBusy.data.calendars?.primary?.busy || []),
       ...fakeBusy
     ];
-    const slots: { start: string; end: string ,status:string }[] = [];
-    let slotStart = new Date(dayStartIST);
-    while (slotStart < dayEndIST) {
-      const slotEnd = new Date(slotStart.getTime() + SLOT_DURATION_MINUTES * 60 * 1000);
+    const slots: { start: string; end: string, status: string }[] = [];
+    let slotStart = new Date(dayStartIST.toISOString());
+    while (slotStart < new Date(dayEndIST.toISOString())){
+      const slotEnd = new Date(new Date(slotStart).getTime() + SLOT_DURATION_MINUTES * 60 * 1000);
       if (slotEnd > dayEndIST) break;
       const overlap = busyTimes.some((b: any) => {
         const busyStart = new Date(b.start).getTime();
         const busyEnd = new Date(b.end).getTime();
-        return slotStart.getTime() < busyEnd && slotEnd.getTime() > busyStart;
+
+        // skip invalid or zero-length busy intervals
+        if (busyEnd <= busyStart) return false;
+
+        // Normalize slots to UTC before comparing
+        const slotStartUTC = new Date(slotStart.toISOString()).getTime();
+        const slotEndUTC = new Date(slotEnd.toISOString()).getTime();
+
+        return slotStartUTC < busyEnd && slotEndUTC > busyStart;
+
       });
-      
-      if (slotEnd <= new Date()) {
-        slotStart = slotEnd;
-        continue;
-      }
-    //   if (!overlap) {
-        slots.push({
-          start: slotStart.toISOString(),
-          end: slotEnd.toISOString(),
-          status:overlap?"busy":"free"
-        });
-    //   }
+
+      slots.push({
+        start: slotStart.toISOString(),
+        end: slotEnd.toISOString(),
+        status: overlap ? "busy" : "free"
+      });
+      //   }
       slotStart = slotEnd;
     }
     return NextResponse.json({ success: true, slots, durtion: SLOT_DURATION_MINUTES });
