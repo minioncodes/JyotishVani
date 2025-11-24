@@ -36,7 +36,7 @@ export async function GET(req: Request) {
     console.log("duration Param = ", durationParam);
     const baseDate = dateParam ? new Date(dateParam) : new Date();
     const SLOT_DURATION_MINUTES = Number(durationParam) || 60;
-    const WORK_START_HOUR = 14;
+    const WORK_START_HOUR = 10;
     const WORK_END_HOUR = 22;
     const dayStartIST = new Date(
       `${baseDate.toISOString().split("T")[0]}T${WORK_START_HOUR}:00:00+05:30`
