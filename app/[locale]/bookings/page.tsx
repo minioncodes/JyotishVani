@@ -8,11 +8,11 @@ import { useTranslations } from "next-intl";
 interface Slot {
   start: string;
   end: string;
+  status: string;
 }
 
 export default function Home() {
   const t = useTranslations("booking");
-
   const [slots, setSlots] = useState<Slot[]>([]);
   const [loading, setLoading] = useState(false);
   const [bookingLoading, setBookingLoading] = useState(false);
@@ -30,14 +30,14 @@ export default function Home() {
   };
 
   const map_Payment_Duration = new Map<number, number>();
-  map_Payment_Duration.set(30, 1500);
-  map_Payment_Duration.set(45, 3000);
-  map_Payment_Duration.set(60, 5000);
+  map_Payment_Duration.set(30, 1100);
+  map_Payment_Duration.set(45, 2100);
+  map_Payment_Duration.set(60, 5100);
 
   const fetchSlots = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/slots?date=${selectedDate}&duration=${duration}`);
+      const res = await fetch(`/api/test-slots?date=${selectedDate}&duration=${duration}`);
       const data = await res.json();
       setSlots(data.slots || []);
     } catch (err) {
@@ -153,7 +153,7 @@ export default function Home() {
       },
       theme: { color: "#3399cc" },
     };
-    
+
     const razorpay = new (window as any).Razorpay(options);
     razorpay.open();
     setLoading(false);
@@ -228,43 +228,24 @@ export default function Home() {
                     minute: "2-digit",
                   })}
                 </span>
+                {slot.status === "free" ?
+                  < button
+                    onClick={() => handlePayment(slot)}
+                    disabled={activeSlot === slot.start}
+                    className={`w-full px-4 py-2 rounded-md font-semibold transition-all duration-200 flex justify-center items-center gap-2 
+      ${activeSlot === slot.start
+                        ? "bg-[#e0d5b8] text-gray-600 cursor-not-allowed"
+                        : "bg-[#B22222] text-white hover:bg-[#6e0000]"
+                      }`}
+                  >
+                    {activeSlot === slot.start ? t("booking") : t("bookNow")}
+                  </button> :
+                  <button
+                    className={`w-full px-4 py-2 rounded-md font-semibold transition-all duration-200 flex justify-center items-center gap-2 cursor-not-allowed bg-[#6B7280]`}
+                  >
+                    Booked
+                  </button>}
 
-                <button
-                  onClick={() => handlePayment(slot)}
-                  disabled={activeSlot === slot.start}
-                  className={`w-full px-4 py-2 rounded-md font-semibold transition-all duration-200 flex justify-center items-center gap-2 ${activeSlot === slot.start
-                    ? "bg-[#e0d5b8] text-gray-600 cursor-not-allowed"
-                    : "bg-[#B22222] text-white hover:bg-[#6e0000]"
-                    }`}
-                >
-                  {activeSlot === slot.start ? (
-                    <>
-                      <svg
-                        className="animate-spin h-5 w-5 text-gray-700"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                        ></path>
-                      </svg>
-                      <span>{t("booking")}</span>
-                    </>
-                  ) : (
-                    t("bookNow")
-                  )}
-                </button>
               </div>
             ))
           ) : (
@@ -282,7 +263,7 @@ export default function Home() {
             </div>
           </div>
         )}
-      </div>
+      </div >
     </>
   );
-}
+}    
