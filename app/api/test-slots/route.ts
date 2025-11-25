@@ -73,16 +73,13 @@ export async function GET(req: Request) {
     ];
     const slots: { start: string; end: string, status: string }[] = [];
     let slotStart = new Date(dayStartIST.toISOString());
-    while (slotStart < new Date(dayEndIST.toISOString())){
+    while (slotStart < new Date(dayEndIST.toISOString())) {
       const slotEnd = new Date(new Date(slotStart).getTime() + SLOT_DURATION_MINUTES * 60 * 1000);
-      if (slotEnd > dayEndIST) break;
       const overlap = busyTimes.some((b: any) => {
         const busyStart = new Date(b.start).getTime();
         const busyEnd = new Date(b.end).getTime();
-
         // skip invalid or zero-length busy intervals
         if (busyEnd <= busyStart) return false;
-
         // Normalize slots to UTC before comparing
         const slotStartUTC = new Date(slotStart.toISOString()).getTime();
         const slotEndUTC = new Date(slotEnd.toISOString()).getTime();
@@ -90,13 +87,18 @@ export async function GET(req: Request) {
         return slotStartUTC < busyEnd && slotEndUTC > busyStart;
 
       });
-
+      const slotStartTS = slotStart.getTime();
+      const slotEndTS = slotEnd.getTime();
+      const nowTS = Date.now();
+      if (slotEndTS <= nowTS) {
+        slotStart = slotEnd;
+        continue;
+      }
       slots.push({
         start: slotStart.toISOString(),
         end: slotEnd.toISOString(),
         status: overlap ? "busy" : "free"
       });
-      //   }
       slotStart = slotEnd;
     }
     return NextResponse.json({ success: true, slots, durtion: SLOT_DURATION_MINUTES });
