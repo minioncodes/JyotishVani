@@ -18,6 +18,7 @@ function fromIST(date: Date) {
   const IST_OFFSET = 5.5 * 60 * 60 * 1000;
   return new Date(date.getTime() - IST_OFFSET);
 }
+
 export async function GET(req: Request) {
   try {
     const oAuth2Client = new google.auth.OAuth2(
@@ -35,10 +36,8 @@ export async function GET(req: Request) {
     console.log("duration Param = ", durationParam);
     const baseDate = dateParam ? new Date(dateParam) : new Date();
     const SLOT_DURATION_MINUTES = Number(durationParam) || 60;
-    const WORK_START_HOUR = 14;
+    const WORK_START_HOUR = 10;
     const WORK_END_HOUR = 22;
-    const baseDateRaw = dateParam ? new Date(dateParam) : new Date();
-    const baseIST = ist(baseDateRaw);
     const dayStartIST = new Date(
       `${baseDate.toISOString().split("T")[0]}T${WORK_START_HOUR}:00:00+05:30`
     );
@@ -54,27 +53,52 @@ export async function GET(req: Request) {
         items: [{ id: "primary" }],
       },
     });
-    const busyTimes = freeBusy.data.calendars?.primary?.busy || [];
-    const slots: { start: string; end: string }[] = [];
-    let slotStart = new Date(dayStartIST);
-    while (slotStart < dayEndIST) {
-      const slotEnd = new Date(slotStart.getTime() + SLOT_DURATION_MINUTES * 60 * 1000);
-      if (slotEnd > dayEndIST) break;
+    const fakeBusy = [
+      {
+        start: new Date(`${baseDate.toISOString().split("T")[0]}T15:00:00+05:30`).toISOString(),
+        end: new Date(`${baseDate.toISOString().split("T")[0]}T16:00:00+05:30`).toISOString()
+      },
+      {
+        start: new Date(`${baseDate.toISOString().split("T")[0]}T18:00:00+05:30`).toISOString(),
+        end: new Date(`${baseDate.toISOString().split("T")[0]}T19:00:00+05:30`).toISOString()
+      },
+      {
+        start: new Date(`${baseDate.toISOString().split("T")[0]}T20:00:00+05:30`).toISOString(),
+        end: new Date(`${baseDate.toISOString().split("T")[0]}T20:00:00+05:30`).toISOString()
+      }
+    ];
+    const busyTimes = [
+      ...(freeBusy.data.calendars?.primary?.busy || []),
+      ...fakeBusy
+    ];
+    const slots: { start: string; end: string, status: string }[] = [];
+    let slotStart = new Date(dayStartIST.toISOString());
+    while (slotStart < new Date(dayEndIST.toISOString())) {
+      const slotEnd = new Date(new Date(slotStart).getTime() + SLOT_DURATION_MINUTES * 60 * 1000);
       const overlap = busyTimes.some((b: any) => {
         const busyStart = new Date(b.start).getTime();
         const busyEnd = new Date(b.end).getTime();
-        return slotStart.getTime() < busyEnd && slotEnd.getTime() > busyStart;
+        // skip invalid or zero-length busy intervals
+        if (busyEnd <= busyStart) return false;
+        // Normalize slots to UTC before comparing
+        const slotStartUTC = new Date(slotStart.toISOString()).getTime();
+        const slotEndUTC = new Date(slotEnd.toISOString()).getTime();
+
+        return slotStartUTC < busyEnd && slotEndUTC > busyStart;
+
       });
-      if (slotEnd <= new Date()) {
+      const slotStartTS = slotStart.getTime();
+      const slotEndTS = slotEnd.getTime();
+      const nowTS = Date.now();
+      if (slotEndTS <= nowTS) {
         slotStart = slotEnd;
         continue;
       }
-      if (!overlap) {
-        slots.push({
-          start: slotStart.toISOString(),
-          end: slotEnd.toISOString(),
-        });
-      }
+      slots.push({
+        start: slotStart.toISOString(),
+        end: slotEnd.toISOString(),
+        status: overlap ? "busy" : "free"
+      });
       slotStart = slotEnd;
     }
     return NextResponse.json({ success: true, slots, durtion: SLOT_DURATION_MINUTES });

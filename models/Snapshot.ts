@@ -1,13 +1,24 @@
-import mongoose, { Schema, model, models } from "mongoose";
+﻿import { Schema, model, models } from "mongoose";
 
-const snapshotSchema = new Schema({
-  date: { type: String, required: true },
-  tithi: String,
-  paksha: String,
-  nakshatra: String,
-  rahuKaal: String,
-  fetchedAtIST: String,
-  lastRefreshISO: String
-});
+export interface SnapshotDoc {
+  tithi: string;
+  nakshatra: string;
+  paksha: string;
+  rahuKaal: string;
+  updatedAt: string;
+  nextRefreshISO: string | null;
+}
 
-export default models.Snapshot || model("Snapshot", snapshotSchema);
+const SnapshotSchema = new Schema<SnapshotDoc>(
+  {
+    tithi: String,
+    nakshatra: String,
+    paksha: String,
+    rahuKaal: String,
+    updatedAt: String,
+    nextRefreshISO: String,
+  },
+  { timestamps: false }
+);
+
+export default models.Snapshot || model<SnapshotDoc>("Snapshot", SnapshotSchema);

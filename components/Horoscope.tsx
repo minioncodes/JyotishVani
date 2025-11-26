@@ -194,23 +194,29 @@ export default function Horoscope() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const rAF = useRef<number | null>(null);
 
-  const open = async (s: Sign) => {
-    setActiveSign(s.name);
-    setLoading(true);
-    setPredictions(null);
-    try {
-      const res = await fetch(
-        `/api/horoscope/get?sign=${s.actualName.toLowerCase()}`,
-        { cache: "no-store" }
-      );
-      const data = await res.json();
-      if (data.success) setPredictions(data.predictions);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
+ const open = async (s: Sign) => {
+  setActiveSign(s.name);
+  setLoading(true);
+  setPredictions(null);
+
+  try {
+    const sign = s.actualName.toLowerCase();
+
+    const res = await fetch(`/api/horoscope-dummy`, { cache: "no-store" });
+    const json = await res.json();
+
+    if (json && json.data && json.data[sign]) {
+      setPredictions(json.data[sign]); // ONLY this sign's dummy data
+    } else {
+      setPredictions([]);
     }
-  };
+  } catch (err) {
+    console.error("Dummy fetch error:", err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const goTo = (i: number) => {
     setIndex(i);
