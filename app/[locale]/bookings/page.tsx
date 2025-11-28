@@ -170,6 +170,7 @@ export default function Home() {
           <div className="flex flex-col">
             <label className="block mb-1 font-semibold text-[#4a4a4a]">Select Date:</label>
             <input
+            title="Date"
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
@@ -243,7 +244,7 @@ export default function Home() {
                   <button
                     className={`w-full px-4 py-2 rounded-md font-semibold transition-all duration-200 flex justify-center items-center gap-2 cursor-not-allowed bg-[#6B7280]`}
                   >
-                    Booked
+                    {t("booked")}
                   </button>}
 
               </div>
