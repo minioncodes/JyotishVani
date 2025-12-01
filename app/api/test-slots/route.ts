@@ -37,7 +37,7 @@ export async function GET(req: Request) {
     const baseDate = dateParam ? new Date(dateParam) : new Date();
     const SLOT_DURATION_MINUTES = Number(durationParam) || 60;
     const WORK_START_HOUR = 10;
-    const WORK_END_HOUR = 22;
+    const WORK_END_HOUR = 19;
     const dayStartIST = new Date(
       `${baseDate.toISOString().split("T")[0]}T${WORK_START_HOUR}:00:00+05:30`
     );
@@ -53,19 +53,19 @@ export async function GET(req: Request) {
         items: [{ id: "primary" }],
       },
     });
+    // to add more fake bookings copy one of the individual object paste it above or below of 
+    // one of the object and the timing here works in the 24 hour system so manipulate the timing
+    // accordingly manipulate the time on which slot that you want to have for the fake bookings
+    // that's it open the browser you will have the slots of the more fake bookings there
     const fakeBusy = [
       {
-        start: new Date(`${baseDate.toISOString().split("T")[0]}T15:00:00+05:30`).toISOString(),
-        end: new Date(`${baseDate.toISOString().split("T")[0]}T16:00:00+05:30`).toISOString()
+        start: new Date(`${baseDate.toISOString().split("T")[0]}T10:00:00+05:30`).toISOString(),
+        end: new Date(`${baseDate.toISOString().split("T")[0]}T12:00:00+05:30`).toISOString()
       },
       {
         start: new Date(`${baseDate.toISOString().split("T")[0]}T18:00:00+05:30`).toISOString(),
-        end: new Date(`${baseDate.toISOString().split("T")[0]}T19:00:00+05:30`).toISOString()
-      },
-      {
-        start: new Date(`${baseDate.toISOString().split("T")[0]}T20:00:00+05:30`).toISOString(),
         end: new Date(`${baseDate.toISOString().split("T")[0]}T20:00:00+05:30`).toISOString()
-      }
+      },
     ];
     const busyTimes = [
       ...(freeBusy.data.calendars?.primary?.busy || []),
