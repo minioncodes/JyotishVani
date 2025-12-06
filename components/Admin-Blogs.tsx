@@ -73,14 +73,13 @@ export default function AdminBlogs() {
                     <div className="absolute -bottom-48 -right-32 h-[44rem] w-[44rem] rounded-full bg-[#B22222]/15 blur-3xl" />
                 </div>
             </div>
-            {/* Blogs Content */}
+           
             <div className="max-w-6xl mx-auto px-6 py-14 relative z-10">
-                {/* Page Heading */}
+              
                 <h1 className="text-4xl md:text-5xl font-bold text-center font-[Cinzel] mb-12 text-black">
                     Whispers from the <span className="text-[#B22222]">Stars ✨</span>
                 </h1>
 
-                {/* Blog Grid */}
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                     {blogs.map((blog) => (
                         <div
