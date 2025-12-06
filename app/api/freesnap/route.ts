@@ -9,7 +9,7 @@ function convertTo12Hour(time: string) {
   const hour12 = h % 12 || 12;
   return `${hour12}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")} ${suffix}`;
 }
-//building
+
 export async function GET() {
   await connectDB();
 
