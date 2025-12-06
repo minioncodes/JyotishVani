@@ -12,7 +12,6 @@ export default function About() {
     <section id="about" className="relative px-6 py-14 sm:py-16 md:py-20 lg:py-28">
       <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-        {/* LEFT: About JyotishWaani Organisation */}
         <motion.div
           initial={{ x: -30, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
