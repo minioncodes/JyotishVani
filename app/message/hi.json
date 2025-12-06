@@ -365,20 +365,20 @@
     "subtitle": "आपके लिए रोज़ की छोटी–सी ज्योतिषीय राहनुमाई ✨",
     "cta": "अपनी व्यक्तिगत रीडिंग लें",
 
-    "signs": {
-      "Aries": "Aries",
-      "Taurus": "Taurus",
-      "Gemini": "Gemini",
-      "Cancer": "Cancer",
-      "Leo": "Leo",
-      "Virgo": "Virgo",
-      "Libra": "Libra",
-      "Scorpio": "Scorpio",
-      "Sagittarius": "Sagittarius",
-      "Capricorn": "Capricorn",
-      "Aquarius": "Aquarius",
-      "Pisces": "Pisces"
-    },
+"signs": {
+  "Aries": "मेष",
+  "Taurus": "वृषभ",
+  "Gemini": "मिथुन",
+  "Cancer": "कर्क",
+  "Leo": "सिंह",
+  "Virgo": "कन्या",
+  "Libra": "तुला",
+  "Scorpio": "वृश्चिक",
+  "Sagittarius": "धनु",
+  "Capricorn": "मकर",
+  "Aquarius": "कुंभ",
+  "Pisces": "मीन"
+},
 
     "messages": {
       "Aries": "आज हिम्मत से कदम बढ़ाएँ",
@@ -404,6 +404,7 @@
   "booking": {
     "title": "अपनी ज्योतिष परामर्श बुक करें",
     "selectDate": "तारीख चुनें",
+    "booked": "बुक हो गया है",
     "enterEmail": "अपना ईमेल दर्ज करें",
     "placeholderEmail": "अपना ईमेल दर्ज करें",
     "min": "मिनट",

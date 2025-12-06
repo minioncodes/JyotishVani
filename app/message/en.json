@@ -404,6 +404,7 @@
 "booking": {
     "title": "Book Your Astrology Consultation",
     "selectDate": "Select Date",
+    "booked": "Booked",
     "enterEmail": "Enter your email",
     "placeholderEmail": "Enter your email",
     "min": "min",
